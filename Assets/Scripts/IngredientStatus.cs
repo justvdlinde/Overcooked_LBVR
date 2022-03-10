@@ -1,5 +1,5 @@
 public enum IngredientStatus : int
 {
-    Raw = 0,
+    UnProcessed = 0,
     Processed = 1
 }

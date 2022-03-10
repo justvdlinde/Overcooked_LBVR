@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 8720514301457999660}
   - component: {fileID: 8728203422479812004}
   - component: {fileID: 8759685299937710692}
+  - component: {fileID: 936539139586819830}
+  - component: {fileID: 9086011756137860703}
+  - component: {fileID: -7828265822038481603}
   m_Layer: 0
   m_Name: Bun_Whole
   m_TagString: Untagged
@@ -96,3 +99,52 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43211679316114046, guid: 825a2345e294c224da53cd829f88f545, type: 2}
+--- !u!54 &936539139586819830
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8752499097049563138}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &9086011756137860703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8752499097049563138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793c025c30a0e914983efb111d5d7533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient: 1
+  status: 0
+  rigidbody: {fileID: 936539139586819830}
+--- !u!114 &-7828265822038481603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8752499097049563138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea726110c7776941a60c1fdaaf3e3c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient: {fileID: 9086011756137860703}
+  status: 0
+  isCooking: 0
+  cookAmount: 0
+  rawToCookTime: 1
+  cookedToBurnTime: 1
