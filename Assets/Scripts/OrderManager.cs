@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utils.Core.Attributes;
 
@@ -7,12 +9,8 @@ public class OrderManager : MonoBehaviour
     [SerializeField] private Dish testDish = null;
 
     [Button]
-    public void EvaluateDish()
+    public void PrintScore()
     {
-        for (int i = 0; i < testDish.ingredients.Count; i++)
-        {
-            Ingredient ingredient = testDish.ingredients[i];
-            Debug.Log(ingredient.ingredientType + " == " + order.ingredients[i] + ": " + (ingredient.ingredientType == order.ingredients[i]));
-        }
+        Debug.Log(new Score(order, testDish));
     }
 }
