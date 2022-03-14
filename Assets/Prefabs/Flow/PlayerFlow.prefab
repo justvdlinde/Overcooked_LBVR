@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7101458339764177284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3570271203656173818}
+  - component: {fileID: 6100698968116660059}
+  m_Layer: 0
+  m_Name: PlayerFlow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3570271203656173818
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7101458339764177284}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6100698968116660059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7101458339764177284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 173820dd5b983c04b8b935cbfb2486e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneLoadDelay: 0.1
+  initialLevel: {fileID: 11400000, guid: ebafa00cb65a0314ca002b9f297adc1f, type: 2}
+  showSplashScreen: 1
+  networkConfig: {fileID: 11400000, guid: cac6aaf4e2900a8448101f0a26baaf06, type: 2}
+  loadingScreenPrefab: {fileID: 7984545635944652098, guid: ec1889b77831db346a7ca52bfa51a951,
+    type: 3}
+  connectingScreenPrefab: {fileID: 8705894717954138564, guid: 536a36089b1e8d6428d80bfc28423016,
+    type: 3}

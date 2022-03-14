@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b409e7bc6ac17c47b163e26fe12b29f, type: 3}
+  m_Name: New GameLevel 1
+  m_EditorClassIdentifier: 
+  name: Money Bank
+  scene:
+    sceneAsset: {fileID: 102900000, guid: acaa9054a77baab40b598db3932b63c7, type: 3}
+    sceneName: TestLevel 1
+  dimensions: {x: 5, y: 5}
+  dimensionsInFeet: {x: 16.404167, y: 16.404167}

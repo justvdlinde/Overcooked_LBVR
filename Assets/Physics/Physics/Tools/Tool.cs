@@ -1,0 +1,296 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace PhysicsCharacter
+{
+	[RequireComponent(typeof(Rigidbody))]
+	public class Tool : MonoBehaviour
+	{
+		[SerializeField] private List<ToolHandle> toolHandles = null;
+		[SerializeField] private ToolPositionDelegate toolTransformDelegate = null;
+		private int heldHandles = 0;
+
+		// physics movement section
+		[SerializeField] protected Rigidbody rigidBody = null;
+		[SerializeField] protected float slowDownVelocity = 0.75f;
+		[SerializeField] protected float slowDownRotation = 0.75f;
+
+		[SerializeField] protected float maxPositionChange = 500f;
+		[SerializeField] protected float maxRotationChange = 720f;
+		[SerializeField] protected float maxAngularVelocity = 7f;
+
+		[SerializeField] protected ClippingCheckerOnSpawn clipChecker = null;
+
+		private Vector3 targetPos = Vector3.zero;
+
+		private Quaternion targetRot = Quaternion.identity;
+		private float maxGripDistance = 0.3f;
+
+		private void Awake()
+		{
+			rigidBody = GetComponent<Rigidbody>();
+			if(rigidBody != null)
+				rigidBody.maxAngularVelocity = maxAngularVelocity;
+
+			foreach(ToolHandle toolHandle in toolHandles)
+			{
+				toolHandle.OnGrabbedCall += OnGrabbedCallback;
+				toolHandle.OnReleasedCall += OnReleasedCallback;
+			}
+		}
+
+		protected virtual void Start()
+		{
+			// empty intentionally
+			if (PhysicsPlayerBlackboard.Instance == null)
+				gameObject.SetActive(false);
+		}
+
+		protected virtual void Update()
+		{
+			if(!IsBeingHeld())
+			{
+				rigidBody.useGravity = true;
+			}
+
+			// disable this when rotating
+			if(!PhysicsPlayerBlackboard.Instance.isFading)
+			{
+				foreach(ToolHandle t in toolHandles)
+				{
+					t.CheckDistance(maxGripDistance);
+				}
+			}
+
+			//if(!IsBeingHeld() && (heldHandles <= 0))
+			//{
+			//	float dist = Vector3.Distance(transform.position, KHS_PhysicsPlayerBlackboard.Instance.headAnchor.position);
+			//	if(dist > 2.5f)
+			//		ReleaseTool();
+			//}
+		}
+
+		protected virtual void FixedUpdate()
+		{
+			if(heldHandles > 0 && !PhysicsPlayerBlackboard.Instance.isFading)
+			{
+				MoveUsingPhysics();
+				RotateUsingPhysics();
+			}
+			else if(heldHandles > 0)
+			{
+				transform.rotation = toolTransformDelegate.GetRotation();
+				targetRot = toolTransformDelegate.GetRotation();
+
+				ToolHandle pickedupHandle = null;
+				int currentHandlePrio = -10;
+				for(int i = 0; i < toolHandles.Count; i++)
+				{
+					if(toolHandles[i].IsObjectBeingHeld())
+					{
+						if((int)toolHandles[i].GetHandlePriority() > currentHandlePrio)
+						{
+							pickedupHandle = toolHandles[i] as ToolHandle;
+							currentHandlePrio = (int)pickedupHandle.GetHandlePriority();
+						}
+					}
+				}
+				if(pickedupHandle == null)
+					return;
+				transform.position = pickedupHandle.transform.position;
+				Vector3 diff = (toolTransformDelegate.GetPosition()) - (rigidBody.worldCenterOfMass + (toolTransformDelegate.GetAnchorPosition() - rigidBody.worldCenterOfMass));
+				transform.position += diff;
+				targetPos = transform.position;
+			}
+		}
+
+		public void PickupTool(Hand hand)
+		{
+			if(toolHandles == null || toolHandles.Count <= 0 || IsBeingHeld(hand))
+				return;
+
+			
+
+			ToolHandle pickedupHandle = toolHandles[0].GetGrabbed(hand, PhysicsPlayerBlackboard.Instance.GetFollowTarget(hand)) as ToolHandle;
+			if(pickedupHandle == null)
+				return;
+
+			if(clipChecker != null)
+				clipChecker.EnableClippingChecker(hand);
+
+			pickedupHandle.OnReleasedCall += ReleaseCallback;
+			if(pickedupHandle.OtherToolHandle != null)
+				pickedupHandle.OtherToolHandle.OnReleasedCall += ReleaseCallback;
+
+			PhysicsPlayerBlackboard.Instance.PickupItem(hand, pickedupHandle);
+
+			transform.rotation = toolTransformDelegate.GetRotation();
+			targetRot = toolTransformDelegate.GetRotation();
+
+			transform.position = pickedupHandle.transform.position;
+			Vector3 diff = (toolTransformDelegate.GetPosition()) - (rigidBody.worldCenterOfMass + (toolTransformDelegate.GetAnchorPosition() - rigidBody.worldCenterOfMass));
+			transform.position += diff;
+			targetPos = transform.position;
+
+
+			//gameObject.SetActive(true);
+		}
+
+		protected void ForcePosition()
+		{
+			transform.position = targetPos;
+			transform.rotation = targetRot;
+		}
+
+		// move this to a distance check in update
+		public void ReleaseCallback(Hand hand, ToolHandle handle)
+		{
+			if(!IsBeingHeld())
+			{
+				if(heldHandles <= 0)
+				{
+					//gameObject.SetActive(false);
+					handle.OnReleasedCall -= ReleaseCallback;
+					if(handle.OtherToolHandle != null)
+						handle.OtherToolHandle.OnReleasedCall -= ReleaseCallback;
+
+					if(clipChecker != null)
+						clipChecker.ResetColliderObject();
+				}
+			}
+		}
+
+		public void ReleaseTool(Hand hand = Hand.None)
+		{
+			foreach(ToolHandle t in toolHandles)
+			{
+				t.ForceRelease();
+
+				t.transform.parent = transform;
+				t.transform.localPosition = t.localTransformMirror.localPosition;
+				t.transform.localRotation = t.localTransformMirror.localRotation;
+			}
+
+			//gameObject.SetActive(false);
+			if(hand == Hand.None)
+			{
+				PhysicsPlayerBlackboard.Instance.DropItem(Hand.Right);
+				PhysicsPlayerBlackboard.Instance.DropItem(Hand.Left);
+
+				PhysicsPlayerBlackboard.Instance.SetToolAndHandCollisions(Hand.Right, false);
+				PhysicsPlayerBlackboard.Instance.SetToolAndHandCollisions(Hand.Left, false);
+				
+			}
+			else
+			{
+				PhysicsPlayerBlackboard.Instance.SetToolAndHandCollisions(hand, false);
+
+				PhysicsPlayerBlackboard.Instance.DropItem(hand);
+			}
+		}
+
+		public bool IsBeingHeld()
+		{
+			foreach(ToolHandle h in toolHandles)
+			{
+				if(h.IsObjectBeingHeld())
+					return true;
+			}
+			return false;
+		}
+
+		public bool IsBeingHeld(Hand hand)
+		{
+			foreach(ToolHandle h in toolHandles)
+			{
+				if(h.IsObjectBeingHeld(hand))
+					return true;
+			}
+			return false;
+		}
+
+		protected virtual void OnGrabbedCallback(Hand hand, ToolHandle toolHandle)
+		{
+			if(heldHandles < 0)
+				heldHandles = 0;
+			heldHandles++;
+			rigidBody.useGravity = false;
+		}
+
+		protected virtual void OnReleasedCallback(Hand hand, ToolHandle toolHandle)
+		{
+			if(heldHandles > 0)
+				heldHandles--;
+
+			if(heldHandles <= 0)
+				rigidBody.useGravity = true;
+
+			toolHandle.transform.parent = transform;
+			toolHandle.transform.localPosition = toolHandle.localTransformMirror.localPosition;
+			toolHandle.transform.localRotation = toolHandle.localTransformMirror.localRotation;
+		}
+
+		protected virtual void MoveUsingPhysics()
+		{
+			rigidBody.velocity *= 0.995f;
+
+			Vector3 newVelocity = FindNewVelocity();
+			if(IsValidVelocity(newVelocity.x))
+			{
+				float maxChange = maxPositionChange * Time.deltaTime;
+				rigidBody.velocity = Vector3.MoveTowards(rigidBody.velocity, newVelocity, maxChange);
+			}
+		}
+
+		protected Vector3 FindNewVelocity()
+		{
+			//				world pos of tool handle		world pos of tool itself	world pos of relative pos where handle was attached on spawn minus tool pos to get the offset
+			Vector3 diff = (toolTransformDelegate.GetPosition()) - (rigidBody.worldCenterOfMass + (toolTransformDelegate.GetAnchorPosition() - rigidBody.worldCenterOfMass));
+			return diff / Time.deltaTime;
+		}
+		protected void RotateUsingPhysics()
+		{
+			rigidBody.angularVelocity *= slowDownRotation;
+
+			Vector3 newAngularVelocity = FindNewAngularVelocity();
+
+			if(IsValidVelocity(newAngularVelocity.x))
+			{
+				float maxChange = maxRotationChange * Time.deltaTime;
+				rigidBody.angularVelocity = Vector3.MoveTowards(rigidBody.angularVelocity, newAngularVelocity, maxChange);
+			}
+		}
+
+
+		protected Vector3 FindNewAngularVelocity()
+		{
+			Quaternion diff = toolTransformDelegate.GetRotation() * Quaternion.Inverse(rigidBody.rotation);
+			diff.ToAngleAxis(out float angle, out Vector3 rotationAxis);
+
+			if(angle > 180f)
+				angle -= 360f;
+
+			return (rotationAxis * angle * Mathf.Deg2Rad) / (Time.deltaTime);
+		}
+
+		protected bool IsValidVelocity(float x)
+		{
+			return !float.IsNaN(x) && !float.IsInfinity(x);
+		}
+
+		public bool IsToolReleasedCompletely()
+		{
+			bool result = true;
+
+			foreach(ToolHandle handle in toolHandles)
+			{
+				result = handle.releasedLeftHand || handle.releasedRightHand;
+				if(result == false)
+					return false;
+			}
+
+			return result;
+		}
+	}
+}
