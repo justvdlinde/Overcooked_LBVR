@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Ingredient : MonoBehaviour
 {
-    public IngredientType ingredient = IngredientType.None;
+    public IngredientType ingredientType = IngredientType.None;
     public IngredientStatus status = IngredientStatus.UnProcessed;
     public new Rigidbody rigidbody = null;
 

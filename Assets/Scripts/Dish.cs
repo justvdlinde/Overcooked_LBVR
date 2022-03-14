@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Dish : MonoBehaviour
 {
-    [SerializeField] private List<Ingredient> ingredients;
+    public List<Ingredient> ingredients;
 }
