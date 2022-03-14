@@ -1,5 +1,6 @@
 using Unity.Profiling;
 using UnityEngine;
+using Utils.Core.Attributes;
 using Utils.Core.FPSCounter;
 
 public class InGameDebugManager : MonoBehaviour
@@ -10,15 +11,20 @@ public class InGameDebugManager : MonoBehaviour
     [SerializeField] private GameObject guiPanel = null;
     [SerializeField] private Transform guiPanelRoot = null;
 
+    [SerializeField] private bool show = true;
+
+    private GameObject debugConsoleInstance;
+    private GameObject guiPanelInstance;
+
     private void Awake()
     {
         if(Debug.isDebugBuild)
         {
             if(debugConsolePrefab != null)
-                Instantiate(debugConsolePrefab, debugConsoleRoot);
+                debugConsoleInstance = Instantiate(debugConsolePrefab, debugConsoleRoot);
 
             if(guiPanel != null)
-                Instantiate(guiPanel, guiPanelRoot);
+                guiPanelInstance = Instantiate(guiPanel, guiPanelRoot);
 
             if (FPSCounter.CounterInstance == null)
                 FPSCounter.CreateCounterInstance();
@@ -27,11 +33,25 @@ public class InGameDebugManager : MonoBehaviour
                 ProfilerHelper.CreateInstance();
         }
 
+        ShowObjects(show);
     }
 
     private void Start()
     {
         GUIWorldSpace.AddButton("Print Test", () => Debug.Log("Test"));
+    }
+
+    [Button]
+    private void Toggle()
+    {
+        show = !show;
+        ShowObjects(show);
+    }
+
+    private void ShowObjects(bool show)
+    {
+        debugConsoleInstance?.SetActive(show);
+        guiPanelInstance?.SetActive(show);
     }
 
     private void Update()
@@ -43,5 +63,8 @@ public class InGameDebugManager : MonoBehaviour
         GUIWorldSpace.Log("Batches: " + ProfilerHelper.BatchesCount);
         GUIWorldSpace.Log("Tris: " + ProfilerHelper.TrisCount);
         GUIWorldSpace.Log("Vertices " + ProfilerHelper.VerticesCount);
+
+        if (XRInput.GetSecondaryButtonPressed(Hand.Left))
+            Toggle();
     }
 }
