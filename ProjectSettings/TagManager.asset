@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - FingerTip
   layers:
   - Default
   - TransparentFX
@@ -29,14 +30,14 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PhysicsButton
+  - ToolHandle
+  - Tool
+  - Player
+  - VRTeleportWalkable
+  - RightHandPhysicsCollider
+  - LeftHandPhysicsCollider
+  - PhysicsCollider
   m_SortingLayers:
   - name: Default
     uniqueID: 0

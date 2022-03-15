@@ -10,10 +10,18 @@ public class PlayerSpawner : MonoBehaviour
     [Tooltip("Only required if connectToNetwork is set to true")]
     [SerializeField] private NetworkConfig networkConfig = null;
 
+    [field: SerializeField]
+    private bool usePhysicsPlayer = false;
+
+    public static bool Use_Physics_Player { get; private set; } = false;
+
     private INetworkService networkService;
 
     protected virtual void Awake()
     {
+        Use_Physics_Player = usePhysicsPlayer;
+
+
         PlayersManager playersManager = GlobalServiceLocator.Instance.Get<PlayersManager>();
         if (playersManager.LocalPlayer != null)
         {
