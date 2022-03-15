@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -1256903263144371103}
   - component: {fileID: -361691756593574954}
   m_Layer: 0
-  m_Name: Bun_Sliced
+  m_Name: Bun_Top_Sliced
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6207516007160710318}
-  m_Mesh: {fileID: 4300000, guid: 503e09190e324f542888c11f2cf3bc62, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 3cd03c92b98726c44ba37881beb968f8, type: 3}
 --- !u!23 &6229845487600119008
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -130,6 +130,8 @@ MonoBehaviour:
   ingredientType: 1
   status: 1
   rigidbody: {fileID: 6235759836750086546}
+  needsToBeCooked: 0
+  cookComponent: {fileID: 0}
 --- !u!114 &-361691756593574954
 MonoBehaviour:
   m_ObjectHideFlags: 0
