@@ -9,6 +9,22 @@ public class Ingredient : MonoBehaviour
     public bool needsToBeCooked = false;
     public CookComponent cookComponent = null;
 
+    [SerializeField] private Transform unProcessedGraphics = null;
+    [SerializeField] private Transform processedGraphics = null;
+
+	private void Awake()
+	{
+        unProcessedGraphics.gameObject.SetActive(true);
+        processedGraphics.gameObject.SetActive(false);
+    }
+
+    public void Process()
+	{
+        unProcessedGraphics.gameObject.SetActive(false);
+        processedGraphics.gameObject.SetActive(true);
+        status = IngredientStatus.Processed;
+	}
+
     public void TogglePhysics(bool toggle)
     {
         rigidbody.isKinematic = !toggle;

@@ -229,13 +229,5 @@ namespace PhysicsCharacter
 
 			return returnValue * Quaternion.Euler(((primaryToolHandleHand == Hand.Right) ? rightHandRotationOffset : leftHandRotationOffset));
 		}
-
-		private void OnDrawGizmos()
-		{
-			foreach (ToolHandle t in followTargets)
-			{
-				Gizmos.DrawWireSphere(t.transform.position, 0.1f);
-			}
-		}
 	}
 }
