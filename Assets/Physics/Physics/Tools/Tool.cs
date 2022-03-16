@@ -25,7 +25,7 @@ namespace PhysicsCharacter
 		private Vector3 targetPos = Vector3.zero;
 
 		private Quaternion targetRot = Quaternion.identity;
-		private float maxGripDistance = 0.3f;
+		[SerializeField] private float maxGripDistance = 1f;
 
 		private void Awake()
 		{
