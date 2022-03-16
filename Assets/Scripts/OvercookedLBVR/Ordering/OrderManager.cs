@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using Utils.Core.Attributes;
 using Utils.Core.Extensions;
 using Random = UnityEngine.Random;
 
-public class OrderManager : MonoBehaviour
+public class OrderManager : MonoBehaviourPun
 {
     public static OrderManager Instance;
 
@@ -16,6 +17,7 @@ public class OrderManager : MonoBehaviour
 
     [SerializeField] private OrderDisplayManager displayManager;
     [SerializeField] private int orderAmount = 10;
+    [SerializeField] private float[] orderTimes;
 
     [Header("Order Settings")]
     [SerializeField] private int minIngredients = 1;
@@ -23,6 +25,7 @@ public class OrderManager : MonoBehaviour
     [SerializeField] private float minTime = 20;
     [SerializeField] private float maxTime = 50;
 
+    private int orderIndex;
 
     private void Awake()
     {
@@ -35,24 +38,48 @@ public class OrderManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        //if (PhotonNetwork.IsMasterClient)
+        //    StartCoroutine(OrderCoroutine());
     }
 
-    private void Start()
-    {
-        AddNewOrder();
-    }
+    //private IEnumerator OrderCoroutine()
+    //{
+    //    for (int i = 0; i < length; i++)
+    //    {
 
-    public void PrintScore()
-    {
-        //Debug.Log(new Score(order, testDish));
-    }
+    //    }
+    //}
 
     [Button]
     private void AddNewOrder()
     {
-        Order order = GenerateRandomOrder(minIngredients, maxIngredients);
-        order.timer.Set(Random.Range(minTime, maxTime));
-        
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Order order = GenerateRandomOrder(minIngredients, maxIngredients);
+            float timerDuration = Random.Range(minTime, maxTime);
+            int[] ingredientInts = new int[order.ingredients.Length];
+            for (int i = 0; i < ingredientInts.Length; i++)
+            {
+                ingredientInts[i] = (int)order.ingredients[i];
+            }
+
+            photonView.RPC(nameof(CreateNewOrderRPC), RpcTarget.All, ingredientInts, timerDuration);
+        }
+    }
+
+    [PunRPC]
+    private void CreateNewOrderRPC(int[] ingredients, float timerDuration, PhotonMessageInfo info)
+    {
+        Order order = new Order();
+        order.ingredients = new IngredientType[ingredients.Length];
+
+        for (int i = 0; i < ingredients.Length; i++)
+        {
+            order.ingredients[i] = (IngredientType)ingredients[i];
+        }
+        order.timer.Set(timerDuration);
+
         Orders.Add(order);
         OnOrderAdded?.Invoke(order);
         order.timer.Start();

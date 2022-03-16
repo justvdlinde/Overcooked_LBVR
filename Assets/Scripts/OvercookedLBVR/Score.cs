@@ -6,6 +6,7 @@ public class Score
 {
     public readonly Order Order;
     public readonly Dish Dish;
+    public bool timerExceeded;
 
     public float MaxScore => 100;
     public float Points { get; private set; }
@@ -18,7 +19,16 @@ public class Score
     {
         Order = order;
         Dish = dish;
-        Points = CalculatePoints(order, dish);
+        if(order.timer.TimeRemaining <= 0)
+        {
+            timerExceeded = true;
+            Points = 0;
+        }
+        else
+        {
+            Points = CalculatePoints(order, dish);
+            timerExceeded = false;
+        }
     }
 
     public override string ToString()

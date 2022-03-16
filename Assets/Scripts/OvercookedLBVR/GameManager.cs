@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
+    // TODO: keep track of all orders and scores
 }
