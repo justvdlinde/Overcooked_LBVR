@@ -5,19 +5,24 @@ public class OrderDisplay : MonoBehaviour
 {
     public OrderDisplayGrid grid;
     public Slider timeSlider;
-    public Text number;
 
-    public Order Order { get; private set; }
+    public Order Order { get; private set; } 
 
     public void DisplayOrder(Order order)
     {
         Order = order;
         grid.DisplayOrder(order);
-        number.text = number.ToString();
+    }
+
+    public void Clear()
+    {
+        grid.Clear();
+        Order = null;
     }
 
     public void Update()
     {
-        timeSlider.value = Order.timer.TimeRemaining / Order.timer.Duration;
+        if (Order != null)
+            timeSlider.value = Order.timer.TimeRemaining / Order.timer.Duration;
     }
 }

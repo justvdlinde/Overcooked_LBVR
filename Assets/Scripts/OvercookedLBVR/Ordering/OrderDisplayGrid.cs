@@ -2,7 +2,6 @@ using UnityEngine;
 using Utils.Core.Attributes;
 using Utils.Core.Extensions;
 
-[ExecuteAlways]
 public class OrderDisplayGrid : MonoBehaviour
 {
     public float intervalSpace = 1;
@@ -15,10 +14,16 @@ public class OrderDisplayGrid : MonoBehaviour
         ingredientsData = Resources.Load<IngredientsData>("IngredientsData");
     }
 
+    public void Clear()
+    {
+        order = null;   
+        transform.RemoveAllChildren();
+    }
+
     public void DisplayOrder(Order order)
     {
+        Clear();
         this.order = order;
-        transform.RemoveAllChildren();
 
         for (int i = 0; i < order.ingredients.Length; i++)
         {

@@ -8,14 +8,34 @@ using Random = UnityEngine.Random;
 
 public class OrderManager : MonoBehaviour
 {
+    public static OrderManager Instance;
+
     public List<Order> Orders { get; private set; } = new List<Order>();
     public Action<Order> OnOrderAdded;
-    public Action<Order, Score> OnOrderFinished;
+    public Action<Order> OnOrderRemoved;
 
+    [SerializeField] private OrderDisplayManager displayManager;
+    [SerializeField] private int orderAmount = 10;
+
+    [Header("Order Settings")]
     [SerializeField] private int minIngredients = 1;
     [SerializeField] private int maxIngredients = 8;
     [SerializeField] private float minTime = 20;
     [SerializeField] private float maxTime = 50;
+
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.LogError("Multiple OrderManager instances found, destroying this instance");
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     private void Start()
     {
@@ -30,19 +50,29 @@ public class OrderManager : MonoBehaviour
     [Button]
     private void AddNewOrder()
     {
-        Order order = CreateNewOrder();
+        Order order = GenerateRandomOrder(minIngredients, maxIngredients);
+        order.timer.Set(Random.Range(minTime, maxTime));
+        
         Orders.Add(order);
         OnOrderAdded?.Invoke(order);
         order.timer.Start();
     }
 
-    public Order CreateNewOrder()
+    public void OnOrderTimerExceeded(Order order)
     {
-        Order order = GenerateRandomOrder(minIngredients, maxIngredients);
-        Timer timer = new Timer();
-        timer.Set(Random.Range(minTime, maxTime));
-        order.timer = timer;
-        return order;
+        RemoveOrder(order);
+    }
+
+    public void OnOrderDelivered(Order order)
+    {
+        RemoveOrder(order);
+    }
+
+    private void RemoveOrder(Order order)
+    {
+        Orders.Remove(order);
+        order.Dispose();
+        OnOrderRemoved?.Invoke(order);
     }
 
     private Order GenerateRandomOrder(int minIngredients, int maxIngredients)

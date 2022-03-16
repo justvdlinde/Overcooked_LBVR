@@ -10,44 +10,48 @@ public class OrderDisplayManager : MonoBehaviour
 
     private void OnEnable()
     {
-        orderManager.OnOrderAdded += SetupDisplay;
-        orderManager.OnOrderFinished += OnOrderFinished;
+        orderManager.OnOrderAdded += DisplayOrder;
+        orderManager.OnOrderRemoved += RemoveDisplay;
     }
 
     private void OnDisable()
     {
-        orderManager.OnOrderAdded -= SetupDisplay;
-        orderManager.OnOrderFinished -= OnOrderFinished;
+        orderManager.OnOrderAdded -= DisplayOrder;
+        orderManager.OnOrderRemoved -= RemoveDisplay;
     }
 
-    private void SetupDisplay(Order order)
+    public bool HasFreeDisplay(out OrderDisplay display)
     {
-        OrderDisplay display = GetBestEmptyDisplay();
-        display.DisplayOrder(order);
-        orderDisplayPairs.Add(order, display);
-    }
-
-    private OrderDisplay GetBestEmptyDisplay()
-    {
-        foreach(OrderDisplay display in displays)
+        display = null;
+        foreach (OrderDisplay d in displays)
         {
-            if (display.Order == null)
-                return display;
+            if (d.Order == null)
+            {
+                display = d;
+                return true;
+            }
         }
-
-        return null;
+        return false;
     }
 
-    private void OnOrderFinished(Order order, Score score)
+    private void DisplayOrder(Order order)
     {
-        RemoveDisplay(order);
+        if (HasFreeDisplay(out OrderDisplay display))
+        {
+            display.DisplayOrder(order);
+            orderDisplayPairs.Add(order, display);
+        }
+        else
+        {
+            Debug.LogWarning("No free display found");
+        }
     }
 
     public void RemoveDisplay(Order order)
     {
         if(orderDisplayPairs.TryGetValue(order, out OrderDisplay display))
         {
-            Destroy(display.gameObject);
+            display.Clear();
             orderDisplayPairs.Remove(order);
         }
     }
