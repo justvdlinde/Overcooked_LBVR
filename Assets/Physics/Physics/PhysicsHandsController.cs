@@ -167,9 +167,8 @@ namespace PhysicsCharacter
 
 		public void ForceHandsToController()
 		{
-			MoveUsingTransform();
-			//rigidBody.velocity = Vector3.zero;
-			//rigidBody.position = handsDelegate.GetControllerPosition();
+			rigidBody.velocity = Vector3.zero;
+			rigidBody.position = handsDelegate.GetControllerPosition();
 		}
 
 		private void RotateUsingTransform()

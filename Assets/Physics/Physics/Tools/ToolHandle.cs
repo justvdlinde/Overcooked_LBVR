@@ -122,10 +122,6 @@ namespace PhysicsCharacter
 				{
 					Debug.Log("Release call");
 					GetReleased(heldHand);
-					if (heldHand == Hand.Right)
-						PhysicsPlayerBlackboard.Instance.rightHandPickupManager.handPhysics.ForceHandsToController();
-					if (heldHand == Hand.Left)
-						PhysicsPlayerBlackboard.Instance.leftHandPickupManager.handPhysics.ForceHandsToController();
 				}
 			}
 		}
