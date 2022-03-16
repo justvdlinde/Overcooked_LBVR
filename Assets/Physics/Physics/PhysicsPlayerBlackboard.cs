@@ -32,6 +32,7 @@ namespace PhysicsCharacter
 		public bool isLeftHandGripping = false;
 		public bool isRightHandGripping = false;
 
+		public static int INGREDIENT_MASK = 6;
 		public static int TOOL_LAYER_MASK = 26;
 		public static int RIGHT_HAND_LAYER_MASK = 29;
 		public static int LEFT_HAND_LAYER_MASK = 30;
@@ -108,9 +109,17 @@ namespace PhysicsCharacter
 		public void SetToolAndHandCollisions(Hand hand, bool collisionsIgnored)
 		{
 			if(hand == Hand.Left)
+			{
+				Physics.IgnoreLayerCollision(INGREDIENT_MASK, LEFT_HAND_LAYER_MASK, collisionsIgnored);
+
 				Physics.IgnoreLayerCollision(TOOL_LAYER_MASK, LEFT_HAND_LAYER_MASK, collisionsIgnored);
+			}
 			else
+			{
+				Physics.IgnoreLayerCollision(INGREDIENT_MASK, RIGHT_HAND_LAYER_MASK, collisionsIgnored);
+
 				Physics.IgnoreLayerCollision(TOOL_LAYER_MASK, RIGHT_HAND_LAYER_MASK, collisionsIgnored);
+			}
 		}
 	}
 }
