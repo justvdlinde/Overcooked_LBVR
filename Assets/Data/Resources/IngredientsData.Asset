@@ -10,18 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 302c9b8ad9b863c49846b2bcbfa7f5b9, type: 3}
-  m_Name: Ingredients
+  m_Name: IngredientsData
   m_EditorClassIdentifier: 
   ingredients:
   - ingredientType: 1
     ingredientPrefab: {fileID: 6207516007160710318, guid: e237fd22f35be4b42ad9ad2f8524dfd5, type: 3}
+    ingredientIcon: {fileID: 198193937083219483, guid: 554853dd95b30624fbb28ce7e6ed71cf, type: 3}
   - ingredientType: 2
     ingredientPrefab: {fileID: 6207516007160710318, guid: b79f48055f99ab54e905544cf98f59ba, type: 3}
+    ingredientIcon: {fileID: 7529243236239441198, guid: e30d3ba1f0617cf4bbb807cb931b0b38, type: 3}
   - ingredientType: 3
     ingredientPrefab: {fileID: 5122647214478050637, guid: db4843d5fccc90448a2939d064114be1, type: 3}
+    ingredientIcon: {fileID: 3191374713650927230, guid: 9135770621f2f194088af55e7f576107, type: 3}
   - ingredientType: 4
     ingredientPrefab: {fileID: 6107469349607700967, guid: 574816ba52e1daf439aaa47683b8a1b8, type: 3}
+    ingredientIcon: {fileID: 3968189406319009012, guid: fc6721217a5297c4a8d134d13bb806f1, type: 3}
   - ingredientType: 5
     ingredientPrefab: {fileID: 6909110976175439910, guid: 5e25ca3a44b310c43812755881e709b6, type: 3}
+    ingredientIcon: {fileID: 4420949152395102528, guid: fd69a66f16872ef4584cadbf25a961e7, type: 3}
   - ingredientType: 6
     ingredientPrefab: {fileID: 1049201880968237935, guid: 68f3f1265e459a542aca03b783946051, type: 3}
+    ingredientIcon: {fileID: 3915156232797166162, guid: 0f72aceeef832364185cb84f2bb1c35d, type: 3}
+  - ingredientType: 7
+    ingredientPrefab: {fileID: 0}
+    ingredientIcon: {fileID: 996823513415449855, guid: 6aeae9965ab7f8148b44d84c12c50d1e, type: 3}
+  - ingredientType: 8
+    ingredientPrefab: {fileID: 0}
+    ingredientIcon: {fileID: 1320332203694447739, guid: 5e7cbf1364bec3d48a1e6aa0f6b8756a, type: 3}

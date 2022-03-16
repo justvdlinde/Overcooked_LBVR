@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public class Order : ScriptableObject
+[System.Serializable]
+public class Order
 {
     public IngredientType[] ingredients;
+    public Timer timer;
 }

@@ -1,7 +1,8 @@
 public enum IngredientType
 {
     None,
-    Bun,
+    BunTop,
+    BunBottom,
     Patty,
     Lettuce,
     Cheese,
