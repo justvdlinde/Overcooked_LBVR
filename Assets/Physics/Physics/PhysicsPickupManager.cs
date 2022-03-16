@@ -169,6 +169,7 @@ namespace PhysicsCharacter
 			{
 				if(currentPickupable == pickupable && !currentPickupable.IsObjectBeingHeld())// && !IsHandGripping() && currentPickupable.isObjectBeingHeld())
 				{
+					Debug.Log("Release");
 					pickupable.GetReleased(hand);
 					//handPhysics.ForceHandsToController();
 					currentPickupable = null;
