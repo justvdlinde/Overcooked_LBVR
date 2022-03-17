@@ -1,0 +1,216 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5786202637453209150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4670149583324359409}
+  - component: {fileID: 779150084833364521}
+  - component: {fileID: 7009178845430741167}
+  - component: {fileID: 845262349846802893}
+  - component: {fileID: 7544187612349943913}
+  - component: {fileID: 526050103001317106}
+  m_Layer: 0
+  m_Name: RemotePlayerPawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4670149583324359409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5786202637453209150}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7675239007807052410}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &779150084833364521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5786202637453209150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 912c696461e44194b9ea0d6b36124e5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  photonView: {fileID: 526050103001317106}
+  body: {fileID: 5640252943502341798}
+  healthController: {fileID: 7544187612349943913}
+--- !u!114 &7009178845430741167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5786202637453209150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964117262e9c290489ce2da2fb0bd40c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lerpSpeed: 50
+  networkedTriggerButtonRight: 0
+  networkedTriggerButtonLeft: 0
+--- !u!114 &845262349846802893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5786202637453209150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9535aae9965301f4ea92204de137afe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 5640252943502341798}
+  bodyRoot: {fileID: 4670149583324359409}
+--- !u!114 &7544187612349943913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5786202637453209150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b743380000cc02b4bb94ff9d86cb9817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingHealth: 100
+  photonView: {fileID: 526050103001317106}
+--- !u!114 &526050103001317106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5786202637453209150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 7009178845430741167}
+  - {fileID: 845262349846802893}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!1001 &7766882186165556939
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4670149583324359409}
+    m_Modifications:
+    - target: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090553384345058882, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: healthController
+      value: 
+      objectReference: {fileID: 7544187612349943913}
+    - target: {fileID: 2990514805603263841, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ca55a32b6073ea3479e84131cb68a8be, type: 2}
+    - target: {fileID: 4113110794108153808, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+        type: 3}
+      propertyPath: m_Name
+      value: RemotePawnBody
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c4ea7f05e0e2cfe4597ce80bb9f97837, type: 3}
+--- !u!4 &7675239007807052410 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 93008809382546609, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+    type: 3}
+  m_PrefabInstance: {fileID: 7766882186165556939}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5640252943502341798 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2706582122289422445, guid: c4ea7f05e0e2cfe4597ce80bb9f97837,
+    type: 3}
+  m_PrefabInstance: {fileID: 7766882186165556939}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ba641c9cbfb8e84eb15837c5226e4de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

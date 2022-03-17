@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3f8bf7d7cfe1944aed4c4deb9cb71b, type: 3}
+  m_Name: OK
+  m_EditorClassIdentifier: 
+  gestureHandPose: 5
+  indexPose: 2
+  indexPoseValue: 0.625
+  indexDeadzone: 0.15
+  middlePose: 1
+  middlePoseValue: 0
+  middleDeadzone: 0.1
+  ringPose: 1
+  ringPoseValue: 0
+  ringDeadzone: 0.1
+  pinkyPose: 1
+  pinkyPoseValue: 0
+  pinkyDeadzone: 0.1
+  thumbPose: 2
+  thumbPoseValue: 1
+  thumbDeadzone: 0.1
