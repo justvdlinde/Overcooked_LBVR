@@ -55,13 +55,13 @@ namespace PhysicsCharacter
 			}
 
 			// disable this when rotating
-			if(!PhysicsPlayerBlackboard.Instance.isFading)
-			{
-				foreach(ToolHandle t in toolHandles)
-				{
-					t.CheckDistance(maxGripDistance);
-				}
-			}
+			//if(!PhysicsPlayerBlackboard.Instance.isFading)
+			//{
+			//	foreach(ToolHandle t in toolHandles)
+			//	{
+			//		t.CheckDistance(maxGripDistance);
+			//	}
+			//}
 
 			//if(!IsBeingHeld() && (heldHandles <= 0))
 			//{
@@ -216,6 +216,9 @@ namespace PhysicsCharacter
 				heldHandles = 0;
 			heldHandles++;
 			rigidBody.useGravity = false;
+
+			if (TryGetComponent(out Photon.Pun.PhotonView photonView))
+				photonView.TransferOwnership(Photon.Pun.PhotonNetwork.LocalPlayer);
 		}
 
 		protected virtual void OnReleasedCallback(Hand hand, ToolHandle toolHandle)
