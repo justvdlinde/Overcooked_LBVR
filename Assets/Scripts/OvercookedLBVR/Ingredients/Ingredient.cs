@@ -29,7 +29,7 @@ public class Ingredient : MonoBehaviour
     public void Process()
 	{
         // TO DO: CLEAN THIS UP
-        if(!processToTwoAssets)
+        if(!processToTwoAssets && !processToCookable)
 		{
             unProcessedGraphics.gameObject.SetActive(false);
             processedGraphics.gameObject.SetActive(true);

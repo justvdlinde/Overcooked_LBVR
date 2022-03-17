@@ -25,6 +25,7 @@ namespace PhysicsCharacter
 		// gesture for gripping left hand (set max for finger)
 
 		protected Hand heldHand = Hand.None;
+		public Hand HeldHand => heldHand;
 		protected bool isHeldLeftHand = false;
 		protected bool isHeldRightHand = false;
 

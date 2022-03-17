@@ -3898,7 +3898,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 4294967295
+      m_Bits: 4177526903
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -4883,7 +4883,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 0}
-  - {fileID: 2100000, guid: 41dd2826a81dd6441817075ac77e550a, type: 2}
+  - {fileID: 2100000, guid: d5c8f4b418ff2bd44a79cb87cbc84aa8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

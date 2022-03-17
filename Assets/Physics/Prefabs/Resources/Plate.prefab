@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 5853532453732691669}
   - component: {fileID: 5853532453732691668}
   - component: {fileID: 4701031565650054890}
+  - component: {fileID: -2127286866967161279}
   m_Layer: 26
   m_Name: Plate
   m_TagString: Untagged
@@ -195,6 +196,27 @@ MonoBehaviour:
   maxRotationChange: 720
   maxAngularVelocity: 35
   clipChecker: {fileID: 0}
+--- !u!114 &-2127286866967161279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853532453732691667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7628820565282496827
 GameObject:
   m_ObjectHideFlags: 0
