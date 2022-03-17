@@ -28,6 +28,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8192778687244025443, guid: be80b5b5cd5e38d41b698d0824189b6f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192778687244025443, guid: be80b5b5cd5e38d41b698d0824189b6f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192778687244025443, guid: be80b5b5cd5e38d41b698d0824189b6f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8192778687244025443, guid: be80b5b5cd5e38d41b698d0824189b6f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -100,6 +112,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4432354375031610813, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0847
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432354375031610813, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.0018302441
       objectReference: {fileID: 0}
@@ -126,6 +142,10 @@ PrefabInstance:
     - target: {fileID: 4432354375031610813, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432354375593197096, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.081
       objectReference: {fileID: 0}
     - target: {fileID: 4432354375593197096, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -205,11 +225,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4432354376710747797, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
       propertyPath: m_Size.x
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4432354376710747797, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
       propertyPath: m_Size.y
-      value: 0.1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4432354376710747797, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
       propertyPath: m_Size.z
