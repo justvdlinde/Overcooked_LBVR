@@ -10,6 +10,7 @@ public class Dispenser : MonoBehaviour
 
     public void DispenseObject(Rigidbody obj)
     {
+        Debug.Log("Dispense");
         Rigidbody instance = Instantiate(obj, spawnPoint.position, spawnPoint.rotation);
         instance.AddForce(instance.transform.forward * forceAmount, forceMode);
     }

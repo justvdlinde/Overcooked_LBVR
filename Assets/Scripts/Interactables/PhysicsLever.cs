@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class PhysicsLever : MonoBehaviour
 {
 	[Header("Lever values")]
+	[SerializeField] private float resetThreshold = 0.15f;
 	[SerializeField] private float clickThreshold = 0.75f;
 	[SerializeField] private UnityEvent onPress = null;
 	[SerializeField] private UnityEvent onRelease = null;
@@ -52,12 +53,12 @@ public class PhysicsLever : MonoBehaviour
 
 	private bool IsLeverUp()
 	{
-		return GetLeverValue01() < leverReactionSpots;
+		return GetLeverValue01() < resetThreshold + leverReactionSpots;
 	}
 
 	private bool IsLeverDown()
 	{
-		return GetLeverValue01() > 1f - leverReactionSpots;
+		return GetLeverValue01() > clickThreshold - leverReactionSpots;
 	}
 
 	private float GetLeverValue01()
