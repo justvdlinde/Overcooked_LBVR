@@ -339,13 +339,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4245607950235198602, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e278d64022795184db664d34a04c0a93, type: 3}
+    - target: {fileID: 4245607950276990618, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.000000050256357
+      objectReference: {fileID: 0}
     - target: {fileID: 4245607950276990618, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: -0.012570202
+      value: -0.012569981
       objectReference: {fileID: 0}
     - target: {fileID: 4245607950276990618, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 0.0000000024124405
+      value: -0.000000010855982
       objectReference: {fileID: 0}
     - target: {fileID: 4245607950891798584, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
       propertyPath: m_IsActive
