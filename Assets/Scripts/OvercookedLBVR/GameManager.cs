@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviourPun
     private void AddScore(Score score, Order order)
     {
         orderScorePairs.Add(order, score);
-        if (orderManager.Orders.Count == 0)
+        if (orderManager.ActiveOrders.Count == 0)
             GameOver();
     }
 
