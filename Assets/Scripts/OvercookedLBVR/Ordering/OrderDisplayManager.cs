@@ -10,14 +10,14 @@ public class OrderDisplayManager : MonoBehaviour
 
     private void OnEnable()
     {
-        orderManager.OnOrderAdded += DisplayOrder;
-        orderManager.OnOrderRemoved += RemoveDisplay;
+        orderManager.OrderAddedToGame += DisplayOrder;
+        orderManager.OrderFailed += RemoveDisplay;
     }
 
     private void OnDisable()
     {
-        orderManager.OnOrderAdded -= DisplayOrder;
-        orderManager.OnOrderRemoved -= RemoveDisplay;
+        orderManager.OrderAddedToGame -= DisplayOrder;
+        orderManager.OrderFailed -= RemoveDisplay;
     }
 
     public bool HasFreeDisplay()

@@ -5,7 +5,6 @@ using UnityEngine;
 public class Score
 {
     public readonly Order Order;
-    public readonly Dish Dish;
     public bool timerExceeded;
 
     public float MaxScore => 100;
@@ -15,20 +14,19 @@ public class Score
     public float CorrectIngredientPercentage { get; private set; }
     public float ProperlyCookedIngredientsPercentage { get; private set; }
 
+    // failed order
+    public Score(Order order)
+    {
+        Order = order;
+        Points = 0;
+        timerExceeded = true;
+    }
+
     public Score(Order order, Dish dish)
     {
         Order = order;
-        Dish = dish;
-        if(order.timer.TimeRemaining <= 0)
-        {
-            timerExceeded = true;
-            Points = 0;
-        }
-        else
-        {
-            Points = CalculatePoints(order, dish);
-            timerExceeded = false;
-        }
+        Points = CalculatePoints(order, dish);
+        timerExceeded = false;
     }
 
     public override string ToString()

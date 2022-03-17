@@ -12,8 +12,9 @@ public class OrderManager : MonoBehaviourPun
     public static OrderManager Instance;
 
     public List<Order> Orders { get; private set; } = new List<Order>();
-    public Action<Order> OnOrderAdded;
-    public Action<Order> OnOrderRemoved;
+    public Action<Order> OrderAddedToGame;
+    public Action<Order> OrderFailed;
+    public Action<Order, Dish> OrderDelivered;
 
     [SerializeField] private OrderDisplayManager displayManager;
     [SerializeField] private int orderAmount = 10;
@@ -38,7 +39,10 @@ public class OrderManager : MonoBehaviourPun
         {
             Instance = this;
         }
+    }
 
+    public void StartOrders()
+    {
         if (PhotonNetwork.IsMasterClient)
             StartCoroutine(OrderCoroutine());
     }
@@ -91,25 +95,22 @@ public class OrderManager : MonoBehaviourPun
         order.timer.Set(timerDuration);
 
         Orders.Add(order);
-        OnOrderAdded?.Invoke(order);
+        OrderAddedToGame?.Invoke(order);
         order.timer.Start();
         orderIndex++;
     }
 
     public void OnOrderTimerExceeded(Order order)
     {
-        RemoveOrder(order);
-    }
-
-    public void OnOrderDelivered(Order order)
-    {
-        RemoveOrder(order);
-    }
-
-    private void RemoveOrder(Order order)
-    {
-        OnOrderRemoved?.Invoke(order);
         Orders.Remove(order);
+        OrderFailed?.Invoke(order);
+        order.Dispose();
+    }
+
+    public void OnOrderDelivered(Order order, Dish dish)
+    {
+        Orders.Remove(order);
+        OrderDelivered?.Invoke(order, dish);
         order.Dispose();
     }
 
