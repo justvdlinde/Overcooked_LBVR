@@ -14,13 +14,7 @@ public class LocalPlayerPawnFactory : IFactory<PlayerPawn>
     {
         // Here we can create different prefabs for different platforms, such as Spree
 
-        PlayerPawn pawn = null;
-
-        if (PlayerSpawner.Use_Physics_Player)
-            pawn = injector.InstantiateGameObject(Resources.Load<PlayerPawn>("LocalPlayerPawnPhysics"));
-        else
-            pawn = injector.InstantiateGameObject(Resources.Load<PlayerPawn>("LocalPlayerPawn"));
-
+        PlayerPawn pawn = injector.InstantiateGameObject(Resources.Load<PlayerPawn>("LocalPlayerPawnPhysics"));
         pawn.name = "Local Player Pawn";
         return pawn;
     }

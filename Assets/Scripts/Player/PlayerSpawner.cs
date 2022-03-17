@@ -13,15 +13,10 @@ public class PlayerSpawner : MonoBehaviour
     [field: SerializeField]
     private bool usePhysicsPlayer = false;
 
-    public static bool Use_Physics_Player { get; private set; } = false;
-
     private INetworkService networkService;
 
     protected virtual void Awake()
     {
-        Use_Physics_Player = usePhysicsPlayer;
-
-
         PlayersManager playersManager = GlobalServiceLocator.Instance.Get<PlayersManager>();
         if (playersManager.LocalPlayer != null)
         {
