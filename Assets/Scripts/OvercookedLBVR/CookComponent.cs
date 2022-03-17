@@ -11,7 +11,16 @@ public class CookComponent : MonoBehaviour
     public float rawToCookTime = 1f;
     public float cookedToBurnTime = 1f;
 
-    private void OnValidate()
+    [SerializeField] private GameObject rawPrefab   = null;
+    [SerializeField] private GameObject cookedPrefab = null;
+    [SerializeField] private GameObject burntPrefab     = null;
+
+	private void Awake()
+	{
+        SetAssetState();
+    }
+
+	private void OnValidate()
     {
         if (ingredient == null)
             ingredient = GetComponent<Ingredient>();
@@ -29,6 +38,13 @@ public class CookComponent : MonoBehaviour
         }
     }
 
+    private void SetAssetState()
+	{
+        rawPrefab?.SetActive(status == CookStatus.Raw);
+        cookedPrefab?.SetActive(status == CookStatus.Cooked);
+        burntPrefab?.SetActive(status == CookStatus.Burned);
+    }
+
     public void Cook(float add = 1)
     {
         if (status != CookStatus.Burned)
@@ -38,6 +54,10 @@ public class CookComponent : MonoBehaviour
             else if (status == CookStatus.Cooked && cookAmount > rawToCookTime + cookedToBurnTime)
                 status = CookStatus.Burned;
         }
+        SetAssetState();
+
+        if (status != CookStatus.Raw)
+            ingredient.status = IngredientStatus.Processed;
 
         cookAmount += add * Time.deltaTime;
     }

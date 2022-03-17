@@ -8,5 +8,7 @@ public enum IngredientType
     Cheese,
     Tomato,
     Mayo,
-    Ketchup
+    Ketchup,
+    Onion,
+    Bacon
 }

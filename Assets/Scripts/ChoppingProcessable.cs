@@ -48,7 +48,12 @@ public class ChoppingProcessable : MonoBehaviour
 			else if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft <= 0)
 			{
 				ingredient.Process();
+
 				Disable();
+
+				// TO DO: CLEAN THIS UP
+				if (ingredient.processToTwoAssets || ingredient.processToCookable)
+					Destroy(this);
 			}
 		}
 	}
