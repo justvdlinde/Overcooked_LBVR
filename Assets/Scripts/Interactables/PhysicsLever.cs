@@ -1,3 +1,4 @@
+using PhysicsCharacter;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,16 +7,23 @@ using UnityEngine.Events;
 public class PhysicsLever : MonoBehaviour
 {
 	[Header("Lever values")]
+	[SerializeField] private float resetThreshold = 0.15f;
 	[SerializeField] private float clickThreshold = 0.75f;
 	[SerializeField] private UnityEvent onPress = null;
 	[SerializeField] private UnityEvent onRelease = null;
+
+	[SerializeField] private Tool toolHandle = null;
 
 	[SerializeField] private Transform leverTransform = null;
 	private HingeJoint hingeJoint = null;
 	private float upperLimit = -90f;
 	private float lowerLimit = 90f;
 
+	[SerializeField] private float leverReactionSpots = 0.1f;
+
 	public float offset = 0;
+
+	private bool wasUp = false;
 
 	private void Awake()
 	{
@@ -29,9 +37,28 @@ public class PhysicsLever : MonoBehaviour
 
 	private void Update()
 	{
-		float ang = Vector3.Dot(transform.up, leverTransform.forward);
-		Debug.Log($"Vector3.Dot(transform.up, leverTransform.forward {Mathf.InverseLerp(-1, 1, ang)}" );
-		//Debug.Log($"GetLeverValue01() {GetLeverValue01()} lowerLimit {lowerLimit + 180f} upperLimit {upperLimit + 180f} localAng.x {Mathf.Abs(leverTransform.localEulerAngles.x * Mathf.Deg2Rad)}" );
+		hingeJoint.useSpring = !toolHandle.IsBeingHeld();
+
+		if (IsLeverDown() && wasUp)
+		{
+			onPress?.Invoke();
+			wasUp = false;
+		}
+		if (!wasUp && IsLeverUp())
+		{
+			onRelease.Invoke();
+			wasUp = true;
+		}
+	}
+
+	private bool IsLeverUp()
+	{
+		return GetLeverValue01() < resetThreshold + leverReactionSpots;
+	}
+
+	private bool IsLeverDown()
+	{
+		return GetLeverValue01() > clickThreshold - leverReactionSpots;
 	}
 
 	private float GetLeverValue01()

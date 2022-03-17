@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 using Utils.Core.Attributes;
 
@@ -10,8 +11,8 @@ public class Dispenser : MonoBehaviour
 
     public void DispenseObject(Rigidbody obj)
     {
-        Rigidbody instance = Instantiate(obj, spawnPoint.position, spawnPoint.rotation);
-        instance.AddForce(instance.transform.forward * forceAmount, forceMode);
+        GameObject g = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, spawnPoint.rotation);
+        //instance.AddForce(instance.transform.forward * forceAmount, forceMode);
     }
 
     [Button]
