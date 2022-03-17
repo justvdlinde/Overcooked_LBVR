@@ -17,7 +17,7 @@ public class OrderManager : MonoBehaviourPun
 
     [SerializeField] private OrderDisplayManager displayManager;
     [SerializeField] private int orderAmount = 10;
-    [SerializeField] private float[] orderTimes;
+    [SerializeField] private float[] orderDelays;
 
     [Header("Order Settings")]
     [SerializeField] private int minIngredients = 1;
@@ -39,17 +39,27 @@ public class OrderManager : MonoBehaviourPun
             Instance = this;
         }
 
-        //if (PhotonNetwork.IsMasterClient)
-        //    StartCoroutine(OrderCoroutine());
+        if (PhotonNetwork.IsMasterClient)
+            StartCoroutine(OrderCoroutine());
     }
 
-    //private IEnumerator OrderCoroutine()
-    //{
-    //    for (int i = 0; i < length; i++)
-    //    {
+    private System.Collections.IEnumerator OrderCoroutine()
+    {
+        for (int i = 0; i < orderDelays.Length; i++)
+        {
+            yield return new WaitForSeconds(orderDelays[orderIndex]);
+            while (!CanAddNewOrder())
+            {
+                yield return null;
+            }
+            AddNewOrder();
+        }
+    }
 
-    //    }
-    //}
+    private bool CanAddNewOrder()
+    {
+        return displayManager.HasFreeDisplay();
+    }
 
     [Button]
     private void AddNewOrder()
@@ -83,6 +93,7 @@ public class OrderManager : MonoBehaviourPun
         Orders.Add(order);
         OnOrderAdded?.Invoke(order);
         order.timer.Start();
+        orderIndex++;
     }
 
     public void OnOrderTimerExceeded(Order order)
@@ -97,9 +108,9 @@ public class OrderManager : MonoBehaviourPun
 
     private void RemoveOrder(Order order)
     {
+        OnOrderRemoved?.Invoke(order);
         Orders.Remove(order);
         order.Dispose();
-        OnOrderRemoved?.Invoke(order);
     }
 
     private Order GenerateRandomOrder(int minIngredients, int maxIngredients)
@@ -114,10 +125,16 @@ public class OrderManager : MonoBehaviourPun
         availableIngredients.Remove(IngredientType.BunBottom);
         availableIngredients.Remove(IngredientType.BunTop);
 
+        bool includesPatty = false;
         for (int i = 1; i < order.ingredients.Length - 1; i++)
         {
             order.ingredients[i] = availableIngredients.GetRandom();
+            if (order.ingredients[i] == IngredientType.Patty)
+                includesPatty = true;
         }
+
+        if (!includesPatty)
+            order.ingredients[Random.Range(1, order.ingredients.Length - 2)] = IngredientType.Patty;
 
         return order;
     }

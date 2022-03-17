@@ -20,6 +20,11 @@ public class OrderDisplayManager : MonoBehaviour
         orderManager.OnOrderRemoved -= RemoveDisplay;
     }
 
+    public bool HasFreeDisplay()
+    {
+        return HasFreeDisplay(out OrderDisplay display);
+    }
+
     public bool HasFreeDisplay(out OrderDisplay display)
     {
         display = null;
