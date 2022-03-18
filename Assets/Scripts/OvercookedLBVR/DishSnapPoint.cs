@@ -57,10 +57,9 @@ public class DishSnapPoint : MonoBehaviour
     private Vector3 GetTopSnapPosition(GameObject obj)
     {
         float objectHeight = 0;
-        if(obj.transform.GetChild(0).TryGetComponent(out Renderer renderer))
+        if(obj.transform.GetChild(0).TryGetComponent(out MeshFilter renderer))
         {
-            objectHeight = renderer.bounds.size.y;
-            Debug.Log(objectHeight);
+            objectHeight = renderer.mesh.bounds.size.y;
         }
         return new Vector3(0, totalStackHeight + objectHeight * snapMargin, 0);
     }
