@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 4726556252404143311}
   - component: {fileID: 3047702267385185088}
   - component: {fileID: 1545349174847788462}
+  - component: {fileID: 6611531621458932714}
   m_Layer: 26
   m_Name: ChoppingCollider
   m_TagString: Metal
@@ -363,8 +364,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.99999917, y: 0.9999998, z: 1.0341976}
+  m_Center: {x: 1.3648532e-15, y: 5.647188e-17, z: -0.017098648}
 --- !u!114 &1545349174847788462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +381,19 @@ MonoBehaviour:
   hitDamage: 1
   connectedColliders:
   - {fileID: 351353564}
+--- !u!114 &6611531621458932714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4112349930651044802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587fe56854b206348a41f84889f33516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  metalHit: {fileID: 8300000, guid: f66579c24321479428363dedbc52c1d5, type: 3}
 --- !u!1 &5386573866616013719
 GameObject:
   m_ObjectHideFlags: 0
