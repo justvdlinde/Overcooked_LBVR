@@ -9,8 +9,8 @@ public class Ingredient : MonoBehaviour
     public bool needsToBeCooked = false;
     public CookComponent cookComponent = null;
 
-    [SerializeField] public Transform unProcessedGraphics = null;
-    [SerializeField] public Transform processedGraphics = null;
+    public Transform unProcessedGraphics = null;
+    public Transform processedGraphics = null;
 
     public bool processToTwoAssets = false;
     [SerializeField] private GameObject result1 = null;
@@ -64,4 +64,17 @@ public class Ingredient : MonoBehaviour
             returnValue &= cookComponent.status == CookStatus.Cooked;
         return returnValue;
     }
+
+    public void PlaySound(AudioClip clip, Vector3 position)
+    {
+
+        GameObject obj = new GameObject();
+        obj.transform.position = position;
+        obj.AddComponent<AudioSource>();
+        obj.GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
+        obj.GetComponent<AudioSource>().PlayOneShot(clip);
+        Destroy(obj, clip.length);
+        return;
+    }
+
 }

@@ -144,6 +144,9 @@ public class OrderManager : MonoBehaviourPun
     {
         // compare dish to each active order,
         // give score to each and return highest score
+        if (ActiveOrders == null || ActiveOrders.Count == 0)
+            return null;
+
         Order bestFit = ActiveOrders[0];
         int bestFitScore = 0;
 

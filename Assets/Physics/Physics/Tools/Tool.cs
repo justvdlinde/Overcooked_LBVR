@@ -226,9 +226,6 @@ namespace PhysicsCharacter
 				heldHandles = 0;
 			heldHandles++;
 			rigidBody.useGravity = false;
-
-			if (TryGetComponent(out Photon.Pun.PhotonView photonView))
-				photonView.TransferOwnership(Photon.Pun.PhotonNetwork.LocalPlayer);
 		}
 
 		protected virtual void OnReleasedCallback(Hand hand, ToolHandle toolHandle)
@@ -242,9 +239,6 @@ namespace PhysicsCharacter
 			toolHandle.transform.parent = transform;
 			toolHandle.transform.localPosition = toolHandle.localTransformMirror.localPosition;
 			toolHandle.transform.localRotation = toolHandle.localTransformMirror.localRotation;
-
-			if (TryGetComponent(out Photon.Pun.PhotonView photonView))
-				photonView.TransferOwnership(-1);
 		}
 
 		protected virtual void MoveUsingPhysics()
