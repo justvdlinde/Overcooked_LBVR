@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107d847f750814b438319e62ca7a772e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dish: {fileID: 0}
+  dish: {fileID: 8136527830910773568}
   collider: {fileID: 1753612516}
   colliderPadding: 0.1
   snapMargin: 0.8
@@ -646,14 +646,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b89480d3cac11874ca65860e4b663921, type: 3}
---- !u!1 &6808626840602902069 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8190094656730802214, guid: b89480d3cac11874ca65860e4b663921, type: 3}
-  m_PrefabInstance: {fileID: 3446403508571526675}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6806858497950038133 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8188322604302069350, guid: b89480d3cac11874ca65860e4b663921, type: 3}
+  m_PrefabInstance: {fileID: 3446403508571526675}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6808626840602902069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8190094656730802214, guid: b89480d3cac11874ca65860e4b663921, type: 3}
   m_PrefabInstance: {fileID: 3446403508571526675}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &8136527830910773568

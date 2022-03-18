@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1067794922556604088}
   - component: {fileID: 2794872585545843162}
   - component: {fileID: 1560361286558406151}
+  - component: {fileID: 5296036423092671766}
   m_Layer: 26
   m_Name: Ketchup
   m_TagString: Untagged
@@ -203,6 +204,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5296036423092671766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067794922556604095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748ba42f04364b34893bdbae72c35c9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1067794922556604089}
 --- !u!1 &1067794922626125364
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,11 +628,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 763401354322132547, guid: 6732d53e155364e45b340d66eb2e448d, type: 3}
   m_PrefabInstance: {fileID: 8042137469378176195}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &6475668654372688618 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 3910632180704949801, guid: 6732d53e155364e45b340d66eb2e448d, type: 3}
-  m_PrefabInstance: {fileID: 8042137469378176195}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3087432616234143646 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4991020760357301085, guid: 6732d53e155364e45b340d66eb2e448d, type: 3}
@@ -632,6 +641,11 @@ ParticleSystem:
 --- !u!1 &7633314339865617067 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 465440424789591656, guid: 6732d53e155364e45b340d66eb2e448d, type: 3}
+  m_PrefabInstance: {fileID: 8042137469378176195}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6475668654372688618 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3910632180704949801, guid: 6732d53e155364e45b340d66eb2e448d, type: 3}
   m_PrefabInstance: {fileID: 8042137469378176195}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &246400251465975141
@@ -661,7 +675,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eb0573d4b6f3d8748bec5777330be8e2, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
@@ -706,7 +720,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -802,7 +816,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
