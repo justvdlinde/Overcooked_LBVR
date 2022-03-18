@@ -33,6 +33,8 @@ public class ChoppingProcessable : MonoBehaviour
 
 	private void OnEnterEvent(Collider obj)
 	{
+		//TO DO: add some check if knife is being held
+
 		if(obj.TryGetComponent<ChoppingCollider>(out ChoppingCollider col))
 		{
 			foreach (Collider c in connectedColliders)
@@ -43,7 +45,6 @@ public class ChoppingProcessable : MonoBehaviour
 			if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft > 0)
 			{
 				currentHitsLeft -= col.HitDamage;
-				Debug.Log($"Chopped {name} for {col.HitDamage} and has {currentHitsLeft} left");
 			}
 			else if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft <= 0)
 			{
