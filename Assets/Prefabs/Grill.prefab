@@ -677,6 +677,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2600720470475435981}
     m_Modifications:
+    - target: {fileID: -6186975024659415729, guid: 9f0e4d0a02c79814091d3d535047376f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6186975024659415729, guid: 9f0e4d0a02c79814091d3d535047376f, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 156024249851060168, guid: 9f0e4d0a02c79814091d3d535047376f, type: 3}
       propertyPath: m_Size.x
       value: 1
