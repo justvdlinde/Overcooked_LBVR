@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: 267a436e565f0604594e05d5c5d7c622, type: 2}
+  m_LightingDataAsset: {fileID: 0}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 4914c77bd04a6bf4e8d3339cd8a207c8, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -181,6 +181,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -937,6 +941,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 57d08dce0edafc849ae4add9a267045b, type: 2}
@@ -965,6 +973,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -1009,6 +1021,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -1155,6 +1171,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 31
@@ -1199,6 +1219,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
 --- !u!4 &65389946 stripped
@@ -1216,6 +1240,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -1260,6 +1288,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -1462,6 +1494,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1669,6 +1705,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -1822,6 +1862,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -1865,6 +1909,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -1931,6 +1979,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2082,6 +2134,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2297,6 +2353,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -2366,6 +2426,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
 --- !u!4 &159081462 stripped
@@ -2431,6 +2495,10 @@ PrefabInstance:
     - target: {fileID: 4382522345662288, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23165221605020318, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
@@ -2567,6 +2635,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2738,6 +2810,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2966,6 +3042,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -3034,6 +3114,10 @@ PrefabInstance:
     - target: {fileID: 4245497485410864, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
@@ -3162,6 +3246,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3591,6 +3679,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -3611,6 +3703,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -3655,6 +3751,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -3859,6 +3959,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -3929,6 +4033,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -3997,6 +4105,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4178,6 +4290,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -4435,6 +4551,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23165221605020318, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
 --- !u!4 &296349007 stripped
@@ -4500,6 +4620,10 @@ PrefabInstance:
     - target: {fileID: 4382522345662288, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23165221605020318, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
@@ -4733,6 +4857,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -4776,6 +4904,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -5555,6 +5687,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 40
@@ -5598,6 +5734,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -5664,6 +5804,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5734,6 +5878,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6004,6 +6152,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23487888079669716, guid: cff33b6b9ea5bd645999601a142ccca8, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cff33b6b9ea5bd645999601a142ccca8, type: 3}
 --- !u!4 &438187947 stripped
@@ -6071,6 +6223,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -6091,6 +6247,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -6136,6 +6296,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
 --- !u!4 &452156503 stripped
@@ -6153,6 +6317,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -6197,6 +6365,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -6480,6 +6652,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -7157,6 +7333,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 38
@@ -7201,6 +7381,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
 --- !u!4 &521350699 stripped
@@ -7218,6 +7402,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -7262,6 +7450,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -7351,6 +7543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 43
@@ -7395,6 +7591,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
 --- !u!4 &539557681 stripped
@@ -7412,6 +7612,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -7456,6 +7660,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -7547,6 +7755,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -7590,6 +7802,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -7726,6 +7942,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -7871,6 +8091,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -7958,6 +8182,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -8001,6 +8229,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -8828,6 +9060,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23487888079669716, guid: cff33b6b9ea5bd645999601a142ccca8, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cff33b6b9ea5bd645999601a142ccca8, type: 3}
 --- !u!4 &608648276 stripped
@@ -8893,6 +9129,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -8994,6 +9234,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -9037,6 +9281,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -9244,6 +9492,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23165221605020318, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
 --- !u!4 &639105951 stripped
@@ -9317,6 +9569,10 @@ PrefabInstance:
     - target: {fileID: 4639590756736548, guid: 66a2d8280cd208249a73cb44382fdce5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23689080716052382, guid: 66a2d8280cd208249a73cb44382fdce5, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66a2d8280cd208249a73cb44382fdce5, type: 3}
@@ -9449,6 +9705,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9628,6 +9888,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 50
@@ -9679,6 +9943,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -10009,6 +10277,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23487888079669716, guid: cff33b6b9ea5bd645999601a142ccca8, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cff33b6b9ea5bd645999601a142ccca8, type: 3}
 --- !u!4 &690775471 stripped
@@ -10026,6 +10298,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -10070,6 +10346,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -10140,6 +10420,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -10639,6 +10923,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
 --- !u!4 &739393861 stripped
@@ -10656,6 +10944,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -10701,6 +10993,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
 --- !u!4 &748948429 stripped
@@ -10718,6 +11014,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -10763,6 +11063,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
 --- !u!4 &763949644 stripped
@@ -10780,6 +11084,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -10824,6 +11132,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -11249,6 +11561,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 57d08dce0edafc849ae4add9a267045b, type: 2}
@@ -11371,6 +11687,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 25
@@ -11414,6 +11734,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -11480,6 +11804,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -11550,6 +11878,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12022,6 +12354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 17
@@ -12065,6 +12401,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -12154,6 +12494,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 29
@@ -12197,6 +12541,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -12335,6 +12683,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 57d08dce0edafc849ae4add9a267045b, type: 2}
@@ -12422,6 +12774,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12523,6 +12879,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 44
@@ -12566,6 +12926,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -12710,6 +13074,10 @@ PrefabInstance:
     - target: {fileID: 4245497485410864, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
@@ -12926,6 +13294,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -12946,6 +13318,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -12991,6 +13367,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
 --- !u!4 &885610056 stripped
@@ -13008,6 +13388,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -13052,6 +13436,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -13188,6 +13576,10 @@ PrefabInstance:
     - target: {fileID: 4245497485410864, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
@@ -13559,6 +13951,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 54
@@ -13611,6 +14007,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
 --- !u!4 &957574900 stripped
@@ -13628,6 +14028,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -13672,6 +14076,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -14102,6 +14510,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -14255,6 +14667,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 49
@@ -14298,6 +14714,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -14399,6 +14819,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 45
@@ -14442,6 +14866,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -14762,6 +15190,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -14831,6 +15263,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
 --- !u!4 &1051367236 stripped
@@ -14848,6 +15284,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -14901,6 +15341,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
 --- !u!4 &1053001823 stripped
@@ -14918,6 +15362,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -14962,6 +15410,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -15466,6 +15918,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 41
@@ -15509,6 +15965,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -15626,6 +16086,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 34
@@ -15669,6 +16133,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -15762,6 +16230,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 52
@@ -15813,6 +16285,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -15880,6 +16356,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
 --- !u!4 &1131688343 stripped
@@ -15945,6 +16425,10 @@ PrefabInstance:
     - target: {fileID: 4382522345662288, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23165221605020318, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
@@ -16549,6 +17033,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -16632,6 +17120,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 27
@@ -16675,6 +17167,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -17046,6 +17542,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 39
@@ -17089,6 +17589,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -17156,6 +17660,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
 --- !u!4 &1243263227 stripped
@@ -17221,6 +17729,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -17521,6 +18033,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -17651,6 +18167,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -17795,6 +18315,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -18114,6 +18638,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 87b4ab089c7be914eb1e498e8cb895e4, type: 2}
@@ -18248,6 +18776,10 @@ PrefabInstance:
     - target: {fileID: 4245497485410864, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
@@ -18866,6 +19398,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -18909,6 +19445,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -19515,6 +20055,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23165221605020318, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
 --- !u!4 &1464158638 stripped
@@ -19607,6 +20151,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Skylight_Flat_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1087331728281664, guid: 34dc27eddd5e61a4cb89f158daaa2742, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1687356498420836, guid: 34dc27eddd5e61a4cb89f158daaa2742, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4512103959753434, guid: 34dc27eddd5e61a4cb89f158daaa2742, type: 3}
       propertyPath: m_RootOrder
       value: 56
@@ -19658,6 +20210,10 @@ PrefabInstance:
     - target: {fileID: 4512103959753434, guid: 34dc27eddd5e61a4cb89f158daaa2742, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23821731400048132, guid: 34dc27eddd5e61a4cb89f158daaa2742, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34dc27eddd5e61a4cb89f158daaa2742, type: 3}
@@ -19726,6 +20282,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -19750,7 +20310,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1475897480
 Transform:
@@ -20267,6 +20827,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -20335,6 +20899,10 @@ PrefabInstance:
     - target: {fileID: 4382522345662288, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23165221605020318, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10588162549d5774588a4fafbcc21d80, type: 3}
@@ -20671,6 +21239,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -20691,6 +21263,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -20736,6 +21312,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
 --- !u!4 &1534294904 stripped
@@ -20753,6 +21333,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -20798,6 +21382,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
 --- !u!4 &1539655120 stripped
@@ -20815,6 +21403,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -20860,6 +21452,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
 --- !u!4 &1540581286 stripped
@@ -20877,6 +21473,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -20921,6 +21521,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -20987,6 +21591,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -21057,6 +21665,10 @@ PrefabInstance:
     - target: {fileID: 4485190587030284, guid: cff33b6b9ea5bd645999601a142ccca8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23487888079669716, guid: cff33b6b9ea5bd645999601a142ccca8, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cff33b6b9ea5bd645999601a142ccca8, type: 3}
@@ -21265,6 +21877,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 57d08dce0edafc849ae4add9a267045b, type: 2}
@@ -21293,6 +21909,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -21338,6 +21958,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
 --- !u!4 &1576841755 stripped
@@ -21355,6 +21979,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -21400,6 +22028,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
 --- !u!4 &1596605353 stripped
@@ -21417,6 +22049,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -21461,6 +22097,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -21577,6 +22217,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -21620,6 +22264,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -21709,6 +22357,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 21
@@ -21752,6 +22404,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -21831,6 +22487,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -21851,6 +22511,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -21895,6 +22559,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -21974,7 +22642,7 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 3
+  m_BounceIntensity: 4
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -22065,6 +22733,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -22211,6 +22883,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 35
@@ -22254,6 +22930,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -22320,6 +23000,10 @@ PrefabInstance:
     - target: {fileID: 4245497485410864, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
@@ -22598,6 +23282,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -22666,6 +23354,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -22746,6 +23438,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -22814,6 +23510,10 @@ PrefabInstance:
     - target: {fileID: 4245497485410864, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
@@ -23108,6 +23808,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -23128,6 +23832,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -23172,6 +23880,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -23401,6 +24113,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -23445,6 +24161,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
 --- !u!4 &1778523632 stripped
@@ -23462,6 +24182,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -23506,6 +24230,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -23767,6 +24495,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -23905,6 +24637,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -24054,6 +24790,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
 --- !u!4 &1831089492 stripped
@@ -24071,6 +24811,10 @@ PrefabInstance:
     - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
@@ -24115,6 +24859,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -24181,6 +24929,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -24252,6 +25004,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23187706513355696, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f986b13ead227b34da9014bc0af11eef, type: 3}
 --- !u!4 &1847108972 stripped
@@ -24317,6 +25073,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -24533,6 +25293,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -24745,6 +25509,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -25028,6 +25796,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -25330,6 +26102,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -25462,6 +26238,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -25482,6 +26262,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -25526,6 +26310,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -25615,6 +26403,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Trim_Ceiling_Half_01 (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 1054566697279558, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_RootOrder
       value: 53
@@ -25666,6 +26458,10 @@ PrefabInstance:
     - target: {fileID: 4538592723857526, guid: f648617217b6e1f408583e2c238f657e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23775950250095004, guid: f648617217b6e1f408583e2c238f657e, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f648617217b6e1f408583e2c238f657e, type: 3}
@@ -25755,6 +26551,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
       value: 28
@@ -25799,6 +26599,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
       objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
 --- !u!4 &1987302268 stripped
@@ -25816,6 +26620,10 @@ PrefabInstance:
     - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_Name
       value: SM_Bld_Ground_Trim_01 (31)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1620188058156114, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_RootOrder
@@ -25860,6 +26668,10 @@ PrefabInstance:
     - target: {fileID: 4152872160824826, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 23161648460757138, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6499c70454a3e646acc1e7eee258817, type: 3}
@@ -26142,6 +26954,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -26210,6 +27026,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -26290,6 +27110,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 57d08dce0edafc849ae4add9a267045b, type: 2}
@@ -26368,6 +27192,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d79e8fc2eea8f534ea71deded9a396f5, type: 2}
@@ -26437,6 +27265,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23487888079669716, guid: cff33b6b9ea5bd645999601a142ccca8, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cff33b6b9ea5bd645999601a142ccca8, type: 3}
 --- !u!4 &2046374627 stripped
@@ -26502,6 +27334,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -26644,6 +27480,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bb647f2c679e511409ae9e3b9084a912, type: 2}
@@ -26712,6 +27552,10 @@ PrefabInstance:
     - target: {fileID: 4096458814454130, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 23660294812871848, guid: 72c6642161c92fa4aa2c8b802372fd0f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -26922,6 +27766,10 @@ PrefabInstance:
     - target: {fileID: 4903243858420274, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 23362946614457098, guid: 06141c93af6c671499eb3c35d1930898, type: 3}
       propertyPath: m_Materials.Array.data[0]
