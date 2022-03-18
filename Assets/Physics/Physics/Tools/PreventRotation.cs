@@ -15,22 +15,5 @@ public class PreventRotation : MonoBehaviour
 		transform.parent = null;
 	}
 
-	private void Update()
-	{
-		if(doRotation)
-			transform.eulerAngles = desiredRotation;
-
-		if (go1 == null)
-		{
-			go1 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			go1.transform.localScale *= 0.1f;
-		}
-	}
-
-	GameObject go1 = null;
-	List<ParticleCollisionEvent> cEvents = null;
-	private void OnParticleCollision(GameObject other)
-	{
-		int numCols = ps.GetCollisionEvents(other, cEvents);
-	}
+	
 }
