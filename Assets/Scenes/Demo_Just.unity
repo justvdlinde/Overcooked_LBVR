@@ -4519,6 +4519,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Clothes_Display_Box_Green_01 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1699589259584010, guid: 25f1a8b87ebbb7f4dafc58fac1689173, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4354344976665234, guid: 25f1a8b87ebbb7f4dafc58fac1689173, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -14976,6 +14980,10 @@ PrefabInstance:
     - target: {fileID: 1699589259584010, guid: 25f1a8b87ebbb7f4dafc58fac1689173, type: 3}
       propertyPath: m_Name
       value: SM_Prop_Clothes_Display_Box_Green_01 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1699589259584010, guid: 25f1a8b87ebbb7f4dafc58fac1689173, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4354344976665234, guid: 25f1a8b87ebbb7f4dafc58fac1689173, type: 3}
       propertyPath: m_RootOrder
