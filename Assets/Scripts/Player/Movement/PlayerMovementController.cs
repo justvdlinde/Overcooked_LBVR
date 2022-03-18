@@ -49,7 +49,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Movement()
     {
-        Vector2 translation = input.RightHand.Primary2DAxis.ReadValue<Vector2>() * movementSpeed * Time.deltaTime;
+        Vector2 translation = input.LeftHand.Primary2DAxis.ReadValue<Vector2>() * movementSpeed * Time.deltaTime;
         Vector3 targetDirection = new Vector3(translation.x, 0f, translation.y);
         targetDirection = camera.transform.TransformDirection(targetDirection);
         targetDirection.y = 0.0f;
@@ -59,7 +59,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Rotation()
     {
-        Vector2 rotation = input.LeftHand.Primary2DAxis.ReadValue<Vector2>() * rotationSpeed * Time.deltaTime;
+        Vector2 rotation = input.RightHand.Primary2DAxis.ReadValue<Vector2>() * rotationSpeed * Time.deltaTime;
         playerTransform.Rotate(0, rotation.x, 0, Space.World);
     }
 }
