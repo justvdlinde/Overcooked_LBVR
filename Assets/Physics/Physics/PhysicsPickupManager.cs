@@ -205,6 +205,8 @@ namespace PhysicsCharacter
 
 		public void SetGrippingMaterial(bool isGripping)
 		{
+			// TO DO: see how to assign physics materials without creating new ones
+			return;
 			PhysicMaterial mat = (isGripping) ? grippingPhysicsMaterial : nonGrippingPhysicsMaterial;
 
 			// exit if material is already correct gripped material.

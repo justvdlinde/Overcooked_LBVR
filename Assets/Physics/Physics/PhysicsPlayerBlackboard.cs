@@ -108,19 +108,14 @@ namespace PhysicsCharacter
 
 		public void SetToolAndHandCollisions(Hand hand, bool collisionsIgnored)
 		{
-
 			if(hand == Hand.Left)
 			{
-				if (!collisionsIgnored && leftHandPickupManager.IsHoldingObject())
-					return;
 				Physics.IgnoreLayerCollision(INGREDIENT_MASK, LEFT_HAND_LAYER_MASK, collisionsIgnored);
 
 				Physics.IgnoreLayerCollision(TOOL_LAYER_MASK, LEFT_HAND_LAYER_MASK, collisionsIgnored);
 			}
 			else
 			{
-				if (!collisionsIgnored && rightHandPickupManager.IsHoldingObject())
-					return;
 				Physics.IgnoreLayerCollision(INGREDIENT_MASK, RIGHT_HAND_LAYER_MASK, collisionsIgnored);
 
 				Physics.IgnoreLayerCollision(TOOL_LAYER_MASK, RIGHT_HAND_LAYER_MASK, collisionsIgnored);

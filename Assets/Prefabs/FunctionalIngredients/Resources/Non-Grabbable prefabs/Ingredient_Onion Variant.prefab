@@ -64,6 +64,14 @@ PrefabInstance:
       value: 0.030284356
       objectReference: {fileID: 0}
     - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: chopSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 186abbeca9cf39a4caf21417f83b28e1, type: 3}
+    - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: breakSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 87a6c6df7af1d774487eb793f74084ae, type: 3}
+    - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: connectedColliders.Array.size
       value: 2
       objectReference: {fileID: 0}

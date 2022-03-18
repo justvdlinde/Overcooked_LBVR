@@ -101,8 +101,6 @@ GameObject:
   - component: {fileID: 1985471478}
   - component: {fileID: 6550192173149749841}
   - component: {fileID: 1310673442178420658}
-  - component: {fileID: 5355574201749801222}
-  - component: {fileID: -2548014604679674415}
   m_Layer: 26
   m_Name: Cleaver
   m_TagString: Untagged
@@ -199,41 +197,13 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 0
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: -2548014604679674415}
+  - {fileID: 0}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &5355574201749801222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860500773698843253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 748ba42f04364b34893bdbae72c35c9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 1860500773698843251}
---- !u!114 &-2548014604679674415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1860500773698843253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
 --- !u!1 &1860500774435313080
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,9 +316,10 @@ GameObject:
   - component: {fileID: 4726556252404143311}
   - component: {fileID: 3047702267385185088}
   - component: {fileID: 1545349174847788462}
+  - component: {fileID: 813176471435764620}
   m_Layer: 26
   m_Name: ChoppingCollider
-  m_TagString: Untagged
+  m_TagString: Metal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -396,6 +367,20 @@ MonoBehaviour:
   hitDamage: 1
   connectedColliders:
   - {fileID: 351353564}
+--- !u!114 &813176471435764620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4112349930651044802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f660351b4b9098488b70cc3535a8116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hit: {fileID: 0}
+  hitMetal: {fileID: 0}
 --- !u!1 &5386573866616013719
 GameObject:
   m_ObjectHideFlags: 0
