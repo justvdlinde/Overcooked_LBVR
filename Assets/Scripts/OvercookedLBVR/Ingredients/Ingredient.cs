@@ -9,8 +9,8 @@ public class Ingredient : MonoBehaviour
     public bool needsToBeCooked = false;
     public CookComponent cookComponent = null;
 
-    [SerializeField] private Transform unProcessedGraphics = null;
-    [SerializeField] private Transform processedGraphics = null;
+    [SerializeField] public Transform unProcessedGraphics = null;
+    [SerializeField] public Transform processedGraphics = null;
 
     public bool processToTwoAssets = false;
     [SerializeField] private GameObject result1 = null;
