@@ -12,8 +12,11 @@ public class ChoppingProcessable : MonoBehaviour
 	[SerializeField] private int hitsNeededToProcess = 5;
 
 	[SerializeField] private List<Collider> connectedColliders = new List<Collider>();
+    [SerializeField] private AudioClip chopSound;
+    [SerializeField] private AudioClip breakSound;
 
-	private void Awake()
+
+    private void Awake()
 	{
 		Init();
 	}
@@ -43,20 +46,25 @@ public class ChoppingProcessable : MonoBehaviour
 			if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft > 0)
 			{
 				currentHitsLeft -= col.HitDamage;
+                col.PlaySound(chopSound,transform.position);
 				Debug.Log($"Chopped {name} for {col.HitDamage} and has {currentHitsLeft} left");
 			}
 			else if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft <= 0)
 			{
+                ingredient.PlaySound(breakSound, transform.position);
 				ingredient.Process();
+                
 
 				Disable();
 
 				// TO DO: CLEAN THIS UP
 				if (ingredient.processToTwoAssets || ingredient.processToCookable)
 					Destroy(this);
-			}
-		}
-	}
+            }
+
+        }
+
+    }
 
 	private void OnExitEvent(Collider obj)
 	{

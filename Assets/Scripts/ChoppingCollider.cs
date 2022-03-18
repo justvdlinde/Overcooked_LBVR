@@ -6,8 +6,9 @@ public class ChoppingCollider : MonoBehaviour
 {
     [SerializeField] private int hitDamage = 1;
     public int HitDamage => hitDamage;
+    
 
-    [SerializeField] private List<Collider> connectedColliders = new List<Collider>();
+   [SerializeField] private List<Collider> connectedColliders = new List<Collider>();
 
     public void ToggleCollision(Collider col, bool ignoreCollisions)
 	{
@@ -15,10 +16,22 @@ public class ChoppingCollider : MonoBehaviour
 		{
 			Physics.IgnoreCollision(col, c, ignoreCollisions);
 		}
-	}
+        
 
-	public void PlaySound()
+    }
+
+	public void PlaySound(AudioClip clip, Vector3 position)
 	{
-		// left empty for now. Add in sound here
-	}
+
+        GameObject obj = new GameObject();
+        obj.transform.position = position;
+        obj.AddComponent<AudioSource>();
+        obj.GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
+        obj.GetComponent<AudioSource>().PlayOneShot(clip);
+        Destroy(obj, clip.length);
+        return;
+
+
+
+    }
 }

@@ -150,6 +150,10 @@ PrefabInstance:
       propertyPath: processToTwoAssets
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2624187265380227324, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: chopSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 186abbeca9cf39a4caf21417f83b28e1, type: 3}
     - target: {fileID: 6211616820283131301, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
       propertyPath: m_Name
       value: Ingredient_BurgerBuns
