@@ -188,6 +188,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1351020761524802705, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: rigidbody
+      value: 
+      objectReference: {fileID: 3886699096138042389}
+    - target: {fileID: 1351020761524802705, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: ingredientType
       value: 8
       objectReference: {fileID: 0}
@@ -200,6 +204,11 @@ PrefabInstance:
     - {fileID: 4810800760899866011, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
     - {fileID: 1876006230183788430, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+--- !u!1 &3103435421924425514 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5811035720647915157, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+  m_PrefabInstance: {fileID: 8914149930490677695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &667475330515987179 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8283867281675887444, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
@@ -210,3 +219,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8198401770643337840, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
   m_PrefabInstance: {fileID: 8914149930490677695}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1568937330752597399
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103435421924425514}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.02, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3886699096138042389
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103435421924425514}
+  serializedVersion: 2
+  m_Mass: 0.01
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

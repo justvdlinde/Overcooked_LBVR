@@ -51,6 +51,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1351020761524802705, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: result1
+      value: 
+      objectReference: {fileID: 6645983001569203793, guid: 137e9a7efd18a5f49abfcaf88e694300, type: 3}
+    - target: {fileID: 1351020761524802705, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: result2
+      value: 
+      objectReference: {fileID: 9031241717821226848, guid: 31670a53a77cb7f4baa399ed5936dd2f, type: 3}
+    - target: {fileID: 1351020761524802705, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: processToTwoAssets
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: connectedColliders.Array.size
       value: 4

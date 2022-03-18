@@ -23,6 +23,7 @@ public class DishSnapPoint : MonoBehaviour
     {
         if (other.TryGetComponent(out Ingredient item))
         {
+			Debug.Log("Got item");
             if(!dish.ingredients.Contains(item) && item.status == IngredientStatus.Processed)
                 Snap(item);
         }
@@ -50,7 +51,9 @@ public class DishSnapPoint : MonoBehaviour
         ingredientParent.velocity = Vector3.zero;
         ingredientParent.isKinematic = true;
         ingredientParent.useGravity = false;
-        ingredientParent.GetComponent<Tool>().enabled = false;
+		Tool t = ingredientParent.GetComponent<Tool>();
+		if(t != null)
+			ingredientParent.GetComponent<Tool>().enabled = false;
         dish.ingredients.Add(ingredient);
     }
 
@@ -59,7 +62,7 @@ public class DishSnapPoint : MonoBehaviour
         float objectHeight = 0;
         if(obj.transform.GetChild(0).TryGetComponent(out MeshFilter renderer))
         {
-            objectHeight = renderer.mesh.bounds.size.y;
+            objectHeight = renderer.mesh.bounds.size.y * renderer.transform.localScale.y;
         }
         return new Vector3(0, totalStackHeight + objectHeight * snapMargin, 0);
     }

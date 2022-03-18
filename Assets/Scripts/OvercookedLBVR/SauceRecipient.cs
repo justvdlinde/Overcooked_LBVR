@@ -12,6 +12,10 @@ public class SauceRecipient : MonoBehaviour
 	[SerializeField] private GameObject mayoPrefab = null;
 	private bool hasTriggered = false;
 
+	public bool destroyOnSauce = true;
+
+	[SerializeField] private DishSnapPoint connectedDish = null;
+
     public void ProgressSauceValue(float value, IngredientType sauceType)
 	{
 		if (hasTriggered)
@@ -21,9 +25,6 @@ public class SauceRecipient : MonoBehaviour
 		else
 			currentProgressTillMayo += value;
 
-		Debug.Log("placing sauce " + sauceType.ToString() + " mayo progress " + currentProgressTillMayo + " ketchup progress " + currentProgressTillKetchup);
-
-
 		if (currentProgressTillKetchup >= timeUntillSaucePlaces)
 			ApplySauce(IngredientType.Ketchup);
 		else if(currentProgressTillMayo >= timeUntillSaucePlaces)
@@ -32,14 +33,29 @@ public class SauceRecipient : MonoBehaviour
 
 	private void ApplySauce(IngredientType sauceType)
 	{
-		hasTriggered = true;
 		GameObject go = Instantiate(((sauceType == IngredientType.Ketchup) ? ketchupPrefab : mayoPrefab));
-		go.transform.position = transform.position;
+
+		if(connectedDish != null)
+		{
+			Ingredient i = go.GetComponent<Ingredient>();
+			connectedDish.Snap(i);
+		}
+		else
+		{
+			go.transform.position = transform.position;
+			go.transform.position += transform.up * 0.05f;
+			go.transform.parent = transform.parent;
+		}
 
 		// apply to something as child here for plate
 
-		go.transform.parent = transform.parent;
+		currentProgressTillKetchup = 0f;
+		currentProgressTillMayo = 0f;
 
-		gameObject.SetActive(false);
+		if (destroyOnSauce)
+		{
+			hasTriggered = true;
+			gameObject.SetActive(false);
+		}
 	}
 }

@@ -135,21 +135,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1454417060013500321, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
-      propertyPath: result1
-      value: 
-      objectReference: {fileID: 6645983001569203793, guid: 137e9a7efd18a5f49abfcaf88e694300, type: 3}
-    - target: {fileID: 1454417060013500321, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
-      propertyPath: result2
-      value: 
-      objectReference: {fileID: 9031241717821226848, guid: 31670a53a77cb7f4baa399ed5936dd2f, type: 3}
-    - target: {fileID: 1454417060013500321, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 9055582907882146300}
-    - target: {fileID: 1454417060013500321, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
-      propertyPath: processToTwoAssets
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6211616820283131301, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
       propertyPath: m_Name
       value: Ingredient_BurgerBuns
