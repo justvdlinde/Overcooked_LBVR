@@ -681,6 +681,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 26
       objectReference: {fileID: 0}
+    - target: {fileID: 7451917830755088484, guid: 5b8237398ae57be43abc05be337388df, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2192
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020401112329488901, guid: 5b8237398ae57be43abc05be337388df, type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020401112329488901, guid: 5b8237398ae57be43abc05be337388df, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 4244635767
+      objectReference: {fileID: 0}
     - target: {fileID: 8334273681327843884, guid: 5b8237398ae57be43abc05be337388df, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.70710784

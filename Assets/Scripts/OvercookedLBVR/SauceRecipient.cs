@@ -35,7 +35,9 @@ public class SauceRecipient : MonoBehaviour
 	{
 		GameObject go = Instantiate(((sauceType == IngredientType.Ketchup) ? ketchupPrefab : mayoPrefab));
 
-		if(connectedDish != null)
+		Debug.Log($"ketchup prog {currentProgressTillKetchup} mayo prog {currentProgressTillMayo}");
+
+		if (connectedDish != null)
 		{
 			Ingredient i = go.GetComponent<Ingredient>();
 			connectedDish.Snap(i);
