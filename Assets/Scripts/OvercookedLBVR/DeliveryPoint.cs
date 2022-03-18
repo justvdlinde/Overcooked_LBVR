@@ -1,10 +1,9 @@
-using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils.Core.Attributes;
 
 [RequireComponent(typeof(Collider))]
-public class DeliveryPoint : MonoBehaviourPun
+public class DeliveryPoint : MonoBehaviour
 {
     private List<Dish> dishesInTrigger = new List<Dish>();
 
@@ -28,13 +27,6 @@ public class DeliveryPoint : MonoBehaviourPun
 
     [Button]
     public void DeliverDishesInTrigger()
-    {
-        Debug.Log("DELIVER");
-        photonView.RPC(nameof(DeliverDishesInTriggerRPC), RpcTarget.All);
-    }
-
-    [PunRPC]
-    private void DeliverDishesInTriggerRPC(PhotonMessageInfo info)
     {
         foreach (Dish dish in dishesInTrigger)
             DeliverDish(dish);
