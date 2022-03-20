@@ -138,9 +138,45 @@ PrefabInstance:
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 9055582907882146300}
+    - target: {fileID: 2624187265380227324, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: connectedColliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 4490876876155884144}
+    - target: {fileID: 2624187265380227324, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: connectedColliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 1003932949745622457}
+    - target: {fileID: 2624187265380227324, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: connectedColliders.Array.data[2]
+      value: 
+      objectReference: {fileID: 379826565602949307}
+    - target: {fileID: 2624187265380227324, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: connectedColliders.Array.data[3]
+      value: 
+      objectReference: {fileID: 8467617099378651947}
     - target: {fileID: 6211616820283131301, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
       propertyPath: m_Name
       value: Ingredient_BurgerBuns
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+--- !u!64 &4490876876155884144 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 8533688705010299436, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+  m_PrefabInstance: {fileID: 5205892958342045788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1003932949745622457 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 5030982177467842021, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+  m_PrefabInstance: {fileID: 5205892958342045788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &379826565602949307 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 5582887044283783399, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+  m_PrefabInstance: {fileID: 5205892958342045788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &8467617099378651947 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 4448440372759335799, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+  m_PrefabInstance: {fileID: 5205892958342045788}
+  m_PrefabAsset: {fileID: 0}

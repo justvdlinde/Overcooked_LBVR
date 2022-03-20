@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 208512772611723795}
   - component: {fileID: 188682550966602941}
   - component: {fileID: 198005037669324121}
-  - component: {fileID: 147905296931184287}
+  - component: {fileID: 1434578279878399551}
   m_Layer: 0
   m_Name: Hamburger_Sliced_Burnt
   m_TagString: Untagged
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211285347722342797}
-  m_Mesh: {fileID: 4300000, guid: 3330b098d305b964fab1b241ec2df7ba, type: 3}
+  m_Mesh: {fileID: -6298932855905555329, guid: 070e926acdf909c4f939dee90f669f3e, type: 3}
 --- !u!23 &198005037669324121
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb5a8f1b9970d0f41a73e9afcbe48579, type: 2}
+  - {fileID: 2100000, guid: 6ae96e3a0800c5f44867ac8ea4457cf3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &147905296931184287
+--- !u!64 &1434578279878399551
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,4 +95,4 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 43181607271612278, guid: d289e9779a4c59a4385ffdcbd5d360f2, type: 2}
+  m_Mesh: {fileID: -6298932855905555329, guid: 070e926acdf909c4f939dee90f669f3e, type: 3}

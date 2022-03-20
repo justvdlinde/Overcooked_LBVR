@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2085747709106859423}
   - component: {fileID: 2060325969887305133}
   - component: {fileID: 2068956896369529885}
-  - component: {fileID: 2018964316290405611}
+  - component: {fileID: 2544617008419792712}
   m_Layer: 0
   m_Name: Tomato_Sliced
   m_TagString: Untagged
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081088583959616509}
-  m_Mesh: {fileID: 4300000, guid: a833e4a55ed88b94588e8167b7e6fae9, type: 3}
+  m_Mesh: {fileID: 3795159888559385624, guid: 2c05bf1001222214fab6740bf503d59b, type: 3}
 --- !u!23 &2068956896369529885
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb5a8f1b9970d0f41a73e9afcbe48579, type: 2}
+  - {fileID: 2100000, guid: aa6279c2f88e66f418d90a36013279c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2018964316290405611
+--- !u!64 &2544617008419792712
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,4 +95,4 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 43608293929958254, guid: 922bbfa878910c54faaf18c7e6201c22, type: 2}
+  m_Mesh: {fileID: 8321685774571456786, guid: 2c05bf1001222214fab6740bf503d59b, type: 3}

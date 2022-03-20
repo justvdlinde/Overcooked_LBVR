@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6910915446928324404}
   - component: {fileID: 6886035547417970258}
   - component: {fileID: 6896373769882766278}
-  - component: {fileID: 6845533040660347604}
+  - component: {fileID: 6844790944090112917}
   m_Layer: 0
   m_Name: Cheese_Slice
   m_TagString: Untagged
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6909110976175439910}
-  m_Mesh: {fileID: 4300000, guid: b9622de3492b0af4ab5f00d57387c083, type: 3}
+  m_Mesh: {fileID: 6125986520723883712, guid: b2a98b0c57a76774d85d54f995c9dce0, type: 3}
 --- !u!23 &6896373769882766278
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb5a8f1b9970d0f41a73e9afcbe48579, type: 2}
+  - {fileID: 2100000, guid: af144f43672d9bf4bb104c28d2fc0dbe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -82,7 +82,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6845533040660347604
+--- !u!64 &6844790944090112917
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,4 +95,4 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 43421193570510492, guid: fa8c0b97686026e4abe615565879d33d, type: 2}
+  m_Mesh: {fileID: 6125986520723883712, guid: b2a98b0c57a76774d85d54f995c9dce0, type: 3}
