@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviourPun
     private float totalScore;
     private float maxScore;
 
+    private bool gameIsRunning;
+
     private void OnEnable()
     {
         orderManager.OrderFailed += OnOrderFailed;
@@ -43,9 +45,10 @@ public class GameManager : MonoBehaviourPun
     }
 
     [Button]
-    private void StartGame()
+    public void StartGame()
     {
-        photonView.RPC(nameof(StartGameRPC), RpcTarget.All);
+        if(!gameIsRunning)
+            photonView.RPC(nameof(StartGameRPC), RpcTarget.All);
     }
 
     [PunRPC]
@@ -53,6 +56,7 @@ public class GameManager : MonoBehaviourPun
     {
         orderScorePairs = new Dictionary<Order, Score>();
         Debug.Log("Starting Game");
+        gameIsRunning = true;
 
         if (PhotonNetwork.IsMasterClient)
             orderManager.StartOrders();
@@ -66,6 +70,7 @@ public class GameManager : MonoBehaviourPun
             maxScore += kvp.Value.MaxScore;
         }
 
+        gameIsRunning = false;
         Debug.Log("Game Over!");
         Debug.LogFormat("Final score: {0} out of {1}", totalScore, maxScore);
     }
