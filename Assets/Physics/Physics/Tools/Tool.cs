@@ -28,6 +28,7 @@ namespace PhysicsCharacter
 
 		private Quaternion targetRot = Quaternion.identity;
 		private float maxGripDistance = 0.3f;
+		public bool forcePosition = true;
 
 		public Hand GetHeldHand()
 		{
@@ -158,6 +159,8 @@ namespace PhysicsCharacter
 			////rigidBody.MoveRotation(toolTransformDelegate.GetRotation());
 			//targetRot = toolTransformDelegate.GetRotation();
 
+			if (!forcePosition)
+				return;
 			ToolHandle pickedupHandle = null;
 			int currentHandlePrio = -10;
 			for (int i = 0; i < toolHandles.Count; i++)
