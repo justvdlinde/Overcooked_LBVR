@@ -50,6 +50,9 @@ namespace PhysicsCharacter
 				toolHandle.OnGrabbedCall += OnGrabbedCallback;
 				toolHandle.OnReleasedCall += OnReleasedCallback;
 			}
+
+			if (photonView == null)
+				photonView = GetComponent<PhotonView>();
 		}
 
 		protected virtual void Start()

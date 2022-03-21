@@ -101,6 +101,7 @@ MonoBehaviour:
   useHandleHandedness: 1
   preferredToolHand: 0
   otherToolHandle: {fileID: 7087498177177867226}
+  isGrabbedByRemote: 0
 --- !u!1 &4851526776574458199
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29dcd4a956f7b724e819e93611c41a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resetThreshold: 0.15
   clickThreshold: 0.75
   onPress:
     m_PersistentCalls:
@@ -250,7 +252,10 @@ MonoBehaviour:
   onRelease:
     m_PersistentCalls:
       m_Calls: []
+  toolHandle: {fileID: 0}
   leverTransform: {fileID: 7087498175095550994}
+  leverReactionSpots: 0.1
+  offset: 0
 --- !u!54 &4851526776677580336
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -710,6 +715,7 @@ GameObject:
   - component: {fileID: 7087498175095550992}
   - component: {fileID: 8901938139849024917}
   - component: {fileID: 2408577532040741938}
+  - component: {fileID: 8840343590606275858}
   m_Layer: 26
   m_Name: Lever
   m_TagString: Untagged
@@ -794,6 +800,29 @@ MonoBehaviour:
   maxRotationChange: 0
   maxAngularVelocity: 7
   clipChecker: {fileID: 0}
+  photonView: {fileID: 0}
+--- !u!114 &8840343590606275858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7087498175095550998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &7087498177177867227
 GameObject:
   m_ObjectHideFlags: 0
@@ -895,3 +924,4 @@ MonoBehaviour:
   useHandleHandedness: 1
   preferredToolHand: 1
   otherToolHandle: {fileID: 4851526776236638499}
+  isGrabbedByRemote: 0
