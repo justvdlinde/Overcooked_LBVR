@@ -18,7 +18,7 @@ public class ChoppingProcessable : MonoBehaviourPun
     [SerializeField] private AudioClip breakSound;
 
 	[SerializeField] private bool isChoppable = true;
-
+	[SerializeField] private ParticleSystem particles = null;
 
 	private void Awake()
 	{
@@ -53,6 +53,9 @@ public class ChoppingProcessable : MonoBehaviourPun
 				{
 					currentHitsLeft -= col.HitDamage;
 					col.PlaySound(chopSound, transform.position);
+					if (particles.isPlaying)
+						particles?.Stop();
+					particles?.Play();
 					Debug.Log($"Chopped {name} for {col.HitDamage} and has {currentHitsLeft} left");
 				}
 				else if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft <= 0)
@@ -74,6 +77,9 @@ public class ChoppingProcessable : MonoBehaviourPun
 	{
 		ingredient.PlaySound(breakSound, transform.position);
 		ingredient.Process();
+		if (particles.isPlaying)
+			particles?.Stop();
+		particles?.Play();
 
 		Disable();
 

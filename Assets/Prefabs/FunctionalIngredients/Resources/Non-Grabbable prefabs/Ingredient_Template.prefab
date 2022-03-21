@@ -63,6 +63,7 @@ Transform:
   m_Children:
   - {fileID: 8283867281675887444}
   - {fileID: 8198401770643337840}
+  - {fileID: 1499042900846878358}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -109,6 +110,7 @@ MonoBehaviour:
   chopSound: {fileID: 0}
   breakSound: {fileID: 0}
   isChoppable: 1
+  particles: {fileID: 1499042900846878359}
 --- !u!65 &1876006230183788430
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -164,3 +166,102 @@ Transform:
   m_Father: {fileID: 721730057611986956}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1406210912414334269
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 721730057611986956}
+    m_Modifications:
+    - target: {fileID: 526488827707483050, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: lengthInSec
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483050, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483050, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.6544
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.6544
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.6544
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488827707483052, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: m_Name
+      value: Particle_Cutting
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488828474124012, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526488829229891524, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+--- !u!4 &1499042900846878358 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+  m_PrefabInstance: {fileID: 1406210912414334269}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1499042900846878359 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 526488827707483050, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+  m_PrefabInstance: {fileID: 1406210912414334269}
+  m_PrefabAsset: {fileID: 0}

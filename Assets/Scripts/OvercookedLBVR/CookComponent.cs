@@ -21,12 +21,66 @@ public class CookComponent : MonoBehaviour
     [SerializeField] private GameObject cookedPrefab = null;
     [SerializeField] private GameObject burntPrefab     = null;
 
+    [SerializeField] private ParticleSystem cookingParticles = null;
+    [SerializeField] private ParticleSystem cookedToBurntParticles = null;
+    [SerializeField] private ParticleSystem burntParticles = null;
 
 
 	private void Awake()
 	{
         audioScript = GetComponent<AudioPlayerScript>();
         SetAssetState();
+
+        if (cookingParticles.isPlaying)
+            cookingParticles.Stop();
+        if (cookedToBurntParticles.isPlaying)
+            cookedToBurntParticles.Stop();
+        if (burntParticles.isPlaying)
+            burntParticles.Stop();
+
+    }
+
+    private void DoParticles()
+	{
+        if (!isCooking)
+		{
+            if (cookingParticles.isPlaying)
+                cookingParticles.Stop();
+            if (cookedToBurntParticles.isPlaying)
+                cookedToBurntParticles.Stop();
+            if (burntParticles.isPlaying)
+                burntParticles.Stop();
+            return;
+        }
+
+        if(cookAmount < rawToCookTime)
+		{
+            if (!cookingParticles.isPlaying)
+                cookingParticles.Play();
+            if (cookedToBurntParticles.isPlaying)
+                cookedToBurntParticles.Stop();
+            if (burntParticles.isPlaying)
+                burntParticles.Stop();
+        }
+        else if (cookAmount >= rawToCookTime && cookAmount < cookedToBurnTime)
+        {
+            if (cookingParticles.isPlaying)
+                cookingParticles.Stop();
+            if (!cookedToBurntParticles.isPlaying)
+                cookedToBurntParticles.Play();
+            if (burntParticles.isPlaying)
+                burntParticles.Stop();
+        }
+        else if (cookAmount >= cookedToBurnTime)
+        {
+            if (cookingParticles.isPlaying)
+                cookingParticles.Stop();
+            if (cookedToBurntParticles.isPlaying)
+                cookedToBurntParticles.Stop();
+            if (!burntParticles.isPlaying)
+                burntParticles.Play();
+        }
+
     }
 
 	private void OnValidate()
@@ -78,6 +132,9 @@ public class CookComponent : MonoBehaviour
             }
         }
         SetAssetState();
+
+        DoParticles();
+
 
         if (status != CookStatus.Raw)
             ingredient.status = IngredientStatus.Processed;
