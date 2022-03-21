@@ -6,8 +6,9 @@ public class AudioPlayerScript : MonoBehaviour
 {
 
     public float maxVolume = 1f;
+    public float baseVolume = 1f;
 
-    public float volume = 1f;
+    private float volume = 1f;
     public float ownVelocity;
     public float incomingVelocity;
 
@@ -34,7 +35,7 @@ public class AudioPlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider col)
@@ -43,8 +44,8 @@ public class AudioPlayerScript : MonoBehaviour
         Rigidbody[] rigidbodies = col.GetComponentsInParent<Rigidbody>();
         Rigidbody rigidbody = null;
 
-        if (rigidbodies.Length <= 0) 
-        { 
+        if (rigidbodies.Length <= 0)
+        {
             rigidbodies = col.GetComponents<Rigidbody>();
         }
         foreach (Rigidbody rb in rigidbodies)
@@ -63,62 +64,63 @@ public class AudioPlayerScript : MonoBehaviour
         {
             incomingVelocity = rigidbody.velocity.magnitude;
 
-            Debug.Log(name + rigidbody.velocity.magnitude);
+          
+          
         }
 
 
 
-            Debug.Log(transform.name + incomingVelocity);
+        Debug.Log(transform.name + incomingVelocity);
 
-        if(col.tag == Tags.METAL)
+        if (col.tag == Tags.METAL)
         {
             PlaySound(metalHit, transform.position);
-            Debug.Log("play METAL");
+
         }
 
         if (col.tag == Tags.WOOD)
         {
             PlaySound(woodHit, transform.position);
-            Debug.Log("play WOOD");
+            
         }
 
         if (col.tag == Tags.PLATE)
         {
             PlaySound(plateHit, transform.position);
-            Debug.Log("play PLATE");
+            
         }
 
         if (col.tag == Tags.KNIFE)
         {
             PlaySound(KnifeHit, transform.position);
-            Debug.Log("play KNIFA");
+            
         }
 
         if (col.tag == Tags.FOOD_SOFT)
         {
             PlaySound(softFood, transform.position);
-            Debug.Log("play SOFT");
+            
 
         }
 
         if (col.tag == Tags.FOOD_CRUNCH)
         {
             PlaySound(crunchFood, transform.position);
-            Debug.Log("play CRUNCH");
+           
         }
 
         if (col.tag == Tags.HEAT_SOURCE)
         {
             PlaySound(heatSource, transform.position);
-            Debug.Log("play HEAT");
+           
         }
 
- 
+
     }
 
     public void PlaySound(AudioClip clip, Vector3 position)
     {
-        if(TryGetComponent(out Rigidbody rigidbody))
+        if (TryGetComponent(out Rigidbody rigidbody))
         {
             ownVelocity = rigidbody.velocity.magnitude;
         }
@@ -133,8 +135,6 @@ public class AudioPlayerScript : MonoBehaviour
             ownVelocity = rigidbodyC.velocity.magnitude;
         }
 
-
-
         volume = (Mathf.InverseLerp(0, 2, incomingVelocity) + Mathf.InverseLerp(0, 2, ownVelocity)) * 0.5f;
         volume = Mathf.Lerp(0, maxVolume, volume);
 
@@ -144,7 +144,18 @@ public class AudioPlayerScript : MonoBehaviour
         obj.AddComponent<AudioSource>().spatialBlend = 1f;
         obj.GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(0.8f, 1.2f);
         obj.GetComponent<AudioSource>().PlayOneShot(clip);
-        Destroy(obj, metalHit.length);
+        Destroy(obj, clip.length);
+        return;
+    }
+    public void PlayNonColSound(AudioClip clip, Vector3 position)
+    {
+        GameObject obj = new GameObject();
+        obj.transform.position = position;
+        obj.AddComponent<AudioSource>().volume = baseVolume;
+        obj.AddComponent<AudioSource>().spatialBlend = 1f;
+        obj.GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        obj.GetComponent<AudioSource>().PlayOneShot(clip);
+        Destroy(obj, clip.length);
         return;
     }
 }

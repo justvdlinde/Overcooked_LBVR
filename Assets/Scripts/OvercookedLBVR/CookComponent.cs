@@ -66,13 +66,13 @@ public class CookComponent : MonoBehaviour
             
             if (status == CookStatus.Raw && cookAmount > rawToCookTime)
             {
-                audioScript.PlaySound(audioScript.cookSound, transform.position);
+                audioScript.PlayNonColSound(audioScript.cookSound, transform.position);
                 status = CookStatus.Cooked;
                 
             }
             else if (status == CookStatus.Cooked && cookAmount > rawToCookTime + cookedToBurnTime)
             {
-                audioScript.PlaySound(audioScript.burnSound, transform.position);
+                audioScript.PlayNonColSound(audioScript.burnSound, transform.position);
                 status = CookStatus.Burned;
                 
             }
@@ -87,7 +87,7 @@ public class CookComponent : MonoBehaviour
 
     public void playCookingSound()
     {
-        audioScript.PlaySound(audioScript.isCookingSound, transform.position);
+        audioScript.PlayNonColSound(audioScript.isCookingSound, transform.position);
     }
 
  
