@@ -1,9 +1,11 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils.Core.Attributes;
 
-public class ChoppingProcessable : MonoBehaviour
+public class ChoppingProcessable : MonoBehaviourPun
 {
     [SerializeField] private Ingredient ingredient = null;
 	[SerializeField] private Trigger trigger = null;
@@ -12,15 +14,15 @@ public class ChoppingProcessable : MonoBehaviour
 	[SerializeField] private int hitsNeededToProcess = 5;
 
 	[SerializeField] private List<Collider> connectedColliders = new List<Collider>();
+    [SerializeField] private AudioClip chopSound;
+    [SerializeField] private AudioClip breakSound;
 
-    [SerializeField] private AudioPlayerScript audioScript;
+	[SerializeField] private bool isChoppable = true;
 
 
-    private void Awake()
+	private void Awake()
 	{
-        audioScript = GetComponent<AudioPlayerScript>();
-
-        Init();
+		Init();
 	}
 
 	private void Init()
@@ -45,28 +47,43 @@ public class ChoppingProcessable : MonoBehaviour
 				col.ToggleCollision(c, true);
 			}
 
-			if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft > 0)
+			if (isChoppable)
 			{
-				currentHitsLeft -= col.HitDamage;
-              
-                Debug.Log($"Chopped {name} for {col.HitDamage} and has {currentHitsLeft} left");
+				if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft > 0)
+				{
+					currentHitsLeft -= col.HitDamage;
+					col.PlaySound(chopSound, transform.position);
+					Debug.Log($"Chopped {name} for {col.HitDamage} and has {currentHitsLeft} left");
+				}
+				else if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft <= 0)
+				{
+					Chop();
+				}
 			}
-			else if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft <= 0)
-			{
-                audioScript.PlaySound(audioScript.doneSound, transform.position);
-				ingredient.Process();
-                
-
-				Disable();
-
-				// TO DO: CLEAN THIS UP
-				if (ingredient.processToTwoAssets || ingredient.processToCookable)
-					Destroy(this);
-            }
-
         }
-
     }
+
+	[Button]
+	public void Chop()
+    {
+		photonView.RPC(nameof(ChopRPC), RpcTarget.All);
+	}
+
+	[PunRPC]
+	public void ChopRPC(PhotonMessageInfo info)
+	{
+		ingredient.PlaySound(breakSound, transform.position);
+		ingredient.Process();
+
+		Disable();
+
+		if (PhotonNetwork.IsMasterClient)
+		{
+			// TO DO: CLEAN THIS UP
+			if (ingredient.processToTwoAssets || ingredient.processToCookable)
+				PhotonNetwork.Destroy(ingredient.rigidbody.gameObject);
+		}
+	}
 
 	private void OnExitEvent(Collider obj)
 	{

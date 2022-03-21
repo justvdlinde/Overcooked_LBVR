@@ -1,3 +1,4 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class Ingredient : MonoBehaviour
@@ -37,16 +38,22 @@ public class Ingredient : MonoBehaviour
         else if(processToTwoAssets)
 		{
             unProcessedGraphics.gameObject.SetActive(false);
-            GameObject r1 = Instantiate(result1);
-            r1.transform.position = unProcessedGraphics.transform.position;
-            GameObject r2 = Instantiate(result2);
-            r2.transform.position = r1.transform.position + Vector3.up * 0.05f;
+            if (PhotonNetwork.IsMasterClient)
+            {
+                if(result1 != null)
+                    PhotonNetwork.Instantiate(result1.name, unProcessedGraphics.transform.position, Quaternion.identity);
+                if(result2 != null)
+                    PhotonNetwork.Instantiate(result2.name, unProcessedGraphics.transform.position + Vector3.up * 0.05f, Quaternion.identity);
+            }
+            //GameObject r1 = Instantiate(result1);
+            //r1.transform.position = unProcessedGraphics.transform.position;
+            //GameObject r2 = Instantiate(result2);
+            //r2.transform.position = r1.transform.position + Vector3.up * 0.05f;
         }
         else if(processToCookable)
 		{
             unProcessedGraphics.gameObject.SetActive(false);
-            GameObject c = Instantiate(cookable);
-            c.transform.position = unProcessedGraphics.transform.position;
+            PhotonNetwork.Instantiate(cookable.name, unProcessedGraphics.transform.position, Quaternion.identity);
 		}
         status = IngredientStatus.Processed;
 	}

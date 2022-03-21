@@ -2,7 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 using Utils.Core.Attributes;
 
-public class Dispenser : MonoBehaviour
+public class Dispenser : MonoBehaviourPun
 {
     [SerializeField] private Rigidbody prefab = null;
     [SerializeField] private Transform spawnPoint = null;
@@ -14,8 +14,19 @@ public class Dispenser : MonoBehaviour
     public void DispenseObject(Rigidbody obj)
     {
         GameObject g = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, spawnPoint.rotation);
-        AudioSource.Play();
+        photonView.RPC(nameof(DispenseObjectRPC), RpcTarget.All);
+
+        //if(g.TryGetComponent(out PhotonView photonView))
+        //{
+        //    photonView.TransferOwnership(-1);
+        //}
         //instance.AddForce(instance.transform.forward * forceAmount, forceMode);
+    }
+
+    [PunRPC]
+    private void DispenseObjectRPC(PhotonMessageInfo info)
+    {
+        AudioSource.Play();
     }
 
     [Button]
