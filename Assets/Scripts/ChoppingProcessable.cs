@@ -51,7 +51,6 @@ public class ChoppingProcessable : MonoBehaviourPun
 				if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft > 0)
 				{
 					currentHitsLeft -= col.HitDamage;
-					col.PlaySound(chopSound, transform.position);
 					if (particles.isPlaying)
 						particles?.Stop();
 					particles?.Play();
@@ -74,7 +73,6 @@ public class ChoppingProcessable : MonoBehaviourPun
 	[PunRPC]
 	public void ChopRPC(PhotonMessageInfo info)
 	{
-		ingredient.PlaySound(breakSound, transform.position);
 		ingredient.Process();
 		if (particles.isPlaying)
 			particles?.Stop();

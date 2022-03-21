@@ -188,6 +188,8 @@ namespace PhysicsCharacter
 
 		public Quaternion GetWorldRotation()
 		{
+			if (parent == null)
+				return Quaternion.identity;
 			return parent.rotation * localRotation;
 		}
 	}
