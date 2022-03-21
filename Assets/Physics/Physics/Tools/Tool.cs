@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace PhysicsCharacter
 		[SerializeField] protected float maxAngularVelocity = 7f;
 
 		[SerializeField] protected ClippingCheckerOnSpawn clipChecker = null;
+		[SerializeField] protected PhotonView photonView = null;
 
 		private Vector3 targetPos = Vector3.zero;
 
@@ -226,6 +228,15 @@ namespace PhysicsCharacter
 				heldHandles = 0;
 			heldHandles++;
 			rigidBody.useGravity = false;
+			photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+			photonView.RPC(nameof(GrabbedRPC), RpcTarget.Others);
+		}
+
+		[PunRPC]
+		protected virtual void GrabbedRPC(PhotonMessageInfo info)
+        {
+			Debug.Log("GrabbedRPC, disabling gravity");
+			rigidBody.useGravity = false;
 		}
 
 		protected virtual void OnReleasedCallback(Hand hand, ToolHandle toolHandle)
@@ -239,6 +250,16 @@ namespace PhysicsCharacter
 			toolHandle.transform.parent = transform;
 			toolHandle.transform.localPosition = toolHandle.localTransformMirror.localPosition;
 			toolHandle.transform.localRotation = toolHandle.localTransformMirror.localRotation;
+
+			photonView.TransferOwnership(-1);
+			photonView.RPC(nameof(ReleasedRPC), RpcTarget.Others, rigidBody.useGravity);
+		}
+
+		[PunRPC]
+		protected virtual void ReleasedRPC(bool useGravity, PhotonMessageInfo info)
+		{
+			rigidBody.useGravity = useGravity;
+			Debug.Log("setgravity " + useGravity);
 		}
 
 		protected virtual void MoveUsingPhysics()
