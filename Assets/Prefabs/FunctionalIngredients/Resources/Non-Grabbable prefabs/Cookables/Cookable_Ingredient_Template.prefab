@@ -167,6 +167,7 @@ MonoBehaviour:
   cookAmount: 0
   rawToCookTime: 5
   cookedToBurnTime: 5
+  audioScript: {fileID: 0}
   cooking: {fileID: 8300000, guid: 8ff09ba2e5c63834d86051ea5a94c462, type: 3}
   isCooked: {fileID: 8300000, guid: 13f4f97c15fc6134db688883e7e85557, type: 3}
   isBurned: {fileID: 8300000, guid: 55d77605454b12e4d9d977da5b51fcf0, type: 3}

@@ -166,6 +166,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ingredient_BurgerBuns
       objectReference: {fileID: 0}
+    - target: {fileID: 8952596974281638687, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: woodHit
+      value: 
+      objectReference: {fileID: 8300000, guid: e6294c4075432e245a26db73b8ebd5e2, type: 3}
+    - target: {fileID: 8952596974281638687, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: KnifeHit
+      value: 
+      objectReference: {fileID: 8300000, guid: 186abbeca9cf39a4caf21417f83b28e1, type: 3}
+    - target: {fileID: 8952596974281638687, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: plateHit
+      value: 
+      objectReference: {fileID: 8300000, guid: ab4fd6499115a7f4689716215f7269a5, type: 3}
+    - target: {fileID: 8952596974281638687, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: softFood
+      value: 
+      objectReference: {fileID: 8300000, guid: 87a6c6df7af1d774487eb793f74084ae, type: 3}
+    - target: {fileID: 8952596974281638687, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: burnSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 55d77605454b12e4d9d977da5b51fcf0, type: 3}
+    - target: {fileID: 8952596974281638687, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: cookSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 13f4f97c15fc6134db688883e7e85557, type: 3}
+    - target: {fileID: 8952596974281638687, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: doneSound
+      value: 
+      objectReference: {fileID: 8300000, guid: bbea5e35cc5897241bae902f85a6571e, type: 3}
+    - target: {fileID: 8952596974281638687, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: crunchFood
+      value: 
+      objectReference: {fileID: 8300000, guid: 7eb3922416580e74b80d7b2814db5a6f, type: 3}
+    - target: {fileID: 8952596974281638687, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: heatSource
+      value: 
+      objectReference: {fileID: 8300000, guid: 8ff09ba2e5c63834d86051ea5a94c462, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
 --- !u!64 &4490876876155884144 stripped

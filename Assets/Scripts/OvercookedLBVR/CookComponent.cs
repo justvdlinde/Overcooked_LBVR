@@ -11,6 +11,7 @@ public class CookComponent : MonoBehaviour
     public float rawToCookTime = 1f;
     public float cookedToBurnTime = 1f;
 
+    public AudioPlayerScript audioScript;
 
     public AudioClip cooking;
     public AudioClip isCooked;
@@ -24,6 +25,7 @@ public class CookComponent : MonoBehaviour
 
 	private void Awake()
 	{
+        audioScript = GetComponent<AudioPlayerScript>();
         SetAssetState();
     }
 
@@ -64,13 +66,13 @@ public class CookComponent : MonoBehaviour
             
             if (status == CookStatus.Raw && cookAmount > rawToCookTime)
             {
-                playSound(isCooked, transform.position);
+                audioScript.PlaySound(audioScript.cookSound, transform.position);
                 status = CookStatus.Cooked;
                 
             }
             else if (status == CookStatus.Cooked && cookAmount > rawToCookTime + cookedToBurnTime)
             {
-                playSound(isBurned, transform.position);
+                audioScript.PlaySound(audioScript.burnSound, transform.position);
                 status = CookStatus.Burned;
                 
             }
@@ -85,24 +87,9 @@ public class CookComponent : MonoBehaviour
 
     public void playCookingSound()
     {
-        GameObject obj = new GameObject();
-        obj.transform.position = transform.position;
-        obj.AddComponent<AudioSource>();
-        obj.GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-        obj.GetComponent<AudioSource>().PlayOneShot(cooking);
-        Destroy(obj, cooking.length);
-        return;
+        audioScript.PlaySound(audioScript.isCookingSound, transform.position);
     }
 
-    public void playSound(AudioClip clip, Vector3 position)
-    {
-        GameObject obj = new GameObject();
-        obj.transform.position = position;
-        obj.AddComponent<AudioSource>();
-        obj.GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-        obj.GetComponent<AudioSource>().PlayOneShot(clip);
-        Destroy(obj, clip.length);
-        return;
-    }
+ 
 
     }

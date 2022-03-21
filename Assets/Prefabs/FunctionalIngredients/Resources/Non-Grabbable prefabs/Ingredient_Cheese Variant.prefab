@@ -179,8 +179,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ingredient_Cheese Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5811035720647915157, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: m_TagString
+      value: FoodSoft
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+--- !u!1 &5393629306666507553 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5811035720647915157, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+  m_PrefabInstance: {fileID: 1909235370641157044}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7532483764063619296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8283867281675887444, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
@@ -191,6 +200,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8198401770643337840, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
   m_PrefabInstance: {fileID: 1909235370641157044}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2809856838409107948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5393629306666507553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587fe56854b206348a41f84889f33516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  metalHit: {fileID: 8300000, guid: 87a6c6df7af1d774487eb793f74084ae, type: 3}
+  woodHit: {fileID: 8300000, guid: 87a6c6df7af1d774487eb793f74084ae, type: 3}
+  plateHit: {fileID: 8300000, guid: 8d41f5ca7f8da7a4cb58a920b99c6bcd, type: 3}
+  KnifeHit: {fileID: 8300000, guid: 186abbeca9cf39a4caf21417f83b28e1, type: 3}
+  softFood: {fileID: 8300000, guid: 87a6c6df7af1d774487eb793f74084ae, type: 3}
+  crunchFood: {fileID: 8300000, guid: 87a6c6df7af1d774487eb793f74084ae, type: 3}
+  heatSource: {fileID: 8300000, guid: 8ff09ba2e5c63834d86051ea5a94c462, type: 3}
+  isCookingSound: {fileID: 8300000, guid: 8ff09ba2e5c63834d86051ea5a94c462, type: 3}
+  cookSound: {fileID: 8300000, guid: 13f4f97c15fc6134db688883e7e85557, type: 3}
+  burnSound: {fileID: 8300000, guid: 55d77605454b12e4d9d977da5b51fcf0, type: 3}
+  doneSound: {fileID: 8300000, guid: bbea5e35cc5897241bae902f85a6571e, type: 3}
 --- !u!1001 &1909235371363261512
 PrefabInstance:
   m_ObjectHideFlags: 0

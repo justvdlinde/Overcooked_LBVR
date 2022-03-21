@@ -162,6 +162,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cookable_Ingredient_Onion Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7143557524521539929, guid: 62a8c64021372d24c96d65f5f4587d06, type: 3}
+      propertyPath: m_TagString
+      value: FoodCrunch
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62a8c64021372d24c96d65f5f4587d06, type: 3}
 --- !u!1 &8192778687244025470 stripped
@@ -195,6 +199,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7143557523146986608, guid: 62a8c64021372d24c96d65f5f4587d06, type: 3}
   m_PrefabInstance: {fileID: 1338021501743327015}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &5978171372880961384
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8192778687244025470}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 0.052200317, z: 0.15}
+  m_Center: {x: 0, y: 0.016670227, z: 0}
 --- !u!64 &6293191508075935440
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -209,6 +226,29 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43660716058422558, guid: c06a6971405401e469f9bd0e554978e4, type: 2}
+--- !u!114 &3072663313335142684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8192778687244025470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 587fe56854b206348a41f84889f33516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  metalHit: {fileID: 8300000, guid: 186abbeca9cf39a4caf21417f83b28e1, type: 3}
+  woodHit: {fileID: 8300000, guid: e6294c4075432e245a26db73b8ebd5e2, type: 3}
+  plateHit: {fileID: 8300000, guid: ab4fd6499115a7f4689716215f7269a5, type: 3}
+  KnifeHit: {fileID: 8300000, guid: 186abbeca9cf39a4caf21417f83b28e1, type: 3}
+  softFood: {fileID: 8300000, guid: 87a6c6df7af1d774487eb793f74084ae, type: 3}
+  crunchFood: {fileID: 8300000, guid: 7eb3922416580e74b80d7b2814db5a6f, type: 3}
+  heatSource: {fileID: 8300000, guid: 8ff09ba2e5c63834d86051ea5a94c462, type: 3}
+  isCookingSound: {fileID: 8300000, guid: 8ff09ba2e5c63834d86051ea5a94c462, type: 3}
+  cookSound: {fileID: 8300000, guid: 13f4f97c15fc6134db688883e7e85557, type: 3}
+  burnSound: {fileID: 8300000, guid: 55d77605454b12e4d9d977da5b51fcf0, type: 3}
+  doneSound: {fileID: 8300000, guid: bbea5e35cc5897241bae902f85a6571e, type: 3}
 --- !u!114 &4075998885284162295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,22 +281,7 @@ MonoBehaviour:
   - {fileID: 3430635430020202276}
   - {fileID: 2999595205382039214}
   - {fileID: 6293191508075935440}
-  chopSound: {fileID: 8300000, guid: af80c63e586c82040a8b69094a3ea3bc, type: 3}
-  breakSound: {fileID: 8300000, guid: 186abbeca9cf39a4caf21417f83b28e1, type: 3}
-  isChoppable: 0
---- !u!65 &5978171372880961384
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8192778687244025470}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.15, y: 0.052200317, z: 0.15}
-  m_Center: {x: 0, y: 0.016670227, z: 0}
+  audioScript: {fileID: 0}
 --- !u!1001 &6480741680709276158
 PrefabInstance:
   m_ObjectHideFlags: 0
