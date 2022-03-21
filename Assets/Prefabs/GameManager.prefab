@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ac15d0e5e2e314dab6cd1715d0d150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orderManager: {fileID: 8156002516217637224}
 --- !u!114 &8156002516217637224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,10 +61,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayManager: {fileID: 1068419402212727378}
   orderAmount: 10
+  orderDelays:
+  - 2
+  - 8
+  - 5
+  - 10
+  - 5
+  - 10
   minIngredients: 1
   maxIngredients: 8
-  minTime: 30
-  maxTime: 50
+  minTime: 60
+  maxTime: 100
+  testDish: {fileID: 0}
 --- !u!114 &4305549660854657898
 MonoBehaviour:
   m_ObjectHideFlags: 0
