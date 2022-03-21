@@ -155,8 +155,8 @@ namespace PhysicsCharacter
 		protected void ForcePosition()
 		{
 			//transform.rotation = toolTransformDelegate.GetRotation();
-			rigidBody.MoveRotation(toolTransformDelegate.GetRotation());
-			targetRot = toolTransformDelegate.GetRotation();
+			////rigidBody.MoveRotation(toolTransformDelegate.GetRotation());
+			//targetRot = toolTransformDelegate.GetRotation();
 
 			ToolHandle pickedupHandle = null;
 			int currentHandlePrio = -10;
