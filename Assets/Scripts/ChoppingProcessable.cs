@@ -15,8 +15,10 @@ public class ChoppingProcessable : MonoBehaviour
     [SerializeField] private AudioClip chopSound;
     [SerializeField] private AudioClip breakSound;
 
+	[SerializeField] private bool isChoppable = true;
 
-    private void Awake()
+
+	private void Awake()
 	{
 		Init();
 	}
@@ -43,27 +45,28 @@ public class ChoppingProcessable : MonoBehaviour
 				col.ToggleCollision(c, true);
 			}
 
-			if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft > 0)
+			if (isChoppable)
 			{
-				currentHitsLeft -= col.HitDamage;
-                col.PlaySound(chopSound,transform.position);
-				Debug.Log($"Chopped {name} for {col.HitDamage} and has {currentHitsLeft} left");
+				if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft > 0)
+				{
+					currentHitsLeft -= col.HitDamage;
+					col.PlaySound(chopSound, transform.position);
+					Debug.Log($"Chopped {name} for {col.HitDamage} and has {currentHitsLeft} left");
+				}
+				else if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft <= 0)
+				{
+					ingredient.PlaySound(breakSound, transform.position);
+					ingredient.Process();
+
+
+					Disable();
+
+					// TO DO: CLEAN THIS UP
+					if (ingredient.processToTwoAssets || ingredient.processToCookable)
+						Destroy(this);
+				}
 			}
-			else if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft <= 0)
-			{
-                ingredient.PlaySound(breakSound, transform.position);
-				ingredient.Process();
-                
-
-				Disable();
-
-				// TO DO: CLEAN THIS UP
-				if (ingredient.processToTwoAssets || ingredient.processToCookable)
-					Destroy(this);
-            }
-
         }
-
     }
 
 	private void OnExitEvent(Collider obj)

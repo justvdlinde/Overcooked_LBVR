@@ -23,6 +23,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8298569430790904705, guid: 41dfc027dd5f5bf45943518386ad5f78, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8304579281827947763, guid: 41dfc027dd5f5bf45943518386ad5f78, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -166,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: connectedColliders.Array.data[0]
       value: 
-      objectReference: {fileID: 5007667968850896540}
+      objectReference: {fileID: 4936897838278418397}
     - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: connectedColliders.Array.data[1]
       value: 
@@ -270,8 +274,8 @@ PrefabInstance:
     - {fileID: 7752080348598047848, guid: 5e25ca3a44b310c43812755881e709b6, type: 3}
     - {fileID: 9066482777333011710, guid: 5e25ca3a44b310c43812755881e709b6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5e25ca3a44b310c43812755881e709b6, type: 3}
---- !u!64 &5007667968850896540 stripped
+--- !u!64 &4936897838278418397 stripped
 MeshCollider:
-  m_CorrespondingSourceObject: {fileID: 6845533040660347604, guid: 5e25ca3a44b310c43812755881e709b6, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6844790944090112917, guid: 5e25ca3a44b310c43812755881e709b6, type: 3}
   m_PrefabInstance: {fileID: 1909235371363261512}
   m_PrefabAsset: {fileID: 0}

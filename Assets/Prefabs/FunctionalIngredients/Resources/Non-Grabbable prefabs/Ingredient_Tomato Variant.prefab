@@ -70,7 +70,7 @@ PrefabInstance:
     - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: connectedColliders.Array.data[0]
       value: 
-      objectReference: {fileID: 7340615723500621164}
+      objectReference: {fileID: 6524482126896463567}
     - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: connectedColliders.Array.data[1]
       value: 
@@ -119,6 +119,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2085747709106859423, guid: abb28326b5daecf439bd045637003580, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.76586
+      objectReference: {fileID: 0}
+    - target: {fileID: 2085747709106859423, guid: abb28326b5daecf439bd045637003580, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.76586
+      objectReference: {fileID: 0}
+    - target: {fileID: 2085747709106859423, guid: abb28326b5daecf439bd045637003580, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.76586
+      objectReference: {fileID: 0}
+    - target: {fileID: 2085747709106859423, guid: abb28326b5daecf439bd045637003580, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -158,6 +170,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2544617008419792712, guid: abb28326b5daecf439bd045637003580, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 3795159888559385624, guid: 2c05bf1001222214fab6740bf503d59b, type: 3}
     - target: {fileID: 4374369042641548019, guid: abb28326b5daecf439bd045637003580, type: 3}
       propertyPath: viewIdField
       value: 0
@@ -170,9 +186,9 @@ PrefabInstance:
     - {fileID: 7927578788063694954, guid: abb28326b5daecf439bd045637003580, type: 3}
     - {fileID: 2965945014580996365, guid: abb28326b5daecf439bd045637003580, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: abb28326b5daecf439bd045637003580, type: 3}
---- !u!64 &7340615723500621164 stripped
+--- !u!64 &6524482126896463567 stripped
 MeshCollider:
-  m_CorrespondingSourceObject: {fileID: 2018964316290405611, guid: abb28326b5daecf439bd045637003580, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2544617008419792712, guid: abb28326b5daecf439bd045637003580, type: 3}
   m_PrefabInstance: {fileID: 8780847481493330311}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8987444009993106037

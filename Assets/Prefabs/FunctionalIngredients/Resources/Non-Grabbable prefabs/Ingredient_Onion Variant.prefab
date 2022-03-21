@@ -56,8 +56,16 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1876006230183788430, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1876006230183788430, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: m_Size.y
-      value: 0.12786296
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1876006230183788430, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: m_Size.z
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 1876006230183788430, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: m_Center.y
@@ -78,7 +86,7 @@ PrefabInstance:
     - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: connectedColliders.Array.data[0]
       value: 
-      objectReference: {fileID: 7416692581966625666}
+      objectReference: {fileID: 1392508716546258061}
     - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: connectedColliders.Array.data[1]
       value: 
@@ -120,15 +128,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 602339649646466373, guid: eabe62535c43b384d82519a4913e5baf, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.75
+      value: 0.49323
       objectReference: {fileID: 0}
     - target: {fileID: 602339649646466373, guid: eabe62535c43b384d82519a4913e5baf, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.75
+      value: 0.49323
       objectReference: {fileID: 0}
     - target: {fileID: 602339649646466373, guid: eabe62535c43b384d82519a4913e5baf, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.75
+      value: 0.49323
       objectReference: {fileID: 0}
     - target: {fileID: 602339649646466373, guid: eabe62535c43b384d82519a4913e5baf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -180,9 +188,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eabe62535c43b384d82519a4913e5baf, type: 3}
---- !u!64 &7416692581966625666 stripped
+--- !u!64 &1392508716546258061 stripped
 MeshCollider:
-  m_CorrespondingSourceObject: {fileID: 626218783422604559, guid: eabe62535c43b384d82519a4913e5baf, type: 3}
+  m_CorrespondingSourceObject: {fileID: 9011293273564523008, guid: eabe62535c43b384d82519a4913e5baf, type: 3}
   m_PrefabInstance: {fileID: 7952693050821697165}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8854921871383251441

@@ -7,6 +7,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7317770453577249459}
     m_Modifications:
+    - target: {fileID: 187953865886760775, guid: be80b5b5cd5e38d41b698d0824189b6f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.57142
+      objectReference: {fileID: 0}
+    - target: {fileID: 187953865886760775, guid: be80b5b5cd5e38d41b698d0824189b6f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.57142
+      objectReference: {fileID: 0}
+    - target: {fileID: 187953865886760775, guid: be80b5b5cd5e38d41b698d0824189b6f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.57142
+      objectReference: {fileID: 0}
     - target: {fileID: 2099362410873703287, guid: be80b5b5cd5e38d41b698d0824189b6f, type: 3}
       propertyPath: viewIdField
       value: 0
@@ -15,6 +27,10 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4682841483568261566, guid: be80b5b5cd5e38d41b698d0824189b6f, type: 3}
+      propertyPath: connectedColliders.Array.data[3]
+      value: 
+      objectReference: {fileID: 1516075556764765897}
     - target: {fileID: 5045821185523558429, guid: be80b5b5cd5e38d41b698d0824189b6f, type: 3}
       propertyPath: viewIdField
       value: 0
@@ -218,6 +234,14 @@ PrefabInstance:
     - target: {fileID: 4432354376435211592, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432354376435211594, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432354376435211594, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4432354376435211596, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
       propertyPath: m_Name

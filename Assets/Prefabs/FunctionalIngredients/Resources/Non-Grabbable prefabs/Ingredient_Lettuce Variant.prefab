@@ -37,7 +37,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7525564519250206458, guid: 3567293b52a948d4692ed056f1bfef0e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0152
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7525564519250206458, guid: 3567293b52a948d4692ed056f1bfef0e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -236,12 +236,20 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1876006230183788430, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: m_Size.x
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1876006230183788430, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: m_Size.y
-      value: 0.08079522
+      value: 0.11540683
+      objectReference: {fileID: 0}
+    - target: {fileID: 1876006230183788430, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: m_Size.z
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 1876006230183788430, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: m_Center.y
-      value: 0.04039761
+      value: 0.048101027
       objectReference: {fileID: 0}
     - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: chopSound

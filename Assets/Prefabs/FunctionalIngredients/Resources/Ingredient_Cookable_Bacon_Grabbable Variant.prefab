@@ -107,6 +107,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4432354376435211594, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432354376435211594, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4432354376435211596, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
       propertyPath: m_Name
       value: Ingredient_Cookable_Bacon_Grabbable Variant
@@ -233,6 +241,14 @@ PrefabInstance:
     - target: {fileID: 1174896090023363920, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
       propertyPath: m_Name
       value: Cookable_Ingredient_Bacon
+      objectReference: {fileID: 0}
+    - target: {fileID: 5298168349828943944, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+      propertyPath: m_Size.y
+      value: 0.13150135
+      objectReference: {fileID: 0}
+    - target: {fileID: 5298168349828943944, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+      propertyPath: m_Center.y
+      value: 0.0058339853
       objectReference: {fileID: 0}
     - target: {fileID: 5393605256029925731, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
       propertyPath: viewIdField

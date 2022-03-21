@@ -75,6 +75,11 @@ PrefabInstance:
     - {fileID: 9099706051159624215, guid: 8ea646b83569dfd43b2fed3266fef119, type: 3}
     - {fileID: 4933193592258560420, guid: 8ea646b83569dfd43b2fed3266fef119, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8ea646b83569dfd43b2fed3266fef119, type: 3}
+--- !u!64 &3927414285651135806 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 3623985448902543352, guid: 8ea646b83569dfd43b2fed3266fef119, type: 3}
+  m_PrefabInstance: {fileID: 345090437507353286}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1188476093108613249
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -150,6 +155,11 @@ PrefabInstance:
     - {fileID: 147905296931184287, guid: 21b55c3625757404284b1900981e2f23, type: 3}
     - {fileID: 6234456049174582366, guid: 21b55c3625757404284b1900981e2f23, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 21b55c3625757404284b1900981e2f23, type: 3}
+--- !u!64 &258664431161763518 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 1434578279878399551, guid: 21b55c3625757404284b1900981e2f23, type: 3}
+  m_PrefabInstance: {fileID: 1188476093108613249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2658095884548644246
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -226,6 +236,11 @@ PrefabInstance:
     - {fileID: 6141761315305178259, guid: db4843d5fccc90448a2939d064114be1, type: 3}
     - {fileID: 2058798949855239341, guid: db4843d5fccc90448a2939d064114be1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: db4843d5fccc90448a2939d064114be1, type: 3}
+--- !u!64 &4996520583683528072 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 7040323449210882078, guid: db4843d5fccc90448a2939d064114be1, type: 3}
+  m_PrefabInstance: {fileID: 2658095884548644246}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4616479666380458873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -328,6 +343,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7143557524521539929, guid: 62a8c64021372d24c96d65f5f4587d06, type: 3}
   m_PrefabInstance: {fileID: 4616479666380458873}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2536094437680288318 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7143557524521539911, guid: 62a8c64021372d24c96d65f5f4587d06, type: 3}
+  m_PrefabInstance: {fileID: 4616479666380458873}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536094437680288288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c4a7b0f1a37a44eabf436837979e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2536094438474829866 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7143557524246567763, guid: 62a8c64021372d24c96d65f5f4587d06, type: 3}
@@ -357,3 +383,51 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: d41a74c75b207394dbf2c349b9a74eea, type: 3}
+--- !u!65 &6409928519045100779
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536094437680288288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 0.07, z: 0.2}
+  m_Center: {x: 0, y: 0.03, z: 0}
+--- !u!114 &1219167653738378707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536094437680288288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071dd62b5e1f25340a556a3edcefa07a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1224595367898658558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536094437680288288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d8a67e7e3de9545b43cdf3586a1bf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient: {fileID: 2536094437680288318}
+  trigger: {fileID: 1219167653738378707}
+  hitsNeededToProcess: 5
+  connectedColliders:
+  - {fileID: 4996520583683528072}
+  - {fileID: 3927414285651135806}
+  - {fileID: 258664431161763518}
+  - {fileID: 3572944772124840321}
+  chopSound: {fileID: 8300000, guid: af80c63e586c82040a8b69094a3ea3bc, type: 3}
+  breakSound: {fileID: 8300000, guid: 87a6c6df7af1d774487eb793f74084ae, type: 3}
+  isChoppable: 0

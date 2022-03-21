@@ -59,6 +59,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4432354376435211594, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432354376435211594, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4432354376435211596, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
       propertyPath: m_Name
       value: Ingredient_BurgerBuns_Grabbable Variant

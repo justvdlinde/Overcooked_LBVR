@@ -66,6 +66,11 @@ PrefabInstance:
     - {fileID: 0}
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: b79f48055f99ab54e905544cf98f59ba, type: 3}
+--- !u!64 &4331581056219961495 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 3410510960234715067, guid: b79f48055f99ab54e905544cf98f59ba, type: 3}
+  m_PrefabInstance: {fileID: 1389448047960821548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8077810460392110114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,6 +137,11 @@ PrefabInstance:
     - {fileID: 0}
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: b79f48055f99ab54e905544cf98f59ba, type: 3}
+--- !u!64 &6867624903936765849 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 3410510960234715067, guid: b79f48055f99ab54e905544cf98f59ba, type: 3}
+  m_PrefabInstance: {fileID: 8077810460392110114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9064542475168304252
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,13 +201,35 @@ PrefabInstance:
       propertyPath: ingredientType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: chopSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 186abbeca9cf39a4caf21417f83b28e1, type: 3}
+    - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: breakSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 7eb3922416580e74b80d7b2814db5a6f, type: 3}
+    - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: isChoppable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: connectedColliders.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: connectedColliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 6867624903936765849}
+    - target: {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
+      propertyPath: connectedColliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 4331581056219961495}
     - target: {fileID: 5811035720647915157, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
       propertyPath: m_Name
       value: Ingredient_Bottom_Bun Variant
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 2520352021233920972, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
-    - {fileID: 4810800760899866011, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
     - {fileID: 1876006230183788430, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7ea4659fced8f254d946e040e853bd3c, type: 3}
 --- !u!1 &3273918371846683369 stripped
@@ -226,5 +258,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.05, z: 0.1}
-  m_Center: {x: 0, y: 0.02, z: 0}
+  m_Size: {x: 0.18577924, y: 0.06277563, z: 0.19034196}
+  m_Center: {x: 0, y: 0.02634982, z: 0}

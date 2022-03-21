@@ -27,6 +27,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2377c8436f6689346ac19cc1c9f6045d, type: 2}
+    - target: {fileID: 6539735093933657575, guid: 8a95fe3cea0eee44faa99e3ac991562a, type: 3}
+      propertyPath: connectedColliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 6756471707253517770}
+    - target: {fileID: 6539735093933657575, guid: 8a95fe3cea0eee44faa99e3ac991562a, type: 3}
+      propertyPath: connectedColliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 643849999754317641}
     - target: {fileID: 7675280130857153210, guid: 8a95fe3cea0eee44faa99e3ac991562a, type: 3}
       propertyPath: rigidbody
       value: 

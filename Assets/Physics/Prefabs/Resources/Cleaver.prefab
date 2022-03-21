@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 3047702267385185088}
   - component: {fileID: 1545349174847788462}
   - component: {fileID: 6611531621458932714}
+  - component: {fileID: 3327360861953415300}
   m_Layer: 26
   m_Name: ChoppingCollider
   m_TagString: Metal
@@ -362,8 +363,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4112349930651044802}
   m_LocalRotation: {x: 0.000000059604645, y: 0.000000059604645, z: -1, w: 0}
-  m_LocalPosition: {x: 0.0001, y: 0.1999, z: 0.0549}
-  m_LocalScale: {x: 0.0150668565, y: 0.19932248, z: 0.13580564}
+  m_LocalPosition: {x: -0, y: 0.189, z: 0.079}
+  m_LocalScale: {x: 0.0150668565, y: 0.15332283, z: 0.1069225}
   m_Children:
   - {fileID: 6134718830943707482}
   m_Father: {fileID: 1860500773698843249}
@@ -410,6 +411,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   metalHit: {fileID: 8300000, guid: f66579c24321479428363dedbc52c1d5, type: 3}
+--- !u!54 &3327360861953415300
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4112349930651044802}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!1 &5386573866616013719
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,8 +453,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5386573866616013719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0000004945, y: 2e-15, z: 0.39}
-  m_LocalScale: {x: 2.0186, y: 1, z: 0.16606}
+  m_LocalPosition: {x: 0, y: -0.064, z: -0.074}
+  m_LocalScale: {x: 2.0186, y: 1.4658518, z: 1.025653}
   m_Children: []
   m_Father: {fileID: 4726556252404143311}
   m_RootOrder: 0
