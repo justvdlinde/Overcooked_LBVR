@@ -10,6 +10,7 @@ public class OrderDisplay : MonoBehaviour
 
     public void DisplayOrder(Order order)
     {
+        Clear();
         Order = order;
         grid.DisplayOrder(order);
     }

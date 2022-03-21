@@ -15,10 +15,12 @@ public class OrderManager : MonoBehaviourPun
     public Action<Order> OrderAddedToGame;
     public Action<Order> OrderFailed;
     public Action<Order, Dish> OrderDelivered;
+    public int OrdersLeft => orderDelays.Length - currentOrderIndex;
 
     [SerializeField] private OrderDisplayManager displayManager;
     [SerializeField] private int orderAmount = 10;
     [SerializeField] private float[] orderDelays;
+    [SerializeField] private bool useOrderTimers = true;
 
     [Header("Order Settings")]
     [SerializeField] private int minIngredients = 1;
@@ -26,7 +28,7 @@ public class OrderManager : MonoBehaviourPun
     [SerializeField] private float minTime = 20;
     [SerializeField] private float maxTime = 50;
 
-    private int orderIndex;
+    public int currentOrderIndex;
 
     private void Awake()
     {
@@ -51,7 +53,7 @@ public class OrderManager : MonoBehaviourPun
     {
         for (int i = 0; i < orderDelays.Length; i++)
         {
-            yield return new WaitForSeconds(orderDelays[orderIndex]);
+            yield return new WaitForSeconds(orderDelays[currentOrderIndex]);
             while (!CanAddNewOrder())
             {
                 yield return null;
@@ -78,12 +80,12 @@ public class OrderManager : MonoBehaviourPun
                 ingredientInts[i] = (int)order.ingredients[i];
             }
 
-            photonView.RPC(nameof(CreateNewOrderRPC), RpcTarget.All, ingredientInts, timerDuration);
+            photonView.RPC(nameof(CreateNewOrderRPC), RpcTarget.All, ingredientInts, timerDuration, useOrderTimers);
         }
     }
 
     [PunRPC]
-    private void CreateNewOrderRPC(int[] ingredients, float timerDuration, PhotonMessageInfo info)
+    private void CreateNewOrderRPC(int[] ingredients, float timerDuration, bool useTimer, PhotonMessageInfo info)
     {
         Order order = new Order();
         order.ingredients = new IngredientType[ingredients.Length];
@@ -96,8 +98,9 @@ public class OrderManager : MonoBehaviourPun
 
         ActiveOrders.Add(order);
         OrderAddedToGame?.Invoke(order);
-        order.timer.Start();
-        orderIndex++;
+        if(useTimer)
+            order.timer.Start();
+        currentOrderIndex++;
     }
 
     public void OnOrderTimerExceeded(Order order)
@@ -163,8 +166,11 @@ public class OrderManager : MonoBehaviourPun
             }
         }
 
-        return bestFit;
-    }
+        if (bestFit == null)
+            return ActiveOrders[0];
+        else
+            return bestFit;
+    } 
 
     [Header("Debug")]
     public Dish testDish;

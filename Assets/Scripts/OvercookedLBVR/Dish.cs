@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Dish : MonoBehaviour
 {
-    public List<Ingredient> ingredients;
+    public List<Ingredient> ingredients = new List<Ingredient>();
 }

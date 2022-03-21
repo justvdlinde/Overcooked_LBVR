@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviourPun
     private void AddScore(Score score, Order order)
     {
         orderScorePairs.Add(order, score);
-        if (orderManager.ActiveOrders.Count == 0)
+        if (orderManager.OrdersLeft <= 0 && orderManager.ActiveOrders.Count == 0)
             GameOver();
     }
 

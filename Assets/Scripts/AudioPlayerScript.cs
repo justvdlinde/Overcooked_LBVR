@@ -70,7 +70,6 @@ public class AudioPlayerScript : MonoBehaviour
 
 
 
-        Debug.Log(transform.name + incomingVelocity);
 
         if (col.tag == Tags.METAL)
         {

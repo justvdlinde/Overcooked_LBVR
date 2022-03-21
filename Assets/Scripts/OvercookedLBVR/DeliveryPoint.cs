@@ -45,11 +45,36 @@ public class DeliveryPoint : MonoBehaviourPun
             DeliverDish(dish);
     }
 
+    [Button]
+    public void DeliverDishDebug()
+    {
+        Dish dish = new GameObject().AddComponent<Dish>();
+        DeliverDish(dish);
+    }
+
     public void DeliverDish(Dish dish)
     {
         Order closestOrder = OrderManager.Instance.GetClosestOrder(dish);
-        if(closestOrder != null)
+        if (closestOrder != null)
             OrderManager.Instance.DeliverOrder(closestOrder, dish);
-        Destroy(dish.transform.parent.parent.gameObject);
+        else
+            Debug.LogError("No closest order found!");
+
+        if (dish.transform.parent != null)
+        {
+            if(dish.transform.parent.parent != null)
+            { 
+                Destroy(dish.transform.parent.parent.gameObject);
+            }
+            else
+            {
+                Destroy(dish.transform.parent.gameObject);
+            }
+
+        }
+        else
+        {
+            Destroy(dish.transform.gameObject);
+        }
     }
 }
