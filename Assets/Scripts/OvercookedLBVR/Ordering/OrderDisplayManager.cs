@@ -12,12 +12,14 @@ public class OrderDisplayManager : MonoBehaviour
     {
         orderManager.OrderAddedToGame += DisplayOrder;
         orderManager.OrderFailed += RemoveDisplay;
+        orderManager.OrderDelivered += OnOrderDelivered;
     }
 
     private void OnDisable()
     {
         orderManager.OrderAddedToGame -= DisplayOrder;
         orderManager.OrderFailed -= RemoveDisplay;
+        orderManager.OrderDelivered -= OnOrderDelivered;
     }
 
     public bool HasFreeDisplay()
@@ -59,5 +61,10 @@ public class OrderDisplayManager : MonoBehaviour
             display.Clear();
             orderDisplayPairs.Remove(order);
         }
+    }
+
+    private void OnOrderDelivered(Order order, Dish dish)
+    {
+        RemoveDisplay(order);
     }
 }
