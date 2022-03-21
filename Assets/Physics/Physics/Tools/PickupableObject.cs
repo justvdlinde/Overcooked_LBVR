@@ -180,7 +180,10 @@ namespace PhysicsCharacter
 
 		public Vector3 GetWorldPosition()
 		{
-			return parent.TransformPoint(localPosition);
+			if (parent != null)
+				return parent.TransformPoint(localPosition);
+			else
+				return Vector3.zero;
 		}
 
 		public Quaternion GetWorldRotation()

@@ -164,6 +164,7 @@ MonoBehaviour:
   useHandleHandedness: 1
   preferredToolHand: 1
   otherToolHandle: {fileID: 7628820565282496829}
+  isGrabbedByRemote: 0
 --- !u!1 &5853532453732691667
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +402,7 @@ MonoBehaviour:
   useHandleHandedness: 1
   preferredToolHand: 0
   otherToolHandle: {fileID: 5853532452858087711}
+  isGrabbedByRemote: 0
 --- !u!1 &7628820566310143154
 GameObject:
   m_ObjectHideFlags: 0
