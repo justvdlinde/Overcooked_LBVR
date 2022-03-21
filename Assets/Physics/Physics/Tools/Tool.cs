@@ -154,8 +154,9 @@ namespace PhysicsCharacter
 
 		protected void ForcePosition()
 		{
-			transform.rotation = toolTransformDelegate.GetRotation();
-			targetRot = toolTransformDelegate.GetRotation();
+			//transform.rotation = toolTransformDelegate.GetRotation();
+			////rigidBody.MoveRotation(toolTransformDelegate.GetRotation());
+			//targetRot = toolTransformDelegate.GetRotation();
 
 			ToolHandle pickedupHandle = null;
 			int currentHandlePrio = -10;
@@ -172,10 +173,12 @@ namespace PhysicsCharacter
 			}
 			if (pickedupHandle == null)
 				return;
-			transform.position = pickedupHandle.transform.position;
+
+			Vector3 pos = pickedupHandle.transform.position;
 			Vector3 diff = (toolTransformDelegate.GetPosition()) - (rigidBody.worldCenterOfMass + (toolTransformDelegate.GetAnchorPosition() - rigidBody.worldCenterOfMass));
-			transform.position += diff;
-			targetPos = transform.position;
+			rigidBody.MovePosition(pos);
+			//transform.position += diff;
+			targetPos = rigidBody.position;
 		}
 
 		// move this to a distance check in update
