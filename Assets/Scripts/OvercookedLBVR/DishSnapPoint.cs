@@ -54,6 +54,9 @@ public class DishSnapPoint : MonoBehaviour
 		Tool t = ingredientParent.GetComponent<Tool>();
 		if(t != null)
 			ingredientParent.GetComponent<Tool>().enabled = false;
+
+        ingredient.DisableComponentsOnDish();
+
         dish.ingredients.Add(ingredient);
     }
 
