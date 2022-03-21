@@ -289,7 +289,6 @@ namespace PhysicsCharacter
 			foreach (ToolHandle handle in toolHandles)
 				handle.isGrabbedByRemote = false;
 			rigidBody.useGravity = useGravity;
-			Debug.Log("setgravity " + useGravity);
 		}
 
 		protected virtual void MoveUsingPhysics()

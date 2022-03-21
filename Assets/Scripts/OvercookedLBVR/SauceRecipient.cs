@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,19 +17,22 @@ public class SauceRecipient : MonoBehaviour
 
 	[SerializeField] private DishSnapPoint connectedDish = null;
 
-    public void ProgressSauceValue(float value, IngredientType sauceType)
+	public void ProgressSauceValue(float value, IngredientType sauceType)
 	{
-		if (hasTriggered)
-			return;
-		if (sauceType == IngredientType.Ketchup)
-			currentProgressTillKetchup += value;
-		else
-			currentProgressTillMayo += value;
+		if (PhotonNetwork.IsMasterClient)
+		{
+			if (hasTriggered)
+				return;
+			if (sauceType == IngredientType.Ketchup)
+				currentProgressTillKetchup += value;
+			else
+				currentProgressTillMayo += value;
 
-		if (currentProgressTillKetchup >= timeUntillSaucePlaces)
-			ApplySauce(IngredientType.Ketchup);
-		else if(currentProgressTillMayo >= timeUntillSaucePlaces)
-			ApplySauce(IngredientType.Mayo);
+			if (currentProgressTillKetchup >= timeUntillSaucePlaces)
+				ApplySauce(IngredientType.Ketchup);
+			else if (currentProgressTillMayo >= timeUntillSaucePlaces)
+				ApplySauce(IngredientType.Mayo);
+		}
 	}
 
 	private void ApplySauce(IngredientType sauceType)

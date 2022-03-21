@@ -112,7 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectedTool: {fileID: 2794872585545843162}
-  isActive: 0
   previousState: 0
   UpEvent:
     m_PersistentCalls:
@@ -492,6 +491,7 @@ MonoBehaviour:
   useHandleHandedness: 1
   preferredToolHand: 1
   otherToolHandle: {fileID: 1067794923933359576}
+  isGrabbedByRemote: 0
 --- !u!1 &1067794923933359583
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +593,7 @@ MonoBehaviour:
   useHandleHandedness: 1
   preferredToolHand: 0
   otherToolHandle: {fileID: 1067794923422121539}
+  isGrabbedByRemote: 0
 --- !u!1001 &8042137469378176195
 PrefabInstance:
   m_ObjectHideFlags: 0

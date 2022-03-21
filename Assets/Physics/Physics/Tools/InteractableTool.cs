@@ -4,12 +4,12 @@ using UnityEngine;
 using PhysicsCharacter;
 using System;
 using UnityEngine.Events;
+using Photon.Pun;
 
-public class InteractableTool : MonoBehaviour
+public class InteractableTool : MonoBehaviourPun
 {
     [SerializeField] private Tool connectedTool = null;
 
-	public bool isActive = false;
 	public bool previousState = false;
 
 	private bool isTriggerHeld = false;
@@ -21,35 +21,59 @@ public class InteractableTool : MonoBehaviour
 
 	private void Update()
 	{
-		bool isBeingHeld = connectedTool.IsBeingHeld();
-
-		float val = XRInput.GetTriggerButtonValue(connectedTool.GetHeldHand());
-
-		if (val < 0.1f)
-			isTriggerHeld = false;
-		else
-			isTriggerHeld = true;
-
-		isActive = isBeingHeld;
-		if (isBeingHeld && wasTriggerHeld == false && isTriggerHeld)
+		if (photonView.IsMine)
 		{
-			DownEvent?.Invoke();
-		}
-		else if (previousState == true && wasTriggerHeld == true && !isTriggerHeld)
-		{
-			UpEvent?.Invoke();
-		}
-		if (connectedTool.IsBeingHeld() && isTriggerHeld)
-		{
-			HeldEvent?.Invoke();
-		}
+			bool isBeingHeld = connectedTool.IsBeingHeld();
 
-		if(previousState == false && !connectedTool.IsBeingHeld())
-		{
-			UpEvent?.Invoke();
-		}
+			float val = XRInput.GetTriggerButtonValue(connectedTool.GetHeldHand());
 
-		previousState = connectedTool.IsBeingHeld();
-		wasTriggerHeld = isTriggerHeld;
+			if (val < 0.1f)
+				isTriggerHeld = false;
+			else
+				isTriggerHeld = true;
+
+			if (isBeingHeld && wasTriggerHeld == false && isTriggerHeld)
+			{
+				OnDownEvent();
+			}
+			else if (previousState == true && wasTriggerHeld == true && !isTriggerHeld)
+			{
+				OnUpEvent();
+			}
+			if (connectedTool.IsBeingHeld() && isTriggerHeld)
+			{
+				HeldEvent?.Invoke();
+			}
+
+			if (previousState == false && !connectedTool.IsBeingHeld())
+			{
+				OnUpEvent();
+			}
+
+			previousState = connectedTool.IsBeingHeld();
+			wasTriggerHeld = isTriggerHeld;
+		}
 	}
+
+	public void OnUpEvent()
+    {
+		photonView.RPC(nameof(OnUpEventRPC), RpcTarget.All);
+    }
+
+	[PunRPC]
+	private void OnUpEventRPC(PhotonMessageInfo info)
+    {
+		UpEvent?.Invoke();
+	}
+
+	private void OnDownEvent()
+    {
+		photonView.RPC(nameof(OnDownEventRPC), RpcTarget.All);
+	}
+
+	[PunRPC]
+	private void OnDownEventRPC(PhotonMessageInfo info)
+    {
+		DownEvent?.Invoke();
+    }
 }

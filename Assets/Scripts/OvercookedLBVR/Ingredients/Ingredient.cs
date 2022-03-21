@@ -71,7 +71,8 @@ public class Ingredient : MonoBehaviour
         else if(processToCookable)
 		{
             unProcessedGraphics.gameObject.SetActive(false);
-            PhotonNetwork.Instantiate(cookable.name, unProcessedGraphics.transform.position, Quaternion.identity);
+            if (PhotonNetwork.IsMasterClient)
+                PhotonNetwork.Instantiate(cookable.name, unProcessedGraphics.transform.position, Quaternion.identity);
 		}
         status = IngredientStatus.Processed;
 	}
