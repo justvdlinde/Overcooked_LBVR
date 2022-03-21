@@ -195,19 +195,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7143557523146986608, guid: 62a8c64021372d24c96d65f5f4587d06, type: 3}
   m_PrefabInstance: {fileID: 1338021501743327015}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &4089493376797290388
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8192778687244025470}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.15406248, y: 0.15706635, z: 0.1087937}
-  m_Center: {x: 0.0066285506, y: 0.016368866, z: -0.000850033}
 --- !u!64 &6293191508075935440
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -257,6 +244,19 @@ MonoBehaviour:
   chopSound: {fileID: 8300000, guid: af80c63e586c82040a8b69094a3ea3bc, type: 3}
   breakSound: {fileID: 8300000, guid: 186abbeca9cf39a4caf21417f83b28e1, type: 3}
   isChoppable: 0
+--- !u!65 &5978171372880961384
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8192778687244025470}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 0.052200317, z: 0.15}
+  m_Center: {x: 0, y: 0.016670227, z: 0}
 --- !u!1001 &6480741680709276158
 PrefabInstance:
   m_ObjectHideFlags: 0
