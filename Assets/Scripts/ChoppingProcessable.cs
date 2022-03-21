@@ -14,8 +14,7 @@ public class ChoppingProcessable : MonoBehaviourPun
 	[SerializeField] private int hitsNeededToProcess = 5;
 
 	[SerializeField] private List<Collider> connectedColliders = new List<Collider>();
-    [SerializeField] private AudioClip chopSound;
-    [SerializeField] private AudioClip breakSound;
+
 
 	[SerializeField] private bool isChoppable = true;
 	[SerializeField] private ParticleSystem particles = null;
