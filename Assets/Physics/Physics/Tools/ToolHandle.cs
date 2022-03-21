@@ -46,6 +46,8 @@ namespace PhysicsCharacter
 		public bool releasedLeftHand { get; private set; } = false;
 		public bool releasedRightHand { get; private set; } = false;
 
+		public bool isGrabbedByRemote;
+
 		private void Awake()
 		{
 			col = GetComponent<Collider>();
@@ -251,7 +253,10 @@ namespace PhysicsCharacter
 
 		public override bool IsObjectBeingHeld()
 		{
-			if(useHandleHandedness)
+			if (isGrabbedByRemote)
+				return true;
+
+			if (useHandleHandedness)
 				return heldHand == preferredToolHand;
 			else
 				return base.IsObjectBeingHeld();
@@ -259,6 +264,9 @@ namespace PhysicsCharacter
 
 		public override bool IsObjectBeingHeld(Hand hand)
 		{
+			if (isGrabbedByRemote)
+				return true;
+
 			if(useHandleHandedness)
 				return hand == preferredToolHand && heldHand == preferredToolHand;
 			else

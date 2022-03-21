@@ -236,6 +236,8 @@ namespace PhysicsCharacter
 		protected virtual void GrabbedRPC(PhotonMessageInfo info)
         {
 			Debug.Log("GrabbedRPC, disabling gravity");
+			foreach (ToolHandle handle in toolHandles)
+				handle.isGrabbedByRemote = true;
 			rigidBody.useGravity = false;
 		}
 
@@ -258,6 +260,8 @@ namespace PhysicsCharacter
 		[PunRPC]
 		protected virtual void ReleasedRPC(bool useGravity, PhotonMessageInfo info)
 		{
+			foreach (ToolHandle handle in toolHandles)
+				handle.isGrabbedByRemote = false;
 			rigidBody.useGravity = useGravity;
 			Debug.Log("setgravity " + useGravity);
 		}
