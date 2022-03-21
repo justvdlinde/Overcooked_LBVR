@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1671455, g: 0.2097688, b: 0.28926834, a: 1}
+  m_IndirectSpecularColor: {r: 0.4456588, g: 0.49535698, b: 0.5742083, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6074,6 +6074,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1175521545}
     m_Modifications:
+    - target: {fileID: 334388220837002340, guid: ae6c892c43fa2a14fb859bf9e0d4a29c, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2768726622231627748, guid: ae6c892c43fa2a14fb859bf9e0d4a29c, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -17004,6 +17008,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1175521545}
     m_Modifications:
+    - target: {fileID: 334388220837002340, guid: ae6c892c43fa2a14fb859bf9e0d4a29c, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2768726622231627748, guid: ae6c892c43fa2a14fb859bf9e0d4a29c, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
