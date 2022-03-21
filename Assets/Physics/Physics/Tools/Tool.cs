@@ -154,8 +154,28 @@ namespace PhysicsCharacter
 
 		protected void ForcePosition()
 		{
-			transform.position = targetPos;
-			transform.rotation = targetRot;
+			transform.rotation = toolTransformDelegate.GetRotation();
+			targetRot = toolTransformDelegate.GetRotation();
+
+			ToolHandle pickedupHandle = null;
+			int currentHandlePrio = -10;
+			for (int i = 0; i < toolHandles.Count; i++)
+			{
+				if (toolHandles[i].IsObjectBeingHeld())
+				{
+					if ((int)toolHandles[i].GetHandlePriority() > currentHandlePrio)
+					{
+						pickedupHandle = toolHandles[i] as ToolHandle;
+						currentHandlePrio = (int)pickedupHandle.GetHandlePriority();
+					}
+				}
+			}
+			if (pickedupHandle == null)
+				return;
+			transform.position = pickedupHandle.transform.position;
+			Vector3 diff = (toolTransformDelegate.GetPosition()) - (rigidBody.worldCenterOfMass + (toolTransformDelegate.GetAnchorPosition() - rigidBody.worldCenterOfMass));
+			transform.position += diff;
+			targetPos = transform.position;
 		}
 
 		// move this to a distance check in update
@@ -231,6 +251,9 @@ namespace PhysicsCharacter
 				heldHandles = 0;
 			heldHandles++;
 			rigidBody.useGravity = false;
+
+			ForcePosition();
+
 			photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
 			photonView.RPC(nameof(GrabbedRPC), RpcTarget.Others);
 		}

@@ -1,4 +1,6 @@
 using Photon.Pun;
+using PhysicsCharacter;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Ingredient : MonoBehaviour
@@ -20,11 +22,27 @@ public class Ingredient : MonoBehaviour
     public bool processToCookable = false;
     [SerializeField] private GameObject cookable = null;
 
-
     private void Awake()
 	{
         unProcessedGraphics?.gameObject.SetActive(true);
         processedGraphics?.gameObject.SetActive(false);
+    }
+
+    public void DisableComponentsOnDish()
+	{
+        PickupableObject[] handles = transform.parent.parent.gameObject.GetComponentsInChildren<PickupableObject>();
+
+		foreach (var item in handles)
+		{
+            item.gameObject.SetActive(false);
+		}
+
+        AudioPlayerScript[] audioPlayers = transform.parent.parent.gameObject.GetComponentsInChildren<AudioPlayerScript>();
+
+        foreach (var item in audioPlayers)
+        {
+            item.enabled = false;
+        }
     }
 
     public void Process()
