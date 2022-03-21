@@ -3144,6 +3144,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5474159880768332964, guid: 3061145ba36b3d24d889f86b224211ee, type: 3}
+      propertyPath: viewIdField
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7711810425587333384, guid: 3061145ba36b3d24d889f86b224211ee, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -11380,6 +11384,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 682612003}
     m_Modifications:
+    - target: {fileID: 948226949152211431, guid: b2e5bd35f03d76e49860409cbdfe3fde, type: 3}
+      propertyPath: viewIdField
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 3806640289091631812, guid: b2e5bd35f03d76e49860409cbdfe3fde, type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: 0.000000037252903
@@ -14743,6 +14751,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 682612003}
     m_Modifications:
+    - target: {fileID: 387268921751879444, guid: 34bc3233c21937740b7c2bbad55b4764, type: 3}
+      propertyPath: viewIdField
+      value: 21
+      objectReference: {fileID: 0}
     - target: {fileID: 4369893817021957175, guid: 34bc3233c21937740b7c2bbad55b4764, type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: -0.000000022351742
@@ -15052,6 +15064,10 @@ PrefabInstance:
     - target: {fileID: 3980107424422171055, guid: 933806167872c4143946f77455222572, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589841477195998116, guid: 933806167872c4143946f77455222572, type: 3}
+      propertyPath: viewIdField
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8388019706574379143, guid: 933806167872c4143946f77455222572, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -16246,6 +16262,10 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.000000018626451
       objectReference: {fileID: 0}
+    - target: {fileID: 4570075920089053633, guid: 4e31bb0a136bbf4429201e1983f1f5f3, type: 3}
+      propertyPath: viewIdField
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5026895137652755402, guid: 4e31bb0a136bbf4429201e1983f1f5f3, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -16983,6 +17003,10 @@ PrefabInstance:
     - target: {fileID: 3397706420881984780, guid: a58d02183f7738740909d01fe82710dc, type: 3}
       propertyPath: m_Name
       value: Dispenser_Bread Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6163218234761494272, guid: a58d02183f7738740909d01fe82710dc, type: 3}
+      propertyPath: viewIdField
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 7814596490789094435, guid: a58d02183f7738740909d01fe82710dc, type: 3}
       propertyPath: m_ConnectedAnchor.x
@@ -18093,6 +18117,10 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: -0.000000018626451
       objectReference: {fileID: 0}
+    - target: {fileID: 2943204847300538005, guid: c9ba9aecc0134694ca82414c285b1d8c, type: 3}
+      propertyPath: viewIdField
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5942333267580116121, guid: c9ba9aecc0134694ca82414c285b1d8c, type: 3}
       propertyPath: m_Name
       value: Dispenser_Lettuce Variant
@@ -19169,7 +19197,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1361189409
 Transform:
   m_ObjectHideFlags: 0
@@ -20946,6 +20974,10 @@ PrefabInstance:
     - target: {fileID: 318353920584096740, guid: 84145130c58262c43ad1cfa1b387bf92, type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: -0.000000018626451
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436086840773058759, guid: 84145130c58262c43ad1cfa1b387bf92, type: 3}
+      propertyPath: viewIdField
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5133840594598564555, guid: 84145130c58262c43ad1cfa1b387bf92, type: 3}
       propertyPath: m_Name
@@ -22814,6 +22846,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 682612003}
     m_Modifications:
+    - target: {fileID: 1062192938095959813, guid: 72a553e56a477d846b40680238362afd, type: 3}
+      propertyPath: viewIdField
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3983023302581412902, guid: 72a553e56a477d846b40680238362afd, type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: 0.000000037252903
@@ -25123,6 +25159,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5474159880768332964, guid: 3061145ba36b3d24d889f86b224211ee, type: 3}
+      propertyPath: viewIdField
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7711810425587333384, guid: 3061145ba36b3d24d889f86b224211ee, type: 3}
       propertyPath: m_RootOrder
       value: 6
