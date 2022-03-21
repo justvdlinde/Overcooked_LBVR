@@ -338,15 +338,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1569142240407545398, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.0000002505218
+      value: -0.00000004175363
       objectReference: {fileID: 0}
     - target: {fileID: 1569142240407545398, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.032099977
+      value: 0.032099944
       objectReference: {fileID: 0}
     - target: {fileID: 1569142240407545398, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.000000020876815
+      value: -0.00000016701452
       objectReference: {fileID: 0}
     - target: {fileID: 2632072100642677052, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
       propertyPath: m_IsActive
@@ -448,6 +448,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7905934757793493648, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e278d64022795184db664d34a04c0a93, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
 --- !u!4 &974759376940092073 stripped

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4096147035926110463}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Clicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 1569142240407545398}
   - component: {fileID: 7153747615285588009}
   - component: {fileID: 7905934757793493648}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e278d64022795184db664d34a04c0a93, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a80899bd73962c74ab27db6d1919195b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 5116252122389046175}
   - component: {fileID: 5998504173451862169}
   - component: {fileID: 7577676797237562567}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 1037740464255897785}
   - component: {fileID: 54620321806413657}
   - component: {fileID: 1642877765254211239}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -472,7 +472,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3114525147041215501}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: PhysicsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7530958837485635658}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Lower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 4317134198591401349}
   - component: {fileID: 418754525694436771}
   - component: {fileID: 3986244174288334750}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,7 +628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 318287369281501784}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -661,7 +661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5725526697417606467}
   - component: {fileID: 6509754774027931689}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -724,7 +724,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2466940672062501037}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Upper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9191216979126920947}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -786,7 +786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2152360945101120682}
   - component: {fileID: 8001213048160335550}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
