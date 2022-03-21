@@ -87,6 +87,10 @@ PrefabInstance:
       propertyPath: connectedAsset
       value: 
       objectReference: {fileID: 2948306774906408938}
+    - target: {fileID: 912522134516345631, guid: fe58724a4fc5cb243b86847f415a51bc, type: 3}
+      propertyPath: idleReturnTimer
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe58724a4fc5cb243b86847f415a51bc, type: 3}
 --- !u!4 &6324825906299220052 stripped
