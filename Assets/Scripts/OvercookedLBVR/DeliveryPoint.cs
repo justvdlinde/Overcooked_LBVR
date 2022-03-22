@@ -45,12 +45,14 @@ public class DeliveryPoint : MonoBehaviourPun
 		Action remove = null;
         foreach (Dish dish in dishesInTrigger)
 		{
-
-            bool delivered = DeliverDish(dish);
-			if(delivered)
-			{
-				remove += () => dishesInTrigger.Remove(dish);
-			}
+            if (dish != null)
+            {
+                bool delivered = DeliverDish(dish);
+                if (delivered)
+                {
+                    remove += () => dishesInTrigger.Remove(dish);
+                }
+            }
 		}
 
 		remove?.Invoke();
