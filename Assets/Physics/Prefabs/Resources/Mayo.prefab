@@ -250,8 +250,8 @@ GameObject:
   - component: {fileID: 1605574215260778442}
   - component: {fileID: 9076424563201446886}
   - component: {fileID: 7327205174612646692}
-  - component: {fileID: -2848024392858308909}
   - component: {fileID: -4397832943445119350}
+  - component: {fileID: 4683238664711021160}
   m_Layer: 26
   m_Name: Mayo
   m_TagString: Untagged
@@ -485,7 +485,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: -2848024392858308909}
+  - {fileID: 4683238664711021160}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -502,21 +502,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6944581648333551561}
---- !u!114 &-2848024392858308909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7786085967117834189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
 --- !u!114 &-4397832943445119350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -530,6 +515,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6944581648333551561}
+--- !u!114 &4683238664711021160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7786085967117834189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &8259192240776232010
 GameObject:
   m_ObjectHideFlags: 0

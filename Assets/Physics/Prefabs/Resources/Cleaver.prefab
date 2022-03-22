@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 6550192173149749841}
   - component: {fileID: 1310673442178420658}
   - component: {fileID: -899074190995560402}
-  - component: {fileID: 1069222003493183127}
+  - component: {fileID: 2872551943472056817}
   m_Layer: 26
   m_Name: Cleaver
   m_TagString: Knife
@@ -185,6 +185,7 @@ MonoBehaviour:
   maxAngularVelocity: 35
   clipChecker: {fileID: 0}
   photonView: {fileID: 1310673442178420658}
+  forcePosition: 1
 --- !u!114 &1310673442178420658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,7 +204,7 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 1069222003493183127}
+  - {fileID: 2872551943472056817}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -220,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1860500773698843251}
---- !u!114 &1069222003493183127
+--- !u!114 &2872551943472056817
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,12 +230,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1860500773698843253}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &1860500774435313080
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxVolume: 1
-  volume: 1
+  baseVolume: 1
   ownVelocity: 0
   incomingVelocity: 0
   metalHit: {fileID: 8300000, guid: f66579c24321479428363dedbc52c1d5, type: 3}
