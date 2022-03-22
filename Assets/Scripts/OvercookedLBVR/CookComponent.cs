@@ -32,8 +32,12 @@ public class CookComponent : MonoBehaviourPun
 	[SerializeField] private Color RawColor = new Color();
 	[SerializeField] private Color CookedColor = new Color();
 	[SerializeField] private Color BurntColor = new Color();
+	[SerializeField] private Animator warningAnimator = null;
+	[SerializeField] private GameObject warningObject = null;
+
 
 	private float yOffset = 0f;
+	private float yOffsetWarning = 0f;
 
 	private void Awake()
 	{
@@ -41,6 +45,7 @@ public class CookComponent : MonoBehaviourPun
         SetAssetState();
 
 		yOffset = progressBarObject.transform.localPosition.y;
+		yOffsetWarning = warningObject.transform.localPosition.y;
 
         if (cookingParticles.isPlaying)
             cookingParticles.Stop();
@@ -50,15 +55,25 @@ public class CookComponent : MonoBehaviourPun
             burntParticles.Stop();
     }
 
+	private bool ShouldWarn()
+	{
+		return cookAmount >= rawToCookTime + (cookedToBurnTime * 0.5f) && status != CookStatus.Burned;
+	}
+
 	private void Update()
 	{
-		progressBarObject.SetActive(isCooking);
+		progressBarObject.SetActive(isCooking && status != CookStatus.Burned);
+		warningObject.SetActive(isCooking && ShouldWarn());
 
 		if (isCooking)
 		{
 			progressBarObject.transform.position = transform.position + Vector3.up * yOffset;
+			warningObject.transform.position = transform.position + Vector3.up * yOffsetWarning;
+
+			warningAnimator.SetBool("ShouldAnimate", ShouldWarn());
 
 			progressBarObject.transform.LookAt(Camera.main.transform);
+			warningObject.transform.LookAt(Camera.main.transform);
 			DoParticles();
 			Vector3 scale = new Vector3(Mathf.Clamp01(GetBarProgress()), 1f, 1f);
 			progressGraphics.transform.localScale = scale;
