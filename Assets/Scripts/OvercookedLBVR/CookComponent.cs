@@ -138,10 +138,11 @@ public class CookComponent : MonoBehaviourPun
 
     public void SetState(CookStatus status)
     {
-        photonView.RPC(nameof(SetStateRPC), RpcTarget.All, (int)status);
+        photonView.RPC(nameof(SetCookStateRPC), RpcTarget.All, (int)status);
     }
 
-    private void SetStateRPC(int statusIndex, PhotonMessageInfo info)
+    [PunRPC]
+    private void SetCookStateRPC(int statusIndex, PhotonMessageInfo info)
     {
         status = (CookStatus)statusIndex;
     }

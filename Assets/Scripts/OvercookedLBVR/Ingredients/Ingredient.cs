@@ -86,10 +86,11 @@ public class Ingredient : MonoBehaviourPun
 
     public void SetState(IngredientStatus status)
     {
-        photonView.RPC(nameof(SetStateRPC), RpcTarget.All, (int)status);
+        photonView.RPC(nameof(SetIngredientStateRPC), RpcTarget.All, (int)status);
     }
 
-    private void SetStateRPC(int statusIndex, PhotonMessageInfo info)
+    [PunRPC]
+    private void SetIngredientStateRPC(int statusIndex, PhotonMessageInfo info)
     {
         Status = (IngredientStatus)statusIndex;
     }
