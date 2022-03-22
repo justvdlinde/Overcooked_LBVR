@@ -29,12 +29,14 @@ public class GameManager : MonoBehaviourPun
     {
         Score score = new Score(order);
         AddScore(score, order);
+        order.score = score;
     }
 
     private void OnOrderDelivered(Order order, Dish dish)
     {
         Score score = new Score(order, dish);
         AddScore(score, order);
+        order.score = score;
     }
 
     private void AddScore(Score score, Order order)

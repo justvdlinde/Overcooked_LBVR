@@ -4,6 +4,8 @@ public class Order : IDisposable
 {
     public IngredientType[] ingredients;
     public Timer timer;
+    public int orderNumber;
+    public Score score;
 
     public Order()
     {
