@@ -580,6 +580,8 @@ GameObject:
   - component: {fileID: 4495164056941639128}
   - component: {fileID: 4486133196515656888}
   - component: {fileID: 4885710115937781954}
+  - component: {fileID: 2501857049157653802}
+  - component: {fileID: 4838738796446455655}
   m_Layer: 0
   m_Name: Grill
   m_TagString: Untagged
@@ -670,6 +672,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.7426368, y: 1.0647876, z: 1.0886114}
   m_Center: {x: 0, y: 0.5286614, z: 0.00000011920929}
+--- !u!65 &2501857049157653802
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4473854120543541914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6374075, y: 0.29999995, z: 0.025195122}
+  m_Center: {x: -0.0129778385, y: 1.23, z: -0.4717586}
+--- !u!65 &4838738796446455655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4473854120543541914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.039099216, y: 0.28039873, z: 0.6164293}
+  m_Center: {x: -0.8, y: 1.2201993, z: -0.21358466}
 --- !u!1001 &3350835000955519275
 PrefabInstance:
   m_ObjectHideFlags: 0
