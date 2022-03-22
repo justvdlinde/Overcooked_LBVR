@@ -229,14 +229,6 @@ PrefabInstance:
       propertyPath: isCooked
       value: 
       objectReference: {fileID: 8300000, guid: 13f4f97c15fc6134db688883e7e85557, type: 3}
-    - target: {fileID: 7143557524521539910, guid: 62a8c64021372d24c96d65f5f4587d06, type: 3}
-      propertyPath: rawToCookTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7143557524521539910, guid: 62a8c64021372d24c96d65f5f4587d06, type: 3}
-      propertyPath: cookedToBurnTime
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7143557524521539911, guid: 62a8c64021372d24c96d65f5f4587d06, type: 3}
       propertyPath: ingredientType
       value: 10

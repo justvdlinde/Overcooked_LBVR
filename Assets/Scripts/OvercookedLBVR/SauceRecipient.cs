@@ -21,6 +21,9 @@ public class SauceRecipient : MonoBehaviourPun
 	{
 		if (PhotonNetwork.IsMasterClient)
 		{
+			//Debug.Log($"ketchup prog {currentProgressTillKetchup} mayo prog {currentProgressTillMayo}");
+
+
 			if (hasTriggered)
 				return;
 			if (sauceType == IngredientType.Ketchup)
@@ -46,7 +49,6 @@ public class SauceRecipient : MonoBehaviourPun
 		IngredientType sauceType = (IngredientType)ingredientTypeIndex;
 		GameObject go = Instantiate(((sauceType == IngredientType.Ketchup) ? ketchupPrefab : mayoPrefab));
 
-		Debug.Log($"ketchup prog {currentProgressTillKetchup} mayo prog {currentProgressTillMayo}");
 
 		if (connectedDish != null)
 		{
