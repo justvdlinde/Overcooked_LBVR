@@ -183,6 +183,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4432354376567926214, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
   m_PrefabInstance: {fileID: 2047207919934116724}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2444265010829086405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432354375031610801, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+  m_PrefabInstance: {fileID: 2047207919934116724}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2444265010284424536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432354375593197100, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+  m_PrefabInstance: {fileID: 2047207919934116724}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2444265011434481123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432354376710747799, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+  m_PrefabInstance: {fileID: 2047207919934116724}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7999579024362038071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -238,6 +253,34 @@ PrefabInstance:
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 2444265011696864830}
+    - target: {fileID: 1174896090023363918, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+      propertyPath: toggleObjects.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1174896090023363918, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+      propertyPath: toggleObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 2444265010829086405}
+    - target: {fileID: 1174896090023363918, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+      propertyPath: toggleObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 2444265010284424536}
+    - target: {fileID: 1174896090023363918, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+      propertyPath: toggleObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 2444265011434481123}
+    - target: {fileID: 1174896090023363918, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+      propertyPath: toggleObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 3961481647918672890}
+    - target: {fileID: 1174896090023363918, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+      propertyPath: toggleObjects.Array.data[4]
+      value: 
+      objectReference: {fileID: 3392364064339481893}
+    - target: {fileID: 1174896090023363918, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+      propertyPath: toggleObjects.Array.data[5]
+      value: 
+      objectReference: {fileID: 1616373346089299382}
     - target: {fileID: 1174896090023363920, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
       propertyPath: m_Name
       value: Cookable_Ingredient_Bacon
@@ -264,3 +307,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+--- !u!1 &3961481647918672890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6484677880728520909, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+  m_PrefabInstance: {fileID: 7999579024362038071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3392364064339481893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4616241955050010130, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+  m_PrefabInstance: {fileID: 7999579024362038071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1616373346089299382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8749003429160685185, guid: f238f8fc019c3084d9fcb7e7941b398e, type: 3}
+  m_PrefabInstance: {fileID: 7999579024362038071}
+  m_PrefabAsset: {fileID: 0}

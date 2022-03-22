@@ -91,6 +91,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4432354376567926214, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
   m_PrefabInstance: {fileID: 4623233636152087734}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9055582908748908807 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432354375031610801, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+  m_PrefabInstance: {fileID: 4623233636152087734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9055582909311412890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432354375593197100, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+  m_PrefabInstance: {fileID: 4623233636152087734}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9055582908144050721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432354376710747799, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+  m_PrefabInstance: {fileID: 4623233636152087734}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5205892958342045788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -154,6 +169,22 @@ PrefabInstance:
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 9055582907882146300}
+    - target: {fileID: 1454417060013500321, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: toggleObjects.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1454417060013500321, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: toggleObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 9055582908748908807}
+    - target: {fileID: 1454417060013500321, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: toggleObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 9055582909311412890}
+    - target: {fileID: 1454417060013500321, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
+      propertyPath: toggleObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 9055582908144050721}
     - target: {fileID: 2624187265380227324, guid: 285e66ba664bee94eb0ce7316984e939, type: 3}
       propertyPath: connectedColliders.Array.data[0]
       value: 

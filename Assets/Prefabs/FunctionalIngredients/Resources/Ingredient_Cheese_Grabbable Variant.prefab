@@ -95,6 +95,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4432354376567926214, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
   m_PrefabInstance: {fileID: 1476865944604934964}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3025296427466415749 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432354375031610801, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+  m_PrefabInstance: {fileID: 1476865944604934964}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3025296426921753880 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432354375593197100, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+  m_PrefabInstance: {fileID: 1476865944604934964}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3025296425923736995 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4432354376710747799, guid: 3feb05e2f18ade14ea020d05f0ed42a6, type: 3}
+  m_PrefabInstance: {fileID: 1476865944604934964}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8222630368553652505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,6 +121,22 @@ PrefabInstance:
       propertyPath: rigidbody
       value: 
       objectReference: {fileID: 3025296426186645118}
+    - target: {fileID: 630852824895356709, guid: 4d744e34e4562da4d823efe033356599, type: 3}
+      propertyPath: toggleObjects.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 630852824895356709, guid: 4d744e34e4562da4d823efe033356599, type: 3}
+      propertyPath: toggleObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 3025296427466415749}
+    - target: {fileID: 630852824895356709, guid: 4d744e34e4562da4d823efe033356599, type: 3}
+      propertyPath: toggleObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 3025296426921753880}
+    - target: {fileID: 630852824895356709, guid: 4d744e34e4562da4d823efe033356599, type: 3}
+      propertyPath: toggleObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 3025296425923736995}
     - target: {fileID: 1173257393072960564, guid: 4d744e34e4562da4d823efe033356599, type: 3}
       propertyPath: viewIdField
       value: 0

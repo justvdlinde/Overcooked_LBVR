@@ -91,6 +91,8 @@ MonoBehaviour:
   result2: {fileID: 0}
   processToCookable: 0
   cookable: {fileID: 0}
+  toggleObjects:
+  - {fileID: 1499042900846878353}
 --- !u!114 &2520352021233920972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,8 +109,6 @@ MonoBehaviour:
   trigger: {fileID: 4810800760899866011}
   hitsNeededToProcess: 4
   connectedColliders: []
-  chopSound: {fileID: 0}
-  breakSound: {fileID: 0}
   isChoppable: 1
   particles: {fileID: 1499042900846878359}
 --- !u!65 &1876006230183788430
@@ -255,6 +255,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+--- !u!1 &1499042900846878353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 526488827707483052, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
+  m_PrefabInstance: {fileID: 1406210912414334269}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1499042900846878358 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 526488827707483051, guid: f50fc026f98598548b8a6f5545b36681, type: 3}
