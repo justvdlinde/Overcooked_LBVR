@@ -69,6 +69,8 @@ public abstract class PhotonNetworkService : MonoBehaviourPunCallbacks, INetwork
         PhotonNetwork.KeepAliveInBackground = 5;
         PhotonNetwork.UseRpcMonoBehaviourCache = true;
         PhotonNetwork.AutomaticallySyncScene = false;
+        PhotonNetwork.SerializationRate = 20;
+        PhotonNetwork.SendRate = 40;
 
         AllClients = new List<IClient>();
         clientIdTable = new Dictionary<string, IClient>();
