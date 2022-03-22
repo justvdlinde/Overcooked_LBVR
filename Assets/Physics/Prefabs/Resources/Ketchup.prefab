@@ -99,6 +99,7 @@ MonoBehaviour:
   maxAngularVelocity: 35
   clipChecker: {fileID: 0}
   photonView: {fileID: 3194226253076106312}
+  forcePosition: 1
 --- !u!114 &1560361286558406151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -775,7 +776,7 @@ AudioSource:
   m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: eb0573d4b6f3d8748bec5777330be8e2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7a1f0f9254da5ef42beeb0265dbac996, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.35
   m_Pitch: 1
