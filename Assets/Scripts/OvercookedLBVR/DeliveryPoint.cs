@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils.Core.Attributes;
@@ -41,8 +42,18 @@ public class DeliveryPoint : MonoBehaviourPun
     [PunRPC]
     private void DeliverDishesInTriggerRPC(PhotonMessageInfo info)
     {
+		Action remove = null;
         foreach (Dish dish in dishesInTrigger)
-            DeliverDish(dish);
+		{
+
+            bool delivered = DeliverDish(dish);
+			if(delivered)
+			{
+				remove += () => dishesInTrigger.Remove(dish);
+			}
+		}
+
+		remove?.Invoke();
     }
 
     [Button]
@@ -52,11 +63,15 @@ public class DeliveryPoint : MonoBehaviourPun
         DeliverDish(dish);
     }
 
-    public void DeliverDish(Dish dish)
+    public bool DeliverDish(Dish dish)
     {
+		bool delivered = false;
         Order closestOrder = OrderManager.Instance.GetClosestOrder(dish);
         if (closestOrder != null)
+		{
             OrderManager.Instance.DeliverOrder(closestOrder, dish);
+			delivered = true;
+		}
         else
             Debug.LogError("No closest order found!");
 
@@ -76,5 +91,6 @@ public class DeliveryPoint : MonoBehaviourPun
         {
             Destroy(dish.transform.gameObject);
         }
+		return delivered;
     }
 }

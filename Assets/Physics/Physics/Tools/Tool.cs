@@ -275,7 +275,10 @@ namespace PhysicsCharacter
 
 		protected virtual void OnReleasedCallback(Hand hand, ToolHandle toolHandle)
 		{
-			if(heldHandles > 0)
+			if (rigidBody == null)
+				return;
+
+				if (heldHandles > 0)
 				heldHandles--;
 
 			if(heldHandles <= 0)
