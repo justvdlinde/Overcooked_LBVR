@@ -333,6 +333,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587fe56854b206348a41f84889f33516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxVolume: 1
+  baseVolume: 1
+  ownVelocity: 0
+  incomingVelocity: 0
   metalHit: {fileID: 8300000, guid: 186abbeca9cf39a4caf21417f83b28e1, type: 3}
   woodHit: {fileID: 8300000, guid: e6294c4075432e245a26db73b8ebd5e2, type: 3}
   plateHit: {fileID: 8300000, guid: ab4fd6499115a7f4689716215f7269a5, type: 3}
@@ -364,7 +368,30 @@ MonoBehaviour:
   - {fileID: 6533014208645378157}
   - {fileID: 6533014208891185017}
   - {fileID: 3011721620069339781}
-  audioScript: {fileID: 0}
+  isChoppable: 1
+  particles: {fileID: 0}
+--- !u!114 &7333393262119612154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174896090023363920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &8317324414581125677
 PrefabInstance:
   m_ObjectHideFlags: 0
