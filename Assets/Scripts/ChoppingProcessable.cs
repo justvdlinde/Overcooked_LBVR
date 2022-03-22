@@ -48,7 +48,7 @@ public class ChoppingProcessable : MonoBehaviourPun
 
 			if (isChoppable)
 			{
-				if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft > 0)
+				if (ingredient.Status == IngredientStatus.UnProcessed && currentHitsLeft > 0)
 				{
 					currentHitsLeft -= col.HitDamage;
 					if (particles.isPlaying)
@@ -56,7 +56,7 @@ public class ChoppingProcessable : MonoBehaviourPun
 					particles?.Play();
 					Debug.Log($"Chopped {name} for {col.HitDamage} and has {currentHitsLeft} left");
 				}
-				else if (ingredient.status == IngredientStatus.UnProcessed && currentHitsLeft <= 0)
+				else if (ingredient.Status == IngredientStatus.UnProcessed && currentHitsLeft <= 0)
 				{
 					Chop();
 				}

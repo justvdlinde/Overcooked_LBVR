@@ -1,7 +1,8 @@
+using Photon.Pun;
 using UnityEngine;
 
 [RequireComponent(typeof(Ingredient))]
-public class CookComponent : MonoBehaviour
+public class CookComponent : MonoBehaviourPun
 {
     public Ingredient ingredient;
     public CookStatus status = CookStatus.Raw;
@@ -25,7 +26,6 @@ public class CookComponent : MonoBehaviour
     [SerializeField] private ParticleSystem cookedToBurntParticles = null;
     [SerializeField] private ParticleSystem burntParticles = null;
 
-
 	private void Awake()
 	{
         audioScript = GetComponent<AudioPlayerScript>();
@@ -37,7 +37,6 @@ public class CookComponent : MonoBehaviour
             cookedToBurntParticles.Stop();
         if (burntParticles.isPlaying)
             burntParticles.Stop();
-
     }
 
     private void DoParticles()
@@ -113,40 +112,42 @@ public class CookComponent : MonoBehaviour
 
     public void Cook(float add = 1)
     {
-        
-
         if (status != CookStatus.Burned)
         {
-            
             if (status == CookStatus.Raw && cookAmount > rawToCookTime)
             {
                 audioScript.PlayNonColSound(audioScript.cookSound, transform.position);
-                status = CookStatus.Cooked;
+                SetState(CookStatus.Cooked);
                 
             }
             else if (status == CookStatus.Cooked && cookAmount > rawToCookTime + cookedToBurnTime)
             {
                 audioScript.PlayNonColSound(audioScript.burnSound, transform.position);
-                status = CookStatus.Burned;
-                
+                SetState(CookStatus.Burned);
             }
         }
         SetAssetState();
 
         DoParticles();
 
-
         if (status != CookStatus.Raw)
-            ingredient.status = IngredientStatus.Processed;
+            ingredient.SetState(IngredientStatus.Processed);
 
         cookAmount += add * Time.deltaTime;
+    }
+
+    public void SetState(CookStatus status)
+    {
+        photonView.RPC(nameof(SetStateRPC), RpcTarget.All, (int)status);
+    }
+
+    private void SetStateRPC(int statusIndex, PhotonMessageInfo info)
+    {
+        status = (CookStatus)statusIndex;
     }
 
     public void playCookingSound()
     {
         audioScript.PlayNonColSound(audioScript.isCookingSound, transform.position);
     }
-
- 
-
-    }
+}

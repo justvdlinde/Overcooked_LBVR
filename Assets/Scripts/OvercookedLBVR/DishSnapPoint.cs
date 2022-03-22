@@ -24,7 +24,7 @@ public class DishSnapPoint : MonoBehaviour
         if (other.TryGetComponent(out Ingredient item))
         {
 			Debug.Log("Got item");
-            if(!dish.ingredients.Contains(item) && item.status == IngredientStatus.Processed)
+            if(!dish.ingredients.Contains(item) && item.Status == IngredientStatus.Processed)
                 Snap(item);
         }
     }

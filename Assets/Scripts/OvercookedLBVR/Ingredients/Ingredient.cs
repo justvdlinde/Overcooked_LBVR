@@ -3,10 +3,10 @@ using PhysicsCharacter;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ingredient : MonoBehaviour
+public class Ingredient : MonoBehaviourPun
 {
     public IngredientType ingredientType = IngredientType.None;
-    public IngredientStatus status = IngredientStatus.UnProcessed;
+    public IngredientStatus Status { get; private set; } = IngredientStatus.UnProcessed;
     public new Rigidbody rigidbody = null;
 
     public bool needsToBeCooked = false;
@@ -67,7 +67,7 @@ public class Ingredient : MonoBehaviour
             if (PhotonNetwork.IsMasterClient)
                 PhotonNetwork.Instantiate(cookable.name, unProcessedGraphics.transform.position, Quaternion.identity);
 		}
-        status = IngredientStatus.Processed;
+        SetState(IngredientStatus.Processed);
 	}
 
     public void TogglePhysics(bool toggle)
@@ -78,11 +78,22 @@ public class Ingredient : MonoBehaviour
 
     public bool IsCookedProperly()
     {
-        bool returnValue = status == IngredientStatus.Processed;
+        bool returnValue = Status == IngredientStatus.Processed;
         if (needsToBeCooked)
             returnValue &= cookComponent.status == CookStatus.Cooked;
         return returnValue;
     }
+
+    public void SetState(IngredientStatus status)
+    {
+        photonView.RPC(nameof(SetStateRPC), RpcTarget.All, (int)status);
+    }
+
+    private void SetStateRPC(int statusIndex, PhotonMessageInfo info)
+    {
+        Status = (IngredientStatus)statusIndex;
+    }
+
 
     public void PlaySound(AudioClip clip, Vector3 position)
     {
