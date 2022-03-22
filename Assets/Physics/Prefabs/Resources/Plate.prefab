@@ -264,6 +264,7 @@ MonoBehaviour:
   maxAngularVelocity: 35
   clipChecker: {fileID: 0}
   photonView: {fileID: -2127286866967161279}
+  forcePosition: 1
 --- !u!114 &-2127286866967161279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +526,7 @@ GameObject:
   - component: {fileID: 3633591311685135634}
   - component: {fileID: 2133682729547605137}
   - component: {fileID: 2073315113003369259}
+  - component: {fileID: 4347318403419249149}
   m_Layer: 0
   m_Name: SaucePoint
   m_TagString: Untagged
@@ -576,6 +578,28 @@ MonoBehaviour:
   mayoPrefab: {fileID: 1619658773355117013, guid: e9f3b8bea625ebb408179cb1536395dc, type: 3}
   destroyOnSauce: 0
   connectedDish: {fileID: 1753612515}
+--- !u!114 &4347318403419249149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504648817007189934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &3446403508571526675
 PrefabInstance:
   m_ObjectHideFlags: 0

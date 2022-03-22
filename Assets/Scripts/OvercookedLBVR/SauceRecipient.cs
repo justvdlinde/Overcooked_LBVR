@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SauceRecipient : MonoBehaviour
+public class SauceRecipient : MonoBehaviourPun
 {
 	[SerializeField] private float timeUntillSaucePlaces = 3;
 	private float currentProgressTillKetchup = 0;
@@ -37,6 +37,13 @@ public class SauceRecipient : MonoBehaviour
 
 	private void ApplySauce(IngredientType sauceType)
 	{
+		photonView.RPC(nameof(ApplySauceRPC), RpcTarget.All, (int)sauceType);
+	}
+
+	[PunRPC]
+	private void ApplySauceRPC(int ingredientTypeIndex, PhotonMessageInfo info)
+    {
+		IngredientType sauceType = (IngredientType)ingredientTypeIndex;
 		GameObject go = Instantiate(((sauceType == IngredientType.Ketchup) ? ketchupPrefab : mayoPrefab));
 
 		Debug.Log($"ketchup prog {currentProgressTillKetchup} mayo prog {currentProgressTillMayo}");
