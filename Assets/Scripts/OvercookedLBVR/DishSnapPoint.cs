@@ -55,7 +55,7 @@ public class DishSnapPoint : MonoBehaviour
 		if(t != null)
 			ingredientParent.GetComponent<Tool>().enabled = false;
 
-        ingredient.DisableComponentsOnDish();
+        ingredient.SetComponentsOnIngredientActive(false);
 
         dish.ingredients.Add(ingredient);
     }
@@ -78,7 +78,10 @@ public class DishSnapPoint : MonoBehaviour
         ingredientParent.useGravity = true;
         ingredientParent.GetComponent<Tool>().enabled = false;
 
-        Collider[] colliders = ingredientParent.GetComponentsInChildren<Collider>(true);
+		ingredient.SetComponentsOnIngredientActive(true);
+
+
+		Collider[] colliders = ingredientParent.GetComponentsInChildren<Collider>(true);
         foreach (Collider collider in colliders)
             collider.enabled = true;
 

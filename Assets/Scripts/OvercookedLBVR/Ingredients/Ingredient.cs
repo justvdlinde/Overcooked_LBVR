@@ -22,27 +22,20 @@ public class Ingredient : MonoBehaviour
     public bool processToCookable = false;
     [SerializeField] private GameObject cookable = null;
 
+	[SerializeField] private List<GameObject> toggleObjects = new List<GameObject>();
+
     private void Awake()
 	{
         unProcessedGraphics?.gameObject.SetActive(true);
         processedGraphics?.gameObject.SetActive(false);
     }
 
-    public void DisableComponentsOnDish()
+    public void SetComponentsOnIngredientActive(bool active)
 	{
-        PickupableObject[] handles = transform.parent.parent.gameObject.GetComponentsInChildren<PickupableObject>();
-
-		foreach (var item in handles)
+		foreach (var item in toggleObjects)
 		{
-            item.gameObject.SetActive(false);
+			item.SetActive(active);
 		}
-
-        AudioPlayerScript[] audioPlayers = transform.parent.parent.gameObject.GetComponentsInChildren<AudioPlayerScript>();
-
-        foreach (var item in audioPlayers)
-        {
-            item.enabled = false;
-        }
     }
 
     public void Process()
