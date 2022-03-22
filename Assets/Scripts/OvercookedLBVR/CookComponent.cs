@@ -1,5 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Ingredient))]
 public class CookComponent : MonoBehaviourPun
@@ -26,10 +27,20 @@ public class CookComponent : MonoBehaviourPun
     [SerializeField] private ParticleSystem cookedToBurntParticles = null;
     [SerializeField] private ParticleSystem burntParticles = null;
 
+	[SerializeField] private GameObject progressBarObject = null;
+	[SerializeField] private Image progressGraphics = null;
+	[SerializeField] private Color RawColor = new Color();
+	[SerializeField] private Color CookedColor = new Color();
+	[SerializeField] private Color BurntColor = new Color();
+
+	private float yOffset = 0f;
+
 	private void Awake()
 	{
         audioScript = GetComponent<AudioPlayerScript>();
         SetAssetState();
+
+		yOffset = progressBarObject.transform.localPosition.y;
 
         if (cookingParticles.isPlaying)
             cookingParticles.Stop();
@@ -38,6 +49,54 @@ public class CookComponent : MonoBehaviourPun
         if (burntParticles.isPlaying)
             burntParticles.Stop();
     }
+
+	private void Update()
+	{
+		progressBarObject.SetActive(isCooking);
+
+		if (isCooking)
+		{
+			progressBarObject.transform.position = transform.position + Vector3.up * yOffset;
+
+			progressBarObject.transform.LookAt(Camera.main.transform);
+			DoParticles();
+			Vector3 scale = new Vector3(Mathf.Clamp01(GetBarProgress()), 1f, 1f);
+			progressGraphics.transform.localScale = scale;
+			progressGraphics.color = GetBarColor();
+		}
+		else
+		{
+			if (cookingParticles.isPlaying)
+				cookingParticles.Stop();
+			if (cookedToBurntParticles.isPlaying)
+				cookedToBurntParticles.Stop();
+			if (burntParticles.isPlaying)
+				burntParticles.Stop();
+		}
+	}
+
+	public float GetBarProgress()
+	{
+		float progress = cookAmount;
+		if(cookAmount > rawToCookTime)
+		{
+			progress -= rawToCookTime;
+			return Mathf.InverseLerp(0, cookedToBurnTime, progress);
+		}
+		else
+		{
+			return Mathf.InverseLerp(0, rawToCookTime, progress);
+		}
+	}
+
+	private Color GetBarColor()
+	{
+		float progress = GetBarProgress();
+		if (cookAmount > rawToCookTime)
+			return Color.Lerp(CookedColor, BurntColor, progress);
+		else
+			return Color.Lerp(RawColor, CookedColor, progress);
+	}
 
     private void DoParticles()
 	{

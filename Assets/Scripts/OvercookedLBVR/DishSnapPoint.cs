@@ -72,7 +72,11 @@ public class DishSnapPoint : MonoBehaviour
         {
             objectHeight = renderer.mesh.bounds.size.y * renderer.transform.localScale.y;
         }
-        return new Vector3(0, totalStackHeight + objectHeight * snapMargin, 0);
+
+		if (objectHeight < 0.015f)
+			objectHeight = 0.015f;
+
+		return new Vector3(0, totalStackHeight + objectHeight * snapMargin, 0);
     }
 
     public void RemoveTopIngredient()
