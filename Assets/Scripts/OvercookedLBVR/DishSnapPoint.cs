@@ -1,3 +1,4 @@
+using Photon.Pun;
 using PhysicsCharacter;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,10 @@ public class DishSnapPoint : MonoBehaviour
     public void Snap(Ingredient ingredient)
     {
         Rigidbody ingredientParent = ingredient.rigidbody;
+        if(ingredientParent.TryGetComponent(out PhotonRigidbodyView view))
+        {
+            view.enabled = false;
+        }
 
         ingredientParent.transform.SetParent(transform);
         Vector3 snapPosition = GetTopSnapPosition(ingredient.processedGraphics.gameObject);
