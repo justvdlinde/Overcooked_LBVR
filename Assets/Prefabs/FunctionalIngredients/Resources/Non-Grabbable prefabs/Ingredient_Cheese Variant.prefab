@@ -212,6 +212,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 587fe56854b206348a41f84889f33516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxVolume: 1
+  baseVolume: 1
+  ownVelocity: 0
+  incomingVelocity: 0
   metalHit: {fileID: 8300000, guid: 87a6c6df7af1d774487eb793f74084ae, type: 3}
   woodHit: {fileID: 8300000, guid: 87a6c6df7af1d774487eb793f74084ae, type: 3}
   plateHit: {fileID: 8300000, guid: 8d41f5ca7f8da7a4cb58a920b99c6bcd, type: 3}
@@ -268,7 +272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6910915446928324404, guid: 5e25ca3a44b310c43812755881e709b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0227
+      value: 0.0612
       objectReference: {fileID: 0}
     - target: {fileID: 6910915446928324404, guid: 5e25ca3a44b310c43812755881e709b6, type: 3}
       propertyPath: m_LocalPosition.z
