@@ -27,7 +27,7 @@ namespace PhysicsCharacter
 		private Vector3 targetPos = Vector3.zero;
 
 		private Quaternion targetRot = Quaternion.identity;
-		private float maxGripDistance = 0.3f;
+		private float maxGripDistance = 2.0f;
 		public bool forcePosition = true;
 
 		public Hand GetHeldHand()
