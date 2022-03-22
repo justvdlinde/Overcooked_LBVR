@@ -24,7 +24,7 @@ public class OrderManager : MonoBehaviourPun
 
     [Header("Order Settings")]
     [SerializeField] private int minIngredients = 1;
-    [SerializeField] private int maxIngredients = 8;
+    [SerializeField] private int maxIngredients = 3;
     [SerializeField] private float minTime = 20;
     [SerializeField] private float maxTime = 50;
 
