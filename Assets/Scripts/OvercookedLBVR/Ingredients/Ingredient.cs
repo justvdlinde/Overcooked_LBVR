@@ -6,9 +6,11 @@ using UnityEngine;
 public class Ingredient : MonoBehaviourPun
 {
     public IngredientType ingredientType = IngredientType.None;
-    public IngredientStatus Status { get; private set; } = IngredientStatus.UnProcessed;
-    public new Rigidbody rigidbody = null;
 
+    public IngredientStatus Status => status;
+    [SerializeField] private IngredientStatus status = IngredientStatus.UnProcessed;
+
+    public new Rigidbody rigidbody = null;
     public bool needsToBeCooked = false;
     public CookComponent cookComponent = null;
 
@@ -92,7 +94,7 @@ public class Ingredient : MonoBehaviourPun
     [PunRPC]
     private void SetIngredientStateRPC(int statusIndex, PhotonMessageInfo info)
     {
-        Status = (IngredientStatus)statusIndex;
+        status = (IngredientStatus)statusIndex;
     }
 
 
