@@ -143,7 +143,43 @@ public class OrderManager : MonoBehaviourPun
         return order;
     }
 
-    public Order GetClosestOrder(Dish dish)
+    public Order GetClosestOrder(Dish dish, out float bestFitScore)
+    {
+        bestFitScore = 0;
+        if (ActiveOrders == null || ActiveOrders.Count == 0)
+            return null;
+
+        Order bestFit = ActiveOrders[0];
+        bestFitScore = GetDishScore(dish, ActiveOrders[0]);
+
+        for (int i = 1; i < ActiveOrders.Count; i++)
+        {
+            Order order = ActiveOrders[i];
+            float score = GetDishScore(dish, order);
+
+            if (score > bestFitScore)
+            {
+                bestFit = order;
+                bestFitScore = score;
+            }
+            else if (score == bestFitScore)
+            {
+                // choose the one with less time remaining
+                if (order.timer.TimeRemaining < bestFit.timer.TimeRemaining)
+                {
+                    bestFit = order;
+                    bestFitScore = score;
+                }
+            }
+        }
+
+        if (bestFit == null)
+            return ActiveOrders[0];
+        else
+            return bestFit;
+    }
+
+    public Order GetClosestOrder2(Dish dish)
     {
         // compare dish to each active order,
         // give score to each and return highest score
@@ -151,9 +187,9 @@ public class OrderManager : MonoBehaviourPun
             return null;
 
         Order bestFit = ActiveOrders[0];
-        int bestFitScore = 0;
+        float bestFitScore = 0;
 
-        foreach(Order order in ActiveOrders)
+        foreach (Order order in ActiveOrders)
         {
             IngredientType[] dishIngredients = dish.ingredients.Select(i => i.ingredientType).ToArray();
             IEnumerable<IngredientType> intersect = dishIngredients.Intersect(order.ingredients);
@@ -170,16 +206,11 @@ public class OrderManager : MonoBehaviourPun
             return ActiveOrders[0];
         else
             return bestFit;
-    } 
+    }
 
-    [Header("Debug")]
-    public Dish testDish;
-
-    [Button]
-    private void CompareDishOrders()
+    private float GetDishScore(Dish dish, Order order)
     {
-        Order best = GetClosestOrder(testDish);
-        foreach (IngredientType ing in best.ingredients)
-            Debug.Log(ing);
+        Score score = new Score(order, dish);
+        return score.Points / score.MaxScore;
     }
 }

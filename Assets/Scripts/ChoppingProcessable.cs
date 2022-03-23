@@ -54,7 +54,7 @@ public class ChoppingProcessable : MonoBehaviourPun
 					if (particles.isPlaying)
 						particles?.Stop();
 					particles?.Play();
-					Debug.Log($"Chopped {name} for {col.HitDamage} and has {currentHitsLeft} left");
+					//Debug.Log($"Chopped {name} for {col.HitDamage} and has {currentHitsLeft} left");
 				}
 				else if (ingredient.Status == IngredientStatus.UnProcessed && currentHitsLeft <= 0)
 				{
