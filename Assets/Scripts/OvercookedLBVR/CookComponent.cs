@@ -29,6 +29,8 @@ public class CookComponent : MonoBehaviourPun
 
 	[SerializeField] private GameObject progressBarObject = null;
 	[SerializeField] private Image progressGraphics = null;
+    [SerializeField] private Image progressGraphicsSphere = null;
+
 	[SerializeField] private Color RawColor = new Color();
 	[SerializeField] private Color CookedColor = new Color();
 	[SerializeField] private Color BurntColor = new Color();
@@ -75,10 +77,12 @@ public class CookComponent : MonoBehaviourPun
 			progressBarObject.transform.LookAt(Camera.main.transform);
 			warningObject.transform.LookAt(Camera.main.transform);
 			DoParticles();
-			Vector3 scale = new Vector3(Mathf.Clamp01(GetBarProgress()), 1f, 1f);
+			Vector3 scale = new Vector3(Mathf.Clamp01(GetBarProgressScaled()), 1f, 1f);
 			progressGraphics.transform.localScale = scale;
 			progressGraphics.color = GetBarColor();
-		}
+            progressGraphicsSphere.color = GetBarColor();
+
+        }
 		else
 		{
 			if (cookingParticles.isPlaying)
@@ -102,6 +106,14 @@ public class CookComponent : MonoBehaviourPun
 		{
 			return Mathf.InverseLerp(0, rawToCookTime, progress);
 		}
+	}
+
+    public float GetBarProgressScaled()
+	{
+        float rawToCookedScale = Mathf.Clamp01(Mathf.InverseLerp(0, rawToCookTime, cookAmount));
+        float cookToBurnScale = Mathf.Clamp01(Mathf.InverseLerp(0, cookedToBurnTime, cookAmount - rawToCookTime));
+
+        return Mathf.Lerp(0.0f, 0.6f, rawToCookedScale) + Mathf.Lerp(0.0f, 0.3f, cookToBurnScale);
 	}
 
 	private Color GetBarColor()
