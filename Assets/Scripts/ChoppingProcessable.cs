@@ -80,11 +80,13 @@ public class ChoppingProcessable : MonoBehaviourPun
 
 		Disable();
 
-		if (PhotonNetwork.IsMasterClient)
+		if (photonView.IsMine)
 		{
 			// TO DO: CLEAN THIS UP
 			if (ingredient.processToTwoAssets || ingredient.processToCookable)
+			{
 				PhotonNetwork.Destroy(ingredient.rigidbody.gameObject);
+			}
 		}
 	}
 
