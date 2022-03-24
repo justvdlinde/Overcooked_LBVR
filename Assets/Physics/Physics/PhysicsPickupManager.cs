@@ -31,6 +31,8 @@ namespace PhysicsCharacter
 
 		private HandsDataDelegate handDelegate = null;
 
+		[SerializeField] private LayerMask pickupablesMask = 0;
+
 		private void Start()
 		{
 			handDelegate = HandsDataDelegate.GetHandedInstance(hand);
@@ -62,16 +64,16 @@ namespace PhysicsCharacter
 
 		private void OnEnable()
 		{
-			grippingTrigger.EnterEvent += OnGripEnter;
-			grippingTrigger.StayEvent += OnGripStay;
-			grippingTrigger.ExitEvent += OnGripExit;
+			//grippingTrigger.EnterEvent += OnGripEnter;
+			//grippingTrigger.StayEvent += OnGripStay;
+			//grippingTrigger.ExitEvent += OnGripExit;
 		}
 
 		private void OnDisable()
 		{
-			grippingTrigger.EnterEvent -= OnGripEnter;
-			grippingTrigger.StayEvent -= OnGripStay;
-			grippingTrigger.ExitEvent -= OnGripExit;
+			//grippingTrigger.EnterEvent -= OnGripEnter;
+			//grippingTrigger.StayEvent -= OnGripStay;
+			//grippingTrigger.ExitEvent -= OnGripExit;
 		}
 
 		private void Update()
@@ -97,61 +99,101 @@ namespace PhysicsCharacter
 			pinkyCol.enabled = holdingObject;
 			thumbCol.enabled = holdingObject;
 
-
-			if(currentPickupable != null && (!handDelegate.IsHandInRange() || !IsHandGripping()))
+			if (currentPickupable == null)
 			{
-				if (currentPickupable.IsObjectBeingHeld(hand))
+				Collider[] toolHandlesInRange = Physics.OverlapSphere(gripPivot.transform.position, 0.1f, pickupablesMask);
+				List<PickupableObject> pickupablesInRange = new List<PickupableObject>();
+				foreach (var item in toolHandlesInRange)
+				{
+					if (item.TryGetComponent<PickupableObject>(out PickupableObject p))
+					{
+						if (!pickupablesInRange.Contains(p))
+							pickupablesInRange.Add(p);
+					}
+				}
+				float closestDistance = 1000f;
+				PickupableObject closetsObject = null;
+				foreach (var item in pickupablesInRange)
+				{
+					Vector3 closestPoint = item.objectCollider.ClosestPoint(gripPivot.transform.position);
+
+					Debug.DrawLine(gripPivot.transform.position, closestPoint, Color.red, 0.0f);
+
+					float dist = Vector3.Distance(gripPivot.transform.position, closestPoint);
+					if (dist < closestDistance)
+					{
+						closetsObject = item;
+						closestDistance = dist;
+					}
+				}
+
+				if(closetsObject != null && IsHandGripping() && !isGrippingPrevious)
+				{
+					currentPickupable = closetsObject;
+					currentPickupable = currentPickupable.GetGrabbed(hand, gripAnchor);
+				}
+			}
+
+			if (currentPickupable != null)
+			{
+				if (!IsHandGripping())
 				{
 					currentPickupable.GetReleased(hand);
-					//handPhysics.ForceHandsToController();
+					currentPickupable = null;
+				}
+				else if (!handDelegate.IsHandInRange())
+				{
+					currentPickupable.GetReleased(hand);
 					currentPickupable = null;
 				}
 			}
 
-			if (currentPickupable != null && currentPickupable.IsObjectBeingHeld(hand) == false && !IsHandGripping() && Vector3.Distance(currentPickupable.transform.position, handDelegate.GetFollowPosition()) > 0.25f)
-			{
-				ForceDropItem();
-			}
+			//if (currentPickupable != null && currentPickupable.IsObjectBeingHeld(hand) == false && !IsHandGripping() && Vector3.Distance(currentPickupable.transform.position, handDelegate.GetFollowPosition()) > 0.25f)
+			//{
+			//	ForceDropItem();
+			//}
+
+			isGrippingPrevious = handGripping;
 		}
 
 		public void OnGripEnter(Collider col)
 		{
-			if(col.TryGetComponent(out PickupableObject pickupable))
+			if (col.TryGetComponent(out PickupableObject pickupable))
 			{
-				if(currentPickupable == null && !IsHandGripping())
+				if (currentPickupable == null && !IsHandGripping())
 					currentPickupable = pickupable;
 			}
 		}
 
 		public void OnGripStay(Collider col)
 		{
-			if(col.TryGetComponent(out PickupableObject pickupable))
+			if (col.TryGetComponent(out PickupableObject pickupable))
 			{
 				bool isGripping = IsHandGripping();
-				if(pickupable == currentPickupable)
+				if (pickupable == currentPickupable)
 				{
-					if(handDelegate.IsHandInRange() && isGripping && (isGrippingPrevious == false))
+					if (handDelegate.IsHandInRange() && isGripping && (isGrippingPrevious == false))
 					{
-						if(!currentPickupable.IsObjectBeingHeld(hand))
+						if (!currentPickupable.IsObjectBeingHeld(hand))
 						{
-							if(currentPickupable.IsObjectBeingHeld((hand == Hand.Right) ? Hand.Left : Hand.Right))
+							if (currentPickupable.IsObjectBeingHeld((hand == Hand.Right) ? Hand.Left : Hand.Right))
 								otherPickupManager.currentPickupable = null;
 
 							currentPickupable = currentPickupable.GetGrabbed(hand, gripAnchor);
 						}
 					}
-					else if(!isGripping)
+					else if (!isGripping)
 					{
-						if(currentPickupable.IsObjectBeingHeld(hand))
+						if (currentPickupable.IsObjectBeingHeld(hand))
 						{
 							currentPickupable.GetReleased(hand);
 							currentPickupable = null;
 							//handPhysics.ForceHandsToController();
 						}
 					}
-					else if(!handDelegate.IsHandInRange())
+					else if (!handDelegate.IsHandInRange())
 					{
-						if(currentPickupable.IsObjectBeingHeld(hand))
+						if (currentPickupable.IsObjectBeingHeld(hand))
 						{
 							currentPickupable.GetReleased(hand);
 							currentPickupable = null;
@@ -165,9 +207,9 @@ namespace PhysicsCharacter
 
 		public void OnGripExit(Collider col)
 		{
-			if(col.TryGetComponent(out PickupableObject pickupable))
+			if (col.TryGetComponent(out PickupableObject pickupable))
 			{
-				if(currentPickupable == pickupable && !currentPickupable.IsObjectBeingHeld())// && !IsHandGripping() && currentPickupable.isObjectBeingHeld())
+				if (currentPickupable == pickupable && !currentPickupable.IsObjectBeingHeld())// && !IsHandGripping() && currentPickupable.isObjectBeingHeld())
 				{
 					pickupable.GetReleased(hand);
 					//handPhysics.ForceHandsToController();

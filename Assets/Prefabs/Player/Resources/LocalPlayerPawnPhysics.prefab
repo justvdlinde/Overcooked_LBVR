@@ -331,6 +331,10 @@ PrefabInstance:
       propertyPath: otherPickupManager
       value: 
       objectReference: {fileID: 4379179684953819703}
+    - target: {fileID: 4474804225998592447, guid: 13aa16a09ea59cf4ab8f7c2d06f6fc69, type: 3}
+      propertyPath: pickupablesMask.m_Bits
+      value: 33554496
+      objectReference: {fileID: 0}
     - target: {fileID: 7891789334119320910, guid: 13aa16a09ea59cf4ab8f7c2d06f6fc69, type: 3}
       propertyPath: followTarget
       value: 
@@ -376,6 +380,10 @@ PrefabInstance:
       propertyPath: otherPickupManager
       value: 
       objectReference: {fileID: 1634848398417245291}
+    - target: {fileID: 5214501037423329637, guid: c91f1533831d0e24280dd444806bf5a1, type: 3}
+      propertyPath: pickupablesMask.m_Bits
+      value: 33554496
+      objectReference: {fileID: 0}
     - target: {fileID: 5214501037423329637, guid: c91f1533831d0e24280dd444806bf5a1, type: 3}
       propertyPath: connectedColliders.Array.size
       value: 22
