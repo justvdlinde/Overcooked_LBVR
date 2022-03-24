@@ -17,6 +17,9 @@ public class PlayerSpawner : MonoBehaviour
 
     protected virtual void Awake()
     {
+        if (GamePlatform.GameType != ClientType.Player)
+            return;
+
         PlayersManager playersManager = GlobalServiceLocator.Instance.Get<PlayersManager>();
         if (playersManager.LocalPlayer != null)
         {
@@ -36,13 +39,18 @@ public class PlayerSpawner : MonoBehaviour
     // Needs to be IEnumerator, as connecting through Photon will otherwise not work when called from Awake or Start
     protected IEnumerator Start()
     {
+
         yield return null;
-        if (connectToNetwork)
+
+        if (GamePlatform.GameType == ClientType.Player)
         {
-            if (networkConfig != null)
-                networkService.Connect(networkConfig);
-            else
-                Debug.LogError("Networkconfig cannot be null when trying to connect!");
+            if (connectToNetwork)
+            {
+                if (networkConfig != null)
+                    networkService.Connect(networkConfig);
+                else
+                    Debug.LogError("Networkconfig cannot be null when trying to connect!");
+            }
         }
 
         gameObject.SetActive(false);

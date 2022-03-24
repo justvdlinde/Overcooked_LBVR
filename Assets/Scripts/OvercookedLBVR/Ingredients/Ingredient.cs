@@ -54,9 +54,9 @@ public class Ingredient : MonoBehaviourPun
             if (PhotonNetwork.IsMasterClient)
             {
                 if(result1 != null)
-                    PhotonNetwork.Instantiate(result1.name, unProcessedGraphics.transform.position, Quaternion.identity);
+                    PhotonNetwork.Instantiate(result1.name, unProcessedGraphics.transform.position + Vector3.up * 0.05f, Quaternion.identity);
                 if(result2 != null)
-                    PhotonNetwork.Instantiate(result2.name, unProcessedGraphics.transform.position + Vector3.up * 0.05f, Quaternion.identity);
+                    PhotonNetwork.Instantiate(result2.name, unProcessedGraphics.transform.position, Quaternion.identity);
             }
             //GameObject r1 = Instantiate(result1);
             //r1.transform.position = unProcessedGraphics.transform.position;

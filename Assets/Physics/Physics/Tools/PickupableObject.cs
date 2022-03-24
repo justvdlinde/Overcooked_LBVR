@@ -30,8 +30,8 @@ namespace PhysicsCharacter
 		protected bool isHeldRightHand = false;
 
 		protected Rigidbody rigidBody = null;
-
 		protected Transform parentObject = null;
+		public Collider objectCollider => GetComponentInChildren<Collider>();
 
 		public virtual PickupableObject GetGrabbed(Hand hand, Transform target)
 		{
@@ -121,6 +121,7 @@ namespace PhysicsCharacter
 		private void Awake()
 		{
 			rigidBody = GetComponent<Rigidbody>();
+			//objectCollider = GetComponentInChildren<Collider>();
 		}
 
 	}
