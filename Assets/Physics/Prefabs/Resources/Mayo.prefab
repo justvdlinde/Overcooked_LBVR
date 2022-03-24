@@ -633,6 +633,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 26
       objectReference: {fileID: 0}
+    - target: {fileID: 4167052195947672997, guid: 5b8237398ae57be43abc05be337388df, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 94eb0757395c9c0448f74cb6faca2c5b, type: 2}
     - target: {fileID: 5673204458177309051, guid: 5b8237398ae57be43abc05be337388df, type: 3}
       propertyPath: m_RootOrder
       value: 0
