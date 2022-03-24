@@ -65,6 +65,14 @@ public class OperatorCameraController : MonoBehaviour
     private void OnSceneChangedEvent(Scene from, Scene to)
     {
         activeCameraIndex = -1;
-        SetActiveCamera(defaultCamera);
+        if (SpectatorCamera.LevelCameras.Count > 1)
+        {
+            activeCameraIndex = 1;
+            SetActiveCamera(SpectatorCamera.LevelCameras[activeCameraIndex]);
+        }
+        else
+        {
+            SetActiveCamera(defaultCamera);
+        }
     }
 }
