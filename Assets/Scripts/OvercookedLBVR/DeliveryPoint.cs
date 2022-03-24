@@ -45,7 +45,7 @@ public class DeliveryPoint : MonoBehaviourPun
 		Action remove = null;
         foreach (Dish dish in dishesInTrigger)
 		{
-            if (dish != null)
+            if (dish != null && dish.ingredients != null && dish.ingredients.Count > 0)
             {
                 bool delivered = DeliverDish(dish);
                 if (delivered)

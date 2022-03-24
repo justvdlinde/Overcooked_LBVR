@@ -288,7 +288,7 @@ namespace PhysicsCharacter
 			toolHandle.transform.localPosition = toolHandle.localTransformMirror.localPosition;
 			toolHandle.transform.localRotation = toolHandle.localTransformMirror.localRotation;
 
-			photonView.TransferOwnership(-1);
+			//photonView.TransferOwnership(-1);
 			photonView.RPC(nameof(ReleasedRPC), RpcTarget.Others, rigidBody.useGravity);
 		}
 
