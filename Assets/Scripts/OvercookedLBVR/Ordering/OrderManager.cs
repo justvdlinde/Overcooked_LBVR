@@ -73,6 +73,7 @@ public class OrderManager : MonoBehaviourPun
         if (PhotonNetwork.IsMasterClient)
         {
             Order order = GenerateRandomOrder(minIngredients, maxIngredients);
+            displayManager.HasFreeDisplay(out OrderDisplay display);
             float timerDuration = Random.Range(minTime, maxTime);
             int[] ingredientInts = new int[order.ingredients.Length];
             for (int i = 0; i < ingredientInts.Length; i++)
@@ -80,15 +81,16 @@ public class OrderManager : MonoBehaviourPun
                 ingredientInts[i] = (int)order.ingredients[i];
             }
 
-            photonView.RPC(nameof(CreateNewOrderRPC), RpcTarget.All, ingredientInts, timerDuration, useOrderTimers);
+            photonView.RPC(nameof(CreateNewOrderRPC), RpcTarget.All, display.orderNumber, ingredientInts, timerDuration, useOrderTimers);
         }
     }
 
     [PunRPC]
-    private void CreateNewOrderRPC(int[] ingredients, float timerDuration, bool useTimer, PhotonMessageInfo info)
+    private void CreateNewOrderRPC(int displayNr, int[] ingredients, float timerDuration, bool useTimer, PhotonMessageInfo info)
     {
         Order order = new Order();
         order.ingredients = new IngredientType[ingredients.Length];
+        order.orderNumber = displayNr;
 
         for (int i = 0; i < ingredients.Length; i++)
         {

@@ -112,7 +112,7 @@ namespace PhysicsCharacter
 					}
 				}
 				float closestDistance = 1000f;
-				PickupableObject closetsObject = null;
+				PickupableObject closestObject = null;
 				foreach (var item in pickupablesInRange)
 				{
 					Vector3 closestPoint = item.objectCollider.ClosestPoint(gripPivot.transform.position);
@@ -122,14 +122,14 @@ namespace PhysicsCharacter
 					float dist = Vector3.Distance(gripPivot.transform.position, closestPoint);
 					if (dist < closestDistance)
 					{
-						closetsObject = item;
+						closestObject = item;
 						closestDistance = dist;
 					}
 				}
 
-				if(closetsObject != null && IsHandGripping() && !isGrippingPrevious)
+				if(closestObject != null && IsHandGripping() && !isGrippingPrevious)
 				{
-					currentPickupable = closetsObject;
+					currentPickupable = closestObject;
 					currentPickupable = currentPickupable.GetGrabbed(hand, gripAnchor);
 				}
 			}

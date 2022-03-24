@@ -26,13 +26,29 @@ public class Ingredient : MonoBehaviourPun
 
 	[SerializeField] private List<GameObject> toggleObjects = new List<GameObject>();
 
+    public bool CanStack = true;
+    public Transform recentDishCollider = null;
+
     private void Awake()
 	{
         unProcessedGraphics?.gameObject.SetActive(true);
         processedGraphics?.gameObject.SetActive(false);
     }
 
-    public void SetComponentsOnIngredientActive(bool active)
+    private void Update()
+    {
+        if (!CanStack && recentDishCollider != null)
+		{
+            if(Vector3.Distance(recentDishCollider.transform.position, rigidbody.position) > 0.3f)
+			{
+                CanStack = true;
+                recentDishCollider = null;
+			}
+		}
+
+    }
+
+	public void SetComponentsOnIngredientActive(bool active)
 	{
 		foreach (var item in toggleObjects)
 		{

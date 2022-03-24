@@ -4540,6 +4540,10 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 58
       objectReference: {fileID: 0}
+    - target: {fileID: 7026960009101063077, guid: 41a47b8add40bed478904c187506acd5, type: 3}
+      propertyPath: orderNumber
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7093676329471605135, guid: 41a47b8add40bed478904c187506acd5, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -8906,6 +8910,10 @@ PrefabInstance:
     - target: {fileID: 6828913330563894043, guid: 41a47b8add40bed478904c187506acd5, type: 3}
       propertyPath: viewIdField
       value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026960009101063077, guid: 41a47b8add40bed478904c187506acd5, type: 3}
+      propertyPath: orderNumber
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7093676329471605135, guid: 41a47b8add40bed478904c187506acd5, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -14489,6 +14497,10 @@ PrefabInstance:
     - target: {fileID: 6828913330563894043, guid: 41a47b8add40bed478904c187506acd5, type: 3}
       propertyPath: viewIdField
       value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 7026960009101063077, guid: 41a47b8add40bed478904c187506acd5, type: 3}
+      propertyPath: orderNumber
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7093676329471605135, guid: 41a47b8add40bed478904c187506acd5, type: 3}
       propertyPath: m_StaticEditorFlags
