@@ -308,6 +308,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7594458588022549709, guid: c4ea7f05e0e2cfe4597ce80bb9f97837, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 2637237527935603195}
+    - target: {fileID: 9059536038958568591, guid: c4ea7f05e0e2cfe4597ce80bb9f97837, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.019
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4ea7f05e0e2cfe4597ce80bb9f97837, type: 3}
 --- !u!4 &7675239007807052410 stripped
@@ -326,6 +334,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba641c9cbfb8e84eb15837c5226e4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &2637237527935603195 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5715309534316807984, guid: c4ea7f05e0e2cfe4597ce80bb9f97837, type: 3}
+  m_PrefabInstance: {fileID: 7766882186165556939}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7458281147406188118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 885134359098976413, guid: c4ea7f05e0e2cfe4597ce80bb9f97837, type: 3}
