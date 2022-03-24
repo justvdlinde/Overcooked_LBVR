@@ -68,7 +68,11 @@ public class DeliveryPoint : MonoBehaviourPun
     public bool DeliverDish(Dish dish)
     {
 		bool delivered = false;
-        Order closestOrder = OrderManager.Instance.GetClosestOrder(dish);
+        Order closestOrder = OrderManager.Instance.GetClosestOrder(dish, out float bestFitScore);
+        Debug.Log("Delivered dish: " + string.Join("", dish.ingredients) 
+            + "\nbest fit score: " + bestFitScore 
+            + "\nclosest order: " + string.Join("", closestOrder.ingredients));
+
         if (closestOrder != null)
 		{
             OrderManager.Instance.DeliverOrder(closestOrder, dish);
