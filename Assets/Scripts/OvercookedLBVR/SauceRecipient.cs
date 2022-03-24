@@ -22,19 +22,20 @@ public class SauceRecipient : MonoBehaviourPun
 		if (PhotonNetwork.IsMasterClient)
 		{
 			//Debug.Log($"ketchup prog {currentProgressTillKetchup} mayo prog {currentProgressTillMayo}");
-
-
 			if (hasTriggered)
 				return;
-			if (sauceType == IngredientType.Ketchup)
-				currentProgressTillKetchup += value;
-			else
-				currentProgressTillMayo += value;
+			if (connectedDish.CanPlaceSauce(sauceType))
+			{
+				if (sauceType == IngredientType.Ketchup)
+					currentProgressTillKetchup += value;
+				else
+					currentProgressTillMayo += value;
 
-			if (currentProgressTillKetchup >= timeUntillSaucePlaces)
-				ApplySauce(IngredientType.Ketchup);
-			else if (currentProgressTillMayo >= timeUntillSaucePlaces)
-				ApplySauce(IngredientType.Mayo);
+				if (currentProgressTillKetchup >= timeUntillSaucePlaces)
+					ApplySauce(IngredientType.Ketchup);
+				else if (currentProgressTillMayo >= timeUntillSaucePlaces)
+					ApplySauce(IngredientType.Mayo);
+			}
 		}
 	}
 
