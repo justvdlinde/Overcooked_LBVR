@@ -117,7 +117,7 @@ public abstract class PhotonNetworkService : MonoBehaviourPunCallbacks, INetwork
         RoomOptions options = new RoomOptions
         {
             PublishUserId = true,
-            //CleanupCacheOnLeave = false
+            CleanupCacheOnLeave = false
         };
         PhotonNetwork.JoinOrCreateRoom(roomName, options, new TypedLobby(roomName, LobbyType.Default));
     }
