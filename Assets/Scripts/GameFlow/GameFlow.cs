@@ -103,17 +103,17 @@ public abstract class GameFlow : MonoBehaviour
         wasConnected = true;
         connectingScreenInstance.Close();
 
-        if (PhotonGameModeHelper.ServerHasGameMode(out GameModeEnum serverGameMode))
-        {
-            if (PhotonGameModeHelper.ServerGamemodeEqualsCurrentGamemode(gameModeService.CurrentGameMode))
-                gameModeService.CurrentGameMode.OnReconnect();
-            else
-                gameModeService.StartNewGame(serverGameMode);
-        }
-        else
-        {
-            gameModeService.StartNewGame(GameModeEnum.TeamDeathmatch);
-        }
+        //if (PhotonGameModeHelper.ServerHasGameMode(out GameModeEnum serverGameMode))
+        //{
+        //    if (PhotonGameModeHelper.ServerGamemodeEqualsCurrentGamemode(gameModeService.CurrentGameMode))
+        //        gameModeService.CurrentGameMode.OnReconnect();
+        //    else
+        //        gameModeService.StartNewGame(serverGameMode);
+        //}
+        //else
+        //{
+        //    gameModeService.StartNewGame(GameModeEnum.TeamDeathmatch);
+        //}
 
         if (@event.Room.CustomProperties.TryGetValue(RoomPropertiesPhoton.SCENE, out object sceneValue))
             OnScenePropertyChanged(sceneValue);
