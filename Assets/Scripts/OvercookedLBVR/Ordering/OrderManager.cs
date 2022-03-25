@@ -46,7 +46,10 @@ public class OrderManager : MonoBehaviourPun
     public void StartOrders()
     {
         if (PhotonNetwork.IsMasterClient)
+        {
+            currentOrderIndex = 0;
             StartCoroutine(OrderCoroutine());
+        }
     }
 
     private System.Collections.IEnumerator OrderCoroutine()
