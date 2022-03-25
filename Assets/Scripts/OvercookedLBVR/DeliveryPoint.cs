@@ -11,24 +11,22 @@ public class DeliveryPoint : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out Dish dish))
+        if(other.TryGetComponent(out DishTrigger trigger))
         {
-            if (!dishesInTrigger.Contains(dish))
+            if (!dishesInTrigger.Contains(trigger.dish))
             {
-                Debug.Log("OnTriggerEnter " + other.gameObject.name);
-                dishesInTrigger.Add(dish);
+                dishesInTrigger.Add(trigger.dish);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Dish dish))
+        if (other.TryGetComponent(out DishTrigger trigger))
         {
-            if (dishesInTrigger.Contains(dish))
+            if (dishesInTrigger.Contains(trigger.dish))
             {
-                Debug.Log("OnTriggerExit " + other.gameObject.name);
-                dishesInTrigger.Remove(dish);
+                dishesInTrigger.Remove(trigger.dish);
             }
         }
     }
