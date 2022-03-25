@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils.Core.Attributes;
+using Utils.Core.Events;
+using Utils.Core.Services;
 
 public class GameManager : MonoBehaviourPun
 {
@@ -62,6 +64,8 @@ public class GameManager : MonoBehaviourPun
 
         if (PhotonNetwork.IsMasterClient)
             orderManager.StartOrders();
+
+        GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>().Invoke(new StartGameEvent());
     }
 
     private void GameOver()

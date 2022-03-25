@@ -14,6 +14,7 @@ public class Dispenser : MonoBehaviourPun
     public void DispenseObject(Rigidbody obj)
     {
         GameObject g = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, spawnPoint.rotation);
+        g.AddComponent(typeof(DestroyOnGameStart));
         photonView.RPC(nameof(DispenseObjectRPC), RpcTarget.All);
 
         //if(g.TryGetComponent(out PhotonView photonView))
