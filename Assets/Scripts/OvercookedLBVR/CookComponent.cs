@@ -12,6 +12,9 @@ public class CookComponent : MonoBehaviourPun
     public float cookAmount = 0;
     public float rawToCookTime = 1f;
     public float cookedToBurnTime = 1f;
+    public float burnedToFireTime = 1f;
+
+    public bool canLightAflame = false;
 
     public AudioPlayerScript audioScript;
 
@@ -19,13 +22,14 @@ public class CookComponent : MonoBehaviourPun
     public AudioClip isCooked;
     public AudioClip isBurned;
 
-    [SerializeField] private GameObject rawPrefab   = null;
+    [SerializeField] private GameObject rawPrefab = null;
     [SerializeField] private GameObject cookedPrefab = null;
-    [SerializeField] private GameObject burntPrefab     = null;
+    [SerializeField] private GameObject burntPrefab = null;
 
     [SerializeField] private ParticleSystem cookingParticles = null;
     [SerializeField] private ParticleSystem cookedToBurntParticles = null;
     [SerializeField] private ParticleSystem burntParticles = null;
+    [SerializeField] private ParticleSystem fireParticles = null;
 
 	[SerializeField] private GameObject progressBarObject = null;
 	[SerializeField] private Image progressGraphics = null;
@@ -81,6 +85,7 @@ public class CookComponent : MonoBehaviourPun
 			progressGraphics.transform.localScale = scale;
 			progressGraphics.color = GetBarColor();
             progressGraphicsSphere.color = GetBarColor();
+
 
         }
 		else

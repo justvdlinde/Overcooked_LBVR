@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 912522133709142552, guid: fe58724a4fc5cb243b86847f415a51bc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.12
+      objectReference: {fileID: 0}
     - target: {fileID: 912522134516345628, guid: fe58724a4fc5cb243b86847f415a51bc, type: 3}
       propertyPath: m_Name
       value: MayoDispenser Variant
@@ -87,7 +91,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1200025
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
       propertyPath: m_LocalPosition.z

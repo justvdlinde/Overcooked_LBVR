@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utils.Core.Attributes;
 using Utils.Core.Extensions;
@@ -36,6 +37,42 @@ public class OrderDisplayGrid : MonoBehaviour
         }
         ReorderChildren();
     }
+
+    public void DisplayOrderEditor(List<IngredientType> order)
+    {
+        ClearEditor();
+        childCount = order.Count;
+
+        if(ingredientsData == null)
+            ingredientsData = Resources.Load<IngredientsData>("IngredientsData");
+
+        for (int i = 0; i < order.Count; i++)
+        {
+            CreateIcon(ingredientsData.GetCorrespondingData(order[i]));
+        }
+        ReorderChildren();
+    }
+
+    public void ClearEditor()
+    {
+        order = null;
+        System.Action destroyCall = null;
+
+        Transform[] ts = transform.GetComponentsInChildren<Transform>();
+        List<Transform> tts = ts.ToList();
+        if (tts.Contains(transform))
+            tts.Remove(transform);
+        ts = tts.ToArray();
+		foreach (var item in ts)
+		{
+            destroyCall += () => DestroyImmediate(item.gameObject);
+		}
+
+        destroyCall?.Invoke();
+
+        icons = new List<GameObject>();
+    }
+
 
     private void CreateIcon(IngredientData ingredient)
     {
