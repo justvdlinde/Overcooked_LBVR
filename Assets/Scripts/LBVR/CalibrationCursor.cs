@@ -23,16 +23,17 @@ public class CalibrationCursor : MonoBehaviour
 	{
 		Instance = this;
 
-		if (!PhotonNetwork.IsMasterClient)
-		{
-			PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(RoomPropertiesPhoton.CALIBRATION_POSITION_X, out object x);
-			PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(RoomPropertiesPhoton.CALIBRATION_POSITION_Z, out object z);
-			Debug.Log("x " + x);
-			Debug.Log("z " + z);
-			float xPos = (float)x;// (x != null) ? int.Parse(x as string) : 0;
-			float zPos = (float)z;// (z != null) ? int.Parse(z as string) : 0;
-			SetCursorPosition(new Vector3(xPos, 0, zPos));
-		}
+		// Commented because throws error when switching scenes via network
+		//if (!PhotonNetwork.IsMasterClient)
+		//{
+		//	PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(RoomPropertiesPhoton.CALIBRATION_POSITION_X, out object x);
+		//	PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(RoomPropertiesPhoton.CALIBRATION_POSITION_Z, out object z);
+		//	Debug.Log("x " + x);
+		//	Debug.Log("z " + z);
+		//	float xPos = (float)x;// (x != null) ? int.Parse(x as string) : 0;
+		//	float zPos = (float)z;// (z != null) ? int.Parse(z as string) : 0;
+		//	SetCursorPosition(new Vector3(xPos, 0, zPos));
+		//}
 	}
 
 	public void SetCursorPosition(Vector3 position)

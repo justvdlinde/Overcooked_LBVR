@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b409e7bc6ac17c47b163e26fe12b29f, type: 3}
-  m_Name: Kitchen 1
+  m_Name: Kitchen 2
   m_EditorClassIdentifier: 
-  title: Demo_Just
+  title: Demo_Just_Space
   scene:
-    sceneAsset: {fileID: 102900000, guid: f4f797880aa33894ea016546b80998dc, type: 3}
-    sceneName: Demo_Just
-  dimensions: {x: 6, y: 6}
-  dimensionsInFeet: {x: 19.685, y: 19.685}
+    sceneAsset: {fileID: 102900000, guid: 724a7ff253461ef4282a46801d47a0dd, type: 3}
+    sceneName: Demo_Just_Space
+  dimensions: {x: 5, y: 5}
+  dimensionsInFeet: {x: 16.404167, y: 16.404167}
