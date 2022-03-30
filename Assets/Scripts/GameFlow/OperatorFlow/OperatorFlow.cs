@@ -36,11 +36,11 @@ public class OperatorFlow : GameFlow
         Debug.Log("OnConnectionSuccessEvent");
 
         // If an operator is already present, disconnect
-        if (playersManager.Operators.Count > 1)
-        {
-            networkService.Disconnect((new PhotonDisconnectInfo(Photon.Realtime.DisconnectCause.MaxOperatorCountReached)));
-            return;
-        }
+        //if (playersManager.Operators.Count > 1)
+        //{
+        //    networkService.Disconnect((new PhotonDisconnectInfo(Photon.Realtime.DisconnectCause.MaxOperatorCountReached)));
+        //    return;
+        //}
         
         PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
         base.OnConnectionSuccessEvent(@event);
