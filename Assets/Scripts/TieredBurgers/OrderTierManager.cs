@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Utils.Core.Attributes;
 
@@ -8,21 +9,14 @@ public class OrderTierManager : MonoBehaviour
     [SerializeField] private List<OrderTier> tiers = new List<OrderTier>();
 	public int currentTier = 0;
 
-	public List<IngredientType> order = new List<IngredientType>();
-
-	public OrderDisplayGrid grid = null;
-
-	[Button]
-    public void GenerateRandomOrder()
+	public Order GenerateRandomOrder(int orderTier, int completedOrdersInARow, out int newOrderTier,  bool useRandomTimer = false)
 	{
-		order = tiers[currentTier].GetOrderRecipie();
+		currentTier = orderTier;
+		if (completedOrdersInARow > tiers[currentTier].AmountToCompleteTier)
+			currentTier++;
 
-		grid.DisplayOrderEditor(order);
-	}
+		newOrderTier = currentTier;
 
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.Space))
-			GenerateRandomOrder();
+		return tiers[currentTier].GetOrderRecipie(useRandomTimer);
 	}
 }
