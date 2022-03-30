@@ -258,7 +258,7 @@ namespace PhysicsCharacter
 			heldHandles++;
 			rigidBody.useGravity = false;
 
-			ForcePosition();
+			//ForcePosition();
 
 			photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
 			photonView.RPC(nameof(GrabbedRPC), RpcTarget.Others);
