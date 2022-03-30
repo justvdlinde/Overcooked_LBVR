@@ -31,8 +31,8 @@ public class Ingredient : MonoBehaviourPun
 
     private void Awake()
 	{
-        unProcessedGraphics?.gameObject.SetActive(true);
-        processedGraphics?.gameObject.SetActive(false);
+        unProcessedGraphics?.gameObject.SetActive(status == IngredientStatus.UnProcessed);
+        processedGraphics?.gameObject.SetActive(status == IngredientStatus.Processed);
     }
 
     private void Update()
@@ -67,10 +67,10 @@ public class Ingredient : MonoBehaviourPun
         else if(processToTwoAssets)
 		{
             unProcessedGraphics.gameObject.SetActive(false);
-            if (PhotonNetwork.IsMasterClient)
+            if (photonView.IsMine)
             {
                 if(result1 != null)
-                    PhotonNetwork.Instantiate(result1.name, unProcessedGraphics.transform.position + Vector3.up * 0.05f, Quaternion.identity);
+                    PhotonNetwork.Instantiate(result1.name, unProcessedGraphics.transform.position + Vector3.up * 0.08f, Quaternion.identity);
                 if(result2 != null)
                     PhotonNetwork.Instantiate(result2.name, unProcessedGraphics.transform.position, Quaternion.identity);
             }
