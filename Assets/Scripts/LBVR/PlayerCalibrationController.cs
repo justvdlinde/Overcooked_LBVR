@@ -22,6 +22,7 @@ public class PlayerCalibrationController : MonoBehaviour
         isHoldingB = XRInput.GetSecondaryButtonPressed(Hand.Right);
         isHoldingY = XRInput.GetSecondaryButtonPressed(Hand.Left);
 
+
         if (canCalibrate && isHoldingB && isHoldingY)
         {
             CurrentWaitTime += Time.deltaTime;
@@ -48,20 +49,37 @@ public class PlayerCalibrationController : MonoBehaviour
         pawnRoot.position = new Vector3(0, pawnRoot.position.y, 0);
         pawnRoot.rotation = Quaternion.identity;
 
+        float headRotation = head.transform.eulerAngles.y;
+
+
+        playerPawn.position = Vector3.zero;
+
         Vector3 centerOfPlayerPos = head.position - (head.forward.normalized * 0.09f);
         centerOfPlayerPos.y = 0f;
 
         // TODO: clean up
-        playerPawn.GetChild(0).position = playerPawn.GetChild(0).position - centerOfPlayerPos;
+        //playerPawn.GetChild(0).position = playerPawn.GetChild(0).position - centerOfPlayerPos;
+        playerPawn.position = playerPawn.position - centerOfPlayerPos;
 
-        playerPawn.transform.localPosition = Vector3.zero;
-        Vector3 newForward = (leftHand.position + rightHand.position) * 0.5f;
-        pawnRoot.rotation = GetNewRotation(newForward);
+        //Vector3 headPos = head.transform.position;
+        //float headY = headPos.y;
+        //headPos *= -1;
+        //headPos.y = headY;
+        //playerPawn.transform.localPosition = headPos;
+
+        //Vector3 rot = playerPawn.transform.eulerAngles;
+        //rot.y = -headRotation;
+        //playerPawn.transform.eulerAngles = rot;
+        
+        
+
 
         if (CalibrationCursor.Instance != null)
         {
-            playerPawn.position = CalibrationCursor.Instance.GetCalibrationCursorPosition();
+            playerPawn.position = CalibrationCursor.Instance.GetCalibrationCursorPosition() - centerOfPlayerPos;
         }
+        Vector3 newForward = (leftHand.position + rightHand.position) * 0.5f;
+        pawnRoot.rotation = GetNewRotation(newForward);
 
         IsCalibrated = true;
     }
@@ -74,12 +92,14 @@ public class PlayerCalibrationController : MonoBehaviour
         centerOfPlayerPos.y = 0f;
 
         Vector3 pos0 = Vector3.forward - centerOfPlayerPos;
+        //Vector3 pos0 = centerOfPlayerPos - Vector3.forward;
         pos0.y = 0f;
 
-        Vector3 pos1 = playerToHand;
+        Vector3 pos1 = playerToHand;// - centerOfPlayerPos;
         pos1.y = 0f;
 
         float angle = Vector2.SignedAngle(RemoveYOfVector3(pos0), RemoveYOfVector3(pos1));
+        Debug.Log(angle);
 		//Quaternion q = CalibrationCursor.ActiveCursorInScene.GetCursorRotation();
 		newRot = Quaternion.identity/*q*/ * Quaternion.Euler(new Vector3(0, Mathf.Floor(angle), 0));
 
