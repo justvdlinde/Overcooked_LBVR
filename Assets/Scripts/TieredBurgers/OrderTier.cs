@@ -24,7 +24,7 @@ public class OrderTier : ScriptableObject
 		SerializeListToDict();
 	}
 
-	public List<IngredientType> GetOrderRecipie()
+	public Order GetOrderRecipie(bool useRandom = false)
 	{
 		List<IngredientType> returnList = new List<IngredientType>();
 
@@ -47,9 +47,13 @@ public class OrderTier : ScriptableObject
 			}
 		}
 
-		returnList.AddRange(recipie.GetRecipie());
+		Order order = new Order();
+		order.ingredients = recipie.GetRecipie().ToArray();
+		order.timer.Set(recipie.GetTimeForRecipie(useRandom));
 
-		return returnList;
+		//returnList.AddRange(recipie.GetRecipie(useRandom));
+
+		return order;
 	}
 
 	private void SerializeListToDict()

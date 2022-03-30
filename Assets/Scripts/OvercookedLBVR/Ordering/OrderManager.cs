@@ -28,6 +28,8 @@ public class OrderManager : MonoBehaviourPun
     [SerializeField] private float minTime = 20;
     [SerializeField] private float maxTime = 50;
 
+    [SerializeField] private OrderTierManager orderTierManager = null;
+
     public int currentOrderIndex;
 
     private void Awake()
@@ -75,9 +77,9 @@ public class OrderManager : MonoBehaviourPun
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            Order order = GenerateRandomOrder(minIngredients, maxIngredients);
+            Order order = GenerateRandomOrder();
             displayManager.HasFreeDisplay(out OrderDisplay display);
-            float timerDuration = Random.Range(minTime, maxTime);
+            float timerDuration = order.timer.Duration;
             int[] ingredientInts = new int[order.ingredients.Length];
             for (int i = 0; i < ingredientInts.Length; i++)
             {
@@ -122,30 +124,16 @@ public class OrderManager : MonoBehaviourPun
         order.Dispose();
     }
 
-    private Order GenerateRandomOrder(int minIngredients, int maxIngredients)
+    private Order GenerateRandomOrder()
     {
         Order order = new Order();
-        order.ingredients = new IngredientType[Random.Range(minIngredients + 2, maxIngredients + 2)];
-        order.ingredients[0] = IngredientType.BunBottom;
-        order.ingredients[order.ingredients.Length - 1] = IngredientType.BunTop;
+        //order.ingredients = new IngredientType[Random.Range(minIngredients + 2, maxIngredients + 2)];
+        //order.ingredients[0] = IngredientType.BunBottom;
+        //order.ingredients[order.ingredients.Length - 1] = IngredientType.BunTop;
 
-        List<IngredientType> availableIngredients = Enum.GetValues(typeof(IngredientType)).Cast<IngredientType>().ToList();
-        availableIngredients.Remove(IngredientType.None);
-        availableIngredients.Remove(IngredientType.BunBottom);
-        availableIngredients.Remove(IngredientType.BunTop);
+        
 
-        bool includesPatty = false;
-        for (int i = 1; i < order.ingredients.Length - 1; i++)
-        {
-            order.ingredients[i] = availableIngredients.GetRandom();
-            if (order.ingredients[i] == IngredientType.Patty)
-                includesPatty = true;
-        }
-
-        if (!includesPatty)
-            order.ingredients[Random.Range(1, order.ingredients.Length - 2)] = IngredientType.Patty;
-
-        return order;
+        return orderTierManager.GenerateRandomOrder(3, 0, out int newTier, true);
     }
 
     public Order GetClosestOrder(Dish dish, out float bestFitScore)

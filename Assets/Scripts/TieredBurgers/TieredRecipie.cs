@@ -4,6 +4,7 @@ using UnityEngine;
 [System.Serializable]
 public class TieredRecipie : ScriptableObject
 {
+	[Header("RecipieOdds")]
 	[Range(0, 100), SerializeField] private int topBunOdds = 100;
 	[Range(0, 100), SerializeField] private int bottomBunOdds = 100;
 	[Range(0, 100), SerializeField] private int firstPattyOdds = 100;
@@ -13,6 +14,10 @@ public class TieredRecipie : ScriptableObject
 	[SerializeField] private int topRandomIngredientsAmount = 0;
 	[SerializeField] private int bottomRandomIngredientsAmount = 0;
 
+	[Header("Timer values")]
+	[Range(0, 100), SerializeField] private int timerDeviationPercentage = 5;
+	[SerializeField] private float timeForRecipieInSeconds = 60;
+
 	public int TopBunOdds { get => topBunOdds; }
 	public int BottomBunOdds { get => bottomBunOdds; }
 	public int FirstPattyOdds { get => firstPattyOdds; }
@@ -21,6 +26,15 @@ public class TieredRecipie : ScriptableObject
 	public int BottomSauceOdds { get => bottomSauceOdds; }
 	public int TopRandomIngredientsAmount { get => topRandomIngredientsAmount; }
 	public int BottomRandomIngredientsAmount { get => bottomRandomIngredientsAmount; }
+
+	public float GetTimeForRecipie(bool useRandomOffset = false)
+	{
+		float offset = Mathf.Lerp(-timerDeviationPercentage, timerDeviationPercentage, (float)(GenerateRandom0to100() * 0.01f));
+
+		//offset *= timeForRecipieInSeconds;
+
+		return timeForRecipieInSeconds + offset;
+	}
 
 	public List<IngredientType> GetRecipie()
 	{
