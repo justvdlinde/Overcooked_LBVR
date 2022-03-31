@@ -19,6 +19,7 @@ namespace PhysicsCharacter
 	[RequireComponent(typeof(Rigidbody))]
 	public class ToolHandle : PickupableObject
 	{
+		public bool HandleIsCloseToToolPos = false;
 		[SerializeField] private float throwDistance = 0.25f;
 		private Collider col = null;
 
