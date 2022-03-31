@@ -14,7 +14,7 @@ public class PointerScript : MonoBehaviour
     public Vector3 targetPosition;
     public Vector3 wallPosition;
 
-    
+    public Vector3 LookDirection;
 
 
 
@@ -47,22 +47,27 @@ public class PointerScript : MonoBehaviour
         RaycastHit wallHit;
         if (Physics.Raycast(originPosition, targetPosition, out wallHit, Mathf.Infinity,23))
         {
-            Debug.DrawRay(originPosition, targetPosition * hit.distance, Color.green);
+            Debug.DrawRay(originPosition, targetPosition * hit.distance, Color.red);
 
 
             wallPosition = wallHit.point;
             wallPointer.transform.position = wallPosition;
-            Vector3 newDirection = Vector3.RotateTowards(wallPosition, targetPosition, Mathf.Infinity, 0.0f);
+
+            //LookDirection = Vector3.Reflect(originPosition , wallHit.normal);
+            //Vector3 newDirection = Vector3.Reflect(wallHit.normal - originPosition, wallHit.normal.normalized);
+     
+
 
             //newDirection
 
             //wallPointer.transform.RotateAround(newDirection, wallHit.normal, 180f);
 
-            wallPointer.transform.forward = newDirection.normalized;
+            //wallPointer.transform.forward = newDirection.normalized;
 
-
-
-            //wallPointer.transform.rotation = Quaternion.LookRotation(newDirection);
+            Ray reflectRay = new Ray(wallHit.point, Vector3.Reflect(originPosition - wallPosition.normalized, wallHit.normal));
+            Debug.DrawRay(wallHit.point, Vector3.Reflect(wallPosition - originPosition.normalized, wallHit.normal) * hit.distance, Color.red);
+            LookDirection = Vector3.Reflect(wallPosition - originPosition.normalized, wallHit.normal);
+            wallPointer.transform.rotation = Quaternion.LookRotation(LookDirection);
 
 
             Debug.Log("Did Hit");
