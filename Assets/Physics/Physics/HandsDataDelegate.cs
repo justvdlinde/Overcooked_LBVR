@@ -177,8 +177,8 @@ namespace PhysicsCharacter
 
 		public Vector3 GetFollowPosition()
 		{
-			//if(IsHoldingObject && HandTargetToolhandle != null)
-			//	return HandTargetToolhandle.localTransformMirror.GetWorldPosition();
+			if(IsHoldingObject && HandTargetToolhandle != null && HandTargetToolhandle.HandleIsCloseToToolPos)
+				return HandTargetToolhandle.localTransformMirror.GetWorldPosition();
 			return GetControllerPosition();
 		}
 
@@ -189,8 +189,8 @@ namespace PhysicsCharacter
 
 		public Quaternion GetFollowRotation()
 		{
-			//if(IsHoldingObject && HandTargetToolhandle != null)
-			//	return HandTargetToolhandle.localTransformMirror.GetWorldRotation();
+			if(IsHoldingObject && HandTargetToolhandle != null && HandTargetToolhandle.HandleIsCloseToToolPos)
+				return HandTargetToolhandle.localTransformMirror.GetWorldRotation();
 			return handFollowTarget.rotation;
 		}
 

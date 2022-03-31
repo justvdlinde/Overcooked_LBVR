@@ -89,7 +89,13 @@ namespace PhysicsCharacter
 
 		protected virtual void FixedUpdate()
 		{
-			if(heldHandles > 0 && !PhysicsPlayerBlackboard.Instance.isFading)
+			foreach (var item in toolHandles)
+			{
+				if (Vector3.Distance(item.transform.position, item.localTransformMirror.GetWorldPosition()) < 0.015f)
+					item.HandleIsCloseToToolPos = true;
+			}
+
+			if (heldHandles > 0 && !PhysicsPlayerBlackboard.Instance.isFading)
 			{
 				MoveUsingPhysics();
 				RotateUsingPhysics();

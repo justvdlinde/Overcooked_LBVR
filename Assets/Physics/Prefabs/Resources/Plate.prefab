@@ -220,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowRightGrip: 1
   allowLeftGrip: 1
+  HandleIsCloseToToolPos: 0
   throwDistance: 0.5
   localTransformMirror:
     parent: {fileID: 0}
@@ -476,6 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowRightGrip: 1
   allowLeftGrip: 1
+  HandleIsCloseToToolPos: 0
   throwDistance: 0.5
   localTransformMirror:
     parent: {fileID: 0}
