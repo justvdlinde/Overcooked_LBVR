@@ -11,12 +11,12 @@ public enum SelectionType
 
 public class TurnkeySelectionEvent : IEvent
 {
-	public SelectionType eventType = SelectionType.None;
-	public bool wantToExecutePositively = true;
+	public int volumeID = 0;
+	public bool isInVolume = false;
 
-	public TurnkeySelectionEvent(SelectionType eventType, bool wantToExecutePositively)
+	public TurnkeySelectionEvent(int selectionValue, bool isInVolume)
 	{
-		this.eventType = eventType;
-		this.wantToExecutePositively = wantToExecutePositively;
+		this.volumeID = selectionValue;
+		this.isInVolume = isInVolume;
 	}
 }
