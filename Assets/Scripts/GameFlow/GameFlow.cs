@@ -15,6 +15,7 @@ public abstract class GameFlow : MonoBehaviour
 
     [Tooltip("The initial level that will be loaded")]
     [SerializeField] protected GameLevel initialLevel = null;
+    [SerializeField] protected GameModeEnum gameMode = GameModeEnum.Story;
 
     [SerializeField] protected bool showSplashScreen = true;
     [SerializeField, InspectableSO] private NetworkConfig networkConfig = null;
@@ -103,17 +104,17 @@ public abstract class GameFlow : MonoBehaviour
         wasConnected = true;
         connectingScreenInstance.Close();
 
-        //if (PhotonGameModeHelper.ServerHasGameMode(out GameModeEnum serverGameMode))
-        //{
-        //    if (PhotonGameModeHelper.ServerGamemodeEqualsCurrentGamemode(gameModeService.CurrentGameMode))
-        //        gameModeService.CurrentGameMode.OnReconnect();
-        //    else
-        //        gameModeService.StartNewGame(serverGameMode);
-        //}
-        //else
-        //{
-        //    gameModeService.StartNewGame(GameModeEnum.TeamDeathmatch);
-        //}
+        if (PhotonGameModeHelper.ServerHasGameMode(out GameModeEnum serverGameMode))
+        {
+            if (PhotonGameModeHelper.ServerGamemodeEqualsCurrentGamemode(gameModeService.CurrentGameMode))
+                gameModeService.CurrentGameMode.OnReconnect();
+            else
+                gameModeService.StartNewGame(serverGameMode);
+        }
+        else
+        {
+            gameModeService.StartNewGame(gameMode);
+        }
 
         if (@event.Room.CustomProperties.TryGetValue(RoomPropertiesPhoton.SCENE, out object sceneValue))
             OnScenePropertyChanged(sceneValue);

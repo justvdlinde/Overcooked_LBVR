@@ -27,7 +27,7 @@ public static class PhotonGameModeHelper
         }
         else
         {
-            gameMode = GameModeEnum.TeamDeathmatch;
+            gameMode = GameModeEnum.Story;
             return false;
         }
     }

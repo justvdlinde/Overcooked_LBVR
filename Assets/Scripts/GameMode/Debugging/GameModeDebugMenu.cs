@@ -76,15 +76,15 @@ public class GameModeDebugMenu : IDebugMenu
         settingsDurationText = GUILayout.TextField(settingsDurationText);
         GUILayout.EndHorizontal();
 
-        if (GUILayout.Button("Update settings"))
-        {
-            GameModeSettings settings = ScriptableObject.CreateInstance<GameModeSettings>();
-            if (int.TryParse(settingsScoreText, out int result))
-                settings.scoreTarget = result;
-            if (int.TryParse(settingsDurationText, out result))
-                settings.matchDuration = result;
-            currentGameMode.Setup(settings);
-        }
+        //if (GUILayout.Button("Update settings"))
+        //{
+        //    GameModeSettings settings = ScriptableObject.CreateInstance<GameModeSettings>();
+        //    if (int.TryParse(settingsScoreText, out int result))
+        //        settings.scoreTarget = result;
+        //    if (int.TryParse(settingsDurationText, out result))
+        //        settings.matchDuration = result;
+        //    currentGameMode.Setup(settings);
+        //}
         GUILayout.EndVertical();
     }
 
@@ -93,16 +93,14 @@ public class GameModeDebugMenu : IDebugMenu
         GUILayout.BeginVertical(currentGameMode.Name, "window");
 
         GUILayout.Label("Phase: " + currentGameMode.MatchPhase);
-        GUILayout.Label("Target: " + currentGameMode.ScoreTarget);
+        //GUILayout.Label("Target: " + currentGameMode.ScoreTarget);
         GUILayout.Label("Start requirements met: " + currentGameMode.StartRequirementsAreMet());
-        GUILayout.Label("Duration: " + string.Format("{0:0:00}", currentGameMode.MatchDuration));
-        GUILayout.Label("Time remaining: " + currentGameMode.GetTimeReadableString());
+        //GUILayout.Label("Duration: " + string.Format("{0:0:00}", currentGameMode.MatchDuration));
+        //GUILayout.Label("Time remaining: " + currentGameMode.GetTimeReadableString());
 
         if (drawDeveloperOptions)
         {
-            if (GUILayout.Button("StartCountdown"))
-                currentGameMode.StartCountdown();
-            if (GUILayout.Button("StartActiveGame"))
+            if (GUILayout.Button("StartGame"))
                 currentGameMode.StartActiveGame();
             if (GUILayout.Button("EndGame"))
                 currentGameMode.EndGame();

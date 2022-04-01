@@ -8,7 +8,7 @@ public static class GameModeHelper
 {
     private static readonly Dictionary<GameModeEnum, Type> GameModeTypePairs = new Dictionary<GameModeEnum, Type>()
     {
-        { GameModeEnum.TeamDeathmatch, typeof(TDMGameMode) },
+        { GameModeEnum.Story, typeof(StoryGameMode) },
     };
 
     public static Type GetGameModeType(GameModeEnum gamemode)

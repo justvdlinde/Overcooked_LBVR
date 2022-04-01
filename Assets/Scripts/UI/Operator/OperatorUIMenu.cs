@@ -57,11 +57,11 @@ public class OperatorUIMenu : MonoBehaviour
         replayGameButton.onClick.AddListener(OnReplayGameButtonPressedEvent);
     }
 
-    private void Update()
-    {
-        if(CurrentGameMode != null)
-            timerLabel.text = CurrentGameMode.GetTimeReadableString();
-    }
+    //private void Update()
+    //{
+    //    if(CurrentGameMode != null)
+    //        timerLabel.text = CurrentGameMode.GetTimeReadableString();
+    //}
 
     private void OnGameModeChangedEvent(GameModeChangedEvent @event)
     {
@@ -77,12 +77,12 @@ public class OperatorUIMenu : MonoBehaviour
 
     private void OnStartGameButtonPressedEvent()
     {
-        CurrentGameMode.StartCountdown();
+        CurrentGameMode.StartActiveGame();
     }
 
     private void OnStopGameButtonPressedEvent()
     {
-        CurrentGameMode.EndGame(MatchEndType.StoppedByOperator);
+        CurrentGameMode.EndGame();
     }
 
     private void OnReplayGameButtonPressedEvent()

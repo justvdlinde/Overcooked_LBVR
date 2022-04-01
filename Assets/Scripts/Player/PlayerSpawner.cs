@@ -23,7 +23,6 @@ public class PlayerSpawner : MonoBehaviour
         PlayersManager playersManager = GlobalServiceLocator.Instance.Get<PlayersManager>();
         if (playersManager.LocalPlayer != null)
         {
-            Debug.LogWarning("Local Player is already present, returning code");
             gameObject.SetActive(false);
             return;
         }

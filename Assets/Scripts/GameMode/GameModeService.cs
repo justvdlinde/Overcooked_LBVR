@@ -17,26 +17,26 @@ public class GameModeService : IService
         injector = new DependencyInjector("GamemodeService");
     }
 
-    public void StartNewGame(GameModeEnum gamemode, GameModeSettings settings = null)
+    public void StartNewGame(GameModeEnum gamemode)
     {
         Type type = GameModeHelper.GetGameModeType(gamemode);
-        StartNewGame(type, settings);
+        StartNewGame(type);
     }
 
-    public void StartNewGame<T>(GameModeSettings settings = null) where T : GameMode
+    public void StartNewGame<T>() where T : GameMode
     {
-        StartNewGame(typeof(T), settings);
+        StartNewGame(typeof(T));
     }
 
-    public void StartNewGame(Type gamemode, GameModeSettings settings = null)
+    public void StartNewGame(Type gamemode)
     {
         GameMode gameModeInstance = injector.CreateType(gamemode) as GameMode;
-        SetGameMode(gameModeInstance, settings);
+        SetGameMode(gameModeInstance);
         if(gameModeInstance.MatchPhase == MatchPhase.Undefined)
             CurrentGameMode.PreGame();
     }
 
-    protected void SetGameMode(GameMode gameMode, GameModeSettings settings = null)
+    protected void SetGameMode(GameMode gameMode)
     {
         if (CurrentGameMode != null)
         {
@@ -45,7 +45,7 @@ public class GameModeService : IService
         }
 
         CurrentGameMode = gameMode;
-        CurrentGameMode.Setup(settings);
+        CurrentGameMode.Setup();
         globalEventDispatcher.Invoke(new GameModeChangedEvent(CurrentGameMode));
 
         if (PhotonNetwork.IsMasterClient)
