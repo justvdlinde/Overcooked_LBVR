@@ -22,5 +22,8 @@ public static class RoomPropertiesPhoton
 	public const string TEAM_TWO_SCORE = "TeamTwoScore";
 
     public const string SELECTION_IS_ACTIVE = "SelectionIsActive";
+    public const string SELECTION_TYPE = "SelectionType";
     public const string SELECTION_PLAYER_READY_AMOUNT = "SelectionPlayerReadyAmount";
+    public const string SELECTION_POPULAR_CHOICE = "SelectionPopularChoice";
+    public const string SELECTION_REQUIRES_VOLUME = "SelectionRequiresVolume";
 }

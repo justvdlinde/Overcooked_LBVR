@@ -9,6 +9,7 @@ public class SelectionVolume : MonoBehaviour
 {
 #if GAME_CLIENT
 	[SerializeField] private Trigger trigger = null;
+	[SerializeField] private Renderer renderer = null;
 	
 	public int selectionVolumeID = 0;
 
@@ -17,14 +18,14 @@ public class SelectionVolume : MonoBehaviour
 	public Color selectedColor = Color.green;
 	public Color idleColor = Color.grey;
 
-	private Renderer renderer = null;
 
 	[SerializeField] private TMPro.TextMeshProUGUI text = null;
 
 	private void Awake()
 	{
-		renderer = GetComponent<Renderer>();
+		renderer = GetComponentInChildren<Renderer>();
 		idleColor = renderer.material.color;
+		trigger = GetComponentInChildren<Trigger>();
 	}
 
 	private void OnEnable()
@@ -33,10 +34,10 @@ public class SelectionVolume : MonoBehaviour
 			globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
 
 		if (trigger == null)
-			GetComponent<Trigger>();
+			GetComponentInChildren<Trigger>();
 
 		if(renderer == null)
-			renderer = GetComponent<Renderer>();
+			renderer = GetComponentInChildren<Renderer>();
 
 		trigger.EnterEvent += OnEnterEvent;
 		trigger.StayEvent += OnStayEvent;
@@ -53,6 +54,7 @@ public class SelectionVolume : MonoBehaviour
 	private void Update()
 	{
 		text.transform.forward = -(Camera.main.transform.position - text.transform.position);
+		trigger.gameObject.SetActive(SelectionManager.SelectionRequiresVolume && SelectionManager.IsSelectionActive);
 	}
 
 	private void OnEnterEvent(Collider obj)
