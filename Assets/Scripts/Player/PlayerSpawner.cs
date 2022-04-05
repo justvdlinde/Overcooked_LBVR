@@ -10,9 +10,6 @@ public class PlayerSpawner : MonoBehaviour
     [Tooltip("Only required if connectToNetwork is set to true")]
     [SerializeField] private NetworkConfig networkConfig = null;
 
-    [field: SerializeField]
-    private bool usePhysicsPlayer = false;
-
     private INetworkService networkService;
 
     protected virtual void Awake()

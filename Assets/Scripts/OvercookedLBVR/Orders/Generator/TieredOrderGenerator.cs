@@ -1,13 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Utils.Core.Attributes;
 
-public class OrderTierManager : MonoBehaviour
+public class TieredOrderGenerator
 {
-    [SerializeField] private List<OrderTier> tiers = new List<OrderTier>();
+	private OrderTier[] tiers;
 	public int currentTier = 0;
+
+    public TieredOrderGenerator()
+    {
+		LoadTiers();
+    }
+
+	private void LoadTiers()
+    {
+		tiers = Resources.Load<OrderTiersCollection>("OrderTiers").tiers;
+	}
 
 	public Order GenerateRandomOrder(int orderTier, int completedOrdersInARow, out int newOrderTier,  bool useRandomTimer = false)
 	{

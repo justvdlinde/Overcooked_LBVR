@@ -65,36 +65,37 @@ public class DeliveryPoint : MonoBehaviourPun
 
     public bool DeliverDish(Dish dish)
     {
-		bool delivered = false;
-        Order closestOrder = OrderManager.Instance.GetClosestOrder(dish, out float bestFitScore);
-        Debug.Log("Delivered dish: " + string.Join("", dish.ingredients) 
-            + "\nbest fit score: " + bestFitScore 
-            + "\nclosest order: " + string.Join("", closestOrder.ingredients));
+        //bool delivered = false;
+        //      Order closestOrder = OrdersController.Instance.GetClosestOrder(dish, out float bestFitScore);
+        //      Debug.Log("Delivered dish: " + string.Join("", dish.ingredients) 
+        //          + "\nbest fit score: " + bestFitScore 
+        //          + "\nclosest order: " + string.Join("", closestOrder.ingredients));
 
-        if (closestOrder != null)
-		{
-            OrderManager.Instance.DeliverOrder(closestOrder, dish);
-			delivered = true;
-		}
-        else
-            Debug.LogError("No closest order found!");
+        //      if (closestOrder != null)
+        //{
+        //          OrdersController.Instance.DeliverOrder(closestOrder, dish);
+        //	delivered = true;
+        //}
+        //      else
+        //          Debug.LogError("No closest order found!");
 
-        if (dish.transform.parent != null)
-        {
-            if(dish.transform.parent.parent != null)
-            { 
-                Destroy(dish.transform.parent.parent.gameObject);
-            }
-            else
-            {
-                Destroy(dish.transform.parent.gameObject);
-            }
+        //      if (dish.transform.parent != null)
+        //      {
+        //          if(dish.transform.parent.parent != null)
+        //          { 
+        //              Destroy(dish.transform.parent.parent.gameObject);
+        //          }
+        //          else
+        //          {
+        //              Destroy(dish.transform.parent.gameObject);
+        //          }
 
-        }
-        else
-        {
-            Destroy(dish.transform.gameObject);
-        }
-		return delivered;
+        //      }
+        //      else
+        //      {
+        //          Destroy(dish.transform.gameObject);
+        //      }
+        //return delivered;
+        return true;
     }
 }

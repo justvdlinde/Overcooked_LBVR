@@ -82,6 +82,8 @@ public abstract class GameMode : IDisposable
     /// </summary>
     public IGameResult GameResult { get; protected set; }
 
+    public OrdersController OrdersController { get; protected set; }
+
     protected readonly GlobalEventDispatcher globalEventDispatcher;
     protected readonly PhotonNetworkService networkService;
 
@@ -287,10 +289,10 @@ public abstract class GameMode : IDisposable
 			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.GAME_STATE, (int)MatchPhase);
             RaisePhotonEventCode(PhotonEventCodes.GAME_STOP);
         }
-        globalEventDispatcher.Invoke(new GameOverEvent(GetGameResultData()));
+        globalEventDispatcher.Invoke(new GameOverEvent(GetGameResult()));
     }
 
-    public abstract IGameResult GetGameResultData();
+    public abstract IGameResult GetGameResult();
 
     public virtual void Shutdown()
     {

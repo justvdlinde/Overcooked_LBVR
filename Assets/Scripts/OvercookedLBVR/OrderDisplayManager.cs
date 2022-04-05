@@ -3,49 +3,58 @@ using UnityEngine;
 
 public class OrderDisplayManager : MonoBehaviour
 {
-    [SerializeField] private OrderManager orderManager = null;
+    public static OrderDisplayManager Instance;
+
     [SerializeField] private OrderDisplay[] displays;
 
+    private OrdersController orderManager = null;
     private Dictionary<Order, OrderDisplay> orderDisplayPairs = new Dictionary<Order, OrderDisplay>();
 
-    private void OnEnable()
+    private void Awake()
     {
-        orderManager.OrderAddedToGame += DisplayOrder;
-        orderManager.OrderFailed += RemoveDisplay;
-        orderManager.OrderDelivered += OnOrderDelivered;
+        Instance = this;
     }
 
-    private void OnDisable()
-    {
-        orderManager.OrderAddedToGame -= DisplayOrder;
-        orderManager.OrderFailed -= RemoveDisplay;
-        orderManager.OrderDelivered -= OnOrderDelivered;
-    }
+    //private void OnEnable()
+    //{
+    //    orderManager.OrderAddedToGame += DisplayOrder;
+    //    orderManager.OrderFailed += RemoveDisplay;
+    //    orderManager.OrderDelivered += OnOrderDelivered;
+    //}
+
+    //private void OnDisable()
+    //{
+    //    orderManager.OrderAddedToGame -= DisplayOrder;
+    //    orderManager.OrderFailed -= RemoveDisplay;
+    //    orderManager.OrderDelivered -= OnOrderDelivered;
+    //}
 
     public bool HasFreeDisplay()
     {
-        return HasFreeDisplay(out OrderDisplay display);
+        return HasFreeDisplay(out _);
     }
 
     public bool HasFreeDisplay(out OrderDisplay display)
     {
-        display = null;
+        display = GetFreeDisplay();
+        return display != null;
+    }
+
+    public OrderDisplay GetFreeDisplay()
+    {
         foreach (OrderDisplay d in displays)
         {
             if (d.Order == null)
-            {
-                display = d;
-                return true;
-            }
+                return d;
         }
-        return false;
+        return null;
     }
 
-    private void DisplayOrder(Order order)
+    public void DisplayOrder(Order order)
     {
         if (HasFreeDisplay(out OrderDisplay display))
         {
-            display.DisplayOrder(order);
+            display.Show(order);
             orderDisplayPairs.Add(order, display);
         }
         else

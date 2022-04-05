@@ -47,9 +47,10 @@ public class OrderTier : ScriptableObject
 			}
 		}
 
-		Order order = new Order();
-		order.ingredients = recipie.GetRecipie().ToArray();
-		order.timer.Set(recipie.GetTimeForRecipie(useRandom));
+		IngredientType[] ingredients = recipie.GetRecipie().ToArray();
+		NetworkedTimer timer = new NetworkedTimer();
+		timer.Set(recipie.GetTimeForRecipie(useRandom));
+		Order order = new Order(ingredients, timer);
 
 		//returnList.AddRange(recipie.GetRecipie(useRandom));
 

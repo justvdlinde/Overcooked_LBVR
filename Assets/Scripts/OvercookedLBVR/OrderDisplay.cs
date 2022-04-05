@@ -9,8 +9,9 @@ public class OrderDisplay : MonoBehaviour
 
     public Order Order { get; private set; } 
 
-    public void DisplayOrder(Order order)
+    public void Show(Order order)
     {
+        // TODO: some kind of animation/flair
         Clear();
         order.orderNumber = orderNumber;
         Order = order;
@@ -19,6 +20,7 @@ public class OrderDisplay : MonoBehaviour
 
     public void Clear()
     {
+        // TODO: some kind of animation/flair
         grid.Clear();
         Order = null;
     }

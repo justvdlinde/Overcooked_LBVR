@@ -8,7 +8,7 @@ using Utils.Core.Services;
 
 public class GameManager : MonoBehaviourPun
 {
-    public OrderManager orderManager;
+    public OrdersController orderManager;
 
     private Dictionary<Order, Score> orderScorePairs = new Dictionary<Order, Score>();
     private float totalScore;
@@ -31,14 +31,14 @@ public class GameManager : MonoBehaviourPun
     {
         Score score = new Score(order);
         AddScore(score, order);
-        order.score = score;
+        //order.score = score;
     }
 
     private void OnOrderDelivered(Order order, Dish dish)
     {
         Score score = new Score(order, dish);
         AddScore(score, order);
-        order.score = score;
+        //order.score = score;
     }
 
     private void AddScore(Score score, Order order)
@@ -62,8 +62,8 @@ public class GameManager : MonoBehaviourPun
         Debug.Log("Starting Game");
         gameIsRunning = true;
 
-        if (PhotonNetwork.IsMasterClient)
-            orderManager.StartOrders();
+        //if (PhotonNetwork.IsMasterClient)
+        //    orderManager.StartOrders();
 
         GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>().Invoke(new StartGameEvent());
     }

@@ -53,5 +53,7 @@ MonoBehaviour:
   - SetIngredientStateRPC
   - AddIngredientRPC
   - RemoveTopIngredientRPC
+  - RequestDataRPC
+  - SendDataRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
