@@ -6,7 +6,8 @@ public enum SelectionType
 	Gamemode,
 	Replay,
 	MapSelection,
-	Gameplay
+	Gameplay,
+	ReadyUp
 }
 
 public class TurnkeySelectionEvent : IEvent

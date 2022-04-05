@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +12,13 @@ using static TMPro.TMP_InputField;
 // needs some sort of network sync.
 // main client (server/operator) needs the managing role and invoke operator-type commands such as
 // level select, gamemode select, game start, game stop
-public class SelectionManager : MonoBehaviour
+public class SelectionManager : MonoBehaviourPun
 {
     private SelectionPawn pawn = null;
 
-	public static bool IsSelectionActive = true;
+	public bool IsSelectionActive = false;
+
+	private int ReadyPlayerCount = 0;
 
 	public static bool IsPawnReady = false;
 
@@ -36,29 +39,169 @@ public class SelectionManager : MonoBehaviour
 
 		globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
 
+#if GAME_CLIENT
 		globalEventDispatcher.Subscribe<TurnkeySelectionEvent>(OnSelectionEvent);
-
+#endif
+		PhotonNetworkService.RoomPropertiesChangedEvent += OnRoomPropertiesChangedEvent;
 		if(pawn == null)
 		{
 			// some error show
 		}
+
+		RequestSelectionStateRPC();
+	}
+
+	private void OnRoomPropertiesChangedEvent(ExitGames.Client.Photon.Hashtable obj)
+	{
+        if (obj.TryGetValue(RoomPropertiesPhoton.SELECTION_IS_ACTIVE, out object selectionActive))
+		{
+			IsSelectionActive = (bool)selectionActive;
+		}
+
+		if (obj.TryGetValue(RoomPropertiesPhoton.SELECTION_PLAYER_READY_AMOUNT, out object amt))
+		{
+			ReadyPlayerCount = (int)amt;
+		}
+	}
+
+	private void OnDisable()
+	{
+#if GAME_CLIENT
+		globalEventDispatcher.Unsubscribe<TurnkeySelectionEvent>(OnSelectionEvent);
+		// left empty intentionally
+#endif
+		PhotonNetworkService.RoomPropertiesChangedEvent -= OnRoomPropertiesChangedEvent;
+	}
+
+
+
+	private void HandleSelectionReadyEvent()
+	{
+		switch (selectionType)
+		{
+			case SelectionType.None:
+				return;
+			case SelectionType.Gamemode:
+				//HandleGameModeSelection();
+				break;
+			case SelectionType.Replay:
+				//globalEventDispatcher.Invoke<ReplayEvent>(new ReplayEvent());
+				break;
+			case SelectionType.MapSelection:
+				break;
+			case SelectionType.Gameplay:
+				break;
+			case SelectionType.ReadyUp:
+				break;
+		}
+	}
+
+	//private void HandleGameModeSelection(int selectedVolume)
+	//{
+	//	// set some gamemode event that calls the event like an operator UI would
+	//}
+
+	//private void HandleReplaySelection(int selectedVolume)
+	//{
+	//	// depending on selectedVolume handle some callback
+	//}
+
+	//private void HandleReplaySelection(int selectedVolume)
+	//{
+	//	// depending on selectedVolume handle some callback
+	//}
+
+	// debug
+	[Button]
+	private void TransferOwnership()
+	{
+		photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+		PhotonNetwork.SetMasterClient(PhotonNetwork.LocalPlayer);
 	}
 
 	[Button]
 	public void ToggleSelection()
 	{
-		IsSelectionActive = !IsSelectionActive;
+		PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_IS_ACTIVE, !IsSelectionActive);
+
+		//photonView.RPC("ToggleSeletionRPC", RpcTarget.All);
+	}
+
+	public void RequestSelectionState()
+	{
+		photonView.RPC("RequestSelectionStateRPC", RpcTarget.MasterClient);
+
+	}
+
+	[PunRPC]
+	public void RequestSelectionStateRPC()
+	{
+		if (PhotonNetwork.IsMasterClient)
+			photonView.RPC("ToggleSeletionRPC", RpcTarget.All);
+	}
+
+	[PunRPC]
+	public void ToggleSeletionRPC(PhotonMessageInfo info)
+	{
+		if (PhotonNetwork.CurrentRoom != null && PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey(RoomPropertiesPhoton.SELECTION_IS_ACTIVE))
+			IsSelectionActive = (bool)PhotonNetwork.CurrentRoom.CustomProperties[RoomPropertiesPhoton.SELECTION_IS_ACTIVE];
+		//IsSelectionActive = selectionActive;
 	}
 
 	private void OnSelectionEvent(TurnkeySelectionEvent obj)
 	{
 		currentPlayerEventState = obj;
-		//Debug.Log($"isInVolume: {obj.isInVolume} volumeID: {obj.volumeID}");
+
+		if(PhotonNetwork.LocalPlayer.IsLocal)
+		{
+			PhotonNetwork.LocalPlayer.SetCustomProperty(PlayerPropertiesPhoton.SELECTION_PLAYER_VOLUME_ID, obj.volumeID);
+			
+		}
 	}
 
-	private void OnDisable()
+	[PunRPC]
+	private void SelectionEventRPC(PhotonMessageInfo info)
 	{
-		// left empty intentionally
+		Debug.Log("selection event");
+		if (PhotonNetwork.IsMasterClient)
+		{
+			CountReadyPlayers();
+		}
+	}
+
+
+	private int CountReadyPlayers()
+	{
+		int playerCount = PhotonNetwork.PlayerList.Length;
+
+		int readyCount = 0;
+		foreach (var item in PhotonNetwork.PlayerList)
+		{
+			bool playerIsInVolume = false;
+			if (item.CustomProperties.TryGetValue(PlayerPropertiesPhoton.SELECTION_PLAYER_VOLUME_ID, out object p))
+				playerIsInVolume = (int)p != -1;
+
+			Debug.Log(p + " " + playerIsInVolume);
+
+			if (!playerIsInVolume)
+				continue;
+
+			bool playerIsReady = false;
+			if (item.CustomProperties.TryGetValue(PlayerPropertiesPhoton.SELECTION_PLAYER_IS_READY, out object r))
+				playerIsReady = (bool)r;
+
+			// some way to find what volume is popular (could be handled locally)
+
+			if (playerIsReady && playerIsInVolume)
+				readyCount++;
+		}
+
+		if(PhotonNetwork.IsMasterClient)
+		{
+			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_PLAYER_READY_AMOUNT, readyCount);
+		}
+
+		return readyCount;
 	}
 
 	private void SetTexts()
@@ -81,10 +224,10 @@ public class SelectionManager : MonoBehaviour
 		else
 			text += "Player is not in volume \n";
 
-		if (IsPawnReady)
-			text += "1/1 players ready";
-		else
-			text += "0/1 players ready";
+		int playerCount = PhotonNetwork.PlayerList.Length;
+
+		// get this from photon room properties
+		text += $"{ReadyPlayerCount}/{playerCount} players ready";
 
 		ApplyTexts(text);
 	}
@@ -142,7 +285,14 @@ public class SelectionManager : MonoBehaviour
 	private void SetReadyToTrue()
 	{
 		if (!IsPawnReady)
+		{
 			isReadyBuzzRoutine = StartCoroutine(BuzzRoutine());
+			if (!IsPawnReady && PhotonNetwork.LocalPlayer.IsLocal)
+			{
+				PhotonNetwork.LocalPlayer.SetCustomProperty(PlayerPropertiesPhoton.SELECTION_PLAYER_IS_READY, true);
+				photonView.RPC("SelectionEventRPC", RpcTarget.MasterClient);
+			}
+		}
 		IsPawnReady = true;
 		// some event call
 	}
@@ -151,10 +301,18 @@ public class SelectionManager : MonoBehaviour
 	{
 		if (isReadyBuzzRoutine != null && IsPawnReady)
 			StopCoroutine(isReadyBuzzRoutine);
+
+		if(IsPawnReady && PhotonNetwork.LocalPlayer.IsLocal)
+		{
+			PhotonNetwork.LocalPlayer.SetCustomProperty(PlayerPropertiesPhoton.SELECTION_PLAYER_IS_READY, false);
+			photonView.RPC("SelectionEventRPC", RpcTarget.MasterClient);
+		}
+
 		timeGestureHeld = 0.0f;
 		IsPawnReady = false;
 		// some event call
 	}
+	
 
 	private Coroutine isReadyBuzzRoutine = null;
 	// translate this to some wave
@@ -181,4 +339,5 @@ public class SelectionManager : MonoBehaviour
 		if (pawn.IsPawnGesturingReady(Hand.Right))
 			XRInput.PlayHaptics(Hand.Right, 0.8f, 0.3f);
 	}
+
 }

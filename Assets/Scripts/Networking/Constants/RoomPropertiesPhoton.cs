@@ -19,5 +19,8 @@ public static class RoomPropertiesPhoton
     public const string OBJECTIVE_TARGET        = "ObjectiveTarget";
 
     public const string TEAM_ONE_SCORE          = "TeamOneScore";
-    public const string TEAM_TWO_SCORE          = "TeamTwoScore";
+	public const string TEAM_TWO_SCORE = "TeamTwoScore";
+
+    public const string SELECTION_IS_ACTIVE = "SelectionIsActive";
+    public const string SELECTION_PLAYER_READY_AMOUNT = "SelectionPlayerReadyAmount";
 }

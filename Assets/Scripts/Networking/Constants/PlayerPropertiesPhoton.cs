@@ -17,6 +17,8 @@ public static class PlayerPropertiesPhoton
     public const string RIGHT_HAND_ITEM_NAME    = "RightItemName";
     public const string RIGHT_HAND_ITEM_VIEW_ID = "RightItemID";
 
+    public const string SELECTION_PLAYER_IS_READY = "SelectionPlayerIsReady";
+    public const string SELECTION_PLAYER_VOLUME_ID = "SelectionPlayerVolumeID";
 
     public static readonly Dictionary<Hand, string> HandItemNamePropertyPair = new Dictionary<Hand, string>()
     {

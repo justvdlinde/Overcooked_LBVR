@@ -7,7 +7,8 @@ using Utils.Core.Services;
 
 public class SelectionVolume : MonoBehaviour
 {
-    [SerializeField] private Trigger trigger = null;
+#if GAME_CLIENT
+	[SerializeField] private Trigger trigger = null;
 	
 	public int selectionVolumeID = 0;
 
@@ -82,8 +83,9 @@ public class SelectionVolume : MonoBehaviour
 	{
 		if (obj.TryGetComponent<SelectionPawn>(out SelectionPawn pawn))
 		{
-			globalEventDispatcher.Invoke(new TurnkeySelectionEvent(selectionVolumeID, false));
+			globalEventDispatcher.Invoke(new TurnkeySelectionEvent(-1, false));
 			renderer.material.color = idleColor;
 		}
 	}
+#endif
 }
