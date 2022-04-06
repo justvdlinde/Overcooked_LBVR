@@ -4,6 +4,8 @@ using Photon.Realtime;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils.Core.Events;
+using Utils.Core.Services;
 
 public class OrdersController : MonoBehaviourPunCallbacks
 {
@@ -26,12 +28,14 @@ public class OrdersController : MonoBehaviourPunCallbacks
     public int CurrentOrderIndex { get; private set; }
     public int OrdersLeft => settings.orderAmount - CurrentOrderIndex;
 
+    private GlobalEventDispatcher globalEventDispatcher;
     private TieredOrderGenerator orderGenerator;
     private GameSettings settings;
 
     public void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
 
         if (Instance != null)
         {
@@ -41,13 +45,14 @@ public class OrdersController : MonoBehaviourPunCallbacks
         Instance = this;
     }
 
-    public override void OnJoinedRoom()
+    public override void OnPlayerEnteredRoom(PhotonNetworkedPlayer newPlayer)
     {
-        if (!PhotonNetwork.IsMasterClient)
-            RequestInitialSync();
+        if(PhotonNetwork.IsMasterClient)
+            SendSyncData(newPlayer);
     }
 
-    public void RequestInitialSync()
+    [Utils.Core.Attributes.Button]
+    private void RequestInitialSync()
     {
         photonView.RPC(nameof(RequestInitialSyncRPC), PhotonNetwork.MasterClient);
     }
@@ -55,84 +60,76 @@ public class OrdersController : MonoBehaviourPunCallbacks
     [PunRPC]
     private void RequestInitialSyncRPC(PhotonMessageInfo info)
     {
-        Debug.Log("RequestDataRPC");
-        SubmitInitialSyncData(info.Sender);
+        SendSyncData(info.Sender);
     }
 
-    private void SubmitInitialSyncData(PhotonNetworkedPlayer player)
+    private void SendSyncData(PhotonNetworkedPlayer player)
     {
-        photonView.RPC(nameof(SubmitInitialSyncDataRPC), player);
+        List<byte[]> bytes = new List<byte[]>();
+        for (int i = 0; i < ActiveOrders.Count; i++)
+        {
+            byte[] order = OrderSerializer.Serialize(ActiveOrders[i]);
+            bytes.Add(order);
+        }
+        photonView.RPC(nameof(SendSyncDataRPC), player, (object)bytes.ToArray());
     }
 
     [PunRPC]
-    private void SubmitInitialSyncDataRPC()
+    private void SendSyncDataRPC(object data)
     {
-        Debug.Log("SendData received");
+        byte[][] bytes = (byte[][])data;
+        for (int i = 0; i < bytes.Length; i++)
+        {
+            Order order = OrderSerializer.Deserialize(bytes[i]);
+            AddActiveOrder(order);
+        }
     }
 
-    public void Initialize(GameSettings settings)
+    public void Initialize(GameSettings settings) // TODO: add generator as generic parameter
     {
-        orderGenerator = new TieredOrderGenerator(); // add as 'generic' parameter
+        orderGenerator = new TieredOrderGenerator(); 
         this.settings = settings;
         CurrentOrderIndex = 0;
-
-        // if joining late, sync up orders
-        //if (PhotonNetwork.IsMasterClient)
-        //{
-        //}
     }
 
-    public bool CanCreateNewOrder()
-    {
-        OrderDisplayManager displays = OrderDisplayManager.Instance;
-        if (displays == null)
-        {
-            Debug.LogWarning("No Order Displays found!, make sure there is at least one present in scene.");
-            return false;
-        }
-        else
-        {
-            return displays.HasFreeDisplay();
-        }
-    }
-
-    public void CreateNewActiveOrder()
+    public void CreateNewActiveOrder(int displayNr)
     {
         Order order = orderGenerator.GenerateRandomOrder(3, 0, out int newTier, true);
-        order.timer.Set(4);
-        AddActiveOrder(order);
+        order.orderNumber = displayNr;
+        order.timer.Set(40);
+        SubmitActiveOrder(order);
     }
 
-    public void AddActiveOrder(Order order)
+    public void SubmitActiveOrder(Order order)
     {
         photonView.RPC(nameof(SubmitActiveOrderRPC), RpcTarget.Others, OrderSerializer.Serialize(order));
-        OnActiveOrderAdded(order);
+        AddActiveOrder(order);
     }
 
     [PunRPC]
     private void SubmitActiveOrderRPC(byte[] orderData)
     {
-        OnActiveOrderAdded(OrderSerializer.Deserialize(orderData));
+        AddActiveOrder(OrderSerializer.Deserialize(orderData));
     }
 
-    private void OnActiveOrderAdded(Order order)
+    private void AddActiveOrder(Order order)
     {
+        Debug.Log("AddActiveOrder " + order);
         ActiveOrders.Add(order);
         ActiveOrderAdded?.Invoke(order);
         order.timer.Start();
+
         CurrentOrderIndex++;
         order.TimerExceededEvent += OnOrderTimerExceeded;
 
-        // TODO: do this via events
-        OrderDisplayManager.Instance.DisplayOrder(order);
+        globalEventDispatcher.Invoke(new ActiveOrderAddedEvent(order));
     }
 
     public void OnOrderTimerExceeded(Order order)
     {
-        // TODO: do this via events
-        OrderDisplayManager.Instance.RemoveDisplay(order);
+        globalEventDispatcher.Invoke(new ActiveOrderRemovedEvent(order));
 
-        OrderFailed?.Invoke(order);
+        //OrderFailed?.Invoke(order);
         RemoveOrder(order);
     }
 

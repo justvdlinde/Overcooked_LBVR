@@ -3,12 +3,21 @@ using System;
 
 public class NetworkedTimer : Timer
 {
-    public double NetworkedTimeStarted { get; private set; }
+    public double NetworkedTimeStarted { get; private set; } = 0;
 
-    public void Start(float startFrom, Action onDoneEvent = null)
+    public void Set(double networkTimeStarted, float durationInSeconds)
     {
-        Start(onDoneEvent);
-        ElapsedTime = startFrom;
-        NetworkedTimeStarted = PhotonNetwork.Time;
+        base.Set(durationInSeconds);
+        NetworkedTimeStarted = networkTimeStarted;
+    }
+
+    public override void Start(Action onDoneEvent = null)
+    {
+        base.Start(onDoneEvent);
+
+        if(NetworkedTimeStarted != 0)
+            ElapsedTime = (float)(PhotonNetwork.Time - NetworkedTimeStarted);
+        else
+            NetworkedTimeStarted = PhotonNetwork.Time;
     }
 }

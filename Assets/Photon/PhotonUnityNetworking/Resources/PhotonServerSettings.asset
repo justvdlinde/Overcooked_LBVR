@@ -55,5 +55,9 @@ MonoBehaviour:
   - RemoveTopIngredientRPC
   - RequestDataRPC
   - SendDataRPC
+  - AddActiveOrderRPC
+  - RequestInitialSyncRPC
+  - SubmitInitialSyncDataRPC
+  - SubmitActiveOrderRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0

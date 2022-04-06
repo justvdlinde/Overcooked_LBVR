@@ -69,13 +69,15 @@ public class StoryGameMode : GameMode
             orderDelay = coroutineService.StartCoroutine(Wait(delay));
             yield return orderDelay.Enumerator;
 
-            while (!OrdersController.CanCreateNewOrder())
+            bool freeDisplayAvailable = OrderDisplayManager.HasFreeDisplay(out OrderDisplay display);
+
+            while (!freeDisplayAvailable)
             {
                 yield return null;
             }
 
             if(PhotonNetwork.IsMasterClient)
-                OrdersController.CreateNewActiveOrder();
+                OrdersController.CreateNewActiveOrder(display.orderNumber);
         }
     }
 

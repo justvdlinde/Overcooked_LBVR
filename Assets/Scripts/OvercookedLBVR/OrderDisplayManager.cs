@@ -1,69 +1,109 @@
+using Photon.Pun;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Utils.Core.Events;
+using Utils.Core.Services;
 
 public class OrderDisplayManager : MonoBehaviour
 {
-    public static OrderDisplayManager Instance;
+    private static OrderDisplayManager Instance;
 
-    [SerializeField] private OrderDisplay[] displays;
+    public OrderDisplay[] OrderDisplays => orderDisplays;
+    [SerializeField] private OrderDisplay[] orderDisplays = null;
 
-    private OrdersController orderManager = null;
     private Dictionary<Order, OrderDisplay> orderDisplayPairs = new Dictionary<Order, OrderDisplay>();
+    private GlobalEventDispatcher globalEventDispatcher;
 
     private void Awake()
     {
+        if (Instance != null)
+            Destroy(Instance.gameObject);
         Instance = this;
+
+        globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
     }
 
-    //private void OnEnable()
-    //{
-    //    orderManager.OrderAddedToGame += DisplayOrder;
-    //    orderManager.OrderFailed += RemoveDisplay;
-    //    orderManager.OrderDelivered += OnOrderDelivered;
-    //}
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
+    }
 
-    //private void OnDisable()
-    //{
-    //    orderManager.OrderAddedToGame -= DisplayOrder;
-    //    orderManager.OrderFailed -= RemoveDisplay;
-    //    orderManager.OrderDelivered -= OnOrderDelivered;
-    //}
+    private void Start()
+    {
+        if(!PhotonNetwork.IsMasterClient)
+            SyncDisplays();
+    }
 
-    public bool HasFreeDisplay()
+    private void SyncDisplays()
+    {
+        OrdersController ordersController = OrdersController.Instance;
+        if (ordersController != null && ordersController.ActiveOrders.Count > 0)
+        {
+            for (int i = 0; i < ordersController.ActiveOrders.Count; i++)
+            {
+                Order order = ordersController.ActiveOrders[i];
+                DisplayOrder(order);
+            }
+        }
+    }
+
+    private void OnEnable()
+    {
+        globalEventDispatcher.Subscribe<ActiveOrderAddedEvent>(OnNewActiveOrderEvent);
+        globalEventDispatcher.Subscribe<ActiveOrderRemovedEvent>(OnActiveOrderRemovedEvent);
+    }
+
+
+    private void OnDisable()
+    {
+        globalEventDispatcher.Unsubscribe<ActiveOrderAddedEvent>(OnNewActiveOrderEvent);
+        globalEventDispatcher.Unsubscribe<ActiveOrderRemovedEvent>(OnActiveOrderRemovedEvent);
+    }
+
+    private void OnNewActiveOrderEvent(ActiveOrderAddedEvent @event)
+    {
+        DisplayOrder(@event.Order);
+    }
+
+    private void OnActiveOrderRemovedEvent(ActiveOrderRemovedEvent @event)
+    {
+        ClearDisplay(@event.Order);
+    }
+
+    public static bool HasFreeDisplay()
     {
         return HasFreeDisplay(out _);
     }
 
-    public bool HasFreeDisplay(out OrderDisplay display)
+    public static bool HasFreeDisplay(out OrderDisplay display)
     {
         display = GetFreeDisplay();
         return display != null;
     }
 
-    public OrderDisplay GetFreeDisplay()
+    public static OrderDisplay GetFreeDisplay()
     {
-        foreach (OrderDisplay d in displays)
+        foreach (OrderDisplay display in Instance.orderDisplays)
         {
-            if (d.Order == null)
-                return d;
+            if (display.CanBeUsed())
+                return display;
         }
         return null;
     }
 
     public void DisplayOrder(Order order)
     {
-        if (HasFreeDisplay(out OrderDisplay display))
-        {
-            display.Show(order);
-            orderDisplayPairs.Add(order, display);
-        }
-        else
-        {
-            Debug.LogWarning("No free display found");
-        }
+        OrderDisplay display = orderDisplays[order.orderNumber];
+        if (!display.CanBeUsed())
+            Debug.LogWarning("Display is already in use, displayed order will be overwritten");
+
+        display.Show(order);
+        orderDisplayPairs.Add(order, display);
     }
 
-    public void RemoveDisplay(Order order)
+    public void ClearDisplay(Order order)
     {
         if(orderDisplayPairs.TryGetValue(order, out OrderDisplay display))
         {
@@ -72,8 +112,12 @@ public class OrderDisplayManager : MonoBehaviour
         }
     }
 
-    private void OnOrderDelivered(Order order, Dish dish)
+#if UNITY_EDITOR
+    [Utils.Core.Attributes.Button]
+    private void AutoFindDisplays()
     {
-        RemoveDisplay(order);
+        OrderDisplay[] displays = FindObjectsOfType<OrderDisplay>();
+        orderDisplays = displays.OrderBy(item => item.orderNumber).ToArray();
     }
+#endif
 }

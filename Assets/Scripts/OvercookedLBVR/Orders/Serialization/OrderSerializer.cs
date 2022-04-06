@@ -16,12 +16,15 @@ public static class OrderSerializer
         if (BitConverter.IsLittleEndian)
             Array.Reverse(timerDuration);
 
+        byte[] timerStarted = BitConverter.GetBytes(order.timer.NetworkedTimeStarted);
+        if (BitConverter.IsLittleEndian)
+            Array.Reverse(timerStarted);
+
         byte[] ingredients = ConvertIngredientsToByteArray(order.ingredients);
         if (BitConverter.IsLittleEndian)
             Array.Reverse(ingredients);
-        UnityEngine.Debug.Log("serializing ingredients: " + order.ingredients.Length + " Ingredients: " + string.Join("", order.ingredients));
 
-        return ByteHelper.JoinBytes(orderNr, timerDuration, ingredients);
+        return ByteHelper.JoinBytes(orderNr, timerDuration, timerStarted, ingredients);
     }
 
     /// <summary>
@@ -36,23 +39,29 @@ public static class OrderSerializer
         if (BitConverter.IsLittleEndian)
             Array.Reverse(orderNrBytes);
         int orderNr = BitConverter.ToInt32(orderNrBytes, 0);
-        int usedBytes = 4;
+        int usedBytes = orderNrBytes.Length;
 
         byte[] timeDurationBytes = new byte[4];
-        Array.Copy(data, 4, timeDurationBytes, 0, timeDurationBytes.Length);
+        Array.Copy(data, timeDurationBytes.Length, timeDurationBytes, 0, timeDurationBytes.Length);
         if (BitConverter.IsLittleEndian)
             Array.Reverse(timeDurationBytes);
         float timerDuration = BitConverter.ToSingle(timeDurationBytes, 0);
-        usedBytes += 4;
+        usedBytes += timeDurationBytes.Length;
+
+        byte[] timerStartedBytes = new byte[8];
+        Array.Copy(data, timerStartedBytes.Length, timerStartedBytes, 0, timerStartedBytes.Length);
+        if (BitConverter.IsLittleEndian)
+            Array.Reverse(timerStartedBytes);
+        double timerStarted = BitConverter.ToDouble(timerStartedBytes, 0);
+        usedBytes += timerStartedBytes.Length;
 
         byte[] ingredientBytes = new byte[data.Length - usedBytes];
         Array.Copy(data, usedBytes, ingredientBytes, 0, ingredientBytes.Length);
         IngredientType[] ingredients = ConvertByteArrayToIngredients(ingredientBytes);
-        UnityEngine.Debug.Log("deserializing ingredients: " + ingredients.Length + " Ingredients: " + string.Join("", ingredients));
 
         NetworkedTimer timer = new NetworkedTimer();
-        timer.Set(timerDuration);
-        Order order = new Order(ingredients, timer);
+        timer.Set(timerStarted, timerDuration);
+        Order order = new Order(orderNr, ingredients, timer);
 
         return order;
     }

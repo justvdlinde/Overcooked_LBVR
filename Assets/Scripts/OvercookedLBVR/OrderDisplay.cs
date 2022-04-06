@@ -7,7 +7,13 @@ public class OrderDisplay : MonoBehaviour
     public Slider timeSlider;
     public int orderNumber;
 
-    public Order Order { get; private set; } 
+    public Order Order { get; private set; }
+
+    public void Update()
+    {
+        if (Order != null)
+            timeSlider.value = Order.timer.TimeRemaining / Order.timer.Duration;
+    }
 
     public void Show(Order order)
     {
@@ -25,9 +31,8 @@ public class OrderDisplay : MonoBehaviour
         Order = null;
     }
 
-    public void Update()
+    public bool CanBeUsed()
     {
-        if (Order != null)
-            timeSlider.value = Order.timer.TimeRemaining / Order.timer.Duration;
+        return Order == null;
     }
 }
