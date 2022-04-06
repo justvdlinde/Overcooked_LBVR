@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneLoadDelay: 0.1
+  useOperatorless: 1
   initialLevel: {fileID: 11400000, guid: ebafa00cb65a0314ca002b9f297adc1f, type: 2}
   showSplashScreen: 0
   networkConfig: {fileID: 11400000, guid: cac6aaf4e2900a8448101f0a26baaf06, type: 2}

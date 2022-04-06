@@ -54,7 +54,9 @@ public class SelectionVolume : MonoBehaviour
 	private void Update()
 	{
 		text.transform.forward = -(Camera.main.transform.position - text.transform.position);
-		trigger.gameObject.SetActive(SelectionManager.SelectionRequiresVolume && SelectionManager.IsSelectionActive);
+		if(SelectionManager.Instance.IsVolumeActive(selectionVolumeID))
+			text.text = SelectionManager.Instance.GetTextForVolume(selectionVolumeID);
+		trigger.gameObject.SetActive(SelectionManager.SelectionRequiresVolume && SelectionManager.IsSelectionActive && SelectionManager.Instance.IsVolumeActive(selectionVolumeID));
 	}
 
 	private void OnEnterEvent(Collider obj)

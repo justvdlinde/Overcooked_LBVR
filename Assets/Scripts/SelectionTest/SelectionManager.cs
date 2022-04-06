@@ -1,12 +1,15 @@
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utils.Core.Attributes;
 using Utils.Core.Events;
+using Utils.Core.SceneManagement;
 using Utils.Core.Services;
 using static TMPro.TMP_InputField;
 
@@ -17,6 +20,10 @@ using static TMPro.TMP_InputField;
 // level select, gamemode select, game start, game stop
 public class SelectionManager : MonoBehaviourPun
 {
+	public static SelectionManager Instance = null;
+
+	public GameLevel selectionStage = null;
+
 	private SelectionPawn pawn = null;
 
 	public static bool IsSelectionActive = false;
@@ -24,6 +31,8 @@ public class SelectionManager : MonoBehaviourPun
 
 	private int ReadyPlayerCount = 0;
 	private int PopularChoice = -1;
+
+	private bool SelectionUsesCanvas = true;
 
 	public static bool IsPawnReady = false;
 
@@ -35,33 +44,53 @@ public class SelectionManager : MonoBehaviourPun
 	private TurnkeySelectionEvent currentPlayerEventState = null;
 
 	[SerializeField] private List<TMPro.TextMeshProUGUI> texts = null;
+	[SerializeField] private GameObject canvasObject = null;
 
 	[SerializeField] public SelectionType selectionType = SelectionType.None;
 
+	private SceneService sceneService = null;
+
+	[Header("GameModeSelection maps")]
+	[SerializeField] private List<GameLevel> levelSelect = new List<GameLevel>();
+
+	private Dictionary<SelectionType, string[]> selectionVolumeTexts = new Dictionary<SelectionType, string[]>
+	{
+		{SelectionType.None, new string[2]{"Contact operator", "Contact Operator"} },
+		{SelectionType.ReadyUp, new string[2]{"Not ready", "Ready"} },
+		{SelectionType.Replay, new string[2]{"Back to main menu", "Play another game" } },
+		{SelectionType.MapSelection, new string[2]{"Select map", "Select map"} },
+		{SelectionType.Gameplay, new string[2]{"Back to main menu", "Start game", } },
+		{SelectionType.Gamemode, new string[3]{"Back to main menu", "Story mode", "Highscore mode"} }
+	};
+
 	private void OnEnable()
 	{
-		pawn = Object.FindObjectOfType<SelectionPawn>();
+		Instance = this;
+
+		pawn = GameObject.FindObjectOfType<SelectionPawn>();
 
 		globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+		sceneService = GlobalServiceLocator.Instance.Get<SceneService>();
+
+		DontDestroyOnLoad(gameObject);
 
 #if GAME_CLIENT
 		globalEventDispatcher.Subscribe<TurnkeySelectionEvent>(OnSelectionEvent);
 #endif
-		PhotonNetworkService.RoomPropertiesChangedEvent += OnRoomPropertiesChangedEvent;
-		if (pawn == null)
-		{
-			// some error show
-		}
-	}
+		globalEventDispatcher.Subscribe<ConnectionSuccessEvent>(OnConnectionSuccessEvent);
+		globalEventDispatcher.Subscribe<SceneLoadedEvent>(OnSceneLoadedEvent);
 
-	
+		PhotonNetworkService.RoomPropertiesChangedEvent += OnRoomPropertiesChangedEvent;
+	}
 
 	private void OnDisable()
 	{
 #if GAME_CLIENT
 		globalEventDispatcher.Unsubscribe<TurnkeySelectionEvent>(OnSelectionEvent);
-		// left empty intentionally
 #endif
+		globalEventDispatcher.Unsubscribe<ConnectionSuccessEvent>(OnConnectionSuccessEvent);
+		globalEventDispatcher.Unsubscribe<SceneLoadedEvent>(OnSceneLoadedEvent);
+
 		IsSelectionActive = false;
 		PhotonNetworkService.RoomPropertiesChangedEvent -= OnRoomPropertiesChangedEvent;
 	}
@@ -69,7 +98,11 @@ public class SelectionManager : MonoBehaviourPun
 	private void Update()
 	{
 		if (pawn == null)
-			return; // show some error
+		{
+			pawn = GameObject.FindObjectOfType<SelectionPawn>();
+			if(pawn == null)
+				return; // show some error
+		}
 
 		SetTexts();
 
@@ -100,8 +133,58 @@ public class SelectionManager : MonoBehaviourPun
 		}
 	}
 
-	#region Selection handling
+	public bool hasStartedReadyCheck = false;
+	private Action onReadyCallback = null;
 
+	public void StartReadyCheck(Action callback)
+	{
+		Debug.Log("Starting ready check");
+		if (hasStartedReadyCheck)
+			return;
+		hasStartedReadyCheck = true;
+		onReadyCallback = callback;
+		InitiateSelection(SelectionType.ReadyUp, false, false, true);
+	}
+
+	#region Selection handling
+	[Tooltip("Short delay before scene starts to actually load, this allows for a screen fade for example")]
+	[SerializeField] protected float sceneLoadDelay = 0.1f;
+	public void InitiateSelection(SelectionType type, bool useCanvas, bool requiresVolume, bool doneInScene = false)
+	{
+		initiatedSelectionType = type;
+		initiatedUseCanvas = useCanvas;
+		initiatedRequiresVolume = requiresVolume;
+		sceneService.SceneLoadFinishEvent += OnSceneLoadFinishEvent;
+		if(!doneInScene)
+			LoadScene(selectionStage.Scene.SceneName);
+		//StartCoroutine(LoadSceneDelayed(selectionStage.Scene.SceneName, sceneLoadDelay, () => { StartSelection(type, useCanvas); }));
+	}
+
+	private SelectionType initiatedSelectionType = SelectionType.None;
+	private bool initiatedUseCanvas = false;
+	private bool initiatedRequiresVolume = false;
+
+	private void OnSceneLoadFinishEvent(Scene scene, LoadSceneMode loadMode)
+	{
+		StartSelection(initiatedSelectionType, initiatedUseCanvas, initiatedRequiresVolume);
+		sceneService.SceneLoadFinishEvent -= OnSceneLoadFinishEvent;
+	}
+
+	protected virtual void LoadScene(string sceneName)
+	{
+		if (sceneLoadDelay > 0)
+			StartCoroutine(LoadSceneDelayed(sceneName, sceneLoadDelay));
+		else
+			sceneService.LoadSceneAsync(sceneName);
+	}
+
+	protected virtual IEnumerator LoadSceneDelayed(string sceneName, float seconds, Action onDone = null)
+	{
+		globalEventDispatcher.Invoke(new StartDelayedSceneLoadEvent(sceneName, seconds));
+		yield return new WaitForSeconds(seconds);
+		onDone?.Invoke();
+		sceneService.LoadSceneAsync(sceneName);
+	}
 	private void OnRoomPropertiesChangedEvent(ExitGames.Client.Photon.Hashtable obj)
 	{
 		if (obj.TryGetValue(RoomPropertiesPhoton.SELECTION_IS_ACTIVE, out object selectionActive))
@@ -109,23 +192,11 @@ public class SelectionManager : MonoBehaviourPun
 			IsSelectionActive = (bool)selectionActive;
 		}
 
-		if (obj.TryGetValue(RoomPropertiesPhoton.SELECTION_PLAYER_READY_AMOUNT, out object amt))
-		{
-			ReadyPlayerCount = (int)amt;
-
-			if(PhotonNetwork.IsMasterClient)
-			{
-				// check coice if ready count equals total player count
-				// execute result
-				// disable selection
-			}
-
-		}
-
 		if (obj.TryGetValue(RoomPropertiesPhoton.SELECTION_TYPE, out object type))
 		{
 			selectionType = (SelectionType)type;
 		}
+
 		if (obj.TryGetValue(RoomPropertiesPhoton.SELECTION_POPULAR_CHOICE, out object p))
 		{
 			PopularChoice = (int)p;
@@ -135,29 +206,69 @@ public class SelectionManager : MonoBehaviourPun
 		{
 			SelectionRequiresVolume = (bool)r;
 		}
+
+		if(obj.TryGetValue(RoomPropertiesPhoton.SELECTION_USES_CANVAS, out object c))
+		{
+			SelectionUsesCanvas = (bool)c;
+			canvasObject.SetActive(SelectionUsesCanvas);
+		}
+
+		if (obj.TryGetValue(RoomPropertiesPhoton.SELECTION_PLAYER_READY_AMOUNT, out object amt))
+		{
+			ReadyPlayerCount = (int)amt;
+
+			if (PhotonNetwork.IsMasterClient && ReadyPlayerCount >= PhotonNetwork.PlayerList.Length)
+			{
+				// check choice if ready count equals total player count
+				// execute result
+				// disable selection
+				HandleSelectionReadyEvent(false);
+			}
+		}
 	}
 
 	private void HandleSelectionReadyEvent(bool useDefault = false)
 	{
 		int choice = (useDefault) ? 0 : PopularChoice;
 
+		StopSelection();
 		switch (selectionType)
 		{
 			case SelectionType.None:
 				return;
-			case SelectionType.Gamemode:
-				//HandleGameModeSelection();
-				break;
 			case SelectionType.Replay:
 				//globalEventDispatcher.Invoke<ReplayEvent>(new ReplayEvent());
 				break;
+			case SelectionType.Gamemode:
 			case SelectionType.MapSelection:
+				HandleMapSelection(choice);
 				break;
 			case SelectionType.Gameplay:
 				break;
 			case SelectionType.ReadyUp:
+				HandleReadyCheck(choice);
 				break;
 		}
+	}
+
+	private void HandleReadyCheck(int selectedVolume)
+	{
+		Debug.Log(selectedVolume);
+		switch (selectedVolume)
+		{
+			case 1:
+				// call replay event across clients
+				onReadyCallback?.Invoke();
+				break;
+			default:
+				Debug.Log("defaulting");
+				sceneService.LoadScene(selectionStage.Scene.SceneName);
+				// go to other place
+				break;
+		}
+		onReadyCallback = null;
+
+		hasStartedReadyCheck = false;
 	}
 
 	private void HandleGameModeSelection(int selectedVolume)
@@ -176,6 +287,7 @@ public class SelectionManager : MonoBehaviourPun
 				gm.Replay();
 				break;
 			default:
+				sceneService.LoadScene(selectionStage.Scene.SceneName);
 				// go to other place
 				break;
 		}
@@ -199,6 +311,23 @@ public class SelectionManager : MonoBehaviourPun
 
 	private void HandleMapSelection(int selectedVolume)
 	{
+		Debug.Log("People picked choice " + GetTextForVolume(selectedVolume));
+		switch (selectedVolume)
+		{
+			case 0:
+				sceneService.LoadScene(selectionStage.Scene.SceneName);
+				break;
+			case 1:
+				sceneService.LoadScene(levelSelect[selectedVolume].Scene.SceneName);
+				break;
+			case 2:
+				sceneService.LoadScene(levelSelect[selectedVolume].Scene.SceneName);
+				break;
+			default:
+				sceneService.LoadScene(selectionStage.Scene.SceneName);
+				break;
+		}
+
 		// depending on selectedVolume handle some callback
 	}
 	#endregion
@@ -215,7 +344,7 @@ public class SelectionManager : MonoBehaviourPun
 	public void ToggleSelection()
 	{
 		if (!IsSelectionActive)
-			StartSelection(selectionType);
+			StartSelection(selectionType, SelectionUsesCanvas, SelectionRequiresVolume);
 		else
 			StopSelection();
 	}
@@ -226,16 +355,28 @@ public class SelectionManager : MonoBehaviourPun
 		PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_REQUIRES_VOLUME, !SelectionRequiresVolume);
 	}
 
-	public void StartSelection(SelectionType type)
+	private void StartSelection(SelectionType type, bool useCanvas, bool requiresVolume)
 	{
-		PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_IS_ACTIVE, true);
-		PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_TYPE, (int)type);
+		canvasObject.SetActive(false);
+		if (PhotonNetwork.IsMasterClient)
+		{
+			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_TYPE, (int)type);
+			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_IS_ACTIVE, true);
+			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_USES_CANVAS, useCanvas);
+			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_REQUIRES_VOLUME, requiresVolume);
+		}
 	}
 
 	public void StopSelection()
 	{
-		PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_IS_ACTIVE, false);
-		PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_TYPE, 0);
+		canvasObject.SetActive(false);
+		if (PhotonNetwork.IsMasterClient)
+		{
+			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_IS_ACTIVE, false);
+			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_TYPE, 0);
+			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_USES_CANVAS, false);
+			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.SELECTION_REQUIRES_VOLUME, true);
+		}
 	}
 
 	private void OnSelectionEvent(TurnkeySelectionEvent obj)
@@ -257,6 +398,17 @@ public class SelectionManager : MonoBehaviourPun
 		}
 	}
 
+	private void OnConnectionSuccessEvent(ConnectionSuccessEvent obj)
+	{
+		OnRoomPropertiesChangedEvent(PhotonNetwork.CurrentRoom.CustomProperties);
+	}
+
+	private void OnSceneLoadedEvent(SceneLoadedEvent obj)
+	{
+		timeGestureHeld = 0;
+		if (PhotonNetwork.CurrentRoom != null)
+			OnRoomPropertiesChangedEvent(PhotonNetwork.CurrentRoom.CustomProperties);
+	}
 
 	private int CountReadyPlayers()
 	{
@@ -281,9 +433,11 @@ public class SelectionManager : MonoBehaviourPun
 
 			bool playerIsReady = false;
 			if (item.CustomProperties.TryGetValue(PlayerPropertiesPhoton.SELECTION_PLAYER_IS_READY, out object r))
+			{
 				playerIsReady = (bool)r;
-
-			// some way to find what volume is popular (could be handled locally)
+				if (!SelectionRequiresVolume)
+					choices.Add((playerIsReady) ? 1 : 0);
+			}
 
 			if (playerIsReady && (playerIsInVolume || !SelectionRequiresVolume))
 				readyCount++;
@@ -326,7 +480,7 @@ public class SelectionManager : MonoBehaviourPun
 		if (PopularChoice == -1)
 			text += "No popular choice";
 		else
-			text += "Popular choice is: " + ((PopularChoice == 0) ? "No" : "Yes");
+			text += "Popular choice is: " + GetTextForVolume(PopularChoice);
 		text += "\n";
 
 		int playerCount = PhotonNetwork.PlayerList.Length;
@@ -386,7 +540,7 @@ public class SelectionManager : MonoBehaviourPun
 			if (!IsPawnReady && PhotonNetwork.LocalPlayer.IsLocal)
 			{
 				PhotonNetwork.LocalPlayer.SetCustomProperty(PlayerPropertiesPhoton.SELECTION_PLAYER_IS_READY, true);
-				photonView.RPC("SelectionEventRPC", RpcTarget.MasterClient);
+				photonView.RPC(nameof(SelectionEventRPC), RpcTarget.MasterClient);
 			}
 		}
 		IsPawnReady = true;
@@ -401,7 +555,7 @@ public class SelectionManager : MonoBehaviourPun
 		if (IsPawnReady && PhotonNetwork.LocalPlayer.IsLocal)
 		{
 			PhotonNetwork.LocalPlayer.SetCustomProperty(PlayerPropertiesPhoton.SELECTION_PLAYER_IS_READY, false);
-			photonView.RPC("SelectionEventRPC", RpcTarget.MasterClient);
+			photonView.RPC(nameof(SelectionEventRPC), RpcTarget.MasterClient);
 		}
 
 		timeGestureHeld = 0.0f;
@@ -436,6 +590,30 @@ public class SelectionManager : MonoBehaviourPun
 			XRInput.PlayHaptics(Hand.Right, 0.8f, 0.3f);
 	}
 	#endregion
+
+	public bool IsVolumeActive(int volumeID)
+	{
+		if (selectionVolumeTexts.ContainsKey(selectionType))
+		{
+			return volumeID <= selectionVolumeTexts[selectionType].Length - 1;
+		}
+
+		return false;
+	}
+
+	public string GetTextForVolume(int volumeID)
+	{
+		string text = "Error getting text";
+
+		if(selectionVolumeTexts.ContainsKey(selectionType))
+		{
+			string[] texts = selectionVolumeTexts[selectionType];
+			if (volumeID <= texts.Length - 1)
+				text = texts[volumeID];
+		}
+
+		return text;
+	}
 
 	public T Mode<T>(IEnumerable<T> list)
 	{

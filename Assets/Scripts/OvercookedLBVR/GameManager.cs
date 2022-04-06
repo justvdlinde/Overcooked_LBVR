@@ -20,6 +20,14 @@ public class GameManager : MonoBehaviourPun
     {
         orderManager.OrderFailed += OnOrderFailed;
         orderManager.OrderDelivered += OnOrderDelivered;
+
+        SelectionManager.Instance.StartReadyCheck(() => StartGame());
+    }
+
+    [Button]
+    public void aaa()
+	{
+        SelectionManager.Instance.StartReadyCheck(() => StartGame());
     }
 
     private void OnDisable()
@@ -79,5 +87,6 @@ public class GameManager : MonoBehaviourPun
         gameIsRunning = false;
         Debug.Log("Game Over!");
         Debug.LogFormat("Final score: {0} out of {1}", totalScore, maxScore);
+        SelectionManager.Instance.StartReadyCheck(() => StartGame());
     }
 }

@@ -26,4 +26,5 @@ public static class RoomPropertiesPhoton
     public const string SELECTION_PLAYER_READY_AMOUNT = "SelectionPlayerReadyAmount";
     public const string SELECTION_POPULAR_CHOICE = "SelectionPopularChoice";
     public const string SELECTION_REQUIRES_VOLUME = "SelectionRequiresVolume";
+    public const string SELECTION_USES_CANVAS = "SelectionUsesCanvas";
 }

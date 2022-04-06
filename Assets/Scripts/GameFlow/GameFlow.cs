@@ -13,6 +13,9 @@ public abstract class GameFlow : MonoBehaviour
     [Tooltip("Short delay before scene starts to actually load, this allows for a screen fade for example")]
     [SerializeField] protected float sceneLoadDelay = 0.1f;
 
+    // should be read from a file on init of application
+    [SerializeField] protected bool useOperatorless = true;
+
     [Tooltip("The initial level that will be loaded")]
     [SerializeField] protected GameLevel initialLevel = null;
 
@@ -31,7 +34,7 @@ public abstract class GameFlow : MonoBehaviour
     protected bool wasConnected;
     protected Popup connectingScreenInstance;
 
-    protected void InjectDependencies(DependencyInjector injector, INetworkService networkService, GlobalEventDispatcher globalEventDispatcher, 
+    protected void InjectDependencies(DependencyInjector injector, INetworkService networkService, GlobalEventDispatcher globalEventDispatcher,
         GameModeService gameModeService, SceneService sceneService, PopupService popupService)
     {
         this.injector = injector;
@@ -79,7 +82,7 @@ public abstract class GameFlow : MonoBehaviour
     protected virtual GameObject InstantiatePrefab(GameObject prefab, bool dontDestroyOnLoad = true)
     {
         GameObject instance = injector.InstantiateGameObject(prefab);
-        if(dontDestroyOnLoad)
+        if (dontDestroyOnLoad)
             DontDestroyOnLoad(instance.gameObject);
         return instance;
     }
@@ -118,7 +121,15 @@ public abstract class GameFlow : MonoBehaviour
         if (@event.Room.CustomProperties.TryGetValue(RoomPropertiesPhoton.SCENE, out object sceneValue))
             OnScenePropertyChanged(sceneValue);
         else
-            LoadScene(initialLevel.Scene.SceneName);
+        {
+            if (useOperatorless)
+            {
+                SelectionManager.Instance.InitiateSelection(SelectionType.Gamemode, true, true);
+                //LoadScene(operatorLessSelectionScene.Scene.SceneName);
+            }
+            else
+                LoadScene(initialLevel.Scene.SceneName);
+        }
     }
 
     protected virtual void OnConnectionFailedEvent(ConnectionFailedEvent @event)
@@ -138,7 +149,7 @@ public abstract class GameFlow : MonoBehaviour
             gameModeService.StartNewGame(gameMode);
     }
 
-    protected virtual void OnRoomPropertiesChangedEvent(HashTable properties)  
+    protected virtual void OnRoomPropertiesChangedEvent(HashTable properties)
     {
         if (properties.TryGetValue(RoomPropertiesPhoton.SCENE, out object sceneValue))
             OnScenePropertyChanged(sceneValue);
