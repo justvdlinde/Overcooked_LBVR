@@ -48,7 +48,7 @@ public class StoryGameMode : GameMode
         Debug.Log("StartActiveGame");
 
         if (PhotonNetwork.IsMasterClient)
-            coroutineService.StartCoroutine(StoryLoop());
+            coroutineService.StartCoroutine(StoryFlow());
     }
 
     public override void Shutdown()
@@ -60,24 +60,25 @@ public class StoryGameMode : GameMode
     }
 
     // TODO: all clients need to somehow execute this loop in case the masterclient disconnects
-    private IEnumerator StoryLoop()
+    // TODO: replace with some kind of state machine? Would be usefull if we want narration in between orders
+    private IEnumerator StoryFlow()
     {
         for (int i = 0; i < settings.orderAmount; i++)
         {
             // TODO: get delay for next order instead of 1
             float delay = 1;
-            orderDelay = coroutineService.StartCoroutine(Wait(delay));
-            yield return orderDelay.Enumerator;
+            yield return Wait(delay);
 
-            bool freeDisplayAvailable = OrderDisplayManager.HasFreeDisplay(out OrderDisplay display);
-
-            while (!freeDisplayAvailable)
+            while (!OrderDisplayManager.HasFreeDisplay())
             {
                 yield return null;
             }
 
+            yield return Wait(settings.nextOrderDelay);
+
+            OrderDisplay freeDisplay = OrderDisplayManager.GetFreeDisplay();
             if(PhotonNetwork.IsMasterClient)
-                OrdersController.CreateNewActiveOrder(display.orderNumber);
+                OrdersController.CreateNewActiveOrder(freeDisplay.orderNumber);
         }
     }
 

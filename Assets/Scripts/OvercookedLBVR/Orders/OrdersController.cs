@@ -21,10 +21,6 @@ public class OrdersController : MonoBehaviourPunCallbacks
     public Action<Order> ActiveOrderAdded;
     public Action<Order> ActiveOrderRemoved;
 
-    // try to merge these 2 together?
-    public Action<Order> OrderFailed;
-    public Action<Order, Dish> OrderDelivered;
-
     public int CurrentOrderIndex { get; private set; }
     public int OrdersLeft => settings.orderAmount - CurrentOrderIndex;
 
@@ -96,7 +92,7 @@ public class OrdersController : MonoBehaviourPunCallbacks
     {
         Order order = orderGenerator.GenerateRandomOrder(3, 0, out int newTier, true);
         order.orderNumber = displayNr;
-        order.timer.Set(40);
+        order.timer.Set(5);
         SubmitActiveOrder(order);
     }
 
@@ -127,13 +123,15 @@ public class OrdersController : MonoBehaviourPunCallbacks
 
     public void OnOrderTimerExceeded(Order order)
     {
-        globalEventDispatcher.Invoke(new ActiveOrderRemovedEvent(order));
+        // rpc call to all players to remove that order?
+        // calculate score via gamemode?
+        // send/store score rpc?
 
-        //OrderFailed?.Invoke(order);
-        RemoveOrder(order);
+        globalEventDispatcher.Invoke(new ActiveOrderRemovedEvent(order));
+        RemoveActiveOrder(order);
     }
 
-    private void RemoveOrder(Order order)
+    private void RemoveActiveOrder(Order order)
     {
         ActiveOrders.Remove(order);
         CompletedOrders.Add(order);
@@ -145,8 +143,7 @@ public class OrdersController : MonoBehaviourPunCallbacks
 
     public void DeliverOrder(Order order, Dish dish)
     {
-        OrderDelivered?.Invoke(order, dish);
-        RemoveOrder(order);
+        RemoveActiveOrder(order);
     }
 
     public Order GetClosestOrder(Dish dish, out float bestFitScore)

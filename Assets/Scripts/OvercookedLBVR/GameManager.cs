@@ -16,16 +16,16 @@ public class GameManager : MonoBehaviourPun
 
     private bool gameIsRunning;
 
-    private void OnEnable()
-    {
-        orderManager.OrderFailed += OnOrderFailed;
-        orderManager.OrderDelivered += OnOrderDelivered;
-    }
+    //private void OnEnable()
+    //{
+    //    orderManager.OrderFailed += OnOrderFailed;
+    //    orderManager.OrderDelivered += OnOrderDelivered;
+    //}
 
-    private void OnDisable()
-    {
-        orderManager.OrderFailed -= OnOrderFailed;
-    }
+    //private void OnDisable()
+    //{
+    //    orderManager.OrderFailed -= OnOrderFailed;
+    //}
 
     private void OnOrderFailed(Order order)
     {
