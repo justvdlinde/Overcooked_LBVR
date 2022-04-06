@@ -34,6 +34,10 @@ public class StoryGameMode : GameMode
             settings = Object.Instantiate(settings);
             OrdersController.Initialize(settings);
         }
+        else
+        {
+            OrdersController = OrdersController.Instance;
+        }
 
         base.Setup();
     }
@@ -55,6 +59,7 @@ public class StoryGameMode : GameMode
             PhotonNetwork.Destroy(OrdersController.gameObject);
     }
 
+    // TODO: all clients need to somehow execute this loop in case the masterclient disconnects
     private IEnumerator StoryLoop()
     {
         for (int i = 0; i < settings.orderAmount; i++)

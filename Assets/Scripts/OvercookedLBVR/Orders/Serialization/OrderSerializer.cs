@@ -19,6 +19,7 @@ public static class OrderSerializer
         byte[] ingredients = ConvertIngredientsToByteArray(order.ingredients);
         if (BitConverter.IsLittleEndian)
             Array.Reverse(ingredients);
+        UnityEngine.Debug.Log("serializing ingredients: " + order.ingredients.Length + " Ingredients: " + string.Join("", order.ingredients));
 
         return ByteHelper.JoinBytes(orderNr, timerDuration, ingredients);
     }
@@ -40,17 +41,19 @@ public static class OrderSerializer
         byte[] timeDurationBytes = new byte[4];
         Array.Copy(data, 4, timeDurationBytes, 0, timeDurationBytes.Length);
         if (BitConverter.IsLittleEndian)
-            Array.Reverse(orderNrBytes);
+            Array.Reverse(timeDurationBytes);
         float timerDuration = BitConverter.ToSingle(timeDurationBytes, 0);
         usedBytes += 4;
 
-        //byte[] ingredientBytes = new byte[data.Length - usedBytes];
-        //Array.Copy(data, usedBytes, ingredientBytes, 0, ingredientBytes.Length);
-        //if (BitConverter.IsLittleEndian)
-        //    Array.Reverse(ingredientBytes);
-        //int[] ingredients = BitConverter.ToSingle(timeDurationBytes, 0);
+        byte[] ingredientBytes = new byte[data.Length - usedBytes];
+        Array.Copy(data, usedBytes, ingredientBytes, 0, ingredientBytes.Length);
+        IngredientType[] ingredients = ConvertByteArrayToIngredients(ingredientBytes);
+        UnityEngine.Debug.Log("deserializing ingredients: " + ingredients.Length + " Ingredients: " + string.Join("", ingredients));
 
-        Order order = new Order(orderNr, timerDuration);
+        NetworkedTimer timer = new NetworkedTimer();
+        timer.Set(timerDuration);
+        Order order = new Order(ingredients, timer);
+
         return order;
     }
 
@@ -65,5 +68,21 @@ public static class OrderSerializer
         byte[] result = new byte[ingredientInts.Length * sizeof(int)];
         Buffer.BlockCopy(ingredientInts, 0, result, 0, result.Length);
         return result;
+    }
+
+    private static IngredientType[] ConvertByteArrayToIngredients(byte[] data)
+    {
+        if (BitConverter.IsLittleEndian)
+            Array.Reverse(data);
+
+        int[] ingredientInts = new int[data.Length / 4]; 
+        Buffer.BlockCopy(data, 0, ingredientInts, 0, data.Length);
+
+        IngredientType[] ingredients = new IngredientType[ingredientInts.Length];
+        for (int i = 0; i < ingredients.Length; i++)
+        {
+            ingredients[i] = (IngredientType)ingredientInts[i];
+        }
+        return ingredients;
     }
 }

@@ -7,6 +7,11 @@ using UnityEngine;
 
 public class OrdersController : MonoBehaviourPunCallbacks
 {
+    /// <summary>
+    /// Needs a singleton because it needs to instantiated by Photon by the MasterClient but all clients need a reference
+    /// </summary>
+    public static OrdersController Instance;
+
     public List<Order> ActiveOrders { get; private set; } = new List<Order>();
     public List<Order> CompletedOrders { get; private set; } = new List<Order>();
 
@@ -27,6 +32,13 @@ public class OrdersController : MonoBehaviourPunCallbacks
     public void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
+        if (Instance != null)
+        {
+            Debug.LogWarning("OrdersController Instance already present, destroying old instance");
+            PhotonNetwork.Destroy(Instance.gameObject);
+        }
+        Instance = this;
     }
 
     public override void OnJoinedRoom()
@@ -93,14 +105,18 @@ public class OrdersController : MonoBehaviourPunCallbacks
 
     public void AddActiveOrder(Order order)
     {
-        photonView.RPC(nameof(AddActiveOrderRPC), RpcTarget.All, OrderSerializer.Serialize(order));
+        photonView.RPC(nameof(SubmitActiveOrderRPC), RpcTarget.Others, OrderSerializer.Serialize(order));
+        OnActiveOrderAdded(order);
     }
 
     [PunRPC]
-    private void AddActiveOrderRPC(byte[] orderData)
+    private void SubmitActiveOrderRPC(byte[] orderData)
     {
-        Order order = OrderSerializer.Deserialize(orderData);
+        OnActiveOrderAdded(OrderSerializer.Deserialize(orderData));
+    }
 
+    private void OnActiveOrderAdded(Order order)
+    {
         ActiveOrders.Add(order);
         ActiveOrderAdded?.Invoke(order);
         order.timer.Start();
@@ -176,5 +192,11 @@ public class OrdersController : MonoBehaviourPunCallbacks
     {
         Score score = new Score(order, dish);
         return score.Points / score.MaxScore;
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+            Instance = null;
     }
 }

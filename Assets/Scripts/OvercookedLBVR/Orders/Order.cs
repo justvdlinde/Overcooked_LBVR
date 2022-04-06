@@ -16,17 +16,6 @@ public class Order : IDisposable
         timer.onDone += OnTimerExceeded;
     }
 
-    public Order(int orderNr, float timerDuration)
-    {
-        timer = new NetworkedTimer();
-        timer.Set(timerDuration);
-        ingredients = new IngredientType[3];
-        ingredients[0] = IngredientType.BunBottom;
-        ingredients[1] = IngredientType.Patty;
-        ingredients[2] = IngredientType.BunTop;
-
-        UnityEngine.Debug.Log("orderNr " + orderNr + " Timerduration: " + timerDuration);
-    }
 
     // TODO: remove
     //public Order(object[] data)
