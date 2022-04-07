@@ -10,23 +10,19 @@ using Utils.Core.Services;
 public class OrdersController : MonoBehaviourPunCallbacks
 {
     /// <summary>
-    /// Needs a singleton because it needs to instantiated by Photon by the MasterClient but all clients need a reference
+    /// Needs a singleton because it needs to be instantiated by Photon by the MasterClient but all clients need a reference as well
     /// </summary>
     public static OrdersController Instance;
 
     public List<Order> ActiveOrders { get; private set; } = new List<Order>();
     public List<Order> CompletedOrders { get; private set; } = new List<Order>();
+    public int CurrentOrderIndex { get; private set; }
 
-    // TODO: replace/add IEvents
     public Action<Order> ActiveOrderAdded;
     public Action<Order> ActiveOrderRemoved;
 
-    public int CurrentOrderIndex { get; private set; }
-    public int OrdersLeft => settings.orderAmount - CurrentOrderIndex;
-
     private GlobalEventDispatcher globalEventDispatcher;
     private TieredOrderGenerator orderGenerator;
-    private GameSettings settings;
 
     public void Awake()
     {
@@ -43,7 +39,7 @@ public class OrdersController : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(PhotonNetworkedPlayer newPlayer)
     {
-        if(PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient)
             SendSyncData(newPlayer);
     }
 
@@ -67,12 +63,21 @@ public class OrdersController : MonoBehaviourPunCallbacks
             byte[] order = OrderSerializer.Serialize(ActiveOrders[i]);
             bytes.Add(order);
         }
-        photonView.RPC(nameof(SendSyncDataRPC), player, (object)bytes.ToArray());
+
+        // In case ActiveOrders is empty, send null, otherwise Photon will throw an error
+        object data = null;
+        if (bytes.Count != 0)
+            data = bytes.ToArray();
+
+        photonView.RPC(nameof(SendSyncDataRPC), player, data);
     }
 
     [PunRPC]
     private void SendSyncDataRPC(object data)
     {
+        if (data == null)
+            return;
+
         byte[][] bytes = (byte[][])data;
         for (int i = 0; i < bytes.Length; i++)
         {
@@ -84,7 +89,6 @@ public class OrdersController : MonoBehaviourPunCallbacks
     public void Initialize(GameSettings settings) // TODO: add generator as generic parameter
     {
         orderGenerator = new TieredOrderGenerator(); 
-        this.settings = settings;
         CurrentOrderIndex = 0;
     }
 
@@ -92,7 +96,7 @@ public class OrdersController : MonoBehaviourPunCallbacks
     {
         Order order = orderGenerator.GenerateRandomOrder(3, 0, out int newTier, true);
         order.orderNumber = displayNr;
-        order.timer.Set(5);
+        order.timer.Set(5); // TODO: set timer
         SubmitActiveOrder(order);
     }
 
@@ -127,7 +131,6 @@ public class OrdersController : MonoBehaviourPunCallbacks
         // calculate score via gamemode?
         // send/store score rpc?
 
-        globalEventDispatcher.Invoke(new ActiveOrderRemovedEvent(order));
         RemoveActiveOrder(order);
     }
 
@@ -136,6 +139,7 @@ public class OrdersController : MonoBehaviourPunCallbacks
         ActiveOrders.Remove(order);
         CompletedOrders.Add(order);
         ActiveOrderRemoved?.Invoke(order);
+        globalEventDispatcher.Invoke(new ActiveOrderRemovedEvent(order));
 
         order.TimerExceededEvent -= OnOrderTimerExceeded;
         order.Dispose();

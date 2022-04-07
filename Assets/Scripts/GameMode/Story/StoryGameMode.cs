@@ -92,6 +92,16 @@ public class StoryGameMode : GameMode
         return new StoryGameResult(this, Scoreboard as StoryGameScores);
     }
 
+    public void OnOrderDelivered(Order order)
+    {
+
+    }
+
+    public void OnOrderTimerExceeded(Order order)
+    {
+
+    }
+
     private bool IsLastOrderDone()
     {
         return OrdersController.ActiveOrders.Count == 0 && OrdersController.CompletedOrders.Count >= settings.orderAmount;

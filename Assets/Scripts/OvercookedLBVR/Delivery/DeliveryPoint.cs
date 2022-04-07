@@ -3,11 +3,20 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils.Core.Attributes;
+using Utils.Core.Events;
+using Utils.Core.Services;
 
 [RequireComponent(typeof(Collider))]
 public class DeliveryPoint : MonoBehaviourPun
 {
     public List<Dish> dishesInTrigger = new List<Dish>();
+
+    private GlobalEventDispatcher globalEventDispatcher;
+
+    private void Awake()
+    {
+        globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -34,12 +43,6 @@ public class DeliveryPoint : MonoBehaviourPun
     [Button]
     public void DeliverDishesInTrigger()
     {
-        photonView.RPC(nameof(DeliverDishesInTriggerRPC), RpcTarget.All);
-    }
-
-    [PunRPC]
-    private void DeliverDishesInTriggerRPC(PhotonMessageInfo info)
-    {
 		Action remove = null;
         foreach (Dish dish in dishesInTrigger)
 		{
@@ -65,37 +68,36 @@ public class DeliveryPoint : MonoBehaviourPun
 
     public bool DeliverDish(Dish dish)
     {
-        //bool delivered = false;
-        //      Order closestOrder = OrdersController.Instance.GetClosestOrder(dish, out float bestFitScore);
-        //      Debug.Log("Delivered dish: " + string.Join("", dish.ingredients) 
-        //          + "\nbest fit score: " + bestFitScore 
-        //          + "\nclosest order: " + string.Join("", closestOrder.ingredients));
+        bool delivered = false;
+        Order closestOrder = OrdersController.Instance.GetClosestOrder(dish, out float bestFitScore);
+        Debug.Log("Delivered dish: " + string.Join("", dish.ingredients)
+            + "\nbest fit score: " + bestFitScore
+            + "\nclosest order: " + string.Join("", closestOrder.ingredients));
 
-        //      if (closestOrder != null)
-        //{
-        //          OrdersController.Instance.DeliverOrder(closestOrder, dish);
-        //	delivered = true;
-        //}
-        //      else
-        //          Debug.LogError("No closest order found!");
+        if (closestOrder != null)
+        {
+            OrdersController.Instance.DeliverOrder(closestOrder, dish);
+            delivered = true;
+        }
+        else
+            Debug.LogError("No closest order found!");
 
-        //      if (dish.transform.parent != null)
-        //      {
-        //          if(dish.transform.parent.parent != null)
-        //          { 
-        //              Destroy(dish.transform.parent.parent.gameObject);
-        //          }
-        //          else
-        //          {
-        //              Destroy(dish.transform.parent.gameObject);
-        //          }
+        if (dish.transform.parent != null)
+        {
+            if (dish.transform.parent.parent != null)
+            {
+                Destroy(dish.transform.parent.parent.gameObject);
+            }
+            else
+            {
+                Destroy(dish.transform.parent.gameObject);
+            }
 
-        //      }
-        //      else
-        //      {
-        //          Destroy(dish.transform.gameObject);
-        //      }
-        //return delivered;
-        return true;
+        }
+        else
+        {
+            Destroy(dish.transform.gameObject);
+        }
+        return delivered;
     }
 }
