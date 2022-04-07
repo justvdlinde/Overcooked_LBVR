@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -117,6 +118,11 @@ public abstract class GameFlow : MonoBehaviour
         //{
         //    gameModeService.StartNewGame(GameModeEnum.TeamDeathmatch);
         //}
+
+        if(PhotonNetwork.IsMasterClient)
+		{
+            PhotonNetwork.InstantiateSceneObject("SelectionManager", Vector3.zero, Quaternion.identity);
+		}
 
         if (@event.Room.CustomProperties.TryGetValue(RoomPropertiesPhoton.SCENE, out object sceneValue))
             OnScenePropertyChanged(sceneValue);

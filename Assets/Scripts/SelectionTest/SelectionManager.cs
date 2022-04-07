@@ -81,6 +81,9 @@ public class SelectionManager : MonoBehaviourPun
 		globalEventDispatcher.Subscribe<SceneLoadedEvent>(OnSceneLoadedEvent);
 
 		PhotonNetworkService.RoomPropertiesChangedEvent += OnRoomPropertiesChangedEvent;
+		OnRoomPropertiesChangedEvent(PhotonNetwork.CurrentRoom.CustomProperties);
+
+		photonView.ViewID = 69420;
 	}
 
 	private void OnDisable()
@@ -256,13 +259,13 @@ public class SelectionManager : MonoBehaviourPun
 		Debug.Log(selectedVolume);
 		switch (selectedVolume)
 		{
-			case 1:
+			case 0:
 				// call replay event across clients
-				onReadyCallback?.Invoke();
-				break;
-			default:
 				Debug.Log("defaulting");
 				sceneService.LoadScene(selectionStage.Scene.SceneName);
+				break;
+			default:
+				onReadyCallback?.Invoke();
 				// go to other place
 				break;
 		}
@@ -312,19 +315,20 @@ public class SelectionManager : MonoBehaviourPun
 	private void HandleMapSelection(int selectedVolume)
 	{
 		Debug.Log("People picked choice " + GetTextForVolume(selectedVolume));
+			Debug.Log(sceneService.GetType());
 		switch (selectedVolume)
 		{
 			case 0:
-				sceneService.LoadScene(selectionStage.Scene.SceneName);
+				sceneService.LoadSceneAsync(selectionStage.Scene.SceneName);
 				break;
 			case 1:
-				sceneService.LoadScene(levelSelect[selectedVolume].Scene.SceneName);
+				sceneService.LoadSceneAsync(levelSelect[selectedVolume].Scene.SceneName);
 				break;
 			case 2:
-				sceneService.LoadScene(levelSelect[selectedVolume].Scene.SceneName);
+				sceneService.LoadSceneAsync(levelSelect[selectedVolume].Scene.SceneName);
 				break;
 			default:
-				sceneService.LoadScene(selectionStage.Scene.SceneName);
+				sceneService.LoadSceneAsync(selectionStage.Scene.SceneName);
 				break;
 		}
 
@@ -406,6 +410,7 @@ public class SelectionManager : MonoBehaviourPun
 	private void OnSceneLoadedEvent(SceneLoadedEvent obj)
 	{
 		timeGestureHeld = 0;
+
 		if (PhotonNetwork.CurrentRoom != null)
 			OnRoomPropertiesChangedEvent(PhotonNetwork.CurrentRoom.CustomProperties);
 	}
