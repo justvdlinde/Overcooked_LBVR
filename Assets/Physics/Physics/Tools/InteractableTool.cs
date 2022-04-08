@@ -11,9 +11,8 @@ public class InteractableTool : MonoBehaviourPun
     [SerializeField] private Tool connectedTool = null;
 
 	public bool previousState = false;
-
-	private bool isTriggerHeld = false;
-	private bool wasTriggerHeld = false;
+	public bool isTriggerHeld = false;
+	public bool isTriggerHeldPreviousFrame = false;
 
 	[SerializeField] public UnityEvent UpEvent = null;
 	[SerializeField] public UnityEvent HeldEvent = null;
@@ -21,43 +20,44 @@ public class InteractableTool : MonoBehaviourPun
 
 	private void Update()
 	{
-		if (photonView.IsMine)
+		if (!photonView.IsMine)
+			return;
+
+		// TODO: use input system
+		float triggerPress = XRInput.GetTriggerButtonValue(connectedTool.GetHeldHand());
+
+		if (triggerPress < 0.1f)
+			isTriggerHeld = false;
+		else
+			isTriggerHeld = true;
+
+		if (connectedTool.IsBeingHeld() && isTriggerHeldPreviousFrame == false && isTriggerHeld)
 		{
-			bool isBeingHeld = connectedTool.IsBeingHeld();
-
-			float val = XRInput.GetTriggerButtonValue(connectedTool.GetHeldHand());
-
-			if (val < 0.1f)
-				isTriggerHeld = false;
-			else
-				isTriggerHeld = true;
-
-			if (isBeingHeld && wasTriggerHeld == false && isTriggerHeld)
-			{
-				OnDownEvent();
-			}
-			else if (previousState == true && wasTriggerHeld == true && !isTriggerHeld)
-			{
-				OnUpEvent();
-			}
-			if (connectedTool.IsBeingHeld() && isTriggerHeld)
-			{
-				HeldEvent?.Invoke();
-			}
-
-			if (previousState == false && !connectedTool.IsBeingHeld())
-			{
-				OnUpEvent();
-			}
-
-			previousState = connectedTool.IsBeingHeld();
-			wasTriggerHeld = isTriggerHeld;
+			OnDownEvent();
 		}
+		else if (previousState == true && isTriggerHeldPreviousFrame == true && !isTriggerHeld)
+		{
+			OnUpEvent();
+		}
+		if (connectedTool.IsBeingHeld() && isTriggerHeld)
+		{
+			HeldEvent?.Invoke();
+		}
+
+		if (previousState == true && !connectedTool.IsBeingHeld())
+		{
+			OnUpEvent();
+		}
+
+		previousState = connectedTool.IsBeingHeld();
+		isTriggerHeldPreviousFrame = isTriggerHeld;
 	}
 
 	public void OnUpEvent()
     {
-		photonView.RPC(nameof(OnUpEventRPC), RpcTarget.All);
+		Debug.Log("OnUpEvent");
+		photonView.RPC(nameof(OnUpEventRPC), RpcTarget.Others);
+		UpEvent?.Invoke();
     }
 
 	[PunRPC]
@@ -68,7 +68,9 @@ public class InteractableTool : MonoBehaviourPun
 
 	private void OnDownEvent()
     {
-		photonView.RPC(nameof(OnDownEventRPC), RpcTarget.All);
+		Debug.Log("OnDownEvent");
+		photonView.RPC(nameof(OnDownEventRPC), RpcTarget.Others);
+		DownEvent?.Invoke();
 	}
 
 	[PunRPC]
