@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Utils.Core.Events;
 
-public class DishDeliveredEvent : MonoBehaviour
+public class DishDeliveredEvent : IEvent
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public readonly Dish Dish;
+    public readonly DeliveryPoint DeliveryPoint;
 
-    // Update is called once per frame
-    void Update()
+    public DishDeliveredEvent(Dish dish, DeliveryPoint deliveryPoint)
     {
-        
+        Dish = dish;
+        DeliveryPoint = deliveryPoint;
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using Utils.Core.Injection;
 using Utils.Core.Services;
@@ -14,20 +13,12 @@ public class NetworkServiceFactory : IServiceFactory<INetworkService>
 
     public INetworkService Construct()
     {
-        INetworkService instance;
-
         // Use injector.CreateType<PhotonNetworkService>(); for non-monobehaviour services
 
+        INetworkService instance;
         GameObject gameObject = new GameObject("[Service] " + nameof(PhotonNetworkService));
         gameObject.SetActive(false);
-
-        Type networkServiceType = null;
-        if (GamePlatform.Platform == BuildPlatform.Windows)
-            networkServiceType = typeof(StandalonePhotonNetworkService);
-        else
-            networkServiceType = typeof(MobilePhotonNetworkService);
-
-        instance = gameObject.AddComponent(networkServiceType) as INetworkService;
+        instance = gameObject.AddComponent(typeof(PhotonNetworkService)) as INetworkService;
         injector.InjectGameObject(gameObject);
         gameObject.SetActive(true);
 

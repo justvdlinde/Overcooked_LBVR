@@ -17,7 +17,4 @@ public static class RoomPropertiesPhoton
     public const string MATCH_START_TIME        = "MatchStartTime";
     public const string MATCH_DURATION          = "MatchDuration";
     public const string OBJECTIVE_TARGET        = "ObjectiveTarget";
-
-    public const string TEAM_ONE_SCORE          = "TeamOneScore";
-    public const string TEAM_TWO_SCORE          = "TeamTwoScore";
 }

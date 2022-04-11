@@ -35,6 +35,8 @@ public class GameModeDebugMenu : IDebugMenu
             DrawSettingsPanel();
             GUILayout.Space(5);
             DrawCurrentGamemodeOptionsPanel(drawDeveloperOptions);
+            GUILayout.Space(5);
+            DrawStoryGamemodeInfoPanel();
         }
 
         GUILayout.EndScrollView();
@@ -60,7 +62,6 @@ public class GameModeDebugMenu : IDebugMenu
 
         GUILayout.EndVertical();
     }
-
 
     private void DrawSettingsPanel()
     {
@@ -93,7 +94,6 @@ public class GameModeDebugMenu : IDebugMenu
         GUILayout.BeginVertical(currentGameMode.Name, "window");
 
         GUILayout.Label("Phase: " + currentGameMode.MatchPhase);
-        //GUILayout.Label("Target: " + currentGameMode.ScoreTarget);
         GUILayout.Label("Start requirements met: " + currentGameMode.StartRequirementsAreMet());
         //GUILayout.Label("Duration: " + string.Format("{0:0:00}", currentGameMode.MatchDuration));
         //GUILayout.Label("Time remaining: " + currentGameMode.GetTimeReadableString());
@@ -110,4 +110,20 @@ public class GameModeDebugMenu : IDebugMenu
         GUILayout.EndVertical();
     }
 
+    // TODO: make this work for all gamemodes, not just storymode
+    private void DrawStoryGamemodeInfoPanel()
+    {
+        StoryMode story = gameModeService.CurrentGameMode as StoryMode;
+        if (story == null) 
+            return;
+
+        StoryModeScoreboard scoreboard = story.Scoreboard as StoryModeScoreboard;
+
+        GUILayout.BeginVertical(currentGameMode.Name + " Scoreboard", "window");
+        GUILayout.Label("Points/Max: " + scoreboard.TotalPoints + "/" + scoreboard.MaxAchievablePoints);
+        GUILayout.Label("Finished orders: " + scoreboard.FinishedOrdersCount);
+        GUILayout.Label("Deliverd orders: " + scoreboard.DeliveredOrdersCount);
+        GUILayout.Label("Timer exceeded orders: " + scoreboard.TimerExceededOrdersCount);
+        GUILayout.EndVertical();
+    }
 }

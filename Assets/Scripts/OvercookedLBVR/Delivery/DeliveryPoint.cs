@@ -1,5 +1,3 @@
-using Photon.Pun;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils.Core.Attributes;
@@ -7,10 +5,11 @@ using Utils.Core.Events;
 using Utils.Core.Services;
 
 [RequireComponent(typeof(Collider))]
-public class DeliveryPoint : MonoBehaviourPun
+public class DeliveryPoint : MonoBehaviour
 {
-    public List<Dish> dishesInTrigger = new List<Dish>();
+    public const int DISH_MIN_INGREDIENTS = 3;
 
+    private List<Dish> dishesInTrigger = new List<Dish>();
     private GlobalEventDispatcher globalEventDispatcher;
 
     private void Awake()
@@ -43,61 +42,17 @@ public class DeliveryPoint : MonoBehaviourPun
     [Button]
     public void DeliverDishesInTrigger()
     {
-		Action remove = null;
         foreach (Dish dish in dishesInTrigger)
 		{
-            if (dish != null && dish.ingredients != null && dish.ingredients.Count > 0)
+            if (dish != null && dish.ingredients.Count > DISH_MIN_INGREDIENTS)
             {
-                bool delivered = DeliverDish(dish);
-                if (delivered)
-                {
-                    remove += () => dishesInTrigger.Remove(dish);
-                }
+                DeliverDish(dish);
             }
 		}
-
-		remove?.Invoke();
     }
 
-    [Button]
-    public void DeliverDishDebug()
+    public void DeliverDish(Dish dish)
     {
-        Dish dish = new GameObject().AddComponent<Dish>();
-        DeliverDish(dish);
-    }
-
-    public bool DeliverDish(Dish dish)
-    {
-        bool delivered = false;
-        Order closestOrder = OrdersController.Instance.GetClosestOrder(dish, out float bestFitScore);
-        Debug.Log("Delivered dish: " + string.Join("", dish.ingredients)
-            + "\nbest fit score: " + bestFitScore
-            + "\nclosest order: " + string.Join("", closestOrder.ingredients));
-
-        if (closestOrder != null)
-        {
-            OrdersController.Instance.DeliverOrder(closestOrder, dish);
-            delivered = true;
-        }
-        else
-            Debug.LogError("No closest order found!");
-
-        if (dish.transform.parent != null)
-        {
-            if (dish.transform.parent.parent != null)
-            {
-                Destroy(dish.transform.parent.parent.gameObject);
-            }
-            else
-            {
-                Destroy(dish.transform.parent.gameObject);
-            }
-
-        }
-        else
-        {
-            Destroy(dish.transform.gameObject);
-        }
-        return delivered;
+        globalEventDispatcher.Invoke(new DishDeliveredEvent(dish, this));
     }
 }

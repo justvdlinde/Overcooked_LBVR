@@ -1,8 +1,15 @@
 using Photon.Pun;
 using PhysicsCharacter;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+
+public enum DishResult
+{
+    None,
+    Delivered,
+    TimerExceeded
+}
 
 public class Dish : MonoBehaviourPun
 {
@@ -109,5 +116,66 @@ public class Dish : MonoBehaviourPun
         snapPoint.RecomputeStackHeight();
         snapPoint.UpdateTriggerPosition();
         //UpdateTriggerSize();
+    }
+
+    public void OnDeliver()
+    {
+        // TODO: check dish hierarchy for which object to destroy
+        // TODO: instantiate some kind of particle/feedback
+        PhotonNetwork.Destroy(gameObject);
+    }
+
+    public override string ToString()
+    {
+        return base.ToString() + " Ingredients: " + string.Join("-", ingredients);
+    }
+
+    public OrderDishCompareResult Compare(Order order)
+    {
+        bool ingredientsAreInCorrectOrder = true;
+        float correctIngredientPercentage = 0;
+        float properlyCookedIngredientsPercentage = 0;
+
+        int totalIngredientCount = order.ingredients.Length;
+        int correctIngredients = 0;
+        int properlyCookedIngredients = 0;
+
+        List<IngredientType> dishChecklist = (from i in ingredients select i.ingredientType).ToList();
+
+        int index = 0;
+        foreach (IngredientType orderIngredient in order.ingredients)
+        {
+            // Check for correct order:
+            if (ingredientsAreInCorrectOrder && index < dishChecklist.Count && dishChecklist[index] == orderIngredient)
+            {
+                correctIngredients++;
+            }
+            // Check for correct ingredients:
+            else if (dishChecklist.Contains(orderIngredient))
+            {
+                // Remove from checklist in case of duplicate ingredients:
+                dishChecklist.Remove(orderIngredient);
+                correctIngredients++;
+                ingredientsAreInCorrectOrder = false;
+            }
+            else
+            {
+                ingredientsAreInCorrectOrder = false;
+            }
+
+            index++;
+        }
+
+        for (int i = 0; i < ingredients.Count; i++)
+        {
+            Ingredient ingredient = ingredients[i];
+            if (ingredient.IsCookedProperly())
+                properlyCookedIngredients++;
+        }
+
+        correctIngredientPercentage = Mathf.Lerp(0, 1, (float)correctIngredients / totalIngredientCount);
+        properlyCookedIngredientsPercentage = Mathf.Lerp(0, 1, (float)properlyCookedIngredients / totalIngredientCount);
+
+        return new OrderDishCompareResult(ingredientsAreInCorrectOrder, correctIngredientPercentage, properlyCookedIngredientsPercentage);
     }
 }

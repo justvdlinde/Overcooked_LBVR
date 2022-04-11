@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviourPun
 {
     public OrdersController orderManager;
 
-    private Dictionary<Order, Score> orderScorePairs = new Dictionary<Order, Score>();
+    private Dictionary<Order, OrderScore> orderScorePairs = new Dictionary<Order, OrderScore>();
     private float totalScore;
     private float maxScore;
 
@@ -27,21 +27,21 @@ public class GameManager : MonoBehaviourPun
     //    orderManager.OrderFailed -= OnOrderFailed;
     //}
 
-    private void OnOrderFailed(Order order)
-    {
-        Score score = new Score(order);
-        AddScore(score, order);
-        //order.score = score;
-    }
+    //private void OnOrderFailed(Order order)
+    //{
+    //    Score score = new Score(order);
+    //    AddScore(score, order);
+    //    //order.score = score;
+    //}
 
-    private void OnOrderDelivered(Order order, Dish dish)
-    {
-        Score score = new Score(order, dish);
-        AddScore(score, order);
-        //order.score = score;
-    }
+    //private void OnOrderDelivered(Order order, Dish dish)
+    //{
+    //    Score score = new Score(order, dish);
+    //    AddScore(score, order);
+    //    //order.score = score;
+    //}
 
-    private void AddScore(Score score, Order order)
+    private void AddScore(OrderScore score, Order order)
     {
         //orderScorePairs.Add(order, score);
         //if (orderManager.OrdersLeft <= 0 && orderManager.ActiveOrders.Count == 0)
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     private void StartGameRPC(PhotonMessageInfo info)
     {
-        orderScorePairs = new Dictionary<Order, Score>();
+        orderScorePairs = new Dictionary<Order, OrderScore>();
         Debug.Log("Starting Game");
         gameIsRunning = true;
 
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviourPun
         foreach(var kvp in orderScorePairs)
         {
             totalScore += kvp.Value.Points;
-            maxScore += kvp.Value.MaxScore;
+            maxScore += kvp.Value.MaxPoints;
         }
 
         gameIsRunning = false;

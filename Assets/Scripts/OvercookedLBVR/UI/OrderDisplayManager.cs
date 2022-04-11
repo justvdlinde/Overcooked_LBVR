@@ -5,7 +5,7 @@ using UnityEngine;
 using Utils.Core.Events;
 using Utils.Core.Services;
 
-public class OrderDisplayManager : MonoBehaviour
+public class OrderDisplayManager : MonoBehaviourPun
 {
     private static OrderDisplayManager Instance;
 
@@ -30,7 +30,7 @@ public class OrderDisplayManager : MonoBehaviour
             Instance = null;
     }
 
-    private void Start()
+    public void Start()
     {
         if(!PhotonNetwork.IsMasterClient)
             SyncDisplays();
@@ -38,25 +38,28 @@ public class OrderDisplayManager : MonoBehaviour
 
     private void SyncDisplays()
     {
-        OrdersController ordersController = OrdersController.Instance;
-        if (ordersController != null && ordersController.ActiveOrders.Count > 0)
+        GameModeService gameModeService = GlobalServiceLocator.Instance.Get<GameModeService>();
+        if (gameModeService.CurrentGameMode != null)
         {
-            for (int i = 0; i < ordersController.ActiveOrders.Count; i++)
+            OrdersController ordersController = gameModeService.CurrentGameMode.OrdersController;
+            if (ordersController != null && ordersController.ActiveOrders.Count > 0)
             {
-                Order order = ordersController.ActiveOrders[i];
-                DisplayOrder(order);
+                for (int i = 0; i < ordersController.ActiveOrders.Count; i++)
+                {
+                    Order order = ordersController.ActiveOrders[i];
+                    DisplayOrder(order);
+                }
             }
         }
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         globalEventDispatcher.Subscribe<ActiveOrderAddedEvent>(OnNewActiveOrderEvent);
         globalEventDispatcher.Subscribe<ActiveOrderRemovedEvent>(OnActiveOrderRemovedEvent);
     }
 
-
-    private void OnDisable()
+    public void OnDisable()
     {
         globalEventDispatcher.Unsubscribe<ActiveOrderAddedEvent>(OnNewActiveOrderEvent);
         globalEventDispatcher.Unsubscribe<ActiveOrderRemovedEvent>(OnActiveOrderRemovedEvent);

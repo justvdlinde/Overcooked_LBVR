@@ -1,7 +1,6 @@
 ﻿using Photon.Pun;
-using System;
+using UnityEngine;
 using Utils.Core.Events;
-using Utils.Core.Injection;
 using Utils.Core.Services;
 
 public class GameModeService : IService
@@ -9,43 +8,39 @@ public class GameModeService : IService
     public GameMode CurrentGameMode { get; private set; }
 
     protected readonly GlobalEventDispatcher globalEventDispatcher;
-    protected readonly DependencyInjector injector;
 
     public GameModeService(GlobalEventDispatcher globalEventDispatcher)
     {
         this.globalEventDispatcher = globalEventDispatcher;
-        injector = new DependencyInjector("GamemodeService");
     }
 
     public void StartNewGame(GameModeEnum gamemode)
     {
-        Type type = GameModeHelper.GetGameModeType(gamemode);
-        StartNewGame(type);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GameMode gameModeInstance = PhotonNetwork.Instantiate(GameModeHelper.GetGameModePrefabName(gamemode), Vector3.zero, Quaternion.identity).GetComponent<GameMode>();
+            Object.DontDestroyOnLoad(gameModeInstance);
+            SetGameMode(gameModeInstance);
+        }
     }
 
-    public void StartNewGame<T>() where T : GameMode
+    public void SetGameMode(GameMode gameMode)
     {
-        StartNewGame(typeof(T));
-    }
+        if (CurrentGameMode == gameMode)
+            return;
 
-    public void StartNewGame(Type gamemode)
-    {
-        GameMode gameModeInstance = injector.CreateType(gamemode) as GameMode;
-        SetGameMode(gameModeInstance);
-        if(gameModeInstance.MatchPhase == MatchPhase.Undefined)
-            CurrentGameMode.PreGame();
-    }
-
-    protected void SetGameMode(GameMode gameMode)
-    {
         if (CurrentGameMode != null)
         {
             CurrentGameMode.Shutdown();
-            CurrentGameMode.Dispose();
+            if(PhotonNetwork.IsMasterClient)
+                PhotonNetwork.Destroy(CurrentGameMode.gameObject);
         }
 
         CurrentGameMode = gameMode;
         CurrentGameMode.Setup();
+        if (CurrentGameMode.MatchPhase == MatchPhase.Undefined)
+            CurrentGameMode.PreGame();
+
         globalEventDispatcher.Invoke(new GameModeChangedEvent(CurrentGameMode));
 
         if (PhotonNetwork.IsMasterClient)

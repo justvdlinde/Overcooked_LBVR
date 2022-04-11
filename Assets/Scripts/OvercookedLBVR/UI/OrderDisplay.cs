@@ -9,6 +9,11 @@ public class OrderDisplay : MonoBehaviour
 
     public Order Order { get; private set; }
 
+    private void Awake()
+    {
+        timeSlider.value = 0;
+    }
+
     public void Update()
     {
         if (Order != null)

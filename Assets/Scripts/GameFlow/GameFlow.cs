@@ -65,7 +65,6 @@ public abstract class GameFlow : MonoBehaviour
     {
         globalEventDispatcher.Subscribe<ConnectionSuccessEvent>(OnConnectionSuccessEvent);
         globalEventDispatcher.Subscribe<ConnectionFailedEvent>(OnConnectionFailedEvent);
-        PhotonGameModeHelper.ServerGameModeChangedEvent += OnServerGameModeChangedEvent;
         PhotonNetworkService.RoomPropertiesChangedEvent += OnRoomPropertiesChangedEvent;
     }
 
@@ -73,7 +72,6 @@ public abstract class GameFlow : MonoBehaviour
     {
         globalEventDispatcher.Unsubscribe<ConnectionFailedEvent>(OnConnectionFailedEvent);
         globalEventDispatcher.Unsubscribe<ConnectionSuccessEvent>(OnConnectionSuccessEvent);
-        PhotonGameModeHelper.ServerGameModeChangedEvent -= OnServerGameModeChangedEvent;
         PhotonNetworkService.RoomPropertiesChangedEvent -= OnRoomPropertiesChangedEvent;
     }
 
@@ -131,12 +129,6 @@ public abstract class GameFlow : MonoBehaviour
             popupService.SpawnPopup().Setup(title, @event.Info.ErrorDescription, new InteractablePopup.ButtonData("Retry", () => ConnectToNetwork()));
         }
         wasConnected = false;
-    }
-
-    protected virtual void OnServerGameModeChangedEvent(GameModeEnum gameMode)
-    {
-        if (!PhotonGameModeHelper.ServerGamemodeEqualsCurrentGamemode(gameModeService.CurrentGameMode))
-            gameModeService.StartNewGame(gameMode);
     }
 
     protected virtual void OnRoomPropertiesChangedEvent(HashTable properties)  

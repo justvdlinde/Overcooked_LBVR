@@ -4,6 +4,7 @@ using Photon.Realtime;
 using System;
 using System.Collections.Generic;
 using Utils.Core.Events;
+using Utils.Core.Services;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 public enum MatchPhase
@@ -14,7 +15,7 @@ public enum MatchPhase
     PostGame
 }
 
-public abstract class GameMode : IDisposable 
+public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
     /// <summary>
     /// The name of the gamemode
@@ -75,31 +76,33 @@ public abstract class GameMode : IDisposable
     /// <summary>
     /// Manages points of the gamemode
     /// </summary>
-    public IGameModeScoreboard Scoreboard { get; protected set; }
+    public virtual IGameModeScoreboard Scoreboard { get; protected set; }
 
     /// <summary>
     /// Game result on game over
     /// </summary>
     public IGameResult GameResult { get; protected set; }
 
-    public OrdersController OrdersController { get; protected set; }
+    public virtual OrdersController OrdersController { get; }
 
-    protected readonly GlobalEventDispatcher globalEventDispatcher;
-    protected readonly PhotonNetworkService networkService;
+    protected GlobalEventDispatcher globalEventDispatcher;
 
-    //protected Timer gameTimer;
-
-    public GameMode(GlobalEventDispatcher globalEventDispatcher, INetworkService networkService)
+    public virtual void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        this.globalEventDispatcher = globalEventDispatcher;
-        this.networkService = networkService as PhotonNetworkService;
+        DontDestroyOnLoad(this);
+        globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+
+        GameModeService gameModeService = GlobalServiceLocator.Instance.Get<GameModeService>();
+        if (gameModeService.CurrentGameMode != this)
+            gameModeService.SetGameMode(this);
+
         //gameTimer = new Timer();
 
         PhotonNetworkService.RoomPropertiesChangedEvent += OnRoomPropertiesChangedEvent;
         PhotonNetworkService.PhotonEventReceivedEvent += OnPhotonEventReceived;
     }
 
-    public virtual void Dispose()
+    public virtual void OnDestroy()
     {
         PhotonNetworkService.RoomPropertiesChangedEvent -= OnRoomPropertiesChangedEvent;
         PhotonNetworkService.PhotonEventReceivedEvent -= OnPhotonEventReceived;
@@ -209,7 +212,7 @@ public abstract class GameMode : IDisposable
     {
         MatchPhase = newPhase;
         MatchPhaseChangedEvent?.Invoke(newPhase);
-		globalEventDispatcher.Invoke(new GameModePhaseChangedEvent(newPhase));
+        globalEventDispatcher.Invoke(new GameModePhaseChangedEvent(newPhase));
     }
 
     public virtual void PreGame(bool replay = false)
@@ -225,6 +228,7 @@ public abstract class GameMode : IDisposable
 
         if (replay)
         {
+            // TODO: create a new scoreboard instead?
             Scoreboard.Reset();
             //gameTimer.Reset();
         }

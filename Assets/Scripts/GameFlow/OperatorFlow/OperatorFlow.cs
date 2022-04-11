@@ -21,8 +21,6 @@ public class OperatorFlow : GameFlow
 
     protected override void OnConnectionSuccessEvent(ConnectionSuccessEvent @event)
     {
-        Debug.Log("OnConnectionSuccessEvent");
-
         // If an operator is already present, disconnect
         //if (playersManager.Operators.Count > 1)
         //{

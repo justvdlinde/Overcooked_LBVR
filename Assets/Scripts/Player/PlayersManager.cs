@@ -40,7 +40,6 @@ public class PlayersManager : IService
 
     private void OnClientLeftEvent(ClientLeftEvent @event)
     {
-        Debug.Log("Client left server, client is " + @event.Data.Client.GetType());
         IClient client = @event.Data.Client;
         if (client is IPlayer)
             RemovePlayer(client as IPlayer);
