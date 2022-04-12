@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using System.Linq;
 using System.Collections;
 using UnityEngine;
 using Utils.Core.Attributes;
@@ -52,9 +53,7 @@ public class StoryMode : GameMode
     {
         base.StartActiveGame();
         globalEventDispatcher.Subscribe<DishDeliveredEvent>(OnDishDeliveredEvent);
-
-        if (PhotonNetwork.IsMasterClient)
-            coroutineService.StartCoroutine(StoryFlow());
+        coroutineService.StartCoroutine(StoryFlow());
     }
 
     public override void EndGame()
@@ -72,6 +71,7 @@ public class StoryMode : GameMode
     // TODO: replace with some kind of state machine? Would be usefull if we want narration in between orders
     private IEnumerator StoryFlow()
     {
+        // TODO: sync up i when joining late
         for (int i = 0; i < settings.orderAmount; i++)
         {
             // TODO: get delay for next order instead of 1
@@ -95,7 +95,7 @@ public class StoryMode : GameMode
     {
         Order order = orderGenerator.GenerateRandomOrder(3, 0, out int newTier, true);
         order.orderNumber = displayNr;
-        order.timer.Set(50); // TODO: set timer
+        order.timer.Set(10); // TODO: set timer
         OrdersController.AddActiveOrder(order);
     }
 
@@ -130,9 +130,20 @@ public class StoryMode : GameMode
         order.TimerExceededEvent -= OnOrderTimerExceeded;
     }
 
+    public void CheatDeliverDish(int displayNr)
+    {
+        Order order = ordersController.ActiveOrders.Where(o => o.orderNumber == displayNr).First();
+        if (order != null)
+        {
+            OrderScore score = new OrderScore(OrderScore.MaxPoints, DishResult.Delivered);
+            (Scoreboard as StoryModeScoreboard).AddScore(order, score);
+            OrdersController.RemoveActiveOrder(order);
+            order.TimerExceededEvent -= OnOrderTimerExceeded;
+        }
+    }
+
     private void OnActiveOrderAdded(Order order)
     {
-        Debug.Log("OnActiveOrderAdded " + order);
         order.TimerExceededEvent += OnOrderTimerExceeded;
     }
 

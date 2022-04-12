@@ -2,7 +2,7 @@ public class OrderScore
 {
     public readonly DishResult Result;
 
-    public float MaxPoints => 100;
+    public const float MaxPoints = 100;
     public float Points { get; private set; }
     public bool IsPerfectScore => Points == MaxPoints;
 

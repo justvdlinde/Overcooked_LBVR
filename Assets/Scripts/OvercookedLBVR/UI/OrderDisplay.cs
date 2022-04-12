@@ -34,6 +34,7 @@ public class OrderDisplay : MonoBehaviour
         // TODO: some kind of animation/flair
         grid.Clear();
         Order = null;
+        timeSlider.value = 0;
     }
 
     public bool CanBeUsed()

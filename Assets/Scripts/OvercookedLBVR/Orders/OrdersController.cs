@@ -54,7 +54,6 @@ public class OrdersController : MonoBehaviourPunCallbacks
         for (int i = 0; i < bytes.Length; i++)
         {
             Order order = OrderSerializer.Deserialize(bytes[i]);
-            UnityEngine.Debug.Log("sync data received " + order);
             AddActiveOrderInternal(order);
         }
     }

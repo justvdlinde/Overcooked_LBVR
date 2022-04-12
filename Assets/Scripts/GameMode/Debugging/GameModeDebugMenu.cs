@@ -37,6 +37,8 @@ public class GameModeDebugMenu : IDebugMenu
             DrawCurrentGamemodeOptionsPanel(drawDeveloperOptions);
             GUILayout.Space(5);
             DrawStoryGamemodeInfoPanel();
+            GUILayout.Space(5);
+            DrawStoryGamemodeOrders();
         }
 
         GUILayout.EndScrollView();
@@ -124,6 +126,29 @@ public class GameModeDebugMenu : IDebugMenu
         GUILayout.Label("Finished orders: " + scoreboard.FinishedOrdersCount);
         GUILayout.Label("Deliverd orders: " + scoreboard.DeliveredOrdersCount);
         GUILayout.Label("Timer exceeded orders: " + scoreboard.TimerExceededOrdersCount);
+        GUILayout.EndVertical();
+    }
+
+    private void DrawStoryGamemodeOrders()
+    {
+        StoryMode story = gameModeService.CurrentGameMode as StoryMode;
+        if (story == null)
+            return;
+
+        GUILayout.BeginVertical(currentGameMode.Name + " Orders", "window");
+        for (int i = 0; i < story.OrdersController.ActiveOrders.Count; i++)
+        {
+            Order order = story.OrdersController.ActiveOrders[i];
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(order.orderNumber + ": " + order + " (" + order.timer.TimeRemaining + ")");
+            if (GUILayout.Button("Deliver"))
+                story.CheatDeliverDish(order.orderNumber);
+            GUILayout.EndHorizontal();
+        }
+
+        if (story.OrdersController.ActiveOrders.Count == 0)
+            GUILayout.Label("Empty");
+
         GUILayout.EndVertical();
     }
 }

@@ -27,13 +27,12 @@ public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboar
 
     public override void OnPlayerEnteredRoom(PhotonNetworkedPlayer newPlayer)
     {
-        //if (PhotonNetwork.IsMasterClient)
-        //    SendSyncData(newPlayer);
+        if (PhotonNetwork.IsMasterClient)
+            SendSyncData(newPlayer);
     }
 
     private void SendSyncData(PhotonNetworkedPlayer player)
     {
-        Debug.Log("send sync data, finishedOrders " + FinishedOrdersCount);
         photonView.RPC(nameof(SendSyncDataRPC), player, FinishedOrdersCount, TotalPoints, MaxAchievablePoints , DeliveredOrdersCount, TimerExceededOrdersCount);
     }
 
@@ -41,7 +40,6 @@ public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboar
     [PunRPC]
     private void SendSyncDataRPC(int finishedOrders, float totalPoints, float maxPoints, int deliveredOrders, int timerExceededOrders)
     {
-        Debug.Log("sync received, orders: " + finishedOrders);
         FinishedOrdersCount = finishedOrders;
         TotalPoints = totalPoints;
         MaxAchievablePoints = maxPoints;
@@ -56,10 +54,10 @@ public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboar
 
     public void AddScore(OrderScoreData data)
     {
-        photonView.RPC(nameof(AddScoreRPC), RpcTarget.Others, data.Score.Points, data.Score.MaxPoints, data.Score.Result);
+        photonView.RPC(nameof(AddScoreRPC), RpcTarget.Others, data.Score.Points, OrderScore.MaxPoints, data.Score.Result);
         OrderScoreHistory.Add(data);
         EntryAddedEvent?.Invoke(data);
-        AddScoreInternal(data.Score.Points, data.Score.MaxPoints, data.Score.Result);
+        AddScoreInternal(data.Score.Points, OrderScore.MaxPoints, data.Score.Result);
     }
 
     [PunRPC]
@@ -85,7 +83,6 @@ public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboar
         return TotalPoints + "/" + MaxAchievablePoints;
     }
 
-    // TODO: remove? and simply create a new instance
     public void Reset()
     {
         OrderScoreHistory = new List<OrderScoreData>();

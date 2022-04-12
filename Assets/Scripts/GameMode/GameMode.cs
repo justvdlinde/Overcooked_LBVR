@@ -228,7 +228,6 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 
         if (replay)
         {
-            // TODO: create a new scoreboard instead?
             Scoreboard.Reset();
             //gameTimer.Reset();
         }
