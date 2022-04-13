@@ -169,7 +169,7 @@ public class Dish : MonoBehaviourPun
         for (int i = 0; i < ingredients.Count; i++)
         {
             Ingredient ingredient = ingredients[i];
-            if (ingredient.IsCookedProperly())
+            if (ingredient.IsPreparedProperly())
                 properlyCookedIngredients++;
         }
 

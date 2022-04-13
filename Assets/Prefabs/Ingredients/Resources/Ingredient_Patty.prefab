@@ -393,7 +393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1742452687228679954, guid: 8b960fa3087f73e4fba319fcd1e2d96a, type: 3}
       propertyPath: m_Name
-      value: Cooking
+      value: Ingredient_Cook_Controller
       objectReference: {fileID: 0}
     - target: {fileID: 1765160307299646809, guid: 8b960fa3087f73e4fba319fcd1e2d96a, type: 3}
       propertyPath: ingredient
@@ -436,12 +436,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: status
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: cookComponent
       value: 
       objectReference: {fileID: 3045855063354739570}
     - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: ingredientType
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: needsToBeCooked
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1698536654608434325, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: m_Name

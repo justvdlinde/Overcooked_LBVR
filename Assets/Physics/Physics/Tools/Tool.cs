@@ -42,7 +42,6 @@ namespace PhysicsCharacter
 
 		private void Awake()
 		{
-			rigidBody = GetComponent<Rigidbody>();
 			if(rigidBody != null)
 				rigidBody.maxAngularVelocity = maxAngularVelocity;
 

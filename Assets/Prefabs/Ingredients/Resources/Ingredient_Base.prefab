@@ -80,7 +80,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientType: 0
   status: 0
-  rigidbody: {fileID: 8729201025394254469}
   needsToBeCooked: 0
   cookComponent: {fileID: 0}
   unProcessedGraphics: {fileID: 0}
@@ -201,6 +200,10 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8767885131029623597, guid: a2cced12afd3db24eabec35c0b42ce23, type: 3}
+      propertyPath: rigidBody
+      value: 
+      objectReference: {fileID: 8729201025394254469}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2cced12afd3db24eabec35c0b42ce23, type: 3}
 --- !u!4 &415704934877111496 stripped

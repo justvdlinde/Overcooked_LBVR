@@ -15,9 +15,14 @@ public class IngredientChopController : MonoBehaviourPun
 	[Tooltip("Prefabs to instantiate on Process()")]
 	[SerializeField] private TransformPrefabPair[] processInstantiationData = null;
 
+	[Header("Audio")]
+	[SerializeField] private AudioSource audioSource = null;
+	[SerializeField] private AudioClip choppingAudioClip = null;
+	[SerializeField, Range(0, 1)] private float pitchDeviation = 0.2f;
+
 	private int hitCount = 0;
 
-    private void Awake()
+	private void Awake()
     {
 		IsChoppable = ingredient.Status == IngredientStatus.UnProcessed;
     }
@@ -103,16 +108,10 @@ public class IngredientChopController : MonoBehaviourPun
 		PhotonNetwork.Destroy(ingredient.gameObject);
 	}
 
-	// TODO: replace with regular audiosource implementation
-	public void PlaySound(AudioClip clip, Vector3 position)
+	private void PlayChopSound()
 	{
-		GameObject obj = new GameObject();
-		obj.transform.position = position;
-		obj.AddComponent<AudioSource>();
-		obj.GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
-		obj.GetComponent<AudioSource>().PlayOneShot(clip);
-		Destroy(obj, clip.length);
-		return;
+		audioSource.pitch = Random.Range(1 - pitchDeviation, 1 + pitchDeviation);
+		audioSource.PlayOneShot(choppingAudioClip);
 	}
 
 	[System.Serializable]
