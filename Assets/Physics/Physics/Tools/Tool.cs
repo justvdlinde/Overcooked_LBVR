@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PhysicsCharacter
 {
-	[RequireComponent(typeof(Rigidbody))]
+	//[RequireComponent(typeof(Rigidbody))]
 	public class Tool : MonoBehaviour
 	{
 		[SerializeField] private List<ToolHandle> toolHandles = null;
@@ -65,10 +65,10 @@ namespace PhysicsCharacter
 
 		protected virtual void Update()
 		{
-			if(!IsBeingHeld())
-			{
-				rigidBody.useGravity = true;
-			}
+			//if(!IsBeingHeld())
+			//{
+			//	rigidBody.useGravity = true;
+			//}
 
 			// disable this when rotating
 			if(!PhysicsPlayerBlackboard.Instance.isFading)

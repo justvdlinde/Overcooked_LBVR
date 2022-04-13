@@ -1,45 +1,46 @@
 using Photon.Pun;
-using PhysicsCharacter;
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class Ingredient : MonoBehaviourPun
 {
-    public IngredientType ingredientType = IngredientType.None;
+    public IngredientType IngredientType => ingredientType;
+    [SerializeField] private IngredientType ingredientType = IngredientType.None;
 
     public IngredientStatus Status => status;
     [SerializeField] private IngredientStatus status = IngredientStatus.UnProcessed;
 
-    public new Rigidbody rigidbody = null;
-    public bool needsToBeCooked = false;
-    public CookComponent cookComponent = null;
+    [Header("References")]
+    [SerializeField] private bool needsToBeCooked = false; // reference cookComponent?
+    [SerializeField] private IngredientCookController cookComponent = null;
 
-    public Transform unProcessedGraphics = null;
-    public Transform processedGraphics = null;
+    [Header("Graphics")]
+    [SerializeField] private Transform unProcessedGraphics = null;
+    [SerializeField] private Transform processedGraphics = null;
 
-    public bool processToTwoAssets = false;
-    [SerializeField] private GameObject result1 = null;
-    [SerializeField] private GameObject result2 = null;
-
-    public bool processToCookable = false;
-    [SerializeField] private GameObject cookable = null;
-
+    // TODO: place into stackable component
 	[SerializeField] private List<GameObject> toggleObjects = new List<GameObject>();
 
+    // TODO: cleanup:
     public bool CanStack = true;
     public Transform recentDishCollider = null;
 
     private void Awake()
-	{
-        unProcessedGraphics?.gameObject.SetActive(status == IngredientStatus.UnProcessed);
-        processedGraphics?.gameObject.SetActive(status == IngredientStatus.Processed);
+    {
+        if (processedGraphics != null && unProcessedGraphics != null)
+        {
+            unProcessedGraphics.gameObject.SetActive(status == IngredientStatus.UnProcessed);
+            processedGraphics.gameObject.SetActive(status == IngredientStatus.Processed);
+        }
     }
 
     private void Update()
     {
+        // TODO: place into stackable component
         if (!CanStack && recentDishCollider != null)
 		{
-            if(Vector3.Distance(recentDishCollider.transform.position, rigidbody.position) > 0.3f)
+            if(Vector3.Distance(recentDishCollider.transform.position, transform.position) > 0.3f)
 			{
                 CanStack = true;
                 recentDishCollider = null;
@@ -48,6 +49,7 @@ public class Ingredient : MonoBehaviourPun
 
     }
 
+    // TODO: place into stackable component
 	public void SetComponentsOnIngredientActive(bool active)
 	{
 		foreach (var item in toggleObjects)
@@ -56,67 +58,34 @@ public class Ingredient : MonoBehaviourPun
 		}
     }
 
-    public void Process()
-	{
-        // TO DO: CLEAN THIS UP
-        if(!processToTwoAssets && !processToCookable)
-		{
-            unProcessedGraphics.gameObject.SetActive(false);
-            processedGraphics.gameObject.SetActive(true);
-		}
-        else if(processToTwoAssets)
-		{
-            unProcessedGraphics.gameObject.SetActive(false);
-            if (photonView.IsMine)
-            {
-                if(result1 != null)
-                    PhotonNetwork.Instantiate(result1.name, unProcessedGraphics.transform.position + Vector3.up * 0.08f, Quaternion.identity);
-                if(result2 != null)
-                    PhotonNetwork.Instantiate(result2.name, unProcessedGraphics.transform.position, Quaternion.identity);
-            }
-            //GameObject r1 = Instantiate(result1);
-            //r1.transform.position = unProcessedGraphics.transform.position;
-            //GameObject r2 = Instantiate(result2);
-            //r2.transform.position = r1.transform.position + Vector3.up * 0.05f;
-        }
-        else if(processToCookable)
-		{
-            unProcessedGraphics.gameObject.SetActive(false);
-            if (PhotonNetwork.IsMasterClient)
-                PhotonNetwork.Instantiate(cookable.name, unProcessedGraphics.transform.position, Quaternion.identity);
-		}
-        SetState(IngredientStatus.Processed);
-	}
-
-    public void TogglePhysics(bool toggle)
-    {
-        rigidbody.isKinematic = !toggle;
-        rigidbody.useGravity = toggle;
-    }
-
     public bool IsCookedProperly()
     {
         bool returnValue = Status == IngredientStatus.Processed;
         if (needsToBeCooked)
-            returnValue &= cookComponent.status == CookStatus.Cooked;
+            returnValue &= cookComponent.State == CookState.Cooked;
         return returnValue;
     }
 
     public void SetState(IngredientStatus status)
     {
-        photonView.RPC(nameof(SetIngredientStateRPC), RpcTarget.All, (int)status);
+        photonView.RPC(nameof(SetStateRPC), RpcTarget.All, (int)status);
     }
 
     [PunRPC]
-    private void SetIngredientStateRPC(int statusIndex, PhotonMessageInfo info)
+    private void SetStateRPC(int statusIndex)
     {
         status = (IngredientStatus)statusIndex;
+
+        if (processedGraphics != null && unProcessedGraphics != null)
+        {
+            processedGraphics.gameObject.SetActive(status == IngredientStatus.Processed);
+            unProcessedGraphics.gameObject.SetActive(status == IngredientStatus.UnProcessed);
+        }
     }
 
-
+    // TODO: replace with future audio implementation or simple audioSource component
     public void PlaySound(AudioClip clip, Vector3 position)
     {
-
         GameObject obj = new GameObject();
         obj.transform.position = position;
         obj.AddComponent<AudioSource>();
@@ -125,5 +94,4 @@ public class Ingredient : MonoBehaviourPun
         Destroy(obj, clip.length);
         return;
     }
-
 }

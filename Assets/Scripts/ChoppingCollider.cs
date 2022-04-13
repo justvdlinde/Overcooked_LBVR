@@ -1,28 +1,24 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ChoppingCollider : MonoBehaviour
 {
-    [SerializeField] private int hitDamage = 1;
     public int HitDamage => hitDamage;
-    
 
-   [SerializeField] private List<Collider> connectedColliders = new List<Collider>();
+    [SerializeField] private int hitDamage = 1;
+    [SerializeField] private List<Collider> connectedColliders = new List<Collider>();
 
-    public void ToggleCollision(Collider col, bool ignoreCollisions)
+    public void ToggleCollision(Collider collider, bool ignoreCollisions)
 	{
-		foreach (Collider c in connectedColliders)
+		foreach (Collider connectedCollider in connectedColliders)
 		{
-			Physics.IgnoreCollision(col, c, ignoreCollisions);
+			Physics.IgnoreCollision(collider, connectedCollider, ignoreCollisions);
 		}
-        
-
     }
 
+    // TODO: replace with regular audiosource implementation
 	public void PlaySound(AudioClip clip, Vector3 position)
 	{
-
         GameObject obj = new GameObject();
         obj.transform.position = position;
         obj.AddComponent<AudioSource>();
@@ -30,8 +26,5 @@ public class ChoppingCollider : MonoBehaviour
         obj.GetComponent<AudioSource>().PlayOneShot(clip);
         Destroy(obj, clip.length);
         return;
-
-
-
     }
 }

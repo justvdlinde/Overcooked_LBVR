@@ -26,7 +26,7 @@ public class DishSnapPoint : MonoBehaviour
     {
         if (other.TryGetComponent(out Ingredient item))
         {
-            if (item.rigidbody.TryGetComponent(out PhotonView photonView))
+            if (item.GetComponent<Rigidbody>().TryGetComponent(out PhotonView photonView))
             {
                 if (photonView.IsMine)
                 {
@@ -73,7 +73,7 @@ public class DishSnapPoint : MonoBehaviour
             return null;
 
         Ingredient ingredient = dish.ingredients[dish.ingredients.Count - 1];
-        if (ingredient.ingredientType == IngredientType.Ketchup || ingredient.ingredientType == IngredientType.Mayo)
+        if (ingredient.IngredientType == IngredientType.Ketchup || ingredient.IngredientType == IngredientType.Mayo)
 		{
             return null;
         }
@@ -87,7 +87,7 @@ public class DishSnapPoint : MonoBehaviour
         totalStackHeight = 0.0f;
 		foreach (var item in dish.ingredients)
 		{
-            Vector3 stackHeight = GetTopSnapPosition(item.processedGraphics.gameObject);
+            Vector3 stackHeight = GetTopSnapPosition(item.gameObject); //item.processedGraphics.gameObject
             stackElements.Add(stackHeight.y);
             totalStackHeight = stackHeight.y;
 		}
@@ -111,7 +111,7 @@ public class DishSnapPoint : MonoBehaviour
 	{
         if(dish.ingredients.Count > 0)
 		{
-            return dish.ingredients[dish.ingredients.Count - 1].ingredientType != sauce;
+            return dish.ingredients[dish.ingredients.Count - 1].IngredientType != sauce;
 		}
         else
             return false;

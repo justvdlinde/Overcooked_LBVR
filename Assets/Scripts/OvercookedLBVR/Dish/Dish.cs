@@ -20,7 +20,7 @@ public class Dish : MonoBehaviourPun
 	{
 		foreach (var item in ingredients)
 		{
-			if (item.ingredientType == type)
+			if (item.IngredientType == type)
 				return true;
 		}
 		return false;
@@ -28,7 +28,7 @@ public class Dish : MonoBehaviourPun
 
 	public void AddIngredient(Ingredient ingredient)
     {
-        PhotonView ingredientPhotonView = ingredient.rigidbody.GetComponent<PhotonView>();
+        PhotonView ingredientPhotonView = ingredient.GetComponent<Rigidbody>().GetComponent<PhotonView>();
         ingredientPhotonView.TransferOwnership(-1);
         photonView.RPC(nameof(AddIngredientRPC), RpcTarget.All, ingredientPhotonView.ViewID);
     }
@@ -39,12 +39,12 @@ public class Dish : MonoBehaviourPun
 		Ingredient ingredient = PhotonView.Find(viewID).GetComponentInChildren<Ingredient>();
 		ingredients.Add(ingredient);
 
-        Rigidbody ingredientParent = ingredient.rigidbody;
+        Rigidbody ingredientParent = ingredient.GetComponent<Rigidbody>();
         if (ingredientParent.TryGetComponent(out PhotonRigidbodyView view))
             view.enabled = false;
 
         ingredientParent.transform.SetParent(snapPoint.ingredientStack);
-        Vector3 snapPosition = snapPoint.GetTopSnapPosition(ingredient.processedGraphics.gameObject);
+        Vector3 snapPosition = snapPoint.GetTopSnapPosition(ingredient.gameObject); //ingredient.processedGraphics.gameObject
         snapPoint.stackElements.Add(snapPosition.y);
 
         float diff = snapPosition.y - snapPoint.totalStackHeight;
@@ -79,7 +79,7 @@ public class Dish : MonoBehaviourPun
             return null;
 
         photonView.RPC(nameof(RemoveTopIngredientRPC), RpcTarget.All);
-        DummyToolHandle handle = ingredient.rigidbody.GetComponentInChildren<DummyToolHandle>(true);
+        DummyToolHandle handle = ingredient.GetComponent<Rigidbody>().GetComponentInChildren<DummyToolHandle>(true);
         return handle;
     }
 
@@ -89,7 +89,7 @@ public class Dish : MonoBehaviourPun
         Ingredient ingredient = ingredients[ingredients.Count - 1];
         ingredients.Remove(ingredient);
 
-        Rigidbody ingredientParent = ingredient.rigidbody;
+        Rigidbody ingredientParent = ingredient.GetComponent<Rigidbody>();
         if (ingredientParent.TryGetComponent(out PhotonRigidbodyView view))
             view.enabled = true;
 
@@ -140,7 +140,7 @@ public class Dish : MonoBehaviourPun
         int correctIngredients = 0;
         int properlyCookedIngredients = 0;
 
-        List<IngredientType> dishChecklist = (from i in ingredients select i.ingredientType).ToList();
+        List<IngredientType> dishChecklist = (from i in ingredients select i.IngredientType).ToList();
 
         int index = 0;
         foreach (IngredientType orderIngredient in order.ingredients)
