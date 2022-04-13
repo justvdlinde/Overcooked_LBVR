@@ -2,6 +2,7 @@ using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils.Core.Attributes;
+using Utils.Core.Extensions;
 
 public class IngredientChopController : MonoBehaviourPun
 {
@@ -17,7 +18,7 @@ public class IngredientChopController : MonoBehaviourPun
 
 	[Header("Audio")]
 	[SerializeField] private AudioSource audioSource = null;
-	[SerializeField] private AudioClip choppingAudioClip = null;
+	[SerializeField] private AudioClip[] choppingAudioClips = null;
 	[SerializeField, Range(0, 1)] private float pitchDeviation = 0.2f;
 
 	private int hitCount = 0;
@@ -71,6 +72,7 @@ public class IngredientChopController : MonoBehaviourPun
 	private void ChopRPC(int hit)
 	{
 		hitCount += hit;
+		PlayChopSound();
 
 		if (particles != null)
 		{
@@ -111,7 +113,7 @@ public class IngredientChopController : MonoBehaviourPun
 	private void PlayChopSound()
 	{
 		audioSource.pitch = Random.Range(1 - pitchDeviation, 1 + pitchDeviation);
-		audioSource.PlayOneShot(choppingAudioClip);
+		audioSource.PlayOneShot(choppingAudioClips.GetRandom());
 	}
 
 	[System.Serializable]

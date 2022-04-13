@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using Utils.Core.Attributes;
+using Utils.Core.Extensions;
 
 public class IngredientCookController : MonoBehaviourPunCallbacks
 {
@@ -27,7 +28,7 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
 
     [Header("Audio")]
     [SerializeField] private AudioSource audioSource = null;
-    [SerializeField] private AudioClip cookingAudioClip = null;
+    [SerializeField] private AudioClip[] cookingAudioClips = null;
     [SerializeField, Range(0, 1)] private float pitchDeviation = 0.2f;
 
     [Header("Particles")]
@@ -148,7 +149,7 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
     private void PlayCookingSound()
     {
         audioSource.pitch = Random.Range(1 - pitchDeviation, 1 + pitchDeviation);
-        audioSource.PlayOneShot(cookingAudioClip);
+        audioSource.PlayOneShot(cookingAudioClips.GetRandom());
     }
 
     // TODO: clean up (seperate particles class?)

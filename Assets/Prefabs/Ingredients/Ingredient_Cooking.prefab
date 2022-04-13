@@ -57,7 +57,8 @@ MonoBehaviour:
   cookedGraphic: {fileID: 0}
   burntGraphic: {fileID: 0}
   audioSource: {fileID: 759084853505569725}
-  cookingAudioClip: {fileID: 8300000, guid: 8ff09ba2e5c63834d86051ea5a94c462, type: 3}
+  cookingAudioClips:
+  - {fileID: 8300000, guid: 8ff09ba2e5c63834d86051ea5a94c462, type: 3}
   pitchDeviation: 0.2
   cookingParticles: {fileID: 3206520126507153833}
   cookedToBurntParticles: {fileID: 2681888474260288633}
