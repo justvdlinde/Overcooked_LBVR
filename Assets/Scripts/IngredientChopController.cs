@@ -6,14 +6,30 @@ using Utils.Core.Extensions;
 
 public class IngredientChopController : MonoBehaviourPun
 {
-	public bool IsChoppable { get; private set; } = true;
+	private enum ChopMethod
+    {
+		/// <summary>
+		/// Instantiates a new prefab when chopped
+		/// </summary>
+		Instantiate,
+		/// <summary>
+		/// Simply toggles the corresponding graphics
+		/// </summary>
+		ToggleGraphic
+    }
 
-    [SerializeField] private Ingredient ingredient = null;
+	public bool IsChoppable => ingredient.State == IngredientStatus.UnProcessed;
+
+	[SerializeField] private Ingredient ingredient = null;
 	[SerializeField] private int hitsNeededToProcess = 5;
 	[SerializeField] private List<Collider> connectedColliders = new List<Collider>();
 	[SerializeField] private ParticleSystem particles = null;
 
-	[Tooltip("Prefabs to instantiate on Process()")]
+	[Header("Chopping Results")]
+	[Tooltip("Decides wether Process() will instantiate new objects or simply toggles graphics")]
+	[SerializeField] private ChopMethod chopMethod = ChopMethod.ToggleGraphic;
+	[SerializeField] private Transform unProcessedGraphics = null;
+	[SerializeField] private Transform processedGraphics = null;
 	[SerializeField] private TransformPrefabPair[] processInstantiationData = null;
 
 	[Header("Audio")]
@@ -23,12 +39,19 @@ public class IngredientChopController : MonoBehaviourPun
 
 	private int hitCount = 0;
 
-	private void Awake()
+    private void OnValidate()
     {
-		IsChoppable = ingredient.Status == IngredientStatus.UnProcessed;
+		if (ingredient == null)
+			ingredient = transform.GetComponentInParent<Ingredient>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
+    {
+		// TODO: test if these work when joining late:
+		ToggleGraphicsToState();
+	}
+
+	private void OnTriggerEnter(Collider other)
 	{
 		if(other.TryGetComponent(out ChoppingCollider choppingCollider))
 		{
@@ -98,16 +121,32 @@ public class IngredientChopController : MonoBehaviourPun
 
 	[PunRPC]
 	private void ProcessIngredientRPC()
-    {
+	{
 		ingredient.SetState(IngredientStatus.Processed);
 
-		for (int i = 0; i < processInstantiationData.Length; i++)
+		if (chopMethod == ChopMethod.Instantiate)
 		{
-			Transform point = processInstantiationData[i].transform;
-			GameObject prefab = processInstantiationData[i].prefab;
-			PhotonNetwork.Instantiate(prefab.name, point.position, Quaternion.identity);
+			for (int i = 0; i < processInstantiationData.Length; i++)
+			{
+				Transform point = processInstantiationData[i].transform;
+				GameObject prefab = processInstantiationData[i].prefab;
+				PhotonNetwork.Instantiate(prefab.name, point.position, Quaternion.identity);
+			}
+			PhotonNetwork.Destroy(ingredient.gameObject);
 		}
-		PhotonNetwork.Destroy(ingredient.gameObject);
+		else
+		{
+			ToggleGraphicsToState();
+		}
+	}
+	
+	private void ToggleGraphicsToState()
+    {
+		if (processedGraphics != null && unProcessedGraphics != null)
+		{
+			unProcessedGraphics.gameObject.SetActive(ingredient.State == IngredientStatus.UnProcessed);
+			processedGraphics.gameObject.SetActive(ingredient.State == IngredientStatus.Processed);
+		}
 	}
 
 	private void PlayChopSound()

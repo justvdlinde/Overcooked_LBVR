@@ -6,6 +6,8 @@ using Utils.Core.Extensions;
 
 public class IngredientCookController : MonoBehaviourPunCallbacks
 {
+    public bool IsCookable => ingredient.State == IngredientStatus.Processed;
+
     public CookState State => state;
     public bool IsCooking { get; private set; }
     public float CookProgress { get; private set; }
@@ -35,6 +37,12 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
     [SerializeField] private ParticleSystem cookingParticles = null;
     [SerializeField] private ParticleSystem cookedToBurntParticles = null;
     [SerializeField] private ParticleSystem burntParticles = null;
+
+    private void OnValidate()
+    {
+        if (ingredient == null)
+            ingredient = transform.GetComponentInParent<Ingredient>();
+    }
 
     private void Awake()
 	{

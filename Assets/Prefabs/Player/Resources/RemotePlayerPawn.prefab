@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 779150084833364521}
   - component: {fileID: 7009178845430741167}
   - component: {fileID: 845262349846802893}
-  - component: {fileID: 7544187612349943913}
   - component: {fileID: 526050103001317106}
   m_Layer: 0
   m_Name: RemotePlayerPawn
@@ -50,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonView: {fileID: 526050103001317106}
   body: {fileID: 5640252943502341798}
-  healthController: {fileID: 7544187612349943913}
+  healthController: {fileID: 0}
 --- !u!114 &7009178845430741167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,22 +79,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   body: {fileID: 5640252943502341798}
   bodyRoot: {fileID: 4670149583324359409}
---- !u!114 &7544187612349943913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5786202637453209150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b743380000cc02b4bb94ff9d86cb9817, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  startingHealth: 100
-  respawnDelay: 1
-  photonView: {fileID: 526050103001317106}
 --- !u!114 &526050103001317106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,7 +274,7 @@ PrefabInstance:
     - target: {fileID: 1090553384345058882, guid: c4ea7f05e0e2cfe4597ce80bb9f97837, type: 3}
       propertyPath: healthController
       value: 
-      objectReference: {fileID: 7544187612349943913}
+      objectReference: {fileID: 0}
     - target: {fileID: 2990514805603263841, guid: c4ea7f05e0e2cfe4597ce80bb9f97837, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

@@ -30,7 +30,7 @@ public class DishSnapPoint : MonoBehaviour
             {
                 if (photonView.IsMine)
                 {
-                    if (!dish.ingredients.Contains(item) && item.Status == IngredientStatus.Processed)
+                    if (!dish.ingredients.Contains(item) && item.State == IngredientStatus.Processed)
                         Snap(item);
                 }
             }

@@ -8,11 +8,11 @@ public class Ingredient : MonoBehaviourPun
     public IngredientType IngredientType => ingredientType;
     [SerializeField] private IngredientType ingredientType = IngredientType.None;
 
-    public IngredientStatus Status => status;
+    public IngredientStatus State => status;
     [SerializeField] private IngredientStatus status = IngredientStatus.UnProcessed;
 
     [Header("Cooking")]
-    [SerializeField] private bool needsToBeCooked = false; // reference cookComponent?
+    [SerializeField] private bool needsToBeCooked = false; 
     [SerializeField] private IngredientCookController cookComponent = null;
 
     // TODO: place into stackable component
@@ -46,7 +46,7 @@ public class Ingredient : MonoBehaviourPun
 
     public bool IsPreparedProperly()
     {
-        bool returnValue = Status == IngredientStatus.Processed;
+        bool returnValue = State == IngredientStatus.Processed;
         if (needsToBeCooked)
             returnValue &= cookComponent.State == CookState.Cooked;
         return returnValue;

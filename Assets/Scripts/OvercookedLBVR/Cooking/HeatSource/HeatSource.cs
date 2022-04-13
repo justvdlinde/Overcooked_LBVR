@@ -13,7 +13,8 @@ public class HeatSource : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out IngredientCookController cookable))
         {
-            cookable.Cook(heatStrength);
+            if(cookable.IsCookable)
+                cookable.Cook(heatStrength);
         }
     }
 
@@ -21,8 +22,11 @@ public class HeatSource : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out IngredientCookController cookable))
         {
-            cookable.SetCookStatus(true);
-            cookedItems.Add(other.gameObject);
+            if (cookable.IsCookable)
+            {
+                cookable.SetCookStatus(true);
+                cookedItems.Add(other.gameObject);
+            }
         }
     }
 
