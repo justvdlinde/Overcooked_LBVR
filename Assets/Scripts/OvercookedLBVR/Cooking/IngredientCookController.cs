@@ -15,7 +15,6 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
 
     [SerializeField] private Ingredient ingredient = null;
     [SerializeField] private CookState state = CookState.Raw;
-    [SerializeField] private AudioPlayerScript audioScript; // TODO: replace with seperate class
 
     [SerializeField] private float rawToCookTime = 1f;
     [SerializeField] private float cookedToBurnTime = 1f;
@@ -26,10 +25,10 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
     [SerializeField] private GameObject cookedGraphic = null;
     [SerializeField] private GameObject burntGraphic = null;
 
-    [Header("Audio Clips")]
-    [SerializeField] private AudioClip cooking;
-    [SerializeField] private AudioClip isCooked;
-    [SerializeField] private AudioClip isBurned;
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource = null;
+    [SerializeField] private AudioClip cookingAudioClip = null;
+    [SerializeField, Range(0, 1)] private float pitchDeviation = 0.2f;
 
     [Header("Particles")]
     [SerializeField] private ParticleSystem cookingParticles = null;
@@ -146,9 +145,10 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
         }
     }
 
-    public void PlayCookingSound()
+    private void PlayCookingSound()
     {
-        //audioScript.PlayNonColSound(audioScript.isCookingSound, transform.position);
+        audioSource.pitch = Random.Range(1 - pitchDeviation, 1 + pitchDeviation);
+        audioSource.PlayOneShot(cookingAudioClip);
     }
 
     // TODO: clean up (seperate particles class?)
