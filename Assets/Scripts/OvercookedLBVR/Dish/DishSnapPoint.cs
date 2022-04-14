@@ -24,59 +24,39 @@ public class DishSnapPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Ingredient item))
+        Debug.Log("OnTriggerEnter " + other);
+        if (other.TryGetComponent(out IngredientSnapController snappable))
         {
-            if (item.GetComponent<Rigidbody>().TryGetComponent(out PhotonView photonView))
+            Ingredient ingredient = snappable.Ingredient;
+            if (ingredient.photonView.IsMine)
             {
-                if (photonView.IsMine)
-                {
-                    if (!dish.ingredients.Contains(item) && item.State == IngredientStatus.Processed)
-                        Snap(item);
-                }
+                if (!dish.ingredientsStack.Contains(ingredient) && snappable.CanBeSnapped())
+                    AddToStack(snappable);
             }
         }
     }
 
-    public void Snap(Ingredient ingredient)
+    public void AddToStack(IngredientSnapController snappable)
     {
-        if (!ingredient.CanStack)
-		{
-            Debug.Log("Ingredient cant stack");
-            return;
-		}
-
-        dish.AddIngredient(ingredient);
+        Debug.Log("addToStack " + snappable.Ingredient);
+        dish.AddIngredientToStack(snappable.Ingredient);
     }
 
-    public Vector3 GetTopSnapPosition(GameObject obj)
+    public Vector3 GetTopSnapPosition(IngredientSnapController snappable)
     {
-		return new Vector3(0, totalStackHeight + GetObjectHeight(obj), 0);
-    }
-
-    private float GetObjectHeight(GameObject obj)
-	{
-        float objectHeight = 0;
-        if (obj.transform.GetChild(0).TryGetComponent(out MeshFilter renderer))
-        {
-            objectHeight = renderer.mesh.bounds.size.y * renderer.transform.localScale.y;
-        }
-
-        if (objectHeight < 0.015f)
-            objectHeight = 0.015f;
-
-        return objectHeight;
+		return new Vector3(0, totalStackHeight + snappable.GetGraphicHeight(), 0);
     }
 
     public DummyToolHandle RemoveTopIngredient()
     {
-        if (dish.ingredients.Count <= 0)
+        if (dish.ingredientsStack.Count <= 0)
             return null;
 
-        Ingredient ingredient = dish.ingredients[dish.ingredients.Count - 1];
+        Ingredient ingredient = dish.ingredientsStack[dish.ingredientsStack.Count - 1];
+
+        // TODO: check if ingredient has grab component instead?
         if (ingredient.IngredientType == IngredientType.Ketchup || ingredient.IngredientType == IngredientType.Mayo)
-		{
             return null;
-        }
 
         return dish.RemoveTopIngredient(ingredient);
     }
@@ -85,11 +65,11 @@ public class DishSnapPoint : MonoBehaviour
 	{
         stackElements = new List<float>();
         totalStackHeight = 0.0f;
-		foreach (var item in dish.ingredients)
+		foreach (var ingredient in dish.ingredientsStack)
 		{
-            Vector3 stackHeight = GetTopSnapPosition(item.gameObject); //item.processedGraphics.gameObject
-            stackElements.Add(stackHeight.y);
-            totalStackHeight = stackHeight.y;
+            //Vector3 stackHeight = GetTopSnapPosition(ingredient); //item.processedGraphics.gameObject
+            //stackElements.Add(stackHeight.y);
+            //totalStackHeight = stackHeight.y;
 		}
 	}
 
@@ -109,9 +89,9 @@ public class DishSnapPoint : MonoBehaviour
 
     public bool CanPlaceSauce(IngredientType sauce)
 	{
-        if(dish.ingredients.Count > 0)
+        if(dish.ingredientsStack.Count > 0)
 		{
-            return dish.ingredients[dish.ingredients.Count - 1].IngredientType != sauce;
+            return dish.ingredientsStack[dish.ingredientsStack.Count - 1].IngredientType != sauce;
 		}
         else
             return false;

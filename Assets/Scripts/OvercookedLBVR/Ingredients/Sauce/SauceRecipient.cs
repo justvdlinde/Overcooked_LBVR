@@ -51,17 +51,17 @@ public class SauceRecipient : MonoBehaviourPun
 		GameObject go = Instantiate(((sauceType == IngredientType.Ketchup) ? ketchupPrefab : mayoPrefab));
 
 
-		if (connectedDish != null)
-		{
-			Ingredient i = go.GetComponent<Ingredient>();
-			connectedDish.Snap(i);
-		}
-		else
-		{
-			go.transform.position = transform.position;
-			go.transform.position += transform.up * 0.05f;
-			go.transform.parent = transform.parent;
-		}
+		//if (connectedDish != null)
+		//{
+		//	Ingredient i = go.GetComponent<Ingredient>();
+		//	connectedDish.AddToStack(i);
+		//}
+		//else
+		//{
+		//	go.transform.position = transform.position;
+		//	go.transform.position += transform.up * 0.05f;
+		//	go.transform.parent = transform.parent;
+		//}
 
 		// apply to something as child here for plate
 

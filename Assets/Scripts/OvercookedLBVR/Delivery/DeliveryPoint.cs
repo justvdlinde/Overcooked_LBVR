@@ -44,7 +44,7 @@ public class DeliveryPoint : MonoBehaviour
     {
         foreach (Dish dish in dishesInTrigger)
 		{
-            if (dish != null && dish.ingredients.Count > DISH_MIN_INGREDIENTS)
+            if (dish != null && dish.ingredientsStack.Count > DISH_MIN_INGREDIENTS)
             {
                 DeliverDish(dish);
             }
