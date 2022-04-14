@@ -38,7 +38,7 @@ public class OperatorOrdersUIManager : MonoBehaviour
         }
     }
 
-    private void OnOrderDelivered(Order order, Dish dish)
+    private void OnOrderDelivered(Order order, FoodStack dish)
     {
         RemoveDisplay(order);
     }

@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107d847f750814b438319e62ca7a772e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dish: {fileID: 8548402943522822903}
+  foodStack: {fileID: 8280493064852665215}
   collider: {fileID: 1753612516}
   colliderPadding: 0.1
   snapMargin: 0.8
@@ -257,9 +257,9 @@ GameObject:
   - component: {fileID: 5853532453732691669}
   - component: {fileID: 5853532453732691668}
   - component: {fileID: 4701031565650054890}
-  - component: {fileID: 8548402943522822903}
   - component: {fileID: -2127286866967161279}
   - component: {fileID: 5022453513816206953}
+  - component: {fileID: 8280493064852665215}
   m_Layer: 26
   m_Name: Plate
   m_TagString: Plate
@@ -347,20 +347,6 @@ MonoBehaviour:
   clipChecker: {fileID: 0}
   photonView: {fileID: -2127286866967161279}
   forcePosition: 1
---- !u!114 &8548402943522822903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5853532453732691667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e160c2515cd4a742854df43cb4322ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ingredientsStack: []
-  snapPoint: {fileID: 1753612515}
 --- !u!114 &-2127286866967161279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +385,20 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &8280493064852665215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853532453732691667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d57e8334d53bc14f978df4f26b56363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientsStack: []
+  snapPoint: {fileID: 1753612515}
 --- !u!1 &7628820565282496827
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,7 +840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6e26200f8317374e83221ba9e82bf45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dish: {fileID: 8548402943522822903}
+  dish: {fileID: 0}
 --- !u!114 &8517470389341293050
 MonoBehaviour:
   m_ObjectHideFlags: 0

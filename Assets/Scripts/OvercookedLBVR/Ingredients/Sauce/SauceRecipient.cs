@@ -15,7 +15,7 @@ public class SauceRecipient : MonoBehaviourPun
 
 	public bool destroyOnSauce = true;
 
-	[SerializeField] private DishSnapPoint connectedDish = null;
+	[SerializeField] private FoodStackSnapPoint connectedDish = null;
 
 	public void ProgressSauceValue(float value, IngredientType sauceType)
 	{

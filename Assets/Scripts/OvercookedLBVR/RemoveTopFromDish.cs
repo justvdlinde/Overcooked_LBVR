@@ -6,7 +6,7 @@ using PhysicsCharacter;
 [RequireComponent(typeof(Rigidbody))]
 public class RemoveTopFromDish : PickupableObject
 {
-	[SerializeField] private DishSnapPoint dishSnapPoint = null;
+	[SerializeField] private FoodStackSnapPoint dishSnapPoint = null;
 	[SerializeField] private PickupableObject defaultToolHandle = null;
 	private BoxCollider col = null;
 

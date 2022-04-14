@@ -9,7 +9,7 @@ public class DeliveryPoint : MonoBehaviour
 {
     public const int DISH_MIN_INGREDIENTS = 3;
 
-    private List<Dish> dishesInTrigger = new List<Dish>();
+    private List<FoodStack> dishesInTrigger = new List<FoodStack>();
     private GlobalEventDispatcher globalEventDispatcher;
 
     private void Awake()
@@ -42,7 +42,7 @@ public class DeliveryPoint : MonoBehaviour
     [Button]
     public void DeliverDishesInTrigger()
     {
-        foreach (Dish dish in dishesInTrigger)
+        foreach (FoodStack dish in dishesInTrigger)
 		{
             if (dish != null && dish.ingredientsStack.Count > DISH_MIN_INGREDIENTS)
             {
@@ -51,7 +51,7 @@ public class DeliveryPoint : MonoBehaviour
 		}
     }
 
-    public void DeliverDish(Dish dish)
+    public void DeliverDish(FoodStack dish)
     {
         globalEventDispatcher.Invoke(new DishDeliveredEvent(dish, this));
     }

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class DishTrigger : MonoBehaviour
 {
-    public Dish dish;
+    public FoodStack dish;
 }

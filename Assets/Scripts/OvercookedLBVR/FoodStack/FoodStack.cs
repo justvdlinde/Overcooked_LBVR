@@ -11,10 +11,10 @@ public enum DishResult
     TimerExceeded
 }
 
-public class Dish : MonoBehaviourPun
+public class FoodStack : MonoBehaviourPun
 {
     public List<Ingredient> ingredientsStack = new List<Ingredient>();
-    public DishSnapPoint snapPoint = null;
+    public FoodStackSnapPoint snapPoint = null;
 
 	public void AddIngredientToStack(Ingredient ingredient)
     {
@@ -28,15 +28,20 @@ public class Dish : MonoBehaviourPun
     {
 		Ingredient ingredient = PhotonView.Find(viewID).GetComponent<Ingredient>();
 		ingredientsStack.Add(ingredient);
-        ingredient.SnapController.OnSnap(true);
+        Snap(ingredient.SnapController);
+    }
 
-        //ingredientParent.transform.SetParent(snapPoint.ingredientStack);
-        //Vector3 snapPosition = snapPoint.GetTopSnapPosition(ingredient); //ingredient.processedGraphics.gameObject
-        //snapPoint.stackElements.Add(snapPosition.y);
+    private void Snap(IngredientSnapController snapController)
+    {
+        snapController.OnSnap(true);
 
-        //float diff = snapPosition.y - snapPoint.totalStackHeight;
-        //snapPoint.totalStackHeight = snapPosition.y;
-        //snapPosition.y -= diff * 0.5f;
+        snapController.transform.SetParent(snapPoint.ingredientStack);
+        Vector3 snapPosition = snapPoint.GetSnapPosition(snapController); 
+        snapPoint.stackElements.Add(snapPosition.y);
+
+        float diff = snapPosition.y - snapPoint.totalStackHeight;
+        snapPoint.totalStackHeight = snapPosition.y;
+        snapPosition.y -= diff * 0.5f;
 
         //ingredientParent.transform.localPosition = snapPosition;
         //ingredientParent.transform.localEulerAngles = new Vector3(0, ingredientParent.transform.eulerAngles.y, 0);

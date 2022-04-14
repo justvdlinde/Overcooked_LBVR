@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class DishSnapPoint : MonoBehaviour
+public class FoodStackSnapPoint : MonoBehaviour
 {
-    public Dish dish;
+    // TODO: replace with events
+    public FoodStack foodStack;
     public new BoxCollider collider;
     public float colliderPadding = 0.1f;
     public float snapMargin = 0.8f;
@@ -30,7 +31,7 @@ public class DishSnapPoint : MonoBehaviour
             Ingredient ingredient = snappable.Ingredient;
             if (ingredient.photonView.IsMine)
             {
-                if (!dish.ingredientsStack.Contains(ingredient) && snappable.CanBeSnapped())
+                if (!foodStack.ingredientsStack.Contains(ingredient) && snappable.CanBeSnapped())
                     AddToStack(snappable);
             }
         }
@@ -39,33 +40,33 @@ public class DishSnapPoint : MonoBehaviour
     public void AddToStack(IngredientSnapController snappable)
     {
         Debug.Log("addToStack " + snappable.Ingredient);
-        dish.AddIngredientToStack(snappable.Ingredient);
+        foodStack.AddIngredientToStack(snappable.Ingredient);
     }
 
-    public Vector3 GetTopSnapPosition(IngredientSnapController snappable)
+    public Vector3 GetSnapPosition(IngredientSnapController snappable)
     {
 		return new Vector3(0, totalStackHeight + snappable.GetGraphicHeight(), 0);
     }
 
     public DummyToolHandle RemoveTopIngredient()
     {
-        if (dish.ingredientsStack.Count <= 0)
+        if (foodStack.ingredientsStack.Count <= 0)
             return null;
 
-        Ingredient ingredient = dish.ingredientsStack[dish.ingredientsStack.Count - 1];
+        Ingredient ingredient = foodStack.ingredientsStack[foodStack.ingredientsStack.Count - 1];
 
         // TODO: check if ingredient has grab component instead?
         if (ingredient.IngredientType == IngredientType.Ketchup || ingredient.IngredientType == IngredientType.Mayo)
             return null;
 
-        return dish.RemoveTopIngredient(ingredient);
+        return foodStack.RemoveTopIngredient(ingredient);
     }
 
     public void RecomputeStackHeight()
 	{
         stackElements = new List<float>();
         totalStackHeight = 0.0f;
-		foreach (var ingredient in dish.ingredientsStack)
+		foreach (var ingredient in foodStack.ingredientsStack)
 		{
             //Vector3 stackHeight = GetTopSnapPosition(ingredient); //item.processedGraphics.gameObject
             //stackElements.Add(stackHeight.y);
@@ -89,9 +90,9 @@ public class DishSnapPoint : MonoBehaviour
 
     public bool CanPlaceSauce(IngredientType sauce)
 	{
-        if(dish.ingredientsStack.Count > 0)
+        if(foodStack.ingredientsStack.Count > 0)
 		{
-            return dish.ingredientsStack[dish.ingredientsStack.Count - 1].IngredientType != sauce;
+            return foodStack.ingredientsStack[foodStack.ingredientsStack.Count - 1].IngredientType != sauce;
 		}
         else
             return false;

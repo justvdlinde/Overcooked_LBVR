@@ -5430,6 +5430,17 @@ Transform:
   m_Father: {fileID: 1485823155}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &261178047 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1414999815571879219, guid: 4e31bb0a136bbf4429201e1983f1f5f3, type: 3}
+  m_PrefabInstance: {fileID: 1065086003}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec6afa12530eabb4b9b2ffa3804a4bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &263005201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7009,6 +7020,10 @@ PrefabInstance:
     - target: {fileID: 3980107424422171055, guid: 933806167872c4143946f77455222572, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997809350937125402, guid: 933806167872c4143946f77455222572, type: 3}
+      propertyPath: viewIdField
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5323413498691346148, guid: 933806167872c4143946f77455222572, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13062,11 +13077,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3806640289091631812, guid: b2e5bd35f03d76e49860409cbdfe3fde, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.000000018141893
+      value: 0.0000000019294162
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806640289091631812, guid: b2e5bd35f03d76e49860409cbdfe3fde, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.000000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 3806640289091631812, guid: b2e5bd35f03d76e49860409cbdfe3fde, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 0.000000014901161
+      value: -0.00000008940697
       objectReference: {fileID: 0}
     - target: {fileID: 7559469067799874660, guid: b2e5bd35f03d76e49860409cbdfe3fde, type: 3}
       propertyPath: viewIdField
@@ -13131,6 +13150,10 @@ PrefabInstance:
     - target: {fileID: 8613119764337570796, guid: b2e5bd35f03d76e49860409cbdfe3fde, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8629123641189007449, guid: b2e5bd35f03d76e49860409cbdfe3fde, type: 3}
+      propertyPath: viewIdField
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2e5bd35f03d76e49860409cbdfe3fde, type: 3}
@@ -17119,7 +17142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4599269171076927599, guid: 34bc3233c21937740b7c2bbad55b4764, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.000000019310946
+      value: -0.0000000061946666
       objectReference: {fileID: 0}
     - target: {fileID: 4599269171076927599, guid: 34bc3233c21937740b7c2bbad55b4764, type: 3}
       propertyPath: m_ConnectedAnchor.y
@@ -17136,6 +17159,10 @@ PrefabInstance:
     - target: {fileID: 6962491880822665879, guid: 34bc3233c21937740b7c2bbad55b4764, type: 3}
       propertyPath: viewIdField
       value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 9203055609908641450, guid: 34bc3233c21937740b7c2bbad55b4764, type: 3}
+      propertyPath: viewIdField
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 9219130808961764632, guid: 34bc3233c21937740b7c2bbad55b4764, type: 3}
       propertyPath: m_Name
@@ -17614,6 +17641,10 @@ PrefabInstance:
     - target: {fileID: 3980107424422171055, guid: 933806167872c4143946f77455222572, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997809350937125402, guid: 933806167872c4143946f77455222572, type: 3}
+      propertyPath: viewIdField
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 5323413498691346148, guid: 933806167872c4143946f77455222572, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19198,6 +19229,10 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5009166684866345087, guid: 4e31bb0a136bbf4429201e1983f1f5f3, type: 3}
+      propertyPath: viewIdField
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 5026895137652755402, guid: 4e31bb0a136bbf4429201e1983f1f5f3, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -19261,6 +19296,14 @@ PrefabInstance:
     - target: {fileID: 6533682527772685378, guid: 4e31bb0a136bbf4429201e1983f1f5f3, type: 3}
       propertyPath: viewIdField
       value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6641134373249292088, guid: 4e31bb0a136bbf4429201e1983f1f5f3, type: 3}
+      propertyPath: onPress.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 261178047}
+    - target: {fileID: 6641134373249292088, guid: 4e31bb0a136bbf4429201e1983f1f5f3, type: 3}
+      propertyPath: onPress.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DispenseObject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e31bb0a136bbf4429201e1983f1f5f3, type: 3}
@@ -21350,6 +21393,10 @@ PrefabInstance:
     - target: {fileID: 5555255309425320726, guid: c9ba9aecc0134694ca82414c285b1d8c, type: 3}
       propertyPath: viewIdField
       value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5922326343258402603, guid: c9ba9aecc0134694ca82414c285b1d8c, type: 3}
+      propertyPath: viewIdField
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5942333267580116121, guid: c9ba9aecc0134694ca82414c285b1d8c, type: 3}
       propertyPath: m_Name
@@ -25025,11 +25072,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 512315807937826748, guid: 84145130c58262c43ad1cfa1b387bf92, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.0000000019127921
+      value: -8.604673e-11
       objectReference: {fileID: 0}
     - target: {fileID: 512315807937826748, guid: 84145130c58262c43ad1cfa1b387bf92, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.032100003
+      value: 0.032099996
       objectReference: {fileID: 0}
     - target: {fileID: 512315807937826748, guid: 84145130c58262c43ad1cfa1b387bf92, type: 3}
       propertyPath: m_ConnectedAnchor.z
@@ -25110,6 +25157,10 @@ PrefabInstance:
     - target: {fileID: 5133840594598564556, guid: 84145130c58262c43ad1cfa1b387bf92, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5149914703207899513, guid: 84145130c58262c43ad1cfa1b387bf92, type: 3}
+      propertyPath: viewIdField
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6363659975842622788, guid: 84145130c58262c43ad1cfa1b387bf92, type: 3}
       propertyPath: viewIdField
@@ -27034,11 +27085,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3760948930951573630, guid: 72a553e56a477d846b40680238362afd, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.00000004461255
+      value: -0.000000007722463
       objectReference: {fileID: 0}
     - target: {fileID: 3760948930951573630, guid: 72a553e56a477d846b40680238362afd, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.032100018
+      value: 0.032100033
       objectReference: {fileID: 0}
     - target: {fileID: 3760948930951573630, guid: 72a553e56a477d846b40680238362afd, type: 3}
       propertyPath: m_ConnectedAnchor.z
@@ -27119,6 +27170,10 @@ PrefabInstance:
     - target: {fileID: 8363922765823372558, guid: 72a553e56a477d846b40680238362afd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8382786052032028347, guid: 72a553e56a477d846b40680238362afd, type: 3}
+      propertyPath: viewIdField
+      value: 23
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72a553e56a477d846b40680238362afd, type: 3}
@@ -32734,6 +32789,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dispenser_Bread Variant (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3413780254613814974, guid: a58d02183f7738740909d01fe82710dc, type: 3}
+      propertyPath: viewIdField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3479101247557169795, guid: a58d02183f7738740909d01fe82710dc, type: 3}
       propertyPath: viewIdField
       value: 13
@@ -32768,7 +32827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7999553669056467067, guid: a58d02183f7738740909d01fe82710dc, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.00000001637235
+      value: -2.747361e-10
       objectReference: {fileID: 0}
     - target: {fileID: 7999553669056467067, guid: a58d02183f7738740909d01fe82710dc, type: 3}
       propertyPath: m_ConnectedAnchor.y

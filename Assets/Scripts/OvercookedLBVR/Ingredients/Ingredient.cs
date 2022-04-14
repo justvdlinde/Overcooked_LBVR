@@ -37,4 +37,9 @@ public class Ingredient : MonoBehaviourPun
     {
         status = (IngredientStatus)statusIndex;
     }
+
+    public override string ToString()
+    {
+        return base.ToString() + "(" + status + ")";
+    }
 }

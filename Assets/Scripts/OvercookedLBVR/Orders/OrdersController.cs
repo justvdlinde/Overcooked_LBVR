@@ -106,7 +106,7 @@ public class OrdersController : MonoBehaviourPunCallbacks
     /// <param name="dish"></param>
     /// <param name="bestFitScore"></param>
     /// <returns></returns>
-    public Order GetClosestMatch(Dish dish)
+    public Order GetClosestMatch(FoodStack dish)
     {
         if (ActiveOrders == null || ActiveOrders.Count == 0)
             return null;

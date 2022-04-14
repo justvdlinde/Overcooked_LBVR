@@ -110,7 +110,7 @@ public class StoryMode : GameMode
             DeliverDish(@event.Dish);
     }
 
-    private void DeliverDish(Dish dish)
+    private void DeliverDish(FoodStack dish)
     {
         Order order = OrdersController.GetClosestMatch(dish);
 
