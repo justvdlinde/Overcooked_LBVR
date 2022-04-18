@@ -6,12 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class FoodStackSnapPoint : MonoBehaviour
 {
-    // TODO: replace with events
     public FoodStack foodStack;
     public new BoxCollider collider;
     public float colliderPadding = 0.1f;
     public float snapMargin = 0.8f;
 
+    // TODO: replace with simple float instead of list
     public List<float> stackElements;
     public float totalStackHeight;
 
@@ -48,6 +48,7 @@ public class FoodStackSnapPoint : MonoBehaviour
 		return new Vector3(0, totalStackHeight + snappable.GetGraphicHeight(), 0);
     }
 
+    // TODO: cleanup:
     public DummyToolHandle RemoveTopIngredient()
     {
         if (foodStack.ingredientsStack.Count <= 0)
@@ -59,7 +60,7 @@ public class FoodStackSnapPoint : MonoBehaviour
         if (ingredient.IngredientType == IngredientType.Ketchup || ingredient.IngredientType == IngredientType.Mayo)
             return null;
 
-        return foodStack.RemoveTopIngredient(ingredient);
+        return null;// foodStack.RemoveTopIngredient(ingredient);
     }
 
     public void RecomputeStackHeight()
@@ -74,19 +75,12 @@ public class FoodStackSnapPoint : MonoBehaviour
 		}
 	}
 
-    public void UpdateTriggerPosition()
+    public void SetPositionToStackEnd()
 	{
         Vector3 pos = transform.localPosition;
 		pos.y = totalStackHeight;
         transform.localPosition = pos;
 	}
-
-    public void UpdateTriggerSize()
-    {
-        Vector3 colliderPosition = collider.center;
-        colliderPosition.y = totalStackHeight + collider.size.y * 0.5f;
-        collider.center = colliderPosition;
-    }
 
     public bool CanPlaceSauce(IngredientType sauce)
 	{

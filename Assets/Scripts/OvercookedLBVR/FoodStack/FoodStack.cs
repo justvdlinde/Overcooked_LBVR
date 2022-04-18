@@ -34,45 +34,31 @@ public class FoodStack : MonoBehaviourPun
     private void Snap(IngredientSnapController snapController)
     {
         snapController.OnSnap(true);
+        snapController.Ingredient.transform.SetParent(snapPoint.ingredientStack);
 
-        snapController.transform.SetParent(snapPoint.ingredientStack);
         Vector3 snapPosition = snapPoint.GetSnapPosition(snapController); 
         snapPoint.stackElements.Add(snapPosition.y);
 
         float diff = snapPosition.y - snapPoint.totalStackHeight;
         snapPoint.totalStackHeight = snapPosition.y;
-        snapPosition.y -= diff * 0.5f;
+        snapPosition.y -= diff * 0.5f; // ??
 
-        //ingredientParent.transform.localPosition = snapPosition;
-        //ingredientParent.transform.localEulerAngles = new Vector3(0, ingredientParent.transform.eulerAngles.y, 0);
-        //snapPoint.UpdateTriggerPosition();
-        ////UpdateTriggerSize();
-
-        //Collider[] colliders = ingredientParent.GetComponentsInChildren<Collider>(true);
-        //foreach (Collider collider in colliders)
-        //{
-        //    if (!collider.isTrigger)
-        //        collider.enabled = false;
-        //}
-
-        //ingredientParent.velocity = Vector3.zero;
-        //ingredientParent.isKinematic = true;
-        //ingredientParent.useGravity = false;
-        //Tool t = ingredientParent.GetComponent<Tool>();
-        //if (t != null)
-        //    ingredientParent.GetComponent<Tool>().enabled = false;
-
-        //ingredient.SetComponentsOnIngredientActive(false);
+        snapController.transform.localPosition = snapPosition;
+        snapController.transform.localEulerAngles = new Vector3(0, snapController.transform.eulerAngles.y, 0);
+        snapPoint.SetPositionToStackEnd();
     }
 
-	public DummyToolHandle RemoveTopIngredient(Ingredient ingredient)
+    public Ingredient GetTopIngredient()
     {
-        if (!ingredientsStack.Contains(ingredient))
+        if (ingredientsStack == null || ingredientsStack.Count == 0)
             return null;
+        else
+            return ingredientsStack[ingredientsStack.Count - 1];
+    }
 
+	public void RemoveTopIngredient()
+    {
         photonView.RPC(nameof(RemoveTopIngredientRPC), RpcTarget.All);
-        DummyToolHandle handle = ingredient.GetComponent<Rigidbody>().GetComponentInChildren<DummyToolHandle>(true);
-        return handle;
     }
 
     [PunRPC]
@@ -80,34 +66,18 @@ public class FoodStack : MonoBehaviourPun
     {
         Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
         ingredientsStack.Remove(ingredient);
+        ingredient.SnapController.OnSnap(false);
 
-        Rigidbody ingredientParent = ingredient.GetComponent<Rigidbody>();
-        if (ingredientParent.TryGetComponent(out PhotonRigidbodyView view))
-            view.enabled = true;
+        if (ingredientsStack.Contains(ingredient))
+            ingredientsStack.Remove(ingredient);
 
-        ingredientParent.isKinematic = false;
-        ingredientParent.useGravity = true;
-        ingredientParent.transform.parent = null;
-        Tool t = ingredientParent.GetComponent<Tool>();
-        if (t != null)
-            t.enabled = true;
+        // TODO: cleanup
+        ingredient.SnapController.canStack = false;
+        ingredient.SnapController.recentDishCollider = transform;
 
-
-        //ingredient.SetComponentsOnIngredientActive(true);
-
-        //Collider[] colliders = ingredientParent.GetComponentsInChildren<Collider>(true);
-        //foreach (Collider collider in colliders)
-        //    collider.enabled = true;
-
-        //if (ingredientsStack.Contains(ingredient))
-        //    ingredientsStack.Remove(ingredient);
-
-        //ingredient.CanStack = false;
-        //ingredient.recentDishCollider = transform;
-
+        // TODO: do this in this class
         snapPoint.RecomputeStackHeight();
-        snapPoint.UpdateTriggerPosition();
-        //UpdateTriggerSize();
+        snapPoint.SetPositionToStackEnd();
     }
 
     public bool ContainsIngredient(IngredientType type)
@@ -120,6 +90,7 @@ public class FoodStack : MonoBehaviourPun
         return false;
     }
 
+    // Move into seperate plate class?
     public void OnDeliver()
     {
         // TODO: check dish hierarchy for which object to destroy

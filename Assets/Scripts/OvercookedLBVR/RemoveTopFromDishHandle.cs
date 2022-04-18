@@ -4,7 +4,7 @@ using UnityEngine;
 using PhysicsCharacter;
 
 [RequireComponent(typeof(Rigidbody))]
-public class RemoveTopFromDish : PickupableObject
+public class RemoveTopFromDishHandle : PickupableObject
 {
 	[SerializeField] private FoodStackSnapPoint dishSnapPoint = null;
 	[SerializeField] private PickupableObject defaultToolHandle = null;

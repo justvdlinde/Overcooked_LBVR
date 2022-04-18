@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: ef08bd63-273e-45a7-afad-9ed5fb6fe293
+    AppIdRealtime: 
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
@@ -29,41 +29,29 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - AddIngredientToStackRPC
+  - AddScoreRPC
   - ApplyBulletDamageRPC
   - ApplyDamageRPC
+  - ApplySauceRPC
+  - ChopRPC
   - ClickRpc
   - DestroyRpc
-  - MoveRPC
-  - RequestStateRPC
-  - RespawnRPC
-  - SetStateRPC
-  - ShootRPC
-  - CreateNewOrderRPC
-  - StartGameRPC
-  - DeliverDishesInTriggerRPC
-  - GrabbedRPC
-  - ReleasedRPC
   - DispenseObjectRPC
-  - ChopRPC
+  - GrabbedRPC
+  - MoveRPC
   - OnDownEventRPC
   - OnUpEventRPC
-  - ApplySayceRPC
-  - ApplySauceRPC
-  - SetCookStateRPC
-  - SetIngredientStateRPC
-  - AddIngredientRPC
-  - RemoveTopIngredientRPC
-  - RequestDataRPC
-  - SendDataRPC
-  - AddActiveOrderRPC
-  - RequestInitialSyncRPC
-  - SubmitInitialSyncDataRPC
-  - SubmitActiveOrderRPC
-  - SendSyncDataRPC
-  - AddScoreRPC
-  - SubmitRemoveActiveOrderRPC
-  - ProcessRPC
   - ProcessIngredientRPC
-  - AddIngredientToStackRPC
+  - ReleasedRPC
+  - RemoveTopIngredientRPC
+  - RequestStateRPC
+  - RespawnRPC
+  - SendSyncDataRPC
+  - SetCookStateRPC
+  - SetStateRPC
+  - ShootRPC
+  - SubmitActiveOrderRPC
+  - SubmitRemoveActiveOrderRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
