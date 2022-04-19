@@ -9,7 +9,7 @@ public class DeliveryPoint : MonoBehaviour
 {
     public const int DISH_MIN_INGREDIENTS = 3;
 
-    private List<FoodStack> dishesInTrigger = new List<FoodStack>();
+    private List<Plate> platesInTrigger = new List<Plate>();
     private GlobalEventDispatcher globalEventDispatcher;
 
     private void Awake()
@@ -19,22 +19,22 @@ public class DeliveryPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out DishTrigger trigger))
+        if(other.TryGetComponent(out Plate plate))
         {
-            if (!dishesInTrigger.Contains(trigger.dish))
+            if (!platesInTrigger.Contains(plate))
             {
-                dishesInTrigger.Add(trigger.dish);
+                platesInTrigger.Add(plate);
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out DishTrigger trigger))
+        if (other.TryGetComponent(out Plate plate))
         {
-            if (dishesInTrigger.Contains(trigger.dish))
+            if (platesInTrigger.Contains(plate))
             {
-                dishesInTrigger.Remove(trigger.dish);
+                platesInTrigger.Remove(plate);
             }
         }
     }
@@ -42,16 +42,16 @@ public class DeliveryPoint : MonoBehaviour
     [Button]
     public void DeliverDishesInTrigger()
     {
-        foreach (FoodStack dish in dishesInTrigger)
+        foreach (Plate plate in platesInTrigger)
 		{
-            if (dish != null && dish.ingredientsStack.Count > DISH_MIN_INGREDIENTS)
+            if (plate.CanBeDelivered())
             {
-                DeliverDish(dish);
+                DeliverDish(plate);
             }
 		}
     }
 
-    public void DeliverDish(FoodStack dish)
+    public void DeliverDish(Plate dish)
     {
         globalEventDispatcher.Invoke(new DishDeliveredEvent(dish, this));
     }

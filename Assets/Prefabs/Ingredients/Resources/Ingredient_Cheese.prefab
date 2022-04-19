@@ -108,6 +108,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8872432211559360073}
     - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
+      propertyPath: rigidbody
+      value: 
+      objectReference: {fileID: 2666350487557391515}
+    - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
       propertyPath: ingredient
       value: 
       objectReference: {fileID: 6698917164500638887}
@@ -119,6 +123,10 @@ PrefabInstance:
       propertyPath: rigidbodyView
       value: 
       objectReference: {fileID: 2334646528918173582}
+    - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
+      propertyPath: heightMultiplier
+      value: 0.37
+      objectReference: {fileID: 0}
     - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
       propertyPath: toggleObjects.Array.size
       value: 1
@@ -285,6 +293,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c4a7b0f1a37a44eabf436837979e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &2666350487557391515 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8729201025394254469, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+  m_PrefabInstance: {fileID: 6639605135965546014}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2334646528918173582 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8953940111436927376, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}

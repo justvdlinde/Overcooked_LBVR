@@ -1,5 +1,4 @@
 using Photon.Pun;
-using PhysicsCharacter;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,8 +12,24 @@ public enum DishResult
 
 public class FoodStack : MonoBehaviourPun
 {
-    public List<Ingredient> ingredientsStack = new List<Ingredient>();
-    public FoodStackSnapPoint snapPoint = null;
+    [SerializeField] private FoodStackSnapPoint snapPoint = null;
+
+    public List<Ingredient> IngredientsStack => ingredientsStack;
+
+    private List<Ingredient> ingredientsStack = new List<Ingredient>();
+    private List<float> ingredientHeights = new List<float>();
+    private float totalStackHeight;
+
+    public bool CanAddToStack(IngredientSnapController ingredientSnapper)
+    {
+        if (!ingredientSnapper.Ingredient.photonView.IsMine)
+            return false;
+        
+        //if (IngredientsStack.Count == 1)
+        //    return ingredientSnapper.Ingredient.IngredientType == IngredientType.BunBottom;
+
+        return !ingredientsStack.Contains(ingredientSnapper.Ingredient) && ingredientSnapper.CanBeSnapped();
+    }
 
 	public void AddIngredientToStack(Ingredient ingredient)
     {
@@ -27,25 +42,25 @@ public class FoodStack : MonoBehaviourPun
 	private void AddIngredientToStackRPC(int viewID)
     {
 		Ingredient ingredient = PhotonView.Find(viewID).GetComponent<Ingredient>();
+        Debug.Log("Add to stack " + ingredient);
 		ingredientsStack.Add(ingredient);
-        Snap(ingredient.SnapController);
+        StackToTop(ingredient.SnapController);
     }
 
-    private void Snap(IngredientSnapController snapController)
+    private void StackToTop(IngredientSnapController snapController)
     {
         snapController.OnSnap(true);
-        snapController.Ingredient.transform.SetParent(snapPoint.ingredientStack);
+        Ingredient ingredient = snapController.Ingredient;
+        ingredient.transform.SetParent(transform);
 
-        Vector3 snapPosition = snapPoint.GetSnapPosition(snapController); 
-        snapPoint.stackElements.Add(snapPosition.y);
+        float graphicHeight = snapController.GetGraphicHeight();
+        Vector3 newSnapPosition = new Vector3(0, totalStackHeight + graphicHeight, 0);
+        ingredient.transform.localPosition = newSnapPosition;
+        ingredient.transform.localEulerAngles = new Vector3(0, ingredient.transform.eulerAngles.y, 0);
+        ingredientHeights.Add(graphicHeight);
 
-        float diff = snapPosition.y - snapPoint.totalStackHeight;
-        snapPoint.totalStackHeight = snapPosition.y;
-        snapPosition.y -= diff * 0.5f; // ??
-
-        snapController.transform.localPosition = snapPosition;
-        snapController.transform.localEulerAngles = new Vector3(0, snapController.transform.eulerAngles.y, 0);
-        snapPoint.SetPositionToStackEnd();
+        totalStackHeight += graphicHeight;
+        snapPoint.SetHeight(totalStackHeight);
     }
 
     public Ingredient GetTopIngredient()
@@ -56,9 +71,19 @@ public class FoodStack : MonoBehaviourPun
             return ingredientsStack[ingredientsStack.Count - 1];
     }
 
-	public void RemoveTopIngredient()
+    public bool CanRemoveTopIngredient()
+    {
+        if (ingredientsStack.Count <= 0)
+            return false;
+
+        Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
+        return ingredient.CanBeGrabbed();
+    }
+
+    public Ingredient RemoveTopIngredient()
     {
         photonView.RPC(nameof(RemoveTopIngredientRPC), RpcTarget.All);
+        return ingredientsStack[ingredientsStack.Count - 1];
     }
 
     [PunRPC]
@@ -67,6 +92,7 @@ public class FoodStack : MonoBehaviourPun
         Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
         ingredientsStack.Remove(ingredient);
         ingredient.SnapController.OnSnap(false);
+        ingredient.transform.SetParent(null);
 
         if (ingredientsStack.Contains(ingredient))
             ingredientsStack.Remove(ingredient);
@@ -75,9 +101,11 @@ public class FoodStack : MonoBehaviourPun
         ingredient.SnapController.canStack = false;
         ingredient.SnapController.recentDishCollider = transform;
 
-        // TODO: do this in this class
-        snapPoint.RecomputeStackHeight();
-        snapPoint.SetPositionToStackEnd();
+        float removedIngredientHeight = ingredientHeights.Count - 1;
+        ingredientHeights.Remove(ingredientHeights.Count - 1);
+
+        totalStackHeight -= removedIngredientHeight;
+        snapPoint.SetHeight(totalStackHeight);
     }
 
     public bool ContainsIngredient(IngredientType type)
@@ -90,19 +118,26 @@ public class FoodStack : MonoBehaviourPun
         return false;
     }
 
-    // Move into seperate plate class?
-    public void OnDeliver()
-    {
-        // TODO: check dish hierarchy for which object to destroy
-        // TODO: instantiate some kind of particle/feedback
-        PhotonNetwork.Destroy(gameObject);
-    }
-
     public override string ToString()
     {
         return base.ToString() + " Ingredients: " + string.Join("-", ingredientsStack);
     }
 
+    public bool CanPlaceSauce(IngredientType sauce)
+    {
+        if (ingredientsStack.Count > 0)
+        {
+            return ingredientsStack[ingredientsStack.Count - 1].IngredientType != sauce;
+        }
+        else
+            return false;
+    }
+
+    /// <summary>
+    /// Compares order with ingredient stack and returns a result
+    /// </summary>
+    /// <param name="order"></param>
+    /// <returns></returns>
     public OrderDishCompareResult Compare(Order order)
     {
         bool ingredientsAreInCorrectOrder = true;

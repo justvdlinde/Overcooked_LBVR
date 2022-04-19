@@ -150,6 +150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c4a7b0f1a37a44eabf436837979e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &4831773796224149337 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8729201025394254469, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+  m_PrefabInstance: {fileID: 4191077464428152284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5074285369989747788 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8953940111436927376, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
@@ -201,6 +206,10 @@ PrefabInstance:
       propertyPath: renderer
       value: 
       objectReference: {fileID: 1434308428326354766}
+    - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
+      propertyPath: rigidbody
+      value: 
+      objectReference: {fileID: 4831773796224149337}
     - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
       propertyPath: ingredient
       value: 

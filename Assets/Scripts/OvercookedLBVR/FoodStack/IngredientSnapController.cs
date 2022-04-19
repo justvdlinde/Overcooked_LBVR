@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class IngredientSnapController : MonoBehaviour
 {
-    private const float MIN_HEIGHT = 0.015f;
+    private const float MIN_HEIGHT = 0.01f;
 
     public Ingredient Ingredient => ingredient;
     public bool IsSnapped { get; private set; }
@@ -16,9 +16,10 @@ public class IngredientSnapController : MonoBehaviour
     [SerializeField] private new Rigidbody rigidbody = null;
     [Tooltip("Renderer used to calculate object height when stacking on dish, use processed version")]
     [SerializeField] private MeshFilter meshFilter = null;
-    [SerializeField] private float heightMultiplier = 1;
-    [SerializeField] private PhotonRigidbodyView rigidbodyView = null; 
+    [SerializeField] private PhotonRigidbodyView rigidbodyView = null;
     [SerializeField] private List<GameObject> toggleObjects = new List<GameObject>();
+    [SerializeField] private float heightMultiplier = 1;
+    [SerializeField] private bool drawHeightGizmo = true;
 
     // TOOD: cleanup
     public bool canStack = true;
@@ -78,11 +79,30 @@ public class IngredientSnapController : MonoBehaviour
 
     public float GetGraphicHeight()
     {
-        float objectHeight = meshFilter.mesh.bounds.size.y * meshFilter.transform.localScale.y * heightMultiplier;
+        if (meshFilter == null || meshFilter.sharedMesh == null)
+        {
+            if (meshFilter == null)
+            {
+                Debug.LogWarning("meshFilter is null");
+                return 0;
+            }
+            else if (meshFilter.sharedMesh == null)
+            {
+                meshFilter.sharedMesh = new Mesh();
+            }
+        }
+
+        float objectHeight = meshFilter.sharedMesh.bounds.size.y * meshFilter.transform.localScale.y * heightMultiplier;
 
         if (objectHeight < MIN_HEIGHT)
             objectHeight = MIN_HEIGHT;
 
         return objectHeight;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (drawHeightGizmo)
+            Gizmos.DrawCube(transform.position, new Vector3(0.05f, GetGraphicHeight(), 0.05f));
     }
 }

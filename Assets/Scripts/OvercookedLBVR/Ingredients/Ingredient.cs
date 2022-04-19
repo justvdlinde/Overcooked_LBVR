@@ -7,10 +7,10 @@ public class Ingredient : MonoBehaviourPun
     public IngredientType IngredientType => ingredientType;
     public IngredientStatus State => status;
     public IngredientSnapController SnapController => snapController;
+    public PhysicsCharacter.Tool GrabController => grabController;
 
     [SerializeField] private IngredientType ingredientType = IngredientType.None;
     [SerializeField] private IngredientStatus status = IngredientStatus.UnProcessed;
-
     [SerializeField] private bool needsToBeCooked = false; 
 
     [Header("References")]
@@ -18,7 +18,8 @@ public class Ingredient : MonoBehaviourPun
     [SerializeField] private IngredientCookController cookController = null;
     [Tooltip("Optional, only needed if object is snappable to dish and contains a IngredientSnapController component")]
     [SerializeField] private IngredientSnapController snapController = null;
-
+    [Tooltip("Optional, only needed if object is grabbable")]
+    [SerializeField] private PhysicsCharacter.Tool grabController = null;
     public bool IsPreparedProperly()
     {
         bool returnValue = State == IngredientStatus.Processed;
@@ -38,8 +39,13 @@ public class Ingredient : MonoBehaviourPun
         status = (IngredientStatus)statusIndex;
     }
 
+    public bool CanBeGrabbed()
+    {
+        return grabController != null;
+    }
+
     public override string ToString()
     {
-        return base.ToString() + "(" + status + ")";
+        return name + "(" + status + ")";
     }
 }

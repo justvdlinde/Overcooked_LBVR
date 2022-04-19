@@ -347,6 +347,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c4a7b0f1a37a44eabf436837979e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &5879746051019872971 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8729201025394254469, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+  m_PrefabInstance: {fileID: 2935599240938928206}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6124788718814620126 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8953940111436927376, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
@@ -384,6 +389,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1832919489416547888}
     - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
+      propertyPath: rigidbody
+      value: 
+      objectReference: {fileID: 5879746051019872971}
+    - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
       propertyPath: ingredient
       value: 
       objectReference: {fileID: 2913441856137462519}
@@ -417,7 +426,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2837935137359851640, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.0279
       objectReference: {fileID: 0}
     - target: {fileID: 2837935137359851640, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
       propertyPath: m_LocalPosition.z

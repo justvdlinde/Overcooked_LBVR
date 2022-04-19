@@ -10,6 +10,7 @@ namespace PhysicsCharacter
 	{
 		[SerializeField] private List<ToolHandle> toolHandles = null;
 		[SerializeField] private ToolPositionDelegate toolTransformDelegate = null;
+		public DummyToolHandle dummyToolHandle = null;
 		private int heldHandles = 0;
 
 		// physics movement section
@@ -62,7 +63,7 @@ namespace PhysicsCharacter
 				gameObject.SetActive(false);
 		}
 
-		protected virtual void Update()
+        protected virtual void Update()
 		{
 			//if(!IsBeingHeld())
 			//{

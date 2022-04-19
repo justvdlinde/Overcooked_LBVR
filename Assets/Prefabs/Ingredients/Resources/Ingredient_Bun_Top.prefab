@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7288360464768657522}
   - component: {fileID: 7279185735037638440}
   - component: {fileID: 8460475290151233355}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bun_Top_Sliced
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,6 +161,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c4a7b0f1a37a44eabf436837979e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &6741122464911861262 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8729201025394254469, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+  m_PrefabInstance: {fileID: 2641674813518873739}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6407448164297757979 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8953940111436927376, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
@@ -194,6 +199,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7288360464768657522}
     - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
+      propertyPath: rigidbody
+      value: 
+      objectReference: {fileID: 6741122464911861262}
+    - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
       propertyPath: ingredient
       value: 
       objectReference: {fileID: 2628647689497460274}
@@ -205,6 +214,10 @@ PrefabInstance:
       propertyPath: rigidbodyView
       value: 
       objectReference: {fileID: 6407448164297757979}
+    - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
+      propertyPath: heightMultiplier
+      value: 0.94
+      objectReference: {fileID: 0}
     - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
       propertyPath: toggleObjects.Array.size
       value: 1

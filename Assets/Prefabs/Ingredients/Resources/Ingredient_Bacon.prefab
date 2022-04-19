@@ -294,7 +294,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8488051633705318320}
-  m_Mesh: {fileID: 4300000, guid: 796e63e0a9781f14c9ce714b7fdf3379, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &8474369409040881676
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -594,6 +594,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05c4a7b0f1a37a44eabf436837979e8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &5563480569806781964 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8729201025394254469, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+  m_PrefabInstance: {fileID: 3751830607970655369}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5211763284999834905 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8953940111436927376, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
@@ -646,6 +651,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8483024412268933724}
     - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
+      propertyPath: rigidbody
+      value: 
+      objectReference: {fileID: 5563480569806781964}
+    - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
       propertyPath: ingredient
       value: 
       objectReference: {fileID: 3801854013561988656}
@@ -657,6 +666,10 @@ PrefabInstance:
       propertyPath: rigidbodyView
       value: 
       objectReference: {fileID: 5211763284999834905}
+    - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
+      propertyPath: heightMultiplier
+      value: 0.22
+      objectReference: {fileID: 0}
     - target: {fileID: 1775246097728263627, guid: b9d9c004f17f7654c975b6b46462bde0, type: 3}
       propertyPath: toggleObjects.Array.size
       value: 2

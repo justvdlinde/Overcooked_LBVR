@@ -6,7 +6,7 @@ using PhysicsCharacter;
 [RequireComponent(typeof(Rigidbody))]
 public class RemoveTopFromDishHandle : PickupableObject
 {
-	[SerializeField] private FoodStackSnapPoint dishSnapPoint = null;
+	[SerializeField] private FoodStack foodStack = null;
 	[SerializeField] private PickupableObject defaultToolHandle = null;
 	private BoxCollider col = null;
 
@@ -18,19 +18,20 @@ public class RemoveTopFromDishHandle : PickupableObject
 
 	public override PickupableObject GetGrabbed(Hand hand, Transform target)
 	{
-		PickupableObject obj = dishSnapPoint.RemoveTopIngredient();
-		//col.center = dishSnapPoint.GetComponent<BoxCollider>().center;
-		if (obj != null)
-			return obj.GetGrabbed(hand, target);
-		else
-			return defaultToolHandle.GetGrabbed(hand, target);
-		//return otherToolHandle.GetGrabbed(hand, target);
+		if (!foodStack.CanRemoveTopIngredient())
+			return null;
+
+		Ingredient ingredient = foodStack.RemoveTopIngredient();
+        PickupableObject handle = ingredient.GrabController.dummyToolHandle;
+		if (handle != null)
+            return handle.GetGrabbed(hand, target);
+        else
+            return defaultToolHandle.GetGrabbed(hand, target);
 	}
 
 	public override void GetReleased(Hand hand)
 	{
 		return;
-		//otherToolHandle.GetReleased(hand);
 	}
 
 	public override bool IsObjectBeingHeld()

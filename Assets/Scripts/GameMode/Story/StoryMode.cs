@@ -110,9 +110,9 @@ public class StoryMode : GameMode
             DeliverDish(@event.Dish);
     }
 
-    private void DeliverDish(FoodStack dish)
+    private void DeliverDish(Plate dish)
     {
-        Order order = OrdersController.GetClosestMatch(dish);
+        Order order = OrdersController.GetClosestMatch(dish.FoodStack);
 
         if (order != null)
         {
@@ -124,7 +124,7 @@ public class StoryMode : GameMode
             throw new System.Exception("No closest order found!");
         }
 
-        OrderScore score = scoreCalculator.CalculateScore(order, dish, DishResult.Delivered);
+        OrderScore score = scoreCalculator.CalculateScore(order, dish.FoodStack, DishResult.Delivered);
         (Scoreboard as StoryModeScoreboard).AddScore(order, score);
         OrdersController.RemoveActiveOrder(order);
         order.TimerExceededEvent -= OnOrderTimerExceeded;
