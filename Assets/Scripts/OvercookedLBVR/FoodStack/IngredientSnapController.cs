@@ -6,6 +6,7 @@ using UnityEngine;
 public class IngredientSnapController : MonoBehaviour
 {
     private const float MIN_HEIGHT = 0.01f;
+    private const float MIN_COLLIDER_DISTANCE_FOR_RESTACK = 0.3f;
 
     public Ingredient Ingredient => ingredient;
     public bool IsSnapped { get; private set; }
@@ -21,9 +22,7 @@ public class IngredientSnapController : MonoBehaviour
     [SerializeField] private float heightMultiplier = 1;
     [SerializeField] private bool drawHeightGizmo = true;
 
-    // TOOD: cleanup
-    public bool canStack = true;
-    public Transform recentDishCollider = null;
+    [SerializeField] private FoodStack lastStack = null;
 
     private void OnValidate()
     {
@@ -34,23 +33,9 @@ public class IngredientSnapController : MonoBehaviour
             rigidbodyView = GetComponentInParent<PhotonRigidbodyView>();
     }
 
-    // TOOD: cleanup
-    private void Update()
-    {
-        if (!canStack && recentDishCollider != null)
-        {
-            if (Vector3.Distance(recentDishCollider.transform.position, transform.position) > 0.3f)
-            {
-                canStack = true;
-                recentDishCollider = null;
-            }
-        }
-    }
-
     public void OnSnap(bool snap)
     {
         IsSnapped = snap;
-        SnapEvent?.Invoke(IsSnapped);
         ToggleObjects(!snap);
 
         if (rigidbodyView != null)
@@ -62,11 +47,31 @@ public class IngredientSnapController : MonoBehaviour
             rigidbody.isKinematic = snap;
             rigidbody.useGravity = !snap;
         }
+
+        SnapEvent?.Invoke(IsSnapped);
+    }
+
+    public void SetLastStackCollider(FoodStack stack)
+    {
+        lastStack = stack;
+    }
+
+    private void Update()
+    {
+        if (lastStack != null)
+        {
+            if (Vector3.Distance(lastStack.transform.position, transform.position) > MIN_COLLIDER_DISTANCE_FOR_RESTACK)
+                lastStack = null;
+        }
+
     }
 
     public bool CanBeSnapped()
     {
-        return /*canStack && */ingredient.State == IngredientStatus.Processed;
+        if (ingredient.State != IngredientStatus.Processed)
+            return false;
+
+        return lastStack == null;
     }
 
     private void ToggleObjects(bool active)
@@ -100,6 +105,7 @@ public class IngredientSnapController : MonoBehaviour
         return objectHeight;
     }
 
+#if UNITY_EDITOR
     [Utils.Core.Attributes.Button]
     private void PrintHeight()
     {
@@ -111,4 +117,17 @@ public class IngredientSnapController : MonoBehaviour
         if (drawHeightGizmo)
             Gizmos.DrawCube(transform.position, new Vector3(0.05f, GetGraphicHeight(), 0.05f));
     }
+
+    private void OnDrawGizmos()
+    {
+        if (lastStack != null)
+        {
+            if (Vector3.Distance(lastStack.transform.position, transform.position) > MIN_COLLIDER_DISTANCE_FOR_RESTACK)
+                Gizmos.color = Color.red;
+            else
+                Gizmos.color = Color.white;
+            Gizmos.DrawLine(transform.position, lastStack.transform.position);
+        }
+    }
+#endif
 }

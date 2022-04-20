@@ -75,6 +75,7 @@ public class FoodStack : MonoBehaviourPun
     private void StackToTop(IngredientSnapController snapController)
     {
         snapController.OnSnap(true);
+        snapController.SetLastStackCollider(this);
         Ingredient ingredient = snapController.Ingredient;
         ingredient.transform.SetParent(transform);
 
@@ -105,10 +106,12 @@ public class FoodStack : MonoBehaviourPun
         return ingredient.CanBeGrabbed();
     }
 
+    [Utils.Core.Attributes.Button]
     public Ingredient RemoveTopIngredient()
     {
-        Debug.Log("RemoveTopIngredient");
         Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
+        Debug.Log("RemoveTopIngredient: " + ingredient);
+
         photonView.RPC(nameof(RemoveTopIngredientRPC), RpcTarget.All);
         return ingredient;
     }
@@ -121,17 +124,12 @@ public class FoodStack : MonoBehaviourPun
         ingredient.SnapController.OnSnap(false);
         ingredient.transform.SetParent(null);
 
-        if (ingredientsStack.Contains(ingredient))
-            ingredientsStack.Remove(ingredient);
-
-        // TODO: cleanup
-        ingredient.SnapController.canStack = false;
-        ingredient.SnapController.recentDishCollider = transform;
-
-        float removedIngredientHeight = ingredientHeights.Count - 1;
-        ingredientHeights.Remove(ingredientHeights.Count - 1);
+        float removedIngredientHeight = ingredientHeights[ingredientHeights.Count - 1];
+        ingredientHeights.RemoveAt(ingredientHeights.Count - 1);
 
         totalStackHeight -= removedIngredientHeight;
+        if (totalStackHeight < 0)
+            totalStackHeight = 0;
         snapPoint.SetHeight(totalStackHeight);
     }
 
