@@ -95,7 +95,7 @@ public class StoryMode : GameMode
     {
         Order order = orderGenerator.GenerateRandomOrder(3, 0, out int newTier, true);
         order.orderNumber = displayNr;
-        order.timer.Set(10); // TODO: set timer
+        order.timer.Set(100); // TODO: set timer
         OrdersController.AddActiveOrder(order);
     }
 

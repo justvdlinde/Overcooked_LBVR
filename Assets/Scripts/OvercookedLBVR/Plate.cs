@@ -15,6 +15,6 @@ public class Plate : MonoBehaviour
 
     public bool CanBeDelivered()
     {
-        return (foodStack != null && foodStack.IngredientsStack.Count > DeliveryPoint.DISH_MIN_INGREDIENTS);
+        return (foodStack != null && foodStack.IngredientsStack.Count >= DeliveryPoint.DISH_MIN_INGREDIENTS);
     }
 }
