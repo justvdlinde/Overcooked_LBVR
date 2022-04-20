@@ -100,6 +100,12 @@ public class IngredientSnapController : MonoBehaviour
         return objectHeight;
     }
 
+    [Utils.Core.Attributes.Button]
+    private void PrintHeight()
+    {
+        Debug.Log(GetGraphicHeight());
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (drawHeightGizmo)

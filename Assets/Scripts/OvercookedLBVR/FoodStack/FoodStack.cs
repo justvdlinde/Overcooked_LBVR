@@ -13,22 +13,47 @@ public enum DishResult
 public class FoodStack : MonoBehaviourPun
 {
     [SerializeField] private FoodStackSnapPoint snapPoint = null;
-
+    [SerializeField] private bool firstIngredientMustBeBunBottom = true;
+    [SerializeField] private bool lastIngredientMustBeBunTop = true;
     public List<Ingredient> IngredientsStack => ingredientsStack;
 
     private List<Ingredient> ingredientsStack = new List<Ingredient>();
     private List<float> ingredientHeights = new List<float>();
     private float totalStackHeight;
 
+    private void Update()
+    {
+        GUIWorldSpace.Log("Stack count: " + ingredientsStack.Count);
+    }
+
     public bool CanAddToStack(IngredientSnapController ingredientSnapper)
     {
         if (!ingredientSnapper.Ingredient.photonView.IsMine)
             return false;
-        
-        //if (IngredientsStack.Count == 1)
-        //    return ingredientSnapper.Ingredient.IngredientType == IngredientType.BunBottom;
 
-        return !ingredientsStack.Contains(ingredientSnapper.Ingredient) && ingredientSnapper.CanBeSnapped();
+        if (firstIngredientMustBeBunBottom)
+        {
+            if (ingredientsStack.Count > 0 && ingredientsStack[ingredientsStack.Count - 1].IngredientType == IngredientType.BunTop)
+                return false;
+        }
+
+        if (!ingredientsStack.Contains(ingredientSnapper.Ingredient) && ingredientSnapper.CanBeSnapped())
+        {
+            // If stack is empty, only stack if ingredient is bottom bun
+            if (lastIngredientMustBeBunTop)
+            {
+                if (IngredientsStack.Count == 0)
+                    return ingredientSnapper.Ingredient.IngredientType == IngredientType.BunBottom;
+                else
+                    return true;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 	public void AddIngredientToStack(Ingredient ingredient)
@@ -82,8 +107,10 @@ public class FoodStack : MonoBehaviourPun
 
     public Ingredient RemoveTopIngredient()
     {
+        Debug.Log("RemoveTopIngredient");
+        Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
         photonView.RPC(nameof(RemoveTopIngredientRPC), RpcTarget.All);
-        return ingredientsStack[ingredientsStack.Count - 1];
+        return ingredient;
     }
 
     [PunRPC]
