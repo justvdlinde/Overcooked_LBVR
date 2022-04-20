@@ -64,13 +64,14 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
 
     private void SendSyncData(PhotonNetworkedPlayer player)
     {
-        photonView.RPC(nameof(SendSyncDataRPC), player, (int)state);
+        photonView.RPC(nameof(SendSyncDataRPC), player, (int)state, CookProgress);
     }
 
     [PunRPC]
-    private void SendSyncDataRPC(object data)
+    private void SendSyncDataRPC(object data, float cookProgress)
     {
         SetState((CookState)data);
+        CookProgress = cookProgress;
     }
 
     private void Update()
@@ -88,7 +89,9 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
 			if (burntParticles.isPlaying)
 				burntParticles.Stop();
 		}
-	}
+
+        transform.rotation = Quaternion.identity;
+    }
 
     public void SetCookStatus(bool cook)
     {
