@@ -63,7 +63,6 @@ public class IngredientSnapController : MonoBehaviour
             if (Vector3.Distance(lastStack.transform.position, transform.position) > MIN_COLLIDER_DISTANCE_FOR_RESTACK)
                 lastStack = null;
         }
-
     }
 
     public bool CanBeSnapped()

@@ -42,8 +42,10 @@ public class DeliveryPoint : MonoBehaviour
     [Button]
     public void DeliverDishesInTrigger()
     {
+        Debug.Log("platesInTrigger.Count: " + platesInTrigger.Count);
         foreach (Plate plate in platesInTrigger)
 		{
+            Debug.Log("plate.CanBeDelivered " + plate.CanBeDelivered());
             if (plate.CanBeDelivered())
             {
                 DeliverDish(plate);

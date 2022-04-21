@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,20 +11,44 @@ public enum DishResult
     TimerExceeded
 }
 
-public class FoodStack : MonoBehaviourPun
+public class FoodStack : MonoBehaviourPunCallbacks
 {
+    public List<Ingredient> IngredientsStack => ingredientsStack;
+
     [SerializeField] private FoodStackSnapPoint snapPoint = null;
+    [SerializeField] private Transform stackContainer = null;
     [SerializeField] private bool firstIngredientMustBeBunBottom = true;
     [SerializeField] private bool lastIngredientMustBeBunTop = true;
-    public List<Ingredient> IngredientsStack => ingredientsStack;
 
     private List<Ingredient> ingredientsStack = new List<Ingredient>();
     private List<float> ingredientHeights = new List<float>();
     private float totalStackHeight;
 
-    private void Update()
+    public override void OnPlayerEnteredRoom(PhotonNetworkedPlayer newPlayer)
     {
-        GUIWorldSpace.Log("Stack count: " + ingredientsStack.Count);
+        if (PhotonNetwork.IsMasterClient)
+            SendSyncData(newPlayer);
+    }
+
+    private void SendSyncData(PhotonNetworkedPlayer player)
+    {
+        int[] ingredientIds = new int[ingredientsStack.Count];
+        for (int i = 0; i < ingredientsStack.Count; i++)
+        {
+            ingredientIds[i] = ingredientsStack[i].photonView.ViewID;
+        }
+        photonView.RPC(nameof(SendSyncDataRPC), player, ingredientIds);
+    }
+
+    [PunRPC]
+    private void SendSyncDataRPC(object data)
+    {
+        int[] ids = (int[])data;
+        for(int i = 0; i < ids.Length; i++)
+        {
+            Ingredient ingredient = PhotonView.Find(ids[i]).GetComponent<Ingredient>();
+            AddIngredientToStackInternal(ingredient);
+        }
     }
 
     public bool CanAddToStack(IngredientSnapController ingredientSnapper)
@@ -60,15 +85,22 @@ public class FoodStack : MonoBehaviourPun
     {
         PhotonView ingredientPhotonView = ingredient.photonView;
         ingredientPhotonView.TransferOwnership(-1);
-        photonView.RPC(nameof(AddIngredientToStackRPC), RpcTarget.All, ingredientPhotonView.ViewID);
+        photonView.RPC(nameof(AddIngredientToStackRPC), RpcTarget.Others, ingredientPhotonView.ViewID);
+        AddIngredientToStackInternal(ingredient);
     }
 
 	[PunRPC]
 	private void AddIngredientToStackRPC(int viewID)
     {
 		Ingredient ingredient = PhotonView.Find(viewID).GetComponent<Ingredient>();
+        AddIngredientToStackInternal(ingredient);
+    }
+
+    private void AddIngredientToStackInternal(Ingredient ingredient)
+    {
         Debug.Log("Add to stack " + ingredient);
 		ingredientsStack.Add(ingredient);
+
         StackToTop(ingredient.SnapController);
     }
 
@@ -77,7 +109,7 @@ public class FoodStack : MonoBehaviourPun
         snapController.OnSnap(true);
         snapController.SetLastStackCollider(this);
         Ingredient ingredient = snapController.Ingredient;
-        ingredient.transform.SetParent(transform);
+        ingredient.transform.SetParent(stackContainer);
 
         float graphicHeight = snapController.GetGraphicHeight();
         Vector3 newSnapPosition = new Vector3(0, totalStackHeight + graphicHeight, 0);

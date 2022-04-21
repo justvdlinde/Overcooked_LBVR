@@ -1,22 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using PhysicsCharacter;
-using System;
-using UnityEngine.Events;
 using Photon.Pun;
+using PhysicsCharacter;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class InteractableTool : MonoBehaviourPun
 {
     [SerializeField] private Tool connectedTool = null;
+	[SerializeField] private UnityEvent UpEvent = null;
+	[SerializeField] private UnityEvent HeldEvent = null;
+	[SerializeField] private UnityEvent DownEvent = null;
 
-	public bool previousState = false;
-	public bool isTriggerHeld = false;
-	public bool isTriggerHeldPreviousFrame = false;
-
-	[SerializeField] public UnityEvent UpEvent = null;
-	[SerializeField] public UnityEvent HeldEvent = null;
-	[SerializeField] public UnityEvent DownEvent = null;
+	private bool previousState = false;
+	private bool isTriggerHeld = false;
+	private bool isTriggerHeldPreviousFrame = false;
 
 	private void Update()
 	{
@@ -55,26 +51,34 @@ public class InteractableTool : MonoBehaviourPun
 
 	public void OnUpEvent()
     {
-		Debug.Log("OnUpEvent");
 		photonView.RPC(nameof(OnUpEventRPC), RpcTarget.Others);
-		UpEvent?.Invoke();
+		OnUpEventInternal();
     }
 
 	[PunRPC]
 	private void OnUpEventRPC(PhotonMessageInfo info)
     {
-		UpEvent?.Invoke();
+		OnUpEventInternal();
 	}
+
+	protected virtual void OnUpEventInternal()
+    {
+		UpEvent?.Invoke();
+    }
 
 	private void OnDownEvent()
     {
-		Debug.Log("OnDownEvent");
 		photonView.RPC(nameof(OnDownEventRPC), RpcTarget.Others);
-		DownEvent?.Invoke();
+		OnDownEventInternal();
 	}
 
 	[PunRPC]
 	private void OnDownEventRPC(PhotonMessageInfo info)
+    {
+		OnDownEventInternal();
+    }
+
+	protected virtual void OnDownEventInternal()
     {
 		DownEvent?.Invoke();
     }

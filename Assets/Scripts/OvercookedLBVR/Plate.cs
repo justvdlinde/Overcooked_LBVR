@@ -1,6 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
+[SelectionBase]
 public class Plate : MonoBehaviour
 {
     public FoodStack FoodStack => foodStack;

@@ -370,6 +370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snapPoint: {fileID: 1753612515}
+  stackContainer: {fileID: 129894903850104404}
   firstIngredientMustBeBunBottom: 1
   lastIngredientMustBeBunTop: 1
 --- !u!114 &-2127286866967161279
@@ -818,7 +819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 129894903850104404}
   m_Layer: 0
-  m_Name: Stack Origin
+  m_Name: Stack Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
