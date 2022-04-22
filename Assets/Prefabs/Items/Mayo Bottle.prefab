@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: -4397832943445119350}
   - component: {fileID: 4683238664711021160}
   m_Layer: 26
-  m_Name: Mayo
+  m_Name: Mayo Bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,6 +327,7 @@ MonoBehaviour:
   - {fileID: 5967720836512215717}
   - {fileID: 2933882632703870266}
   toolTransformDelegate: {fileID: 507704117629090177}
+  dummyToolHandle: {fileID: 0}
   rigidBody: {fileID: 6944581648333551561}
   slowDownVelocity: 0.75
   slowDownRotation: 0.75
@@ -350,6 +351,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connectedTool: {fileID: 2173501234779955112}
   previousState: 0
+  isTriggerHeld: 0
+  isTriggerHeldPreviousFrame: 0
   UpEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1000,6 +1003,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f93dba689ac2f3b45bfed8cb18ecbcd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 704096204437002244}
+  particleSystem: {fileID: 704096204437002244}
   sauceType: 7
-  IsActive: 0
