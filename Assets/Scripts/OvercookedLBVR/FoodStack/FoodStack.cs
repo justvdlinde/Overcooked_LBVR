@@ -83,6 +83,9 @@ public class FoodStack : MonoBehaviourPunCallbacks
 
 	public void AddIngredientToStack(Ingredient ingredient)
     {
+        if (ingredientsStack.Contains(ingredient))
+            return;
+
         PhotonView ingredientPhotonView = ingredient.photonView;
         ingredientPhotonView.TransferOwnership(-1);
         photonView.RPC(nameof(AddIngredientToStackRPC), RpcTarget.Others, ingredientPhotonView.ViewID);
@@ -100,7 +103,6 @@ public class FoodStack : MonoBehaviourPunCallbacks
     {
         Debug.Log("Add to stack " + ingredient);
 		ingredientsStack.Add(ingredient);
-
         StackToTop(ingredient.SnapController);
     }
 
@@ -138,7 +140,6 @@ public class FoodStack : MonoBehaviourPunCallbacks
         return ingredient.CanBeGrabbed();
     }
 
-    [Utils.Core.Attributes.Button]
     public Ingredient RemoveTopIngredient()
     {
         Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
@@ -180,14 +181,14 @@ public class FoodStack : MonoBehaviourPunCallbacks
         return base.ToString() + " Ingredients: " + string.Join("-", ingredientsStack);
     }
 
-    public bool CanPlaceSauce(IngredientType sauce)
+    public bool CanPlaceSauce(SauceType sauce)
     {
-        if (ingredientsStack.Count > 0)
-        {
-            return ingredientsStack[ingredientsStack.Count - 1].IngredientType != sauce;
-        }
-        else
-            return false;
+        //if (ingredientsStack.Count > 0)
+        //    return !IngredientTypeExtensions.Equals(ingredientsStack[ingredientsStack.Count - 1].IngredientType, sauce);
+        //else
+        //    return false;
+
+        return true;
     }
 
     /// <summary>

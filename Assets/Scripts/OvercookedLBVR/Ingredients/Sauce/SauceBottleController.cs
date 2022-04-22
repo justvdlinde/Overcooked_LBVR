@@ -2,14 +2,26 @@ using UnityEngine;
 
 public class SauceBottleController : InteractableTool
 {
-    public IngredientType SauceType => sauceType;
-    [SerializeField] private IngredientType sauceType = IngredientType.Ketchup;
+    public SauceType SauceType => sauceType;
+
+    [SerializeField] private SauceType sauceType = SauceType.Ketchup;
+    [SerializeField] private float sauceFillSpeed = 1;
 
     [Header("References")]
     [SerializeField] private ParticleSystem[] particleSystems = null;
     [SerializeField] private AudioSource audioSourceLooping = null;
     [SerializeField] private AudioSource audioSourceOneshot = null;
     [SerializeField] private SauceCollisionDetector saucePlacer = null;
+
+
+    //public SauceRecipient testRecipient;
+
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //        testRecipient.AddSauceIngredient(sauceType);
+    //}
+
 
     private void OnEnable()
     {
@@ -48,6 +60,6 @@ public class SauceBottleController : InteractableTool
 
     private void OnSauceRecipientDetected(SauceRecipient recipient)
     {
-        recipient.ProgressSauceValue(Time.deltaTime, SauceType);
+        recipient.ApplySauce(sauceFillSpeed * Time.deltaTime, SauceType);
     }
 }

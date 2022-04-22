@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class IngredientSnapController : MonoBehaviour
 {
-    private const float MIN_HEIGHT = 0.01f;
+    private const float MIN_HEIGHT = 0.005f;
     private const float MIN_COLLIDER_DISTANCE_FOR_RESTACK = 0.3f;
 
     public Ingredient Ingredient => ingredient;

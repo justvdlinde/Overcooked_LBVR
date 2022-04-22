@@ -30,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1772899905892721951}
+  - {fileID: 3633591311685135634}
   m_Father: {fileID: 5853532453732691671}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -279,7 +280,6 @@ Transform:
   - {fileID: 7628820566310143155}
   - {fileID: 7507018133625042799}
   - {fileID: 1753612514}
-  - {fileID: 3633591311685135634}
   - {fileID: 129894903850104404}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -837,90 +837,71 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5853532453732691671}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8504648817007189934
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3633591311685135634}
-  - component: {fileID: 2133682729547605137}
-  - component: {fileID: 2073315113003369259}
-  - component: {fileID: 4347318403419249149}
-  m_Layer: 0
-  m_Name: Sauce Recipient
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3633591311685135634
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8504648817007189934}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.4336, y: 0.36466, z: 2.5262}
-  m_Children: []
-  m_Father: {fileID: 5853532453732691671}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2133682729547605137
-BoxCollider:
+--- !u!1001 &5052793334559774136
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8504648817007189934}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.1}
-  m_Center: {x: 0, y: 0.05, z: 0}
---- !u!114 &2073315113003369259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_Modification:
+    m_TransformParent: {fileID: 1753612514}
+    m_Modifications:
+    - target: {fileID: 3466001285827611158, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_Name
+      value: Sauce Recipient
+      objectReference: {fileID: 0}
+    - target: {fileID: 6546762540241016467, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: foodStack
+      value: 
+      objectReference: {fileID: 8280493064852665215}
+    - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.021
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+--- !u!4 &3633591311685135634 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+  m_PrefabInstance: {fileID: 5052793334559774136}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8504648817007189934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4dcee09e28d48d4c9bd917b264cf83e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeUntillSaucePlaces: 0.5
-  ketchupPrefab: {fileID: 3103435421924425514, guid: c33347d5bcc8d3a4881c55044a467b49, type: 3}
-  mayoPrefab: {fileID: 1619658773355117013, guid: e9f3b8bea625ebb408179cb1536395dc, type: 3}
-  destroyOnSauce: 0
-  connectedDish: {fileID: 1753612515}
---- !u!114 &4347318403419249149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8504648817007189934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
