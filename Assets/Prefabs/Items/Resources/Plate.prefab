@@ -846,9 +846,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1753612514}
     m_Modifications:
+    - target: {fileID: 299678073419357725, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3466001285827611158, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
       propertyPath: m_Name
       value: Sauce Recipient
+      objectReference: {fileID: 0}
+    - target: {fileID: 3832980236738302328, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6546762540241016467, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
       propertyPath: foodStack

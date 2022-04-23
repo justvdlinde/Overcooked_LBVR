@@ -64,10 +64,6 @@ public class IngredientCookUI : MonoBehaviour
 		if (cookable.IsCooking)
 		{
 			warningAnimator.SetBool(ANIMATOR_WARNING, ShouldWarningShow());
-
-			progressBar.transform.LookAt(Camera.main.transform);
-			warningObject.transform.LookAt(Camera.main.transform);
-
 			progressBar.value = GetCookProgressNormalized();
 			SetProgressBarColors(GetBarColor());
 		}

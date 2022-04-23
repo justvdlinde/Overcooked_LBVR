@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,6 +14,7 @@ public enum DishResult
 
 public class FoodStack : MonoBehaviourPunCallbacks
 {
+    public Action<Ingredient> IngredientAddedEvent;
     public List<Ingredient> IngredientsStack => ingredientsStack;
 
     [SerializeField] private FoodStackSnapPoint snapPoint = null;
@@ -104,6 +106,7 @@ public class FoodStack : MonoBehaviourPunCallbacks
         Debug.Log("Add to stack " + ingredient);
 		ingredientsStack.Add(ingredient);
         StackToTop(ingredient.SnapController);
+        IngredientAddedEvent?.Invoke(ingredient);
     }
 
     private void StackToTop(IngredientSnapController snapController)
@@ -184,9 +187,14 @@ public class FoodStack : MonoBehaviourPunCallbacks
     public bool CanPlaceSauce(SauceType sauce)
     {
         //if (ingredientsStack.Count > 0)
-        //    return !IngredientTypeExtensions.Equals(ingredientsStack[ingredientsStack.Count - 1].IngredientType, sauce);
+        //{
+        //    IngredientType lastIngredient = ingredientsStack[ingredientsStack.Count - 1].IngredientType;
+        //    return !IngredientTypeExtensions.Equals(lastIngredient, sauce) && lastIngredient != IngredientType.BunTop;
+        //}
         //else
+        //{
         //    return false;
+        //}
 
         return true;
     }

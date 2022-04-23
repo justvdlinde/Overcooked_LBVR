@@ -14,13 +14,13 @@ public class SauceBottleController : InteractableTool
     [SerializeField] private SauceCollisionDetector saucePlacer = null;
 
 
-    //public SauceRecipient testRecipient;
+    public SauceRecipient testRecipient;
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //        testRecipient.AddSauceIngredient(sauceType);
-    //}
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Space))
+            testRecipient.ApplySauce(sauceFillSpeed * Time.deltaTime, sauceType);
+    }
 
 
     private void OnEnable()

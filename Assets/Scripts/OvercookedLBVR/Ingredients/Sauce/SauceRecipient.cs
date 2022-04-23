@@ -1,8 +1,11 @@
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
-public class SauceRecipient : MonoBehaviourPun
+public class SauceRecipient : MonoBehaviourPunCallbacks
 {
+    public float FillProgressNormalized => fillProgress / fillDuration;
+
     [Tooltip("Duration in seconds it takes to create sauce")]
 	[SerializeField] private float fillDuration = 1;
 	[SerializeField] private FoodStack foodStack = null;
@@ -15,12 +18,40 @@ public class SauceRecipient : MonoBehaviourPun
     private float currentSegment = 0;
     private SauceType lastReceivedSauceType;
 
-    // TODO: sync fillProgress
-	public void ApplySauce(float value, SauceType sauceType)
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        foodStack.IngredientAddedEvent += OnIngredientAddedToFoodStackEvent;
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        foodStack.IngredientAddedEvent -= OnIngredientAddedToFoodStackEvent;
+    }
+
+    public override void OnPlayerEnteredRoom(PhotonNetworkedPlayer newPlayer)
+    {
+        if (PhotonNetwork.IsMasterClient)
+            SendSyncData(newPlayer);
+    }
+
+    private void SendSyncData(PhotonNetworkedPlayer player)
+    {
+        photonView.RPC(nameof(SendSyncDataRPC), player, fillProgress);
+    }
+
+    [PunRPC]
+    private void SendSyncDataRPC(object data)
+    {
+        fillProgress = (float)data;
+    }
+
+    // TODO: do something when a different sauceType is used then lastReceivedSauceType
+    public void ApplySauce(float value, SauceType sauceType)
 	{
         if (PhotonNetwork.IsMasterClient)
         {
-            Debug.Log("apply sauce");
             if (foodStack.CanPlaceSauce(sauceType))
             {
                 fillProgress += value;
@@ -30,20 +61,6 @@ public class SauceRecipient : MonoBehaviourPun
                 if (fillProgress >= fillDuration)
                     AddSauceIngredient(sauceType);
             }
-        }
-    }
-
-    private void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        // TODO: send progressm make sure not to overwrite local player's progress but add
-
-        if (stream.IsWriting)
-        {
-            //stream.SendNext(x);
-        }
-        else
-        {
-            //x = (int)stream.ReceiveNext();
         }
     }
 
@@ -59,6 +76,11 @@ public class SauceRecipient : MonoBehaviourPun
             foodStack.AddIngredientToStack(instance.GetComponent<Ingredient>());
             ResetProgress();
         }
+    }
+
+    private void OnIngredientAddedToFoodStackEvent(Ingredient obj)
+    {
+        ResetProgress();
     }
 
     public void ResetProgress()

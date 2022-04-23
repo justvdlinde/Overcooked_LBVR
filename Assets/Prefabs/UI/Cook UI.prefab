@@ -459,6 +459,7 @@ GameObject:
   - component: {fileID: 4287280540013687782}
   - component: {fileID: 580793435434866984}
   - component: {fileID: 3547598819647237895}
+  - component: {fileID: 2733434331698887939}
   m_Layer: 5
   m_Name: Cook UI
   m_TagString: Untagged
@@ -483,7 +484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.144}
+  m_AnchoredPosition: {x: 0, y: 0.14401245}
   m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5852044556164708078
@@ -529,7 +530,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &580793435434866984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,6 +570,18 @@ MonoBehaviour:
   BurntColor: {r: 0, g: 0, b: 0, a: 1}
   warningAnimator: {fileID: 1888394000691901811}
   warningObject: {fileID: 3052693523509357320}
+--- !u!114 &2733434331698887939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010835252803253661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c6bbfeaa5c8984ba04fa219b620be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7050676056884276509
 GameObject:
   m_ObjectHideFlags: 0
