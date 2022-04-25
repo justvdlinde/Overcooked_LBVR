@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5403914962933223817}
   - component: {fileID: 1653537817275300724}
-  - component: {fileID: 5207728420183874036}
   - component: {fileID: 6572264836711156432}
   m_Layer: 6
   m_Name: Ingredient_Sauce_Base
@@ -52,19 +51,6 @@ MonoBehaviour:
   cookController: {fileID: 0}
   snapController: {fileID: 0}
   grabController: {fileID: 0}
---- !u!114 &5207728420183874036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 122487719622526296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9874439304730a44ebb177172d1d1c86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ingredient: {fileID: 1653537817275300724}
 --- !u!114 &6572264836711156432
 MonoBehaviour:
   m_ObjectHideFlags: 0

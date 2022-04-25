@@ -349,7 +349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.0577}
+  m_AnchoredPosition: {x: 0, y: 0.05770874}
   m_SizeDelta: {x: 617, y: 219.4646}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8927155171539941892
@@ -426,8 +426,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sauce: {fileID: 0}
-  slider: {fileID: 6098013727968902642}
   root: {fileID: 7681883589999690574}
+  slider: {fileID: 6098013727968902642}
+  sliderImage: {fileID: 34750655221904813}
+  ketchupColor: {r: 1, g: 0, b: 0, a: 1}
+  mayoColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &800849911683002609
 MonoBehaviour:
   m_ObjectHideFlags: 0
