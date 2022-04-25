@@ -74,7 +74,7 @@ public class OrdersController : MonoBehaviourPunCallbacks
     {
         ActiveOrders.Add(order);
         ActiveOrderAdded?.Invoke(order);
-        order.timer.Start();
+        //order.timer.Start();
         CurrentOrderIndex++;
         globalEventDispatcher.Invoke(new ActiveOrderAddedEvent(order));
     }

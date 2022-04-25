@@ -2,10 +2,10 @@ public class ScoreCalculator
 {
     public float maxScore = 100;
 
-    public virtual OrderScore CalculateScore(Order order, FoodStack dish, DishResult result)
+    public virtual ScoreData CalculateScore(Order order, FoodStack dish, DishResult result)
     {
         if (result == DishResult.TimerExceeded)
-            return new OrderScore(0, result);
+            return new ScoreData(0, result);
 
         OrderDishCompareResult comparisonResult = dish.Compare(order);
 
@@ -16,6 +16,6 @@ public class ScoreCalculator
         if (comparisonResult.ingredientsAreInCorrectOrder)
             totalPoints += pointSegment;
 
-        return new OrderScore(totalPoints, result, comparisonResult);
+        return new ScoreData(totalPoints, result, comparisonResult);
     }
 }

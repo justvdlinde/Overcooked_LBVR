@@ -195,8 +195,6 @@ public class FoodStack : MonoBehaviourPunCallbacks
         {
             return false;
         }
-
-        return true;
     }
 
     /// <summary>

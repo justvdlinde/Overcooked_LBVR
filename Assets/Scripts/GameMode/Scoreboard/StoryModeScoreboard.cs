@@ -2,12 +2,11 @@ using Photon.Pun;
 using Photon.Realtime;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboard
 {
     /// <summary>
-    /// Orders that have been finished, either delivered of time exceeded
+    /// Orders that have been finished, either delivered or time exceeded
     /// </summary>
     public int FinishedOrdersCount { get; private set; }
     public float TotalPoints { get; private set; }
@@ -15,14 +14,14 @@ public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboar
     public int DeliveredOrdersCount { get; private set; }
     public int TimerExceededOrdersCount { get; private set; }
 
-    public Action<OrderScoreData> EntryAddedEvent;
+    public Action<OrderScorePair> EntryAddedEvent;
 
     // Is NOT synced at the moment
-    private List<OrderScoreData> OrderScoreHistory;
+    private List<OrderScorePair> OrderScoreHistory;
 
     public void Awake()
     {
-        OrderScoreHistory = new List<OrderScoreData>();
+        OrderScoreHistory = new List<OrderScorePair>();
     }
 
     public override void OnPlayerEnteredRoom(PhotonNetworkedPlayer newPlayer)
@@ -47,17 +46,17 @@ public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboar
         TimerExceededOrdersCount = timerExceededOrders;
     }
 
-    public void AddScore(Order order, OrderScore score)
+    public void AddScore(Order order, ScoreData score)
     {
-        AddScore(new OrderScoreData(order, score));
+        AddScore(new OrderScorePair(order, score));
     }
 
-    public void AddScore(OrderScoreData data)
+    public void AddScore(OrderScorePair data)
     {
-        photonView.RPC(nameof(AddScoreRPC), RpcTarget.Others, data.Score.Points, OrderScore.MaxPoints, data.Score.Result);
+        photonView.RPC(nameof(AddScoreRPC), RpcTarget.Others, data.Score.Points, ScoreData.MaxPoints, data.Score.Result);
         OrderScoreHistory.Add(data);
         EntryAddedEvent?.Invoke(data);
-        AddScoreInternal(data.Score.Points, OrderScore.MaxPoints, data.Score.Result);
+        AddScoreInternal(data.Score.Points, ScoreData.MaxPoints, data.Score.Result);
     }
 
     [PunRPC]
@@ -85,7 +84,7 @@ public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboar
 
     public void Reset()
     {
-        OrderScoreHistory = new List<OrderScoreData>();
+        OrderScoreHistory = new List<OrderScorePair>();
         TotalPoints = 0;
         FinishedOrdersCount = 0;
         MaxAchievablePoints = 0;

@@ -52,23 +52,10 @@ public class StoryMode : GameMode
     public override void StartActiveGame()
     {
         base.StartActiveGame();
-        globalEventDispatcher.Subscribe<DishDeliveredEvent>(OnDishDeliveredEvent);
         coroutineService.StartCoroutine(StoryFlow());
     }
 
-    public override void EndGame()
-    {
-        base.EndGame();
-        globalEventDispatcher.Unsubscribe<DishDeliveredEvent>(OnDishDeliveredEvent);
-    }
-
-    public override void Shutdown()
-    {
-        base.Shutdown();
-        globalEventDispatcher.Unsubscribe<DishDeliveredEvent>(OnDishDeliveredEvent);
-    }
-
-    // TODO: replace with some kind of state machine? Would be usefull if we want narration in between orders
+    // TODO: replace with some kind of state machine? Would be useful if we want narration in between orders
     private IEnumerator StoryFlow()
     {
         // TODO: sync up i when joining late
@@ -104,14 +91,11 @@ public class StoryMode : GameMode
         return new StoryGameResult(this, Scoreboard as StoryModeScoreboard);
     }
 
-    private void OnDishDeliveredEvent(DishDeliveredEvent @event)
+    public override void DeliverDish(Plate dish)
     {
-        if (PhotonNetwork.IsMasterClient)
-            DeliverDish(@event.Dish);
-    }
+        if (!PhotonNetwork.IsMasterClient)
+            return;
 
-    private void DeliverDish(Plate dish)
-    {
         Order order = OrdersController.GetClosestMatch(dish.FoodStack);
 
         if (order != null)
@@ -124,10 +108,11 @@ public class StoryMode : GameMode
             throw new System.Exception("No closest order found!");
         }
 
-        OrderScore score = scoreCalculator.CalculateScore(order, dish.FoodStack, DishResult.Delivered);
+        ScoreData score = scoreCalculator.CalculateScore(order, dish.FoodStack, DishResult.Delivered);
         (Scoreboard as StoryModeScoreboard).AddScore(order, score);
         OrdersController.RemoveActiveOrder(order);
         order.TimerExceededEvent -= OnOrderTimerExceeded;
+        globalEventDispatcher.Invoke(new DishDeliveredEvent(dish, order, score));
     }
 
     public void CheatDeliverDish(int displayNr)
@@ -135,10 +120,11 @@ public class StoryMode : GameMode
         Order order = ordersController.ActiveOrders.Where(o => o.orderNumber == displayNr).First();
         if (order != null)
         {
-            OrderScore score = new OrderScore(OrderScore.MaxPoints, DishResult.Delivered);
+            ScoreData score = new ScoreData(ScoreData.MaxPoints, DishResult.Delivered);
             (Scoreboard as StoryModeScoreboard).AddScore(order, score);
             OrdersController.RemoveActiveOrder(order);
             order.TimerExceededEvent -= OnOrderTimerExceeded;
+            globalEventDispatcher.Invoke(new DishDeliveredEvent(null, order, score));
         }
     }
 
@@ -154,7 +140,7 @@ public class StoryMode : GameMode
         if (PhotonNetwork.IsMasterClient)
         {
             OrdersController.RemoveActiveOrder(order);
-            OrderScore score = scoreCalculator.CalculateScore(order, null, DishResult.TimerExceeded);
+            ScoreData score = scoreCalculator.CalculateScore(order, null, DishResult.TimerExceeded);
             (Scoreboard as StoryModeScoreboard).AddScore(order, score);
         }
     }

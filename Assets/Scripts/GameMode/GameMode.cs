@@ -296,6 +296,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
     }
 
     public abstract IGameResult GetGameResult();
+    public abstract void DeliverDish(Plate dish);
 
     public virtual void Shutdown()
     {
