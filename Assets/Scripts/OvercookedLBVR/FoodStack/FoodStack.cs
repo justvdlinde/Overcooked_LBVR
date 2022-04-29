@@ -22,7 +22,9 @@ public class FoodStack : MonoBehaviourPunCallbacks
     [SerializeField] private bool firstIngredientMustBeBunBottom = true;
     [SerializeField] private bool lastIngredientMustBeBunTop = true;
 
-    private List<Ingredient> ingredientsStack = new List<Ingredient>();
+    // Needs SerializeField for the inspector script to be useable
+    [SerializeField, HideInInspector] private List<Ingredient> ingredientsStack = new List<Ingredient>();
+
     private List<float> ingredientHeights = new List<float>();
     private float totalStackHeight;
 
