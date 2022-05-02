@@ -1,33 +1,28 @@
 using UnityEngine;
 
-public class SauceBottleController : InteractableTool
+public class FireExtinguisherController : InteractableTool
 {
-    public SauceType SauceType => sauceType;
-
-    [SerializeField] private SauceType sauceType = SauceType.Ketchup;
-    [SerializeField] private float sauceFillSpeed = 1;
-
-    [Header("References")]
+	[SerializeField] private new Rigidbody rigidbody = null;
     [SerializeField] private ParticleSystem[] particleSystems = null;
     [SerializeField] private AudioSource audioSourceLooping = null;
     [SerializeField] private AudioSource audioSourceOneshot = null;
     [SerializeField] private SauceCollisionDetector saucePlacer = null;
 
-    private void OnEnable()
-    {
-        saucePlacer.SauceRecipientDetected += OnSauceRecipientDetected;
-    }
+    private bool isActive = false;
 
-    private void OnDisable()
-    {
-        saucePlacer.SauceRecipientDetected -= OnSauceRecipientDetected;
-    }
+	private void Update()
+	{
+		if(isActive)
+		{
+			rigidbody.AddForce(-rigidbody.transform.forward * 10f, ForceMode.Acceleration);
+		}
+	}
 
     protected override void OnUpEventInternal()
     {
         base.OnUpEventInternal();
 
-        foreach(var particleSystem in particleSystems)
+        foreach (var particleSystem in particleSystems)
         {
             particleSystem.Stop();
         }
@@ -48,8 +43,4 @@ public class SauceBottleController : InteractableTool
         audioSourceOneshot.Play();
     }
 
-    private void OnSauceRecipientDetected(SauceRecipient recipient)
-    {
-        recipient.ApplySauce(sauceFillSpeed * Time.deltaTime, SauceType);
-    }
 }

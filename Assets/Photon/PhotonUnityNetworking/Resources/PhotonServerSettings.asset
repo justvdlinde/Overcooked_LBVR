@@ -55,5 +55,11 @@ MonoBehaviour:
   - SubmitRemoveActiveOrderRPC
   - AddSauceIngredientRPC
   - ResetProgressRPC
+  - AddIngredientRPC
+  - CreateNewOrderRPC
+  - DeliverDishesInTriggerRPC
+  - SelectionEventRPC
+  - SetIngredientStateRPC
+  - StartGameRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
