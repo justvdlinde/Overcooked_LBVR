@@ -17,4 +17,11 @@ public static class RoomPropertiesPhoton
     public const string MATCH_START_TIME        = "MatchStartTime";
     public const string MATCH_DURATION          = "MatchDuration";
     public const string OBJECTIVE_TARGET        = "ObjectiveTarget";
+
+    public const string SELECTION_IS_ACTIVE = "SelectionIsActive";
+    public const string SELECTION_TYPE = "SelectionType";
+    public const string SELECTION_PLAYER_READY_AMOUNT = "SelectionPlayerReadyAmount";
+    public const string SELECTION_POPULAR_CHOICE = "SelectionPopularChoice";
+    public const string SELECTION_REQUIRES_VOLUME = "SelectionRequiresVolume";
+    public const string SELECTION_USES_CANVAS = "SelectionUsesCanvas";
 }
