@@ -57,6 +57,7 @@ public class StoryMode : GameMode
     }
 
     // TODO: replace with some kind of state machine? Would be useful if we want narration in between orders
+    // TODO: Get this to work on a set match duration instead of order amount
     private IEnumerator StoryFlow()
     {
         // TODO: sync up i when joining late
