@@ -120,12 +120,21 @@ public class GameModeDebugMenu : IDebugMenu
             return;
 
         StoryModeScoreboard scoreboard = story.Scoreboard as StoryModeScoreboard;
+        TieredOrderGenerator orderGenerator = story.OrderGenerator;
 
         GUILayout.BeginVertical(currentGameMode.Name + " Scoreboard", "window");
         GUILayout.Label("Points/Max: " + scoreboard.TotalPoints + "/" + scoreboard.MaxAchievablePoints);
         GUILayout.Label("Finished orders: " + scoreboard.OrdersCount);
         GUILayout.Label("Deliverd orders: " + scoreboard.DeliveredOrdersCount);
         GUILayout.Label("Timer exceeded orders: " + scoreboard.TimerExceededOrdersCount);
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Current Tier: " + orderGenerator.currentTier);
+        if (GUILayout.Button("+"))
+            orderGenerator.currentTier++;
+        if (GUILayout.Button("-"))
+            orderGenerator.currentTier--;
+        GUILayout.EndHorizontal();
+        GUILayout.Label("Completed orders in succession: " + orderGenerator.completedOrdersInSuccession);
         GUILayout.EndVertical();
     }
 

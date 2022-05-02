@@ -12,6 +12,7 @@ public class StoryMode : GameMode
     public override GameModeEnum GameModeEnum => GameModeEnum.Story;
     public override OrdersController OrdersController => ordersController;
     public override IGameModeScoreboard Scoreboard => scoreboard;
+    public TieredOrderGenerator OrderGenerator => orderGenerator;
 
     [SerializeField] private OrdersController ordersController = null;
     [SerializeField] private StoryModeScoreboard scoreboard = null;
@@ -40,7 +41,7 @@ public class StoryMode : GameMode
     public override void Setup()
     {
         scoreCalculator = new ScoreCalculator();
-        orderGenerator = new TieredOrderGenerator();
+        orderGenerator = new TieredOrderGenerator(true, 0);
         settings = Resources.Load<GameSettings>("GameSettings");
 
         // Make copy so we don't change the original asset's values:
@@ -80,9 +81,8 @@ public class StoryMode : GameMode
 
     public void CreateNewActiveOrder(int displayNr)
     {
-        Order order = orderGenerator.GenerateRandomOrder(3, 0, out int newTier, true);
+        Order order = orderGenerator.Generate();
         order.orderNumber = displayNr;
-        order.timer.Set(100); // TODO: set timer
         OrdersController.AddActiveOrder(order);
     }
 
@@ -112,7 +112,11 @@ public class StoryMode : GameMode
         (Scoreboard as StoryModeScoreboard).AddScore(order, score);
         OrdersController.RemoveActiveOrder(order);
         order.TimerExceededEvent -= OnOrderTimerExceeded;
+        orderGenerator.OnOrderCompleted(true);
         globalEventDispatcher.Invoke(new DishDeliveredEvent(dish, order, score));
+
+        if (IsLastOrderDone())
+            OnLastOrderServed();
     }
 
     public void CheatDeliverDish(int displayNr)
@@ -125,6 +129,9 @@ public class StoryMode : GameMode
             OrdersController.RemoveActiveOrder(order);
             order.TimerExceededEvent -= OnOrderTimerExceeded;
             globalEventDispatcher.Invoke(new DishDeliveredEvent(null, order, score));
+
+            if (IsLastOrderDone())
+                OnLastOrderServed();
         }
     }
 
@@ -136,6 +143,7 @@ public class StoryMode : GameMode
     private void OnOrderTimerExceeded(Order order)
     {
         order.TimerExceededEvent -= OnOrderTimerExceeded;
+        orderGenerator.OnOrderCompleted(false);
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -143,6 +151,9 @@ public class StoryMode : GameMode
             ScoreData score = scoreCalculator.CalculateScore(order, null, DishResult.TimerExceeded);
             (Scoreboard as StoryModeScoreboard).AddScore(order, score);
         }
+
+        if (IsLastOrderDone())
+            OnLastOrderServed();
     }
 
     private bool IsLastOrderDone()
@@ -152,7 +163,6 @@ public class StoryMode : GameMode
 
     private void OnLastOrderServed()
     {
-        Debug.LogFormat("Last dish served, Game Over");
         if (PhotonNetwork.IsMasterClient)
             EndGame();
     }

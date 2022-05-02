@@ -56,19 +56,20 @@ public class GameUIController : MonoBehaviour
 
     private void OnGamemodeChangedEvent(GameModeChangedEvent @event)
     {
-        gamemodeUI.Show(@event.GameMode);
+        gamemode = @event.GameMode;
+        gamemodeUI.Show(gamemode);
         gameOverUI.Hide();
     }
 
     private void OnGameStartEvent(StartGameEvent obj)
     {
-        gameOverUI.Hide();
         gamemodeUI.Hide();
+        gameOverUI.Hide();
     }
 
     private void OnReplayEvent(ReplayEvent @event)
     {
-        gameOverUI.Hide();
         gamemodeUI.Show(gamemode);
+        gameOverUI.Hide();
     }
 }

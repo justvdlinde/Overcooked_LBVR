@@ -58,6 +58,11 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
     public float MatchStartTimeStamp { get; protected set; }
 
     /// <summary>
+    /// Timestamp in milliseconds when ended
+    /// </summary>
+    public float MatchEndTimeStamp { get; protected set; }
+
+    /// <summary>
     /// Time the match has been alive, in milliseconds
     /// </summary>
     public float MatchTimeElapsed => (float)PhotonNetwork.Time - MatchStartTimeStamp; //gameTimer.ElapsedTime;//
@@ -293,6 +298,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
             RaisePhotonEventCode(PhotonEventCodes.GAME_STOP);
         }
         globalEventDispatcher.Invoke(new GameOverEvent(GetGameResult()));
+        MatchEndTimeStamp = (float)PhotonNetwork.Time;
     }
 
     public abstract IGameResult GetGameResult();
