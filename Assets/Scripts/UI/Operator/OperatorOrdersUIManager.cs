@@ -8,29 +8,24 @@ public class OperatorOrdersUIManager : MonoBehaviour
 
     private Dictionary<Order, OrderDisplay> orderDisplayPairs = new Dictionary<Order, OrderDisplay>();
 
-    private IEnumerator Start()
-    {
-        while(OrderManager.Instance == null)
-        {
-            yield return new WaitForSeconds(1);
-        }
+    //private IEnumerator Start()
+    //{
+    //    OrdersController.Instance.OrderAddedToGame += DisplayOrder;
+    //    OrdersController.Instance.OrderFailed += RemoveDisplay;
+    //    OrdersController.Instance.OrderDelivered += OnOrderDelivered;
+    //}
 
-        OrderManager.Instance.OrderAddedToGame += DisplayOrder;
-        OrderManager.Instance.OrderFailed += RemoveDisplay;
-        OrderManager.Instance.OrderDelivered += OnOrderDelivered;
-    }
-
-    private void OnDestroy()
-    {
-        OrderManager.Instance.OrderAddedToGame -= DisplayOrder;
-        OrderManager.Instance.OrderFailed -= RemoveDisplay;
-        OrderManager.Instance.OrderDelivered -= OnOrderDelivered;
-    }
+    //private void OnDestroy()
+    //{
+    //    OrdersController.Instance.OrderAddedToGame -= DisplayOrder;
+    //    OrdersController.Instance.OrderFailed -= RemoveDisplay;
+    //    OrdersController.Instance.OrderDelivered -= OnOrderDelivered;
+    //}
 
     private void DisplayOrder(Order order)
     {
         OrderDisplay display = displays[order.orderNumber];
-        display.DisplayOrder(order);
+        display.Show(order);
         orderDisplayPairs.Add(order, display);
     }
 
@@ -43,7 +38,7 @@ public class OperatorOrdersUIManager : MonoBehaviour
         }
     }
 
-    private void OnOrderDelivered(Order order, Dish dish)
+    private void OnOrderDelivered(Order order, FoodStack dish)
     {
         RemoveDisplay(order);
     }

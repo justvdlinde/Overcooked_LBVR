@@ -5,11 +5,12 @@ using UnityEngine;
 
 namespace PhysicsCharacter
 {
-	[RequireComponent(typeof(Rigidbody))]
+	//[RequireComponent(typeof(Rigidbody))]
 	public class Tool : MonoBehaviour
 	{
 		[SerializeField] private List<ToolHandle> toolHandles = null;
 		[SerializeField] private ToolPositionDelegate toolTransformDelegate = null;
+		public DummyToolHandle dummyToolHandle = null;
 		private int heldHandles = 0;
 
 		// physics movement section
@@ -42,7 +43,6 @@ namespace PhysicsCharacter
 
 		private void Awake()
 		{
-			rigidBody = GetComponent<Rigidbody>();
 			if(rigidBody != null)
 				rigidBody.maxAngularVelocity = maxAngularVelocity;
 
@@ -63,12 +63,12 @@ namespace PhysicsCharacter
 				gameObject.SetActive(false);
 		}
 
-		protected virtual void Update()
+        protected virtual void Update()
 		{
-			if(!IsBeingHeld())
-			{
-				rigidBody.useGravity = true;
-			}
+			//if(!IsBeingHeld())
+			//{
+			//	rigidBody.useGravity = true;
+			//}
 
 			// disable this when rotating
 			if(!PhysicsPlayerBlackboard.Instance.isFading)

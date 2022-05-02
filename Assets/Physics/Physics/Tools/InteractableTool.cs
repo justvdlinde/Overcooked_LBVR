@@ -1,78 +1,84 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using PhysicsCharacter;
-using System;
-using UnityEngine.Events;
 using Photon.Pun;
+using PhysicsCharacter;
+using UnityEngine;
+using UnityEngine.Events;
 
 public class InteractableTool : MonoBehaviourPun
 {
     [SerializeField] private Tool connectedTool = null;
+	[SerializeField] private UnityEvent UpEvent = null;
+	[SerializeField] private UnityEvent HeldEvent = null;
+	[SerializeField] private UnityEvent DownEvent = null;
 
-	public bool previousState = false;
-
+	private bool previousState = false;
 	private bool isTriggerHeld = false;
-	private bool wasTriggerHeld = false;
-
-	[SerializeField] public UnityEvent UpEvent = null;
-	[SerializeField] public UnityEvent HeldEvent = null;
-	[SerializeField] public UnityEvent DownEvent = null;
+	private bool isTriggerHeldPreviousFrame = false;
 
 	private void Update()
 	{
-		if (photonView.IsMine)
+		if (!photonView.IsMine)
+			return;
+
+		// TODO: use input system
+		float triggerPress = XRInput.GetTriggerButtonValue(connectedTool.GetHeldHand());
+
+		if (triggerPress < 0.1f)
+			isTriggerHeld = false;
+		else
+			isTriggerHeld = true;
+
+		if (connectedTool.IsBeingHeld() && isTriggerHeldPreviousFrame == false && isTriggerHeld)
 		{
-			bool isBeingHeld = connectedTool.IsBeingHeld();
-
-			float val = XRInput.GetTriggerButtonValue(connectedTool.GetHeldHand());
-
-			if (val < 0.1f)
-				isTriggerHeld = false;
-			else
-				isTriggerHeld = true;
-
-			if (isBeingHeld && wasTriggerHeld == false && isTriggerHeld)
-			{
-				OnDownEvent();
-			}
-			else if (previousState == true && wasTriggerHeld == true && !isTriggerHeld)
-			{
-				OnUpEvent();
-			}
-			if (connectedTool.IsBeingHeld() && isTriggerHeld)
-			{
-				HeldEvent?.Invoke();
-			}
-
-			if (previousState == false && !connectedTool.IsBeingHeld())
-			{
-				OnUpEvent();
-			}
-
-			previousState = connectedTool.IsBeingHeld();
-			wasTriggerHeld = isTriggerHeld;
+			OnDownEvent();
 		}
+		else if (previousState == true && isTriggerHeldPreviousFrame == true && !isTriggerHeld)
+		{
+			OnUpEvent();
+		}
+		if (connectedTool.IsBeingHeld() && isTriggerHeld)
+		{
+			HeldEvent?.Invoke();
+		}
+
+		if (previousState == true && !connectedTool.IsBeingHeld())
+		{
+			OnUpEvent();
+		}
+
+		previousState = connectedTool.IsBeingHeld();
+		isTriggerHeldPreviousFrame = isTriggerHeld;
 	}
 
 	public void OnUpEvent()
     {
-		photonView.RPC(nameof(OnUpEventRPC), RpcTarget.All);
+		photonView.RPC(nameof(OnUpEventRPC), RpcTarget.Others);
+		OnUpEventInternal();
     }
 
 	[PunRPC]
 	private void OnUpEventRPC(PhotonMessageInfo info)
     {
-		UpEvent?.Invoke();
+		OnUpEventInternal();
 	}
+
+	protected virtual void OnUpEventInternal()
+    {
+		UpEvent?.Invoke();
+    }
 
 	private void OnDownEvent()
     {
-		photonView.RPC(nameof(OnDownEventRPC), RpcTarget.All);
+		photonView.RPC(nameof(OnDownEventRPC), RpcTarget.Others);
+		OnDownEventInternal();
 	}
 
 	[PunRPC]
 	private void OnDownEventRPC(PhotonMessageInfo info)
+    {
+		OnDownEventInternal();
+    }
+
+	protected virtual void OnDownEventInternal()
     {
 		DownEvent?.Invoke();
     }

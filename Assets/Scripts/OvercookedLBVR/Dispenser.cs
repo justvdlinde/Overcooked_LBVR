@@ -2,6 +2,7 @@ using Photon.Pun;
 using UnityEngine;
 using Utils.Core.Attributes;
 
+[SelectionBase]
 public class Dispenser : MonoBehaviourPun
 {
     [SerializeField] private Rigidbody prefab = null;

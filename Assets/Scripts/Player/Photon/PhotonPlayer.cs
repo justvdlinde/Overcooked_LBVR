@@ -9,7 +9,6 @@ public class PhotonPlayer : PhotonClient, IPlayer
     public string Name { get; private set; }
     public Team Team => teamManager.Team;
     public string ID => UserId;
-    public PlayerStatistics Stats { get; private set; }
     public DependencyInjector Injector { get; private set; }
     public PlayerPawn Pawn { get; private set; }
 
@@ -17,7 +16,6 @@ public class PhotonPlayer : PhotonClient, IPlayer
     public event IPlayer.TeamChangeDelegate TeamChangeEvent;
 
     private readonly PhotonPlayerTeamManager teamManager;
-    private readonly PhotonPlayerStatisticsManager statsManager;
     public Action<Hashtable> PropertiesChangedEvent;
 
     public PhotonPlayer(DependencyInjector injector, PhotonNetworkedPlayer networkClient, string ipAddress = "", string name = "") : base(networkClient, ipAddress)
@@ -25,8 +23,6 @@ public class PhotonPlayer : PhotonClient, IPlayer
         Injector = injector;
         injector.RegisterInstance<IPlayer>(this);
         teamManager = new PhotonPlayerTeamManager(this, GlobalServiceLocator.Instance.Get<TeamsManager>());
-        Stats = new PlayerStatistics();
-        statsManager = new PhotonPlayerStatisticsManager(this, Stats);
 
         if (IsLocal)
         {
@@ -80,8 +76,6 @@ public class PhotonPlayer : PhotonClient, IPlayer
     public override void Dispose()
     {
         base.Dispose();
-        Stats.Dispose();
-        statsManager.Dispose();
 
         if (Pawn != null)
         {

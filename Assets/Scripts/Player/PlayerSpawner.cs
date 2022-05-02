@@ -10,9 +10,6 @@ public class PlayerSpawner : MonoBehaviour
     [Tooltip("Only required if connectToNetwork is set to true")]
     [SerializeField] private NetworkConfig networkConfig = null;
 
-    [field: SerializeField]
-    private bool usePhysicsPlayer = false;
-
     private INetworkService networkService;
 
     protected virtual void Awake()
@@ -23,7 +20,6 @@ public class PlayerSpawner : MonoBehaviour
         PlayersManager playersManager = GlobalServiceLocator.Instance.Get<PlayersManager>();
         if (playersManager.LocalPlayer != null)
         {
-            Debug.LogWarning("Local Player is already present, returning code");
             gameObject.SetActive(false);
             return;
         }

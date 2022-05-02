@@ -26,8 +26,6 @@ public class PlayersDebugMenu : IDebugMenu
         }
         private int teamIndex = 0;
         public string nameField;
-        public string debugDamage = "1";
-        public string respawnTimer = "1";
 
         public PlayerUIWrapper(IPlayer player)
         {
@@ -43,12 +41,6 @@ public class PlayersDebugMenu : IDebugMenu
     private string[] teamStrings;
     private string[] playerNames;
     private List<PlayerUIWrapper> playersUIList;
-
-    private int killerDebugIndex;
-    private IPlayer killerDebug;
-
-    private int victimDebugIndex;
-    private IPlayer victimDebug;
 
     public PlayersDebugMenu(PlayersManager playersManager, TeamsManager teamsManager)
     {
@@ -78,8 +70,6 @@ public class PlayersDebugMenu : IDebugMenu
         if (drawDeveloperOptions)
         {
             GUILayout.Space(5);
-            DrawKillPanel();
-            GUILayout.Space(5);
             DrawDummyCreatorPanel();
         }
         GUILayout.Space(5);
@@ -103,38 +93,6 @@ public class PlayersDebugMenu : IDebugMenu
         GUILayout.Label("Team 1: " + teamsManager.PlayersPerTeam[Team.Team1].Count);
         GUILayout.Label("Team 2: " + teamsManager.PlayersPerTeam[Team.Team2].Count);
         GUILayout.EndHorizontal();
-        GUILayout.EndVertical();
-    }
-
-    private void DrawKillPanel()
-    {
-        GUILayout.BeginVertical("Emulate Kill", "window");
-
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Killer: ", GUILayout.Width(40));
-        killerDebugIndex = GUILayout.Toolbar(killerDebugIndex, playerNames, GUILayout.MaxWidth(400));
-        killerDebug = playersManager.AllPlayers[killerDebugIndex];
-        GUILayout.EndHorizontal();
-
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("victim: ", GUILayout.Width(40));
-        victimDebugIndex = GUILayout.Toolbar(victimDebugIndex, playerNames, GUILayout.MaxWidth(400));
-        victimDebug = playersManager.AllPlayers[victimDebugIndex];
-        GUILayout.EndHorizontal();
-
-        if (killerDebug != null && victimDebug != null)
-        {
-            GUI.enabled = killerDebug != victimDebug;
-            if (GUILayout.Button(killerDebug.Name + " kills " + victimDebug.Name))
-            {
-                if (victimDebug.Pawn == null)
-                    throw new Exception(victimDebug.Name + " does not have a pawn!");
-
-                HealthController health = victimDebug.Pawn.HealthController;
-                health.ApplyDamage(new BulletDamage(killerDebug, health.MaxHealth));
-            }
-            GUI.enabled = true;
-        }
         GUILayout.EndVertical();
     }
 
@@ -201,68 +159,9 @@ public class PlayersDebugMenu : IDebugMenu
 
         GUILayout.BeginHorizontal();
         GUI.enabled = player.IsLocal;
-        GUILayout.Label("kills: " + player.Stats.Kills);
-        if (drawDeveloperOptions)
-        {
-            if (GUILayout.Button("+", GUILayout.Width(25)))
-                player.Stats.Kills.Add(1);
-            if (GUILayout.Button("-", GUILayout.Width(25)))
-                player.Stats.Kills.Add(-1);
-        }
 
-        GUILayout.Label("deaths: " + player.Stats.Deaths);
-        if (drawDeveloperOptions)
-        {
-            if (GUILayout.Button("+", GUILayout.Width(25)))
-                player.Stats.Deaths.Add(1);
-            if (GUILayout.Button("-", GUILayout.Width(25)))
-                player.Stats.Deaths.Add(-1);
-        }
         GUI.enabled = true;
         GUILayout.EndHorizontal();
-
-        if (drawDeveloperOptions && player.Pawn != null)
-        {
-            PlayerHealthController healthController = player.Pawn.HealthController;
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("HP: " + healthController.CurrentHealth);
-            GUILayout.Label("State: " + healthController.State);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("IsRespawning: " + healthController.IsRespawning);
-            GUILayout.Label("CanRespawn: " + healthController.CanRespawn);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            playerWrapper.debugDamage = GUILayout.TextField(playerWrapper.debugDamage);
-            GUI.enabled = healthController.State == PlayerState.Alive;
-            if (GUILayout.Button("Apply Damage"))
-            {
-                if (float.TryParse(playerWrapper.debugDamage, out float damage))
-                    healthController.ApplyDamage(new Damage(damage));
-            }
-
-            if (GUILayout.Button("Kill"))
-                healthController.SetHealth(0);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            GUI.enabled = healthController.State == PlayerState.Dead;
-            if (GUILayout.Button("Respawn"))
-                healthController.Respawn();
-
-            playerWrapper.respawnTimer = GUILayout.TextField(playerWrapper.respawnTimer);
-            if (GUILayout.Button("Respawn Delayed"))
-            {
-                if (float.TryParse(playerWrapper.debugDamage, out float duration))
-                {
-                    healthController.RespawnDelayed(duration);
-                }
-            }
-            GUI.enabled = true;
-            GUILayout.EndHorizontal();
-        }
 
         if (player is DummyPlayer)
         {

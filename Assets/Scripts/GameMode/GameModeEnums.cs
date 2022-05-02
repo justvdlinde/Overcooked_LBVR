@@ -1,4 +1,6 @@
 public enum GameModeEnum
 { 
-    TeamDeathmatch
+    Story,
+    Highscore,
+    Versus
 }

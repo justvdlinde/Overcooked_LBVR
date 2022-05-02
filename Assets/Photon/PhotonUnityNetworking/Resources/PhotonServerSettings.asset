@@ -29,29 +29,31 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - AddIngredientToStackRPC
+  - AddScoreRPC
   - ApplyBulletDamageRPC
   - ApplyDamageRPC
+  - ApplySauceRPC
+  - ChopRPC
   - ClickRpc
   - DestroyRpc
-  - MoveRPC
-  - RequestStateRPC
-  - RespawnRPC
-  - SetStateRPC
-  - ShootRPC
-  - CreateNewOrderRPC
-  - StartGameRPC
-  - DeliverDishesInTriggerRPC
-  - GrabbedRPC
-  - ReleasedRPC
   - DispenseObjectRPC
-  - ChopRPC
+  - GrabbedRPC
+  - MoveRPC
   - OnDownEventRPC
   - OnUpEventRPC
-  - ApplySayceRPC
-  - ApplySauceRPC
-  - SetCookStateRPC
-  - SetIngredientStateRPC
-  - AddIngredientRPC
+  - ProcessIngredientRPC
+  - ReleasedRPC
   - RemoveTopIngredientRPC
+  - RequestStateRPC
+  - RespawnRPC
+  - SendSyncDataRPC
+  - SetCookStateRPC
+  - SetStateRPC
+  - ShootRPC
+  - SubmitActiveOrderRPC
+  - SubmitRemoveActiveOrderRPC
+  - AddSauceIngredientRPC
+  - ResetProgressRPC
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1

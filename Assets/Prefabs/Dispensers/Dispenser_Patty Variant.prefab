@@ -76,6 +76,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 136676272253386969, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 2410108771205509625, guid: e6a5704a9682e8a47bec6f039020fb75, type: 3}
     - target: {fileID: 696437989500161789, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -94,11 +98,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.000000019310946
+      value: -1.18423795e-14
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.03210001
+      value: 0.032099996
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.z
@@ -155,7 +159,7 @@ PrefabInstance:
     - target: {fileID: 8019060657202214618, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: prefab
       value: 
-      objectReference: {fileID: 7032509977150503203, guid: 0bb509f56451dd24e8479be260215352, type: 3}
+      objectReference: {fileID: 2410108771205509625, guid: e6a5704a9682e8a47bec6f039020fb75, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
 --- !u!4 &1916183699048739662 stripped

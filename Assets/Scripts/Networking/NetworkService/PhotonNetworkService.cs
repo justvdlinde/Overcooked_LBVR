@@ -24,7 +24,7 @@ public enum ConnectionType
     Selfhosted
 };
 
-public abstract class PhotonNetworkService : MonoBehaviourPunCallbacks, INetworkService, IOnEventCallback
+public class PhotonNetworkService : MonoBehaviourPunCallbacks, INetworkService, IOnEventCallback
 {
     public delegate void PlayerPropertiesChangeDelegate(PhotonNetworkedPlayer targetPlayer, Hashtable properties);
 
@@ -145,7 +145,20 @@ public abstract class PhotonNetworkService : MonoBehaviourPunCallbacks, INetwork
             ListenForBroadcastAndConnect(config);
     }
 
-    protected abstract void ConnectToSelfHosted(NetworkConfig config);
+    protected void ConnectToSelfHosted(NetworkConfig config)
+    {
+        if (GamePlatform.Platform == BuildPlatform.Windows)
+        {
+            StartSearchForLocalServer(config);
+        }
+        else
+        {
+            if (GamePlatform.GameType == ClientType.Operator)
+                ConnectToCloudAndBroadcastRoomName(config);
+            else
+                ListenForBroadcastAndConnect(config);
+        }
+    }
 
     protected void ListenForBroadcastAndConnect(NetworkConfig config)
     {

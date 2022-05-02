@@ -14,7 +14,6 @@ public interface IPlayer : IDisposable
     public delegate void TeamChangeDelegate(Team oldTeam, Team newTeam);
     public event TeamChangeDelegate TeamChangeEvent;
 
-    public PlayerStatistics Stats { get; }
     public DependencyInjector Injector { get; }
     public PlayerPawn Pawn { get; }
 

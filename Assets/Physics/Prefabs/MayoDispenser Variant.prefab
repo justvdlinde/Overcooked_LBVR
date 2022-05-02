@@ -62,7 +62,7 @@ PrefabInstance:
     - target: {fileID: 912522134516345631, guid: fe58724a4fc5cb243b86847f415a51bc, type: 3}
       propertyPath: connectedAsset
       value: 
-      objectReference: {fileID: 7968096506181200717}
+      objectReference: {fileID: 2260033532350962416}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe58724a4fc5cb243b86847f415a51bc, type: 3}
 --- !u!4 &545715991240517161 stripped
@@ -70,71 +70,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 912522134516345630, guid: fe58724a4fc5cb243b86847f415a51bc, type: 3}
   m_PrefabInstance: {fileID: 809288689923591479}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &809288690798358633
+--- !u!1001 &7428598588434935487
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 545715991240517161}
     m_Modifications:
-    - target: {fileID: 7786085967117834189, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
-      propertyPath: m_Name
-      value: Mayo
-      objectReference: {fileID: 0}
-    - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
+    - target: {fileID: 4603861115874205666, guid: 1be11946717de304280755d056c46cb3, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
+    - target: {fileID: 4603861115874205666, guid: 1be11946717de304280755d056c46cb3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
+    - target: {fileID: 4603861115874205666, guid: 1be11946717de304280755d056c46cb3, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.12
       objectReference: {fileID: 0}
-    - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
+    - target: {fileID: 4603861115874205666, guid: 1be11946717de304280755d056c46cb3, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
+    - target: {fileID: 4603861115874205666, guid: 1be11946717de304280755d056c46cb3, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
+    - target: {fileID: 4603861115874205666, guid: 1be11946717de304280755d056c46cb3, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
+    - target: {fileID: 4603861115874205666, guid: 1be11946717de304280755d056c46cb3, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
+    - target: {fileID: 4603861115874205666, guid: 1be11946717de304280755d056c46cb3, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
+    - target: {fileID: 4603861115874205666, guid: 1be11946717de304280755d056c46cb3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
+    - target: {fileID: 4603861115874205666, guid: 1be11946717de304280755d056c46cb3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8691141501502296365, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
+    - target: {fileID: 4603861115874205666, guid: 1be11946717de304280755d056c46cb3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9076424563201446886, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
-      propertyPath: viewIdField
-      value: 0
+    - target: {fileID: 4603861115874205670, guid: 1be11946717de304280755d056c46cb3, type: 3}
+      propertyPath: m_Name
+      value: Mayo Bottle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
---- !u!114 &7968096506181200717 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 1be11946717de304280755d056c46cb3, type: 3}
+--- !u!114 &2260033532350962416 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7327205174612646692, guid: e87377f4f10c1f047b8bcd32a47ba8cc, type: 3}
-  m_PrefabInstance: {fileID: 809288690798358633}
+  m_CorrespondingSourceObject: {fileID: 8668003803693446223, guid: 1be11946717de304280755d056c46cb3, type: 3}
+  m_PrefabInstance: {fileID: 7428598588434935487}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

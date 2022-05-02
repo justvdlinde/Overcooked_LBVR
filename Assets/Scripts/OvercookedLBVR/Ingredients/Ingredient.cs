@@ -1,129 +1,57 @@
 using Photon.Pun;
-using PhysicsCharacter;
-using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class Ingredient : MonoBehaviourPun
 {
-    public IngredientType ingredientType = IngredientType.None;
+    public IngredientType IngredientType => ingredientType;
+    public IngredientStatus State => status;
+    public IngredientSnapController SnapController => snapController;
+    public PhysicsCharacter.Tool GrabController => grabController;
+    public bool NeedsToBeCooked => needsToBeCooked;
+    public IngredientCookController CookController => cookController;
+    public IngredientChopController ChopController => chopController;
 
-    public IngredientStatus Status => status;
+    [SerializeField] private IngredientType ingredientType = IngredientType.None;
     [SerializeField] private IngredientStatus status = IngredientStatus.UnProcessed;
+    [SerializeField] private bool needsToBeCooked = false; 
 
-    public new Rigidbody rigidbody = null;
-    public bool needsToBeCooked = false;
-    public CookComponent cookComponent = null;
+    [Header("References")]
+    [Tooltip("Optional, only needed if 'needsToBeCooked' is set to true")]
+    [SerializeField] private IngredientCookController cookController = null;
+    [Tooltip("Optional, only needed if object is snappable to dish and contains a IngredientSnapController component")]
+    [SerializeField] private IngredientSnapController snapController = null;
+    [Tooltip("Optional, only needed if object is choppable")]
+    [SerializeField] private IngredientChopController chopController = null;
+    [Tooltip("Optional, only needed if object is grabbable")]
+    [SerializeField] private PhysicsCharacter.Tool grabController = null;
 
-    public Transform unProcessedGraphics = null;
-    public Transform processedGraphics = null;
-
-    public bool processToTwoAssets = false;
-    [SerializeField] private GameObject result1 = null;
-    [SerializeField] private GameObject result2 = null;
-
-    public bool processToCookable = false;
-    [SerializeField] private GameObject cookable = null;
-
-	[SerializeField] private List<GameObject> toggleObjects = new List<GameObject>();
-
-    public bool CanStack = true;
-    public Transform recentDishCollider = null;
-
-    private void Awake()
-	{
-        unProcessedGraphics?.gameObject.SetActive(status == IngredientStatus.UnProcessed);
-        processedGraphics?.gameObject.SetActive(status == IngredientStatus.Processed);
-    }
-
-    private void Update()
+    public bool IsPreparedProperly()
     {
-        if (!CanStack && recentDishCollider != null)
-		{
-            if(Vector3.Distance(recentDishCollider.transform.position, rigidbody.position) > 0.3f)
-			{
-                CanStack = true;
-                recentDishCollider = null;
-			}
-		}
-
-    }
-
-	public void SetComponentsOnIngredientActive(bool active)
-	{
-		foreach (var item in toggleObjects)
-		{
-			item.SetActive(active);
-		}
-    }
-
-    public void Process()
-	{
-        // TO DO: CLEAN THIS UP
-        if(!processToTwoAssets && !processToCookable)
-		{
-            unProcessedGraphics.gameObject.SetActive(false);
-            processedGraphics.gameObject.SetActive(true);
-		}
-        else if(processToTwoAssets)
-		{
-            unProcessedGraphics.gameObject.SetActive(false);
-            if (photonView.IsMine)
-            {
-                if(result1 != null)
-                    PhotonNetwork.Instantiate(result1.name, unProcessedGraphics.transform.position + Vector3.up * 0.08f, Quaternion.identity);
-                if(result2 != null)
-                    PhotonNetwork.Instantiate(result2.name, unProcessedGraphics.transform.position, Quaternion.identity);
-            }
-            //GameObject r1 = Instantiate(result1);
-            //r1.transform.position = unProcessedGraphics.transform.position;
-            //GameObject r2 = Instantiate(result2);
-            //r2.transform.position = r1.transform.position + Vector3.up * 0.05f;
-        }
-        else if(processToCookable)
-		{
-            unProcessedGraphics.gameObject.SetActive(false);
-            if (PhotonNetwork.IsMasterClient)
-                PhotonNetwork.Instantiate(cookable.name, unProcessedGraphics.transform.position, Quaternion.identity);
-		}
-        SetState(IngredientStatus.Processed);
-	}
-
-    public void TogglePhysics(bool toggle)
-    {
-        rigidbody.isKinematic = !toggle;
-        rigidbody.useGravity = toggle;
-    }
-
-    public bool IsCookedProperly()
-    {
-        bool returnValue = Status == IngredientStatus.Processed;
+        bool returnValue = State == IngredientStatus.Processed;
         if (needsToBeCooked)
-            returnValue &= cookComponent.status == CookStatus.Cooked;
+            returnValue &= cookController.State == CookState.Cooked;
         return returnValue;
     }
 
     public void SetState(IngredientStatus status)
     {
-        photonView.RPC(nameof(SetIngredientStateRPC), RpcTarget.All, (int)status);
+        photonView.RPC(nameof(SetStateRPC), RpcTarget.All, (int)status);
     }
 
     [PunRPC]
-    private void SetIngredientStateRPC(int statusIndex, PhotonMessageInfo info)
+    private void SetStateRPC(int statusIndex)
     {
         status = (IngredientStatus)statusIndex;
     }
 
-
-    public void PlaySound(AudioClip clip, Vector3 position)
+    public bool CanBeGrabbed()
     {
-
-        GameObject obj = new GameObject();
-        obj.transform.position = position;
-        obj.AddComponent<AudioSource>();
-        obj.GetComponent<AudioSource>().pitch = Random.Range(0.8f, 1.2f);
-        obj.GetComponent<AudioSource>().PlayOneShot(clip);
-        Destroy(obj, clip.length);
-        return;
+        return grabController != null;
     }
 
+    public override string ToString()
+    {
+        return name + "(" + status + ")";
+    }
 }

@@ -35,6 +35,10 @@ public class GameModeDebugMenu : IDebugMenu
             DrawSettingsPanel();
             GUILayout.Space(5);
             DrawCurrentGamemodeOptionsPanel(drawDeveloperOptions);
+            GUILayout.Space(5);
+            DrawStoryGamemodeInfoPanel();
+            GUILayout.Space(5);
+            DrawStoryGamemodeOrders();
         }
 
         GUILayout.EndScrollView();
@@ -61,7 +65,6 @@ public class GameModeDebugMenu : IDebugMenu
         GUILayout.EndVertical();
     }
 
-
     private void DrawSettingsPanel()
     {
         GUILayout.BeginVertical(currentGameMode.Name + " Settings", "window");
@@ -76,15 +79,15 @@ public class GameModeDebugMenu : IDebugMenu
         settingsDurationText = GUILayout.TextField(settingsDurationText);
         GUILayout.EndHorizontal();
 
-        if (GUILayout.Button("Update settings"))
-        {
-            GameModeSettings settings = ScriptableObject.CreateInstance<GameModeSettings>();
-            if (int.TryParse(settingsScoreText, out int result))
-                settings.scoreTarget = result;
-            if (int.TryParse(settingsDurationText, out result))
-                settings.matchDuration = result;
-            currentGameMode.Setup(settings);
-        }
+        //if (GUILayout.Button("Update settings"))
+        //{
+        //    GameModeSettings settings = ScriptableObject.CreateInstance<GameModeSettings>();
+        //    if (int.TryParse(settingsScoreText, out int result))
+        //        settings.scoreTarget = result;
+        //    if (int.TryParse(settingsDurationText, out result))
+        //        settings.matchDuration = result;
+        //    currentGameMode.Setup(settings);
+        //}
         GUILayout.EndVertical();
     }
 
@@ -93,16 +96,13 @@ public class GameModeDebugMenu : IDebugMenu
         GUILayout.BeginVertical(currentGameMode.Name, "window");
 
         GUILayout.Label("Phase: " + currentGameMode.MatchPhase);
-        GUILayout.Label("Target: " + currentGameMode.ScoreTarget);
         GUILayout.Label("Start requirements met: " + currentGameMode.StartRequirementsAreMet());
-        GUILayout.Label("Duration: " + string.Format("{0:0:00}", currentGameMode.MatchDuration));
-        GUILayout.Label("Time remaining: " + currentGameMode.GetTimeReadableString());
+        //GUILayout.Label("Duration: " + string.Format("{0:0:00}", currentGameMode.MatchDuration));
+        //GUILayout.Label("Time remaining: " + currentGameMode.GetTimeReadableString());
 
         if (drawDeveloperOptions)
         {
-            if (GUILayout.Button("StartCountdown"))
-                currentGameMode.StartCountdown();
-            if (GUILayout.Button("StartActiveGame"))
+            if (GUILayout.Button("StartGame"))
                 currentGameMode.StartActiveGame();
             if (GUILayout.Button("EndGame"))
                 currentGameMode.EndGame();
@@ -112,4 +112,52 @@ public class GameModeDebugMenu : IDebugMenu
         GUILayout.EndVertical();
     }
 
+    // TODO: make this work for all gamemodes, not just storymode
+    private void DrawStoryGamemodeInfoPanel()
+    {
+        StoryMode story = gameModeService.CurrentGameMode as StoryMode;
+        if (story == null) 
+            return;
+
+        StoryModeScoreboard scoreboard = story.Scoreboard as StoryModeScoreboard;
+        TieredOrderGenerator orderGenerator = story.OrderGenerator;
+
+        GUILayout.BeginVertical(currentGameMode.Name + " Scoreboard", "window");
+        GUILayout.Label("Points/Max: " + scoreboard.TotalPoints + "/" + scoreboard.MaxAchievablePoints);
+        GUILayout.Label("Finished orders: " + scoreboard.OrdersCount);
+        GUILayout.Label("Deliverd orders: " + scoreboard.DeliveredOrdersCount);
+        GUILayout.Label("Timer exceeded orders: " + scoreboard.TimerExceededOrdersCount);
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Current Tier: " + orderGenerator.currentTier);
+        if (GUILayout.Button("+"))
+            orderGenerator.currentTier++;
+        if (GUILayout.Button("-"))
+            orderGenerator.currentTier--;
+        GUILayout.EndHorizontal();
+        GUILayout.Label("Completed orders in succession: " + orderGenerator.completedOrdersInSuccession);
+        GUILayout.EndVertical();
+    }
+
+    private void DrawStoryGamemodeOrders()
+    {
+        StoryMode story = gameModeService.CurrentGameMode as StoryMode;
+        if (story == null)
+            return;
+
+        GUILayout.BeginVertical(currentGameMode.Name + " Orders", "window");
+        for (int i = 0; i < story.OrdersController.ActiveOrders.Count; i++)
+        {
+            Order order = story.OrdersController.ActiveOrders[i];
+            GUILayout.BeginHorizontal();
+            GUILayout.Label(order.orderNumber + ": " + order + " (" + order.timer.TimeRemaining + ")");
+            if (GUILayout.Button("Deliver"))
+                story.CheatDeliverDish(order.orderNumber);
+            GUILayout.EndHorizontal();
+        }
+
+        if (story.OrdersController.ActiveOrders.Count == 0)
+            GUILayout.Label("Empty");
+
+        GUILayout.EndVertical();
+    }
 }

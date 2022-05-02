@@ -15,6 +15,7 @@ public abstract class GameFlow : MonoBehaviour
 
     [Tooltip("The initial level that will be loaded")]
     [SerializeField] protected GameLevel initialLevel = null;
+    [SerializeField] protected GameModeEnum gameMode = GameModeEnum.Story;
 
     [SerializeField] protected bool showSplashScreen = true;
     [SerializeField, InspectableSO] private NetworkConfig networkConfig = null;
@@ -64,7 +65,6 @@ public abstract class GameFlow : MonoBehaviour
     {
         globalEventDispatcher.Subscribe<ConnectionSuccessEvent>(OnConnectionSuccessEvent);
         globalEventDispatcher.Subscribe<ConnectionFailedEvent>(OnConnectionFailedEvent);
-        PhotonGameModeHelper.ServerGameModeChangedEvent += OnServerGameModeChangedEvent;
         PhotonNetworkService.RoomPropertiesChangedEvent += OnRoomPropertiesChangedEvent;
     }
 
@@ -72,7 +72,6 @@ public abstract class GameFlow : MonoBehaviour
     {
         globalEventDispatcher.Unsubscribe<ConnectionFailedEvent>(OnConnectionFailedEvent);
         globalEventDispatcher.Unsubscribe<ConnectionSuccessEvent>(OnConnectionSuccessEvent);
-        PhotonGameModeHelper.ServerGameModeChangedEvent -= OnServerGameModeChangedEvent;
         PhotonNetworkService.RoomPropertiesChangedEvent -= OnRoomPropertiesChangedEvent;
     }
 
@@ -103,17 +102,17 @@ public abstract class GameFlow : MonoBehaviour
         wasConnected = true;
         connectingScreenInstance.Close();
 
-        //if (PhotonGameModeHelper.ServerHasGameMode(out GameModeEnum serverGameMode))
-        //{
-        //    if (PhotonGameModeHelper.ServerGamemodeEqualsCurrentGamemode(gameModeService.CurrentGameMode))
-        //        gameModeService.CurrentGameMode.OnReconnect();
-        //    else
-        //        gameModeService.StartNewGame(serverGameMode);
-        //}
-        //else
-        //{
-        //    gameModeService.StartNewGame(GameModeEnum.TeamDeathmatch);
-        //}
+        if (PhotonGameModeHelper.ServerHasGameMode(out GameModeEnum serverGameMode))
+        {
+            if (PhotonGameModeHelper.ServerGamemodeEqualsCurrentGamemode(gameModeService.CurrentGameMode))
+                gameModeService.CurrentGameMode.OnReconnect();
+            else
+                gameModeService.StartNewGame(serverGameMode);
+        }
+        else
+        {
+            gameModeService.StartNewGame(gameMode);
+        }
 
         if (@event.Room.CustomProperties.TryGetValue(RoomPropertiesPhoton.SCENE, out object sceneValue))
             OnScenePropertyChanged(sceneValue);
@@ -130,12 +129,6 @@ public abstract class GameFlow : MonoBehaviour
             popupService.SpawnPopup().Setup(title, @event.Info.ErrorDescription, new InteractablePopup.ButtonData("Retry", () => ConnectToNetwork()));
         }
         wasConnected = false;
-    }
-
-    protected virtual void OnServerGameModeChangedEvent(GameModeEnum gameMode)
-    {
-        if (!PhotonGameModeHelper.ServerGamemodeEqualsCurrentGamemode(gameModeService.CurrentGameMode))
-            gameModeService.StartNewGame(gameMode);
     }
 
     protected virtual void OnRoomPropertiesChangedEvent(HashTable properties)  
