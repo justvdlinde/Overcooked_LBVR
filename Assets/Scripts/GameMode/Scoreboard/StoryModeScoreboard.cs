@@ -8,11 +8,12 @@ public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboar
     /// <summary>
     /// Orders that have been finished, either delivered or time exceeded
     /// </summary>
-    public int FinishedOrdersCount { get; private set; }
+    public int OrdersCount { get; private set; }
     public float TotalPoints { get; private set; }
     public float MaxAchievablePoints { get; private set; }
     public int DeliveredOrdersCount { get; private set; }
     public int TimerExceededOrdersCount { get; private set; }
+    public int PerfectOrdersCount { get; private set; }
 
     public Action<OrderScorePair> EntryAddedEvent;
 
@@ -32,18 +33,19 @@ public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboar
 
     private void SendSyncData(PhotonNetworkedPlayer player)
     {
-        photonView.RPC(nameof(SendSyncDataRPC), player, FinishedOrdersCount, TotalPoints, MaxAchievablePoints , DeliveredOrdersCount, TimerExceededOrdersCount);
+        photonView.RPC(nameof(SendSyncDataRPC), player, OrdersCount, TotalPoints, MaxAchievablePoints , DeliveredOrdersCount, TimerExceededOrdersCount, PerfectOrdersCount);
     }
 
     // could potentially be expanded to also send the OrderScoreData
     [PunRPC]
-    private void SendSyncDataRPC(int finishedOrders, float totalPoints, float maxPoints, int deliveredOrders, int timerExceededOrders)
+    private void SendSyncDataRPC(int finishedOrders, float totalPoints, float maxPoints, int deliveredOrders, int timerExceededOrders, int perfectOrdersCount)
     {
-        FinishedOrdersCount = finishedOrders;
+        OrdersCount = finishedOrders;
         TotalPoints = totalPoints;
         MaxAchievablePoints = maxPoints;
         DeliveredOrdersCount = deliveredOrders;
         TimerExceededOrdersCount = timerExceededOrders;
+        PerfectOrdersCount = perfectOrdersCount;
     }
 
     public void AddScore(Order order, ScoreData score)
@@ -69,7 +71,10 @@ public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboar
     {
         MaxAchievablePoints += maxPoints;
         TotalPoints += points;
-        FinishedOrdersCount++;
+        OrdersCount++;
+
+        if (points == maxPoints)
+            PerfectOrdersCount++;
 
         if (result == DishResult.Delivered)
             DeliveredOrdersCount++;
@@ -86,7 +91,7 @@ public class StoryModeScoreboard : MonoBehaviourPunCallbacks, IGameModeScoreboar
     {
         OrderScoreHistory = new List<OrderScorePair>();
         TotalPoints = 0;
-        FinishedOrdersCount = 0;
+        OrdersCount = 0;
         MaxAchievablePoints = 0;
         DeliveredOrdersCount = 0;
         TimerExceededOrdersCount = 0;

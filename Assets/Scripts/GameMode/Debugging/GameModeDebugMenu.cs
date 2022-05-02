@@ -123,7 +123,7 @@ public class GameModeDebugMenu : IDebugMenu
 
         GUILayout.BeginVertical(currentGameMode.Name + " Scoreboard", "window");
         GUILayout.Label("Points/Max: " + scoreboard.TotalPoints + "/" + scoreboard.MaxAchievablePoints);
-        GUILayout.Label("Finished orders: " + scoreboard.FinishedOrdersCount);
+        GUILayout.Label("Finished orders: " + scoreboard.OrdersCount);
         GUILayout.Label("Deliverd orders: " + scoreboard.DeliveredOrdersCount);
         GUILayout.Label("Timer exceeded orders: " + scoreboard.TimerExceededOrdersCount);
         GUILayout.EndVertical();
