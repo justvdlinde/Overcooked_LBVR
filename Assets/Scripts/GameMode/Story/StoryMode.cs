@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using Utils.Core.Attributes;
 using Utils.Core.Services;
+using Utils.Core;
 
 public class StoryMode : GameMode
 {
@@ -21,6 +22,7 @@ public class StoryMode : GameMode
     protected CoroutineService coroutineService;
     private TieredOrderGenerator orderGenerator;
     private ScoreCalculator scoreCalculator;
+    private CoroutineTask storyFlow;
 
     public override void OnPhotonInstantiate(PhotonMessageInfo info)
     {
@@ -53,7 +55,17 @@ public class StoryMode : GameMode
     public override void StartActiveGame()
     {
         base.StartActiveGame();
-        coroutineService.StartCoroutine(StoryFlow());
+        storyFlow = coroutineService.StartCoroutine(StoryFlow());
+    }
+
+    public override void EndGame()
+    {
+        base.EndGame();
+        if (storyFlow != null)
+            storyFlow.Stop();
+
+        if(PhotonNetwork.IsMasterClient)
+            ordersController.RemoveAllActiveOrders();
     }
 
     // TODO: replace with some kind of state machine? Would be useful if we want narration in between orders
@@ -75,7 +87,7 @@ public class StoryMode : GameMode
             yield return new WaitForSeconds(settings.nextOrderDelay);
 
             OrderDisplay freeDisplay = OrderDisplayManager.GetFreeDisplay();
-            if(PhotonNetwork.IsMasterClient)
+            if (PhotonNetwork.IsMasterClient)
                 CreateNewActiveOrder(freeDisplay.orderNumber);
         }
     }

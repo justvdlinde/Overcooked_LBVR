@@ -79,6 +79,21 @@ public class OrdersController : MonoBehaviourPunCallbacks
         globalEventDispatcher.Invoke(new ActiveOrderAddedEvent(order));
     }
 
+    public void RemoveAllActiveOrders()
+    {
+        photonView.RPC(nameof(RemoveAllActiveOrdersRPC), RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void RemoveAllActiveOrdersRPC()
+    {
+        Order[] temp = ActiveOrders.ToArray();
+        for (int i = 0; i < temp.Length; i++)
+        {
+            RemoveActiveOrderInternal(temp[i], false);
+        }
+    }
+
     public void RemoveActiveOrder(Order order)
     {
         photonView.RPC(nameof(SubmitRemoveActiveOrderRPC), RpcTarget.Others, ActiveOrders.IndexOf(order));
@@ -91,10 +106,11 @@ public class OrdersController : MonoBehaviourPunCallbacks
         RemoveActiveOrderInternal(ActiveOrders[activeOrderIndex]);
     }
 
-    private void RemoveActiveOrderInternal(Order order)
+    private void RemoveActiveOrderInternal(Order order, bool addToCompleted = true)
     {
         ActiveOrders.Remove(order);
-        CompletedOrders.Add(order);
+        if(addToCompleted)
+            CompletedOrders.Add(order);
         ActiveOrderRemoved?.Invoke(order);
         globalEventDispatcher.Invoke(new ActiveOrderRemovedEvent(order));
         order.Dispose();
