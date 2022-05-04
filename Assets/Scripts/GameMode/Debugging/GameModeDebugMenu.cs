@@ -158,6 +158,18 @@ public class GameModeDebugMenu : IDebugMenu
             Order order = story.OrdersController.ActiveOrders[i];
             GUILayout.BeginHorizontal();
             GUILayout.Label(order.orderNumber + ": " + order + " (" + order.timer.TimeRemaining + ")");
+
+            if (order.timer.IsRunning)
+            {
+                if (GUILayout.Button("Pause"))
+                    order.timer.Stop();
+            }
+            else
+            {
+                 if (GUILayout.Button("Resume"))
+                    order.timer.Resume();
+            }
+
             if (GUILayout.Button("Deliver"))
                 story.CheatDeliverDish(order.orderNumber);
             GUILayout.EndHorizontal();
