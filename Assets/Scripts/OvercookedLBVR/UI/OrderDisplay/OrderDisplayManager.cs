@@ -75,6 +75,16 @@ public class OrderDisplayManager : MonoBehaviourPun
         ClearDisplay(@event.Order);
     }
 
+    public static bool AllDisplaysAreFree()
+    {
+        for (int i = 0; i < Instance.OrderDisplays.Length; i++)
+        {
+            if (Instance.OrderDisplays[i].Order != null)
+                return false;
+        }
+        return true;
+    }
+
     public static bool HasFreeDisplay()
     {
         return HasFreeDisplay(out _);

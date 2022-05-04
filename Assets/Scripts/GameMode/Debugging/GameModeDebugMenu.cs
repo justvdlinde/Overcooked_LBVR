@@ -97,8 +97,9 @@ public class GameModeDebugMenu : IDebugMenu
 
         GUILayout.Label("Phase: " + currentGameMode.MatchPhase);
         GUILayout.Label("Start requirements met: " + currentGameMode.StartRequirementsAreMet());
-        //GUILayout.Label("Duration: " + string.Format("{0:0:00}", currentGameMode.MatchDuration));
-        //GUILayout.Label("Time remaining: " + currentGameMode.GetTimeReadableString());
+        GUILayout.Label("Duration: " + string.Format("{0:0:00}", currentGameMode.MatchDuration));
+        GUILayout.Label("Time remaining: " + string.Format("{0:0:00}", currentGameMode.GameTimer.TimeRemaining));
+        GUILayout.Label("timer is running: " + currentGameMode.GameTimer.IsRunning);
 
         if (drawDeveloperOptions)
         {
@@ -120,21 +121,12 @@ public class GameModeDebugMenu : IDebugMenu
             return;
 
         StoryModeScoreboard scoreboard = story.Scoreboard as StoryModeScoreboard;
-        TieredOrderGenerator orderGenerator = story.OrderGenerator;
 
         GUILayout.BeginVertical(currentGameMode.Name + " Scoreboard", "window");
         GUILayout.Label("Points/Max: " + scoreboard.TotalPoints + "/" + scoreboard.MaxAchievablePoints);
         GUILayout.Label("Finished orders: " + scoreboard.OrdersCount);
         GUILayout.Label("Deliverd orders: " + scoreboard.DeliveredOrdersCount);
         GUILayout.Label("Timer exceeded orders: " + scoreboard.TimerExceededOrdersCount);
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Current Tier: " + orderGenerator.currentTier);
-        if (GUILayout.Button("+"))
-            orderGenerator.currentTier++;
-        if (GUILayout.Button("-"))
-            orderGenerator.currentTier--;
-        GUILayout.EndHorizontal();
-        GUILayout.Label("Completed orders in succession: " + orderGenerator.completedOrdersInSuccession);
         GUILayout.EndVertical();
     }
 
@@ -143,8 +135,24 @@ public class GameModeDebugMenu : IDebugMenu
         StoryMode story = gameModeService.CurrentGameMode as StoryMode;
         if (story == null)
             return;
+        TieredOrderGenerator orderGenerator = story.OrderGenerator;
 
         GUILayout.BeginVertical(currentGameMode.Name + " Orders", "window");
+        GUILayout.BeginHorizontal();
+        GUILayout.Label("Current Tier: " + orderGenerator.currentTier);
+        if (GUILayout.Button("+"))
+            orderGenerator.currentTier++;
+        if (GUILayout.Button("-"))
+            orderGenerator.currentTier--;
+        GUILayout.EndHorizontal();
+        GUILayout.Label("Completed orders in succession: " + orderGenerator.completedOrdersInSuccession);
+
+        bool guiWasEnabled = GUI.enabled;
+        GUI.enabled = OrderDisplayManager.HasFreeDisplay();
+        if(GUILayout.Button("Add new order"))
+            story.CreateNewActiveOrder(OrderDisplayManager.GetFreeDisplay().orderNumber);
+        GUI.enabled = guiWasEnabled;
+
         for (int i = 0; i < story.OrdersController.ActiveOrders.Count; i++)
         {
             Order order = story.OrdersController.ActiveOrders[i];

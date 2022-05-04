@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneLoadDelay: 0.1
   initialLevel: {fileID: 11400000, guid: ebafa00cb65a0314ca002b9f297adc1f, type: 2}
+  gameMode: 0
   showSplashScreen: 0
   networkConfig: {fileID: 11400000, guid: cac6aaf4e2900a8448101f0a26baaf06, type: 2}
   loadingScreenPrefab: {fileID: 7984545635944652098, guid: ec1889b77831db346a7ca52bfa51a951, type: 3}

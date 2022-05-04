@@ -9,7 +9,7 @@ using Utils.Core;
 public class StoryMode : GameMode
 {
     public const string PrefabName = "StoryMode";
-    public override string Name => "Story";
+    public override string Name => "Story Mode";
     public override GameModeEnum GameModeEnum => GameModeEnum.Story;
     public override OrdersController OrdersController => ordersController;
     public override IGameModeScoreboard Scoreboard => scoreboard;
@@ -17,7 +17,7 @@ public class StoryMode : GameMode
 
     [SerializeField] private OrdersController ordersController = null;
     [SerializeField] private StoryModeScoreboard scoreboard = null;
-    [SerializeField, InspectableSO] protected GameSettings settings;
+    [SerializeField, InspectableSO] protected StorySettings settings;
 
     protected CoroutineService coroutineService;
     private TieredOrderGenerator orderGenerator;
@@ -44,11 +44,12 @@ public class StoryMode : GameMode
     {
         scoreCalculator = new ScoreCalculator();
         orderGenerator = new TieredOrderGenerator(true, 0);
-        settings = Resources.Load<GameSettings>("GameSettings");
+        settings = Resources.Load<StorySettings>("StorySettings");
+        settings = Instantiate(settings); // Make copy so the original asset stays the same
 
-        // Make copy so we don't change the original asset's values:
-        settings = Instantiate(settings);
-        
+        if(PhotonNetwork.IsMasterClient)
+            SetMatchDuration(settings.gameDuration);
+
         base.Setup();
     }
 
@@ -68,32 +69,40 @@ public class StoryMode : GameMode
             ordersController.RemoveAllActiveOrders();
     }
 
-    // TODO: replace with some kind of state machine? Would be useful if we want narration in between orders
-    // TODO: Get this to work on a set match duration instead of order amount
     private IEnumerator StoryFlow()
     {
-        // TODO: sync up i when joining late
-        for (int i = 0; i < settings.orderAmount; i++)
+        yield return new WaitForSeconds(settings.initialStartDelay);
+
+        while (GameTimer.IsRunning)
         {
-            // TODO: get delay for next order instead of 1
-            float delay = 1;
-            yield return new WaitForSeconds(delay);
+            if (OrderDisplayManager.AllDisplaysAreFree())
+            {
+                OrderDisplay freeDisplay = OrderDisplayManager.GetFreeDisplay();
+                CreateNewActiveOrder(freeDisplay.orderNumber);
+                continue;
+            }
+            else
+            { 
+                float delay = Random.Range(settings.orderDelayMin, settings.orderDelayMax);
+                yield return new WaitForSeconds(delay);
+            }
 
             while (!OrderDisplayManager.HasFreeDisplay())
             {
                 yield return null;
             }
 
-            yield return new WaitForSeconds(settings.nextOrderDelay);
-
-            OrderDisplay freeDisplay = OrderDisplayManager.GetFreeDisplay();
             if (PhotonNetwork.IsMasterClient)
+            {
+                OrderDisplay freeDisplay = OrderDisplayManager.GetFreeDisplay();
                 CreateNewActiveOrder(freeDisplay.orderNumber);
+            }
         }
     }
 
     public void CreateNewActiveOrder(int displayNr)
     {
+        // TODO: sync generator tier somehow
         Order order = orderGenerator.Generate();
         order.orderNumber = displayNr;
         OrdersController.AddActiveOrder(order);
@@ -122,14 +131,7 @@ public class StoryMode : GameMode
         }
 
         ScoreData score = scoreCalculator.CalculateScore(order, dish.FoodStack, DishResult.Delivered);
-        (Scoreboard as StoryModeScoreboard).AddScore(order, score);
-        OrdersController.RemoveActiveOrder(order);
-        order.TimerExceededEvent -= OnOrderTimerExceeded;
-        orderGenerator.OnOrderCompleted(true);
-        globalEventDispatcher.Invoke(new DishDeliveredEvent(dish, order, score));
-
-        if (IsLastOrderDone())
-            OnLastOrderServed();
+        OnDishDelivered(dish, order, score);
     }
 
     public void CheatDeliverDish(int displayNr)
@@ -138,14 +140,20 @@ public class StoryMode : GameMode
         if (order != null)
         {
             ScoreData score = new ScoreData(ScoreData.MaxPoints, DishResult.Delivered);
-            (Scoreboard as StoryModeScoreboard).AddScore(order, score);
-            OrdersController.RemoveActiveOrder(order);
-            order.TimerExceededEvent -= OnOrderTimerExceeded;
-            globalEventDispatcher.Invoke(new DishDeliveredEvent(null, order, score));
-
-            if (IsLastOrderDone())
-                OnLastOrderServed();
+            OnDishDelivered(null, order, score);
         }
+    }
+
+    private void OnDishDelivered(Plate dish, Order order, ScoreData score)
+    {
+        (Scoreboard as StoryModeScoreboard).AddScore(order, score);
+        OrdersController.RemoveActiveOrder(order);
+        order.TimerExceededEvent -= OnOrderTimerExceeded;
+        orderGenerator.OnOrderCompleted(true);
+        globalEventDispatcher.Invoke(new DishDeliveredEvent(dish, order, score));
+
+        if (!GameTimer.IsRunning && ordersController.ActiveOrders.Count == 0)
+            OnLastOrderServed();
     }
 
     private void OnActiveOrderAdded(Order order)
@@ -165,13 +173,8 @@ public class StoryMode : GameMode
             (Scoreboard as StoryModeScoreboard).AddScore(order, score);
         }
 
-        if (IsLastOrderDone())
+        if (!GameTimer.IsRunning && ordersController.ActiveOrders.Count == 0)
             OnLastOrderServed();
-    }
-
-    private bool IsLastOrderDone()
-    {
-        return OrdersController.ActiveOrders.Count == 0 && OrdersController.CompletedOrders.Count >= settings.orderAmount;
     }
 
     private void OnLastOrderServed()

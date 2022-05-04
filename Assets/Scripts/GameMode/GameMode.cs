@@ -3,6 +3,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Utils.Core.Events;
 using Utils.Core.Services;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -42,15 +43,15 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
     /// </summary>
     public Action ScoreChangedEvent { get; set; }
 
-    ///// <summary>
-    ///// Full duration of this match, in seconds;
-    ///// </summary>
-    //public float MatchDuration { get; protected set; }
+    /// <summary>
+    /// Full duration of this match, in seconds;
+    /// </summary>
+    public float MatchDuration { get; protected set; }
 
-    ///// <summary>
-    ///// Gets the game time mapped to a 0 to 1 value
-    ///// </summary>
-    //public float GameTimeProgress01 { get { return Mathf.InverseLerp(0f, MatchDuration, TimeRemaining); } }
+    /// <summary>
+    /// Gets the game time mapped to a 0 to 1 value
+    /// </summary>
+    public float GameTimeProgress01 { get { return Mathf.InverseLerp(0f, MatchDuration, TimeRemaining); } }
 
     /// <summary>
     /// Timestamp in milliseconds when match was started by masterclient
@@ -63,14 +64,19 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
     public float MatchEndTimeStamp { get; protected set; }
 
     /// <summary>
+    /// Timer used to keep track of game time
+    /// </summary>
+    public Timer GameTimer { get; protected set; }
+
+    /// <summary>
     /// Time the match has been alive, in milliseconds
     /// </summary>
-    public float MatchTimeElapsed => (float)PhotonNetwork.Time - MatchStartTimeStamp; //gameTimer.ElapsedTime;//
+    public float MatchTimeElapsed => GameTimer.ElapsedTime; //(float)PhotonNetwork.Time - MatchStartTimeStamp; ////
 
-    ///// <summary>
-    ///// How much time is remaining until the game is over, in milliseconds
-    ///// </summary>
-    //public float TimeRemaining => gameTimer.TimeRemaining;
+    /// <summary>
+    /// How much time is remaining until the game is over, in milliseconds
+    /// </summary>
+    public float TimeRemaining => GameTimer.TimeRemaining;
 
     /// <summary>
     /// Timestamp that gets set everytime masterclient initializes a new gamemode, 
@@ -92,16 +98,19 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     protected GlobalEventDispatcher globalEventDispatcher;
 
+    protected void Awake()
+    {
+        GameTimer = new Timer();
+        DontDestroyOnLoad(this);
+    }
+
     public virtual void OnPhotonInstantiate(PhotonMessageInfo info)
     {
-        DontDestroyOnLoad(this);
         globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
 
         GameModeService gameModeService = GlobalServiceLocator.Instance.Get<GameModeService>();
         if (gameModeService.CurrentGameMode != this)
             gameModeService.SetGameMode(this);
-
-        //gameTimer = new Timer();
 
         PhotonNetworkService.RoomPropertiesChangedEvent += OnRoomPropertiesChangedEvent;
         PhotonNetworkService.PhotonEventReceivedEvent += OnPhotonEventReceived;
@@ -117,17 +126,12 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            //MatchDuration = settings.matchDuration;
-            //gameTimer.Set(MatchDuration);
-            //ScoreTarget = settings.scoreTarget;
             SetupRoomProperties();
         }
         else
         {
             Hashtable properties = PhotonNetwork.CurrentRoom.CustomProperties;
-            //MatchDuration = (float)properties[RoomPropertiesPhoton.MATCH_DURATION];
-            //gameTimer.Set(MatchDuration);
-            //ScoreTarget = (int)properties[RoomPropertiesPhoton.OBJECTIVE_TARGET];
+            MatchDuration = (float)properties[RoomPropertiesPhoton.MATCH_DURATION];
             GameModeInitializedTimeStamp = (string)properties[RoomPropertiesPhoton.GAME_TIME_STAMP];
 
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(RoomPropertiesPhoton.MATCH_START_TIME, out object value))
@@ -137,13 +141,14 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
             if (MatchPhase != phase)
                 InvokePhase(phase);
         }
+
+        GameTimer.Set(MatchDuration);
     }
 
     public void OnReconnect()
     {
         Hashtable properties = PhotonNetwork.CurrentRoom.CustomProperties;
-        //MatchDuration = (float)properties[RoomPropertiesPhoton.MATCH_DURATION];
-        //ScoreTarget = (int)properties[RoomPropertiesPhoton.OBJECTIVE_TARGET];
+        MatchDuration = (float)properties[RoomPropertiesPhoton.MATCH_DURATION];
         GameModeInitializedTimeStamp = (string)properties[RoomPropertiesPhoton.GAME_TIME_STAMP];
 
         MatchPhase phase = (MatchPhase)(int)properties[RoomPropertiesPhoton.GAME_STATE];
@@ -170,8 +175,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         Dictionary<string, object> properties = new Dictionary<string, object>
         {
             { RoomPropertiesPhoton.GAME_STATE, (int)MatchPhase },
-            //{ RoomPropertiesPhoton.MATCH_DURATION, MatchDuration },
-            //{ RoomPropertiesPhoton.OBJECTIVE_TARGET, ScoreTarget },
+            { RoomPropertiesPhoton.MATCH_DURATION, MatchDuration },
         };
         PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
     }
@@ -183,11 +187,9 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 
         if (properties.TryGetValue(RoomPropertiesPhoton.MATCH_DURATION, out object newValue))
         {
-            //MatchDuration = (float)newValue;
-            //gameTimer.Set(MatchDuration);
+            MatchDuration = (float)newValue;
+            GameTimer.Set(MatchDuration);
         }
-        //if (properties.TryGetValue(RoomPropertiesPhoton.OBJECTIVE_TARGET, out newValue))
-        //    ScoreTarget = (int)newValue;
         if (properties.TryGetValue(RoomPropertiesPhoton.MATCH_START_TIME, out newValue))
             MatchStartTimeStamp = (float)newValue;
         if (properties.TryGetValue(RoomPropertiesPhoton.GAME_TIME_STAMP, out newValue))
@@ -234,7 +236,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         if (replay)
         {
             Scoreboard.Reset();
-            //gameTimer.Reset();
+            GameTimer.Reset();
         }
     }
 
@@ -270,27 +272,27 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         }
 
         // In case a player joins mid-game, the start time and current network time have to be subtracted from the match duration 
-        //float duration = MatchDuration; 
-        //if(MatchStartTimeStamp != 0)
-        //    duration = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
+        float duration = MatchDuration;
+        if (MatchStartTimeStamp != 0)
+            duration = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
 
-        //gameTimer.Set(duration);
-        //gameTimer.Start(OnTimerReachedZero);
+        GameTimer.Set(duration);
+        GameTimer.Start(OnTimerReachedZero);
     }
 
-    //protected virtual void OnTimerReachedZero()
-    //{
-    //    if (PhotonNetwork.IsMasterClient)
-    //    {
-    //        gameTimer.Stop();
-    //        EndGame(MatchEndType.TimeLimitReached);
-    //    }
-    //}
+    protected virtual void OnTimerReachedZero()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GameTimer.Stop();
+            //EndGame();
+        }
+    }
 
     public virtual void EndGame()
     {
         SetPhase(MatchPhase.PostGame);
-        //gameTimer.Stop();
+        GameTimer.Stop();
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -326,30 +328,11 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         globalEventDispatcher.Invoke(new ReplayEvent());
     }
 
-    ///// <summary>
-    ///// Returns TimeRemaining as a readable time in minutes and seconds
-    ///// </summary>
-    ///// <returns></returns>
-    //public virtual string GetTimeReadableString()
-    //{
-    //    int minutes = Mathf.FloorToInt(TimeRemaining / 60f);
-    //    int seconds = Mathf.FloorToInt(TimeRemaining - minutes * 60);
-    //    return string.Format("{00:00}:{1:00}", minutes, seconds);
-    //}
-
-    //public virtual void SetMatchDuration(float newDuration)
-    //{
-    //    PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.MATCH_DURATION, newDuration);
-    //    MatchDuration = newDuration;
-    //    SettingsChangedEvent?.Invoke();
-    //}
-
-    //public virtual void SetScoreTarget(int newScore)
-    //{
-    //    PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.OBJECTIVE_TARGET, newScore);
-    //    ScoreTarget = newScore;
-    //    SettingsChangedEvent?.Invoke();
-    //}
+    public virtual void SetMatchDuration(float newDuration)
+    {
+        PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.MATCH_DURATION, newDuration);
+        MatchDuration = newDuration;
+    }
 
     /// <summary>
     /// Raises a Photon event code for specific game logic such as starting and stopping
