@@ -13,6 +13,11 @@ public static class XRInput
     public static InputDevice LeftController { get; private set; }
     public static InputDevice RightController { get; private set; }
 
+    // TODO: left/right hand
+    private static bool primaryButtonWasPressed = false;
+    private static bool secondaryButtonIsPressState = false;
+    private static float secondaryButtonStateChangeFrame = -1;
+
     static XRInput()
     {
         List<InputDevice> inputDevices = new List<InputDevice>();
@@ -93,9 +98,32 @@ public static class XRInput
         InputDevice controller = hand == Hand.Right ? RightController : LeftController;
         if (controller == null)
             return false;
+
         controller.TryGetFeatureValue(CommonUsages.secondaryButton, out bool value);
+        if (secondaryButtonIsPressState != value)
+        {
+            secondaryButtonStateChangeFrame = Time.frameCount;
+            secondaryButtonIsPressState = value;
+        }
         return value;
     }
+
+    public static bool GetSecondaryButtonDown(Hand hand)
+    {
+        bool wasPressed = secondaryButtonIsPressState;
+        bool isPressed = GetSecondaryButtonPressed(hand);
+
+        if (secondaryButtonStateChangeFrame == Time.frameCount)
+            isPressed = !secondaryButtonIsPressState;
+
+        Debug.Log("wasPressed " + wasPressed + " isPressed " + isPressed);
+        return !wasPressed && isPressed;
+    }
+
+    //public static bool GetSecondaryButtonUp(Hand hand)
+    //{
+    //    return secondaryButtonIsPressed && !GetSecondaryButtonPressed(hand);
+    //}
 
     public static Vector2 GetThumbStickAxis(Hand hand)
     {
