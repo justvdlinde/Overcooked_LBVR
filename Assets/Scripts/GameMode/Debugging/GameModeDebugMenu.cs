@@ -109,6 +109,21 @@ public class GameModeDebugMenu : IDebugMenu
                 currentGameMode.EndGame();
             if (GUILayout.Button("Replay"))
                 currentGameMode.Replay();
+
+            if (currentGameMode.MatchPhase == MatchPhase.Active)
+            {
+                GUILayout.Space(10);
+                if (currentGameMode.GameTimer.IsRunning)
+                {
+                    if (GUILayout.Button("Pause"))
+                        currentGameMode.GameTimer.Stop();
+                }
+                else
+                {
+                    if (GUILayout.Button("Resume"))
+                        currentGameMode.GameTimer.Resume();
+                }
+            }
         }
         GUILayout.EndVertical();
     }
