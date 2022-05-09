@@ -50,8 +50,10 @@ public class InGameDebugManager : MonoBehaviour
 
     private void ShowObjects(bool show)
     {
-        debugConsoleInstance?.SetActive(show);
-        guiPanelInstance?.SetActive(show);
+        if(debugConsoleInstance != null)
+            debugConsoleInstance.SetActive(show);
+        if(guiPanelInstance != null)
+            guiPanelInstance.SetActive(show);
     }
 
     private void Update()
@@ -63,8 +65,5 @@ public class InGameDebugManager : MonoBehaviour
         GUIWorldSpace.Log("Batches: " + ProfilerHelper.BatchesCount);
         GUIWorldSpace.Log("Tris: " + ProfilerHelper.TrisCount);
         GUIWorldSpace.Log("Vertices " + ProfilerHelper.VerticesCount);
-
-        if (XRInput.GetSecondaryButtonPressed(Hand.Left))
-            Toggle();
     }
 }
