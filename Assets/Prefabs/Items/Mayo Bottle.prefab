@@ -87,6 +87,14 @@ PrefabInstance:
       propertyPath: sauceType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6018988614647235935, guid: bb4350354cf49b34897b25324ea2e042, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6018988615175136970, guid: bb4350354cf49b34897b25324ea2e042, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6475668654372688618, guid: bb4350354cf49b34897b25324ea2e042, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 0.8160377

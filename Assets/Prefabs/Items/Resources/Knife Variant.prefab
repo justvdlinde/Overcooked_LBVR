@@ -400,6 +400,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knife Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1860500774435313076, guid: 44aa82d8670a6094da6dc242cc5aa631, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860500774435313076, guid: 44aa82d8670a6094da6dc242cc5aa631, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1860500774435313076, guid: 44aa82d8670a6094da6dc242cc5aa631, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 3047702267385185088, guid: 44aa82d8670a6094da6dc242cc5aa631, type: 3}
       propertyPath: m_IsTrigger
       value: 1

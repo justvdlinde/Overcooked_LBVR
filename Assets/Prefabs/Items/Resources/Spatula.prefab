@@ -221,6 +221,7 @@ MonoBehaviour:
   toolHandles:
   - {fileID: 4419888869342000843}
   toolTransformDelegate: {fileID: 2632153986795077764}
+  dummyToolHandle: {fileID: 0}
   rigidBody: {fileID: 4419888868740026625}
   slowDownVelocity: 0.75
   slowDownRotation: 0.75
@@ -307,13 +308,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4419888869342000842}
-  m_LocalRotation: {x: -0.3359615, y: 0.000000029802322, z: -0.000000044703484, w: 0.9418758}
-  m_LocalPosition: {x: -0, y: 0.0131, z: -0.0051}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.027, z: 0.018}
   m_LocalScale: {x: 0.61343, y: 0.61343, z: 0.61343}
   m_Children: []
   m_Father: {fileID: 4419888868740026627}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -140.738, y: -180, z: -180}
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 180}
 --- !u!54 &4419888869342000837
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -358,6 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowRightGrip: 1
   allowLeftGrip: 1
+  HandleIsCloseToToolPos: 0
   throwDistance: 0.25
   localTransformMirror:
     parent: {fileID: 0}

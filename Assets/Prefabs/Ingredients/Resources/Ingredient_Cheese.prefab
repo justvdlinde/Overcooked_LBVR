@@ -215,6 +215,14 @@ PrefabInstance:
       propertyPath: snapController
       value: 
       objectReference: {fileID: 4891301637541957004}
+    - target: {fileID: 415704936152818749, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 415704936698529704, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 1698536654608434325, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: m_Name
       value: Ingredient_Cheese

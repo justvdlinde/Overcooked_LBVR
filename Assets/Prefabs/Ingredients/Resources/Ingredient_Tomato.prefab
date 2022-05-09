@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4341637029995549102
 Transform:
   m_ObjectHideFlags: 0
@@ -273,6 +273,22 @@ PrefabInstance:
       propertyPath: snapController
       value: 
       objectReference: {fileID: 7553528557950705492}
+    - target: {fileID: 415704934877111496, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.69172
+      objectReference: {fileID: 0}
+    - target: {fileID: 415704934877111496, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.69172
+      objectReference: {fileID: 0}
+    - target: {fileID: 415704934877111496, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.69172
+      objectReference: {fileID: 0}
+    - target: {fileID: 415704934877111496, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.023
+      objectReference: {fileID: 0}
     - target: {fileID: 1698536654608434325, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: m_Name
       value: Ingredient_Tomato
