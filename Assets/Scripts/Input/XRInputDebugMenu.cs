@@ -30,7 +30,11 @@ public class XRInputDebugMenu : IDebugMenu
             GUILayout.Label("Grip Pressed: " + XRInput.GripButtonIsPressed(hand));
             GUILayout.Label("Grip value: " + XRInput.GetGripButtonValue(hand));
             GUILayout.Label("Primary button pressed: " + XRInput.GetPrimaryButtonPressed(hand));
+            GUILayout.Label("Primary button down: " + XRInput.GetPrimaryButtonDown(hand));
+            GUILayout.Label("Primary button up: " + XRInput.GetPrimaryButtonUp(hand));
             GUILayout.Label("Secondary button pressed: " + XRInput.GetSecondaryButtonPressed(hand));
+            GUILayout.Label("Secondary button down: " + XRInput.GetSecondaryButtonDown(hand));
+            GUILayout.Label("Secondary button up: " + XRInput.GetSecondaryButtonUp(hand));
             GUILayout.Label("Thumb stick axis: " + XRInput.GetThumbStickAxis(hand));
             GUILayout.Label("Thumb stick touched: " + XRInput.ThumbStickButtonIsTouched(hand));
             GUILayout.Label("Thumb stick pressed: " + XRInput.ThumbStickButtonIsPressed(hand));

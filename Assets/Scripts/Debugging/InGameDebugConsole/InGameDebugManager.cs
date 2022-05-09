@@ -65,11 +65,5 @@ public class InGameDebugManager : MonoBehaviour
         GUIWorldSpace.Log("Batches: " + ProfilerHelper.BatchesCount);
         GUIWorldSpace.Log("Tris: " + ProfilerHelper.TrisCount);
         GUIWorldSpace.Log("Vertices " + ProfilerHelper.VerticesCount);
-
-        //if (XRInput.GetSecondaryButtonPressed(Hand.Left))
-        //    Toggle();
-
-        Debug.Log("down: " + XRInput.GetSecondaryButtonDown(Hand.Left));
-        //Debug.Log("up: " + XRInput.GetSecondaryButtonUp(Hand.Left));
     }
 }

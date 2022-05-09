@@ -13,10 +13,22 @@ public static class XRInput
     public static InputDevice LeftController { get; private set; }
     public static InputDevice RightController { get; private set; }
 
-    // TODO: left/right hand
-    private static bool primaryButtonWasPressed = false;
-    private static bool secondaryButtonIsPressState = false;
-    private static float secondaryButtonStateChangeFrame = -1;
+    private static readonly ButtonStateInfo leftPrimaryButtonState = new ButtonStateInfo();
+    private static readonly ButtonStateInfo rightPrimaryButtonState = new ButtonStateInfo();
+    private static readonly ButtonStateInfo leftSecondaryButtonState = new ButtonStateInfo();
+    private static readonly ButtonStateInfo rightSecondaryButtonState = new ButtonStateInfo();
+
+    private static readonly Dictionary<Hand, ButtonStateInfo> primaryButtonStatePairs = new Dictionary<Hand, ButtonStateInfo>
+    {
+        { Hand.Left, leftPrimaryButtonState },
+        { Hand.Right, rightPrimaryButtonState }
+    };
+
+    private static readonly Dictionary<Hand, ButtonStateInfo> secondaryButtonStatePairs = new Dictionary<Hand, ButtonStateInfo>
+    {
+        { Hand.Left, leftSecondaryButtonState },
+        { Hand.Right, rightSecondaryButtonState }
+    };
 
     static XRInput()
     {
@@ -89,8 +101,31 @@ public static class XRInput
         InputDevice controller = hand == Hand.Right ? RightController : LeftController;
         if (controller == null)
             return false;
+        ButtonStateInfo buttonState = primaryButtonStatePairs[hand];
+
         controller.TryGetFeatureValue(CommonUsages.primaryButton, out bool value);
+        if (buttonState.isPressed != value)
+        {
+            buttonState.isPressed = value;
+            buttonState.frameChange = Time.frameCount;
+        }
         return value;
+    }
+
+    public static bool GetPrimaryButtonDown(Hand hand)
+    {
+        if (primaryButtonStatePairs[hand].frameChange == Time.frameCount)
+            return GetPrimaryButtonPressed(hand);
+        else
+            return false;
+    }
+
+    public static bool GetPrimaryButtonUp(Hand hand)
+    {
+        if (primaryButtonStatePairs[hand].frameChange == Time.frameCount)
+            return !GetPrimaryButtonPressed(hand);
+        else
+            return false;
     }
 
     public static bool GetSecondaryButtonPressed(Hand hand)
@@ -98,32 +133,32 @@ public static class XRInput
         InputDevice controller = hand == Hand.Right ? RightController : LeftController;
         if (controller == null)
             return false;
+        ButtonStateInfo buttonState = secondaryButtonStatePairs[hand];
 
         controller.TryGetFeatureValue(CommonUsages.secondaryButton, out bool value);
-        if (secondaryButtonIsPressState != value)
+        if (buttonState.isPressed != value)
         {
-            secondaryButtonStateChangeFrame = Time.frameCount;
-            secondaryButtonIsPressState = value;
+            buttonState.isPressed = value;
+            buttonState.frameChange = Time.frameCount;
         }
         return value;
     }
 
     public static bool GetSecondaryButtonDown(Hand hand)
     {
-        bool wasPressed = secondaryButtonIsPressState;
-        bool isPressed = GetSecondaryButtonPressed(hand);
-
-        if (secondaryButtonStateChangeFrame == Time.frameCount)
-            isPressed = !secondaryButtonIsPressState;
-
-        Debug.Log("wasPressed " + wasPressed + " isPressed " + isPressed);
-        return !wasPressed && isPressed;
+        if (secondaryButtonStatePairs[hand].frameChange == Time.frameCount)
+            return GetSecondaryButtonPressed(hand);
+        else
+            return false;
     }
 
-    //public static bool GetSecondaryButtonUp(Hand hand)
-    //{
-    //    return secondaryButtonIsPressed && !GetSecondaryButtonPressed(hand);
-    //}
+    public static bool GetSecondaryButtonUp(Hand hand)
+    {
+        if (secondaryButtonStatePairs[hand].frameChange == Time.frameCount)
+            return !GetSecondaryButtonPressed(hand);
+        else
+            return false;
+    }
 
     public static Vector2 GetThumbStickAxis(Hand hand)
     {
@@ -184,5 +219,11 @@ public static class XRInput
         {
             return false;
         }
+    }
+
+    private class ButtonStateInfo
+    {
+        public float frameChange = -1;
+        public bool isPressed;
     }
 }
