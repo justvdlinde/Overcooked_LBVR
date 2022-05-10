@@ -116,6 +116,6 @@ public class TieredRecipie : ScriptableObject
 
 	private int GenerateRandom0to100()
 	{
-		return (int)Random.Range(0, 101);
+		return (int)Random.Range(0, 100);
 	}
 }
