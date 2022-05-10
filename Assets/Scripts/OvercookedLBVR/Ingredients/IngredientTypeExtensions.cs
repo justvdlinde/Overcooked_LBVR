@@ -7,4 +7,9 @@ public static class IngredientTypeExtensions
         else
             return ingredient == IngredientType.Mayo;
     }
+
+    public static bool IsSauce(this IngredientType ingredient)
+    {
+        return ingredient == IngredientType.Mayo || ingredient == IngredientType.Ketchup;
+    }
 }

@@ -8,6 +8,7 @@ public class SauceRecipient : MonoBehaviourPunCallbacks
     public Action<SauceType> SauceTypeChanged;
     public float FillProgressNormalized => fillProgress / fillDuration;
     public SauceType LastReceivedSauceType => lastReceivedSauceType;
+    public FoodStack FoodStack => foodStack;
 
     [Tooltip("Duration in seconds it takes to create sauce")]
 	[SerializeField] private float fillDuration = 1;
@@ -53,7 +54,7 @@ public class SauceRecipient : MonoBehaviourPunCallbacks
 
     public void ApplySauce(float value, SauceType sauceType)
 	{
-        if (foodStack.CanPlaceSauce(sauceType))
+        if (foodStack.CanPlaceSauce())
         {
             if (lastReceivedSauceType != sauceType)
             {

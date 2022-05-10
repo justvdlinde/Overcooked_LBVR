@@ -865,6 +865,10 @@ PrefabInstance:
       propertyPath: foodStack
       value: 
       objectReference: {fileID: 8280493064852665215}
+    - target: {fileID: 6546762540241016467, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
+      propertyPath: fillDuration
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8390835917817231530, guid: ece178fdb2c4b814aa07dea5ce2a5519, type: 3}
       propertyPath: m_RootOrder
       value: 1
