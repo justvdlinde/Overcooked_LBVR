@@ -52,6 +52,6 @@ public class Ingredient : MonoBehaviourPun
 
     public override string ToString()
     {
-        return name + "(" + status + ")";
+        return ingredientType.ToString() + "(" + status + (CookController != null ? "-" + CookController.State : string.Empty) + ")";
     }
 }

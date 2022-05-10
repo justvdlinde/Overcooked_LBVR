@@ -1,10 +1,11 @@
 using System;
 
+[Serializable]
 public class Order : IDisposable
 {
     public Action<Order> TimerExceededEvent;
 
-    public readonly IngredientType[] ingredients;
+    public IngredientType[] ingredients;
     public readonly NetworkedTimer timer;
     public int orderNumber;
 

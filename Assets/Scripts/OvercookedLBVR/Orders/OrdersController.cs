@@ -15,6 +15,7 @@ public class OrdersController : MonoBehaviourPunCallbacks
     public Action<Order> ActiveOrderRemoved;
 
     private GlobalEventDispatcher globalEventDispatcher;
+    private DishFitnessCalculator comparisor = new DishFitnessCalculator();
 
     public void Awake()
     {
@@ -128,12 +129,12 @@ public class OrdersController : MonoBehaviourPunCallbacks
             return null;
 
         Order bestFit = ActiveOrders[0];
-        float bestFitScore = GetDishMatchScore(dish.Compare(ActiveOrders[0]));
+        float bestFitScore = comparisor.CalculateFitness(dish.Compare(ActiveOrders[0]));
 
         for (int i = 1; i < ActiveOrders.Count; i++)
         {
             Order order = ActiveOrders[i];
-            float score = GetDishMatchScore(dish.Compare(order));
+            float score = comparisor.CalculateFitness(dish.Compare(order));
 
             if (score > bestFitScore)
             {
@@ -155,17 +156,5 @@ public class OrdersController : MonoBehaviourPunCallbacks
             return ActiveOrders[0];
         else
             return bestFit;
-    }
-
-    private float GetDishMatchScore(OrderDishCompareResult compareResult, float maxScore = 100)
-    {
-        float fitScore = maxScore / 3;
-        float totalFitness = 0f;
-        totalFitness += fitScore * compareResult.correctIngredientPercentage;
-        totalFitness += fitScore * compareResult.properlyCookedIngredientsPercentage;
-        if (compareResult.ingredientsAreInCorrectOrder)
-            totalFitness += fitScore;
-
-        return totalFitness;
     }
 }

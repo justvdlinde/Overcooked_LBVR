@@ -93,6 +93,10 @@ PrefabInstance:
       value: Ingredient_Sauce_Mayo
       objectReference: {fileID: 0}
     - target: {fileID: 1653537817275300724, guid: 181bb91fea7f862479f4fe6cd18e6680, type: 3}
+      propertyPath: ingredientType
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653537817275300724, guid: 181bb91fea7f862479f4fe6cd18e6680, type: 3}
       propertyPath: snapController
       value: 
       objectReference: {fileID: 7098936228552210120}

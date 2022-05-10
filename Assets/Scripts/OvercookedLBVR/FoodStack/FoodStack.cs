@@ -105,7 +105,6 @@ public class FoodStack : MonoBehaviourPunCallbacks
 
     private void AddIngredientToStackInternal(Ingredient ingredient)
     {
-        Debug.Log("Add to stack " + ingredient);
 		ingredientsStack.Add(ingredient);
         StackToTop(ingredient.SnapController);
         IngredientAddedEvent?.Invoke(ingredient);
@@ -148,8 +147,6 @@ public class FoodStack : MonoBehaviourPunCallbacks
     public Ingredient RemoveTopIngredient()
     {
         Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
-        Debug.Log("RemoveTopIngredient: " + ingredient);
-
         photonView.RPC(nameof(RemoveTopIngredientRPC), RpcTarget.All);
         return ingredient;
     }
@@ -215,6 +212,9 @@ public class FoodStack : MonoBehaviourPunCallbacks
         int properlyCookedIngredients = 0;
 
         List<IngredientType> dishChecklist = (from i in ingredientsStack select i.IngredientType).ToList();
+
+        if (order.ingredients.Length != ingredientsStack.Count)
+            ingredientsAreInCorrectOrder = false;
 
         int index = 0;
         foreach (IngredientType orderIngredient in order.ingredients)

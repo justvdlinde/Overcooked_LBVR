@@ -108,6 +108,7 @@ public class FoodStackInspector : Editor
 
         GameObject prefab = ingredientsData.GetCorrespondingData(ingredientType).ingredientPrefab;
         Ingredient ingredient = PhotonNetwork.Instantiate(prefab.name, foodStack.transform.position, foodStack.transform.rotation).GetComponent<Ingredient>();
+        Debug.Log(ingredient);
         if (ingredient.ChopController != null)
             ingredient.ChopController.ProcessIngredient();
         foodStack.AddIngredientToStack(ingredient);

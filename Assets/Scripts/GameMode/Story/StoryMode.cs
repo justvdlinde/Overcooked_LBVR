@@ -123,7 +123,7 @@ public class StoryMode : GameMode
         if (order != null)
         {
             dish.OnDeliver();
-            Debug.Log("Delivered dish: " + dish + "\nclosest match: " + order);
+            Debug.Log("Delivered dish: " + dish.FoodStack + "\nclosest match: " + order);
         }
         else
         {
@@ -131,6 +131,7 @@ public class StoryMode : GameMode
         }
 
         ScoreData score = scoreCalculator.CalculateScore(order, dish.FoodStack, DishResult.Delivered);
+        Debug.Log("Score: " + score.Points + "/" + ScoreData.MaxPoints);
         OnDishDelivered(dish, order, score);
     }
 
