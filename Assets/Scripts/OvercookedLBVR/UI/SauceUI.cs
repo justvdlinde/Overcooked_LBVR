@@ -30,7 +30,7 @@ public class SauceUI : MonoBehaviour
 
     private void Update()
     {
-        root.SetActive(sauce.FillProgressNormalized > 0);
+        root.SetActive(sauce.FillProgressNormalized > 0 && sauce.FoodStack.CanPlaceSauce());
         slider.value = sauce.FillProgressNormalized;
     }
 }

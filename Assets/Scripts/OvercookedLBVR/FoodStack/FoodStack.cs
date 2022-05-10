@@ -183,12 +183,12 @@ public class FoodStack : MonoBehaviourPunCallbacks
         return base.ToString() + " Ingredients: " + string.Join("-", ingredientsStack);
     }
 
-    public bool CanPlaceSauce(SauceType sauce)
+    public bool CanPlaceSauce()
     {
         if (ingredientsStack.Count > 0)
         {
             IngredientType lastIngredient = ingredientsStack[ingredientsStack.Count - 1].IngredientType;
-            return !IngredientTypeExtensions.Equals(lastIngredient, sauce) && lastIngredient != IngredientType.BunTop;
+            return !lastIngredient.IsSauce() && lastIngredient != IngredientType.BunTop;
         }
         else
         {
