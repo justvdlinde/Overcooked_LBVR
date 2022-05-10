@@ -126,13 +126,16 @@ public class IngredientChopController : MonoBehaviourPun
 
 		if (chopMethod == ChopMethod.Instantiate)
 		{
-			for (int i = 0; i < processInstantiationData.Length; i++)
+			if (PhotonNetwork.IsMasterClient)
 			{
-				Transform point = processInstantiationData[i].transform;
-				GameObject prefab = processInstantiationData[i].prefab;
-				PhotonNetwork.Instantiate(prefab.name, point.position, Quaternion.identity);
+				for (int i = 0; i < processInstantiationData.Length; i++)
+				{
+					Transform point = processInstantiationData[i].transform;
+					GameObject prefab = processInstantiationData[i].prefab;
+					PhotonNetwork.Instantiate(prefab.name, point.position, Quaternion.identity);
+				}
+				PhotonNetwork.Destroy(ingredient.gameObject);
 			}
-			PhotonNetwork.Destroy(ingredient.gameObject);
 		}
 		else
 		{
