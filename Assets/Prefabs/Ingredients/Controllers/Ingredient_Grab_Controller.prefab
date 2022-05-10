@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5887674822639520844}
   - component: {fileID: 5887674822639520847}
   - component: {fileID: 8767885131029623597}
-  - component: {fileID: 7921332959912920898}
+  - component: {fileID: 7859303341983735389}
   m_Layer: 26
   m_Name: Ingredient_Grab_Controller
   m_TagString: Untagged
@@ -78,9 +78,10 @@ MonoBehaviour:
   maxRotationChange: 720
   maxAngularVelocity: 35
   clipChecker: {fileID: 0}
-  photonView: {fileID: 7921332959912920898}
+  photonView: {fileID: 7859303341983735389}
+  rootPhotonView: {fileID: 0}
   forcePosition: 1
---- !u!114 &7921332959912920898
+--- !u!114 &7859303341983735389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
