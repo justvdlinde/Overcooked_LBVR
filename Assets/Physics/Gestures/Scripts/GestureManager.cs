@@ -16,6 +16,11 @@ namespace PhysicsCharacter
 		[SerializeField] private HandController handController = null;
 		public HandPoses currentGesture { get; private set; } = HandPoses.Neutral;
 
+		public void SetCurrentGesture(HandPoses pose)
+		{
+			currentGesture = pose;
+		}
+
 		public void Update()
 		{
 			
@@ -53,7 +58,7 @@ namespace PhysicsCharacter
 					new HandController.FingerPoseValuePair(Fingers.Thumb, gesture.ThumbPose, thumbValue)
 					);
 
-				currentGesture = gesture.GestureHandPose;
+				SetCurrentGesture(gesture.GestureHandPose);
 			}
 			else
 			{
@@ -64,7 +69,7 @@ namespace PhysicsCharacter
 					new HandController.FingerPoseValuePair(Fingers.Pinky, FingerPoses.Null, pinky),
 					new HandController.FingerPoseValuePair(Fingers.Thumb, FingerPoses.Null, thumb)
 					);
-				currentGesture = HandPoses.Neutral;
+				SetCurrentGesture(HandPoses.Neutral);
 			}
 		}
 

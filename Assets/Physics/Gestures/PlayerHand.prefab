@@ -1338,11 +1338,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gestures:
-  - {fileID: 11400000, guid: 546d8e4c1621ff74d9dece21f3f2c69a, type: 2}
+  - {fileID: 11400000, guid: 323decdc82b6915438700b2df84b8103, type: 2}
   - {fileID: 11400000, guid: 0e4127a63e9a8364b85a2a93a7d55e2c, type: 2}
-  - {fileID: 11400000, guid: a5297cae0aaf2a7499fe0e846f6e1971, type: 2}
-  - {fileID: 11400000, guid: 7111d368fb6dcb049845956cb57af2dd, type: 2}
   - {fileID: 11400000, guid: 2de4c2490449f0147ad75ad837a3e15b, type: 2}
+  - {fileID: 11400000, guid: 546d8e4c1621ff74d9dece21f3f2c69a, type: 2}
+  - {fileID: 11400000, guid: 7111d368fb6dcb049845956cb57af2dd, type: 2}
+  - {fileID: 11400000, guid: a5297cae0aaf2a7499fe0e846f6e1971, type: 2}
   handController: {fileID: 2557576329723302408}
 --- !u!54 &8035254656055694033
 Rigidbody:
