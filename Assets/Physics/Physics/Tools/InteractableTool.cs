@@ -56,7 +56,7 @@ public class InteractableTool : MonoBehaviourPun
     }
 
 	[PunRPC]
-	private void OnUpEventRPC(PhotonMessageInfo info)
+	protected void OnUpEventRPC(PhotonMessageInfo info)
     {
 		OnUpEventInternal();
 	}
@@ -73,7 +73,7 @@ public class InteractableTool : MonoBehaviourPun
 	}
 
 	[PunRPC]
-	private void OnDownEventRPC(PhotonMessageInfo info)
+	protected void OnDownEventRPC(PhotonMessageInfo info)
     {
 		OnDownEventInternal();
     }
