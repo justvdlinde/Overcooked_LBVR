@@ -88,7 +88,8 @@ public class IngredientChopController : MonoBehaviourPun
 
 	public void Chop(int hit)
     {
-		photonView.RPC(nameof(ChopRPC), RpcTarget.All, hit);
+		if(photonView.IsMine)
+			photonView.RPC(nameof(ChopRPC), RpcTarget.All, hit);
 	}
 
 	[PunRPC]
@@ -104,9 +105,9 @@ public class IngredientChopController : MonoBehaviourPun
 			particles.Play();
 		}
 
-		if (PhotonNetwork.IsMasterClient)
+		if (hitCount >= hitsNeededToProcess)
 		{
-			if (hitCount >= hitsNeededToProcess)
+			if (PhotonNetwork.IsMasterClient)
 			{
 				ProcessIngredient();
 			}
@@ -122,7 +123,10 @@ public class IngredientChopController : MonoBehaviourPun
 	[PunRPC]
 	private void ProcessIngredientRPC()
 	{
-		ingredient.SetState(IngredientStatus.Processed);
+		Debug.Log("ProcessIngredientRPC");
+
+		if (PhotonNetwork.IsMasterClient)
+			ingredient.SetState(IngredientStatus.Processed);
 
 		if (chopMethod == ChopMethod.Instantiate)
 		{
@@ -134,8 +138,10 @@ public class IngredientChopController : MonoBehaviourPun
 					GameObject prefab = processInstantiationData[i].prefab;
 					PhotonNetwork.Instantiate(prefab.name, point.position, Quaternion.identity);
 				}
-				PhotonNetwork.Destroy(ingredient.gameObject);
 			}
+
+			if(photonView.IsMine)
+				PhotonNetwork.Destroy(ingredient.gameObject);
 		}
 		else
 		{
@@ -145,10 +151,13 @@ public class IngredientChopController : MonoBehaviourPun
 	
 	private void ToggleGraphicsToState()
     {
-		if (processedGraphics != null && unProcessedGraphics != null)
+		if (chopMethod == ChopMethod.ToggleGraphic)
 		{
-			unProcessedGraphics.gameObject.SetActive(ingredient.State == IngredientStatus.UnProcessed);
-			processedGraphics.gameObject.SetActive(ingredient.State == IngredientStatus.Processed);
+			if (processedGraphics != null && unProcessedGraphics != null)
+			{
+				unProcessedGraphics.gameObject.SetActive(ingredient.State == IngredientStatus.UnProcessed);
+				processedGraphics.gameObject.SetActive(ingredient.State == IngredientStatus.Processed);
+			}
 		}
 	}
 

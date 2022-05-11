@@ -17,11 +17,8 @@ public class Dispenser : MonoBehaviourPun
         GameObject g = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, spawnPoint.rotation);
         g.AddComponent(typeof(DestroyOnGameStart));
         photonView.RPC(nameof(DispenseObjectRPC), RpcTarget.All);
+        photonView.TransferOwnership(-1);
 
-        //if(g.TryGetComponent(out PhotonView photonView))
-        //{
-        //    photonView.TransferOwnership(-1);
-        //}
         //instance.AddForce(instance.transform.forward * forceAmount, forceMode);
     }
 
