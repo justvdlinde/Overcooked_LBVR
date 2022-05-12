@@ -24,6 +24,7 @@ namespace PhysicsCharacter
 
 		[SerializeField] protected ClippingCheckerOnSpawn clipChecker = null;
 		[SerializeField] protected PhotonView photonView = null;
+		[SerializeField] protected PhotonView rootPhotonView = null;
 
 		private Vector3 targetPos = Vector3.zero;
 
@@ -235,6 +236,9 @@ namespace PhysicsCharacter
 
 				PhysicsPlayerBlackboard.Instance.DropItem(hand);
 			}
+
+			photonView.TransferOwnership(-1);
+			rootPhotonView.TransferOwnership(-1);
 		}
 
 		public bool IsBeingHeld()
@@ -291,6 +295,7 @@ namespace PhysicsCharacter
 			//ForcePosition();
 
 			photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
+			rootPhotonView.TransferOwnership(PhotonNetwork.LocalPlayer);
 			photonView.RPC(nameof(GrabbedRPC), RpcTarget.Others);
 		}
 

@@ -230,6 +230,7 @@ MonoBehaviour:
   maxAngularVelocity: 35
   clipChecker: {fileID: 0}
   photonView: {fileID: 3942682222910123200}
+  rootPhotonView: {fileID: 3942682222910123200}
   forcePosition: 1
 --- !u!114 &3942682222910123200
 MonoBehaviour:

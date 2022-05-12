@@ -83,6 +83,7 @@ MonoBehaviour:
   needsToBeCooked: 0
   cookController: {fileID: 0}
   snapController: {fileID: 0}
+  chopController: {fileID: 0}
   grabController: {fileID: 3304535414630095785}
 --- !u!54 &8729201025394254469
 Rigidbody:
@@ -201,6 +202,10 @@ PrefabInstance:
       propertyPath: rigidBody
       value: 
       objectReference: {fileID: 8729201025394254469}
+    - target: {fileID: 8767885131029623597, guid: a2cced12afd3db24eabec35c0b42ce23, type: 3}
+      propertyPath: rootPhotonView
+      value: 
+      objectReference: {fileID: 5554103771995163421}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2cced12afd3db24eabec35c0b42ce23, type: 3}
 --- !u!4 &415704934877111496 stripped
