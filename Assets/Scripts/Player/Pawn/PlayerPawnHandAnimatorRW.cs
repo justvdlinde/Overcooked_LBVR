@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 {
+	private const float lerpSpeed = 10f;
+
 	[SerializeField] private PhotonView rootPhotonView = null;
 	[SerializeField] private Hand hand = Hand.None;
 
@@ -29,7 +31,7 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 		int increment = hand == Hand.Left ? PhotonIdentifiers.LeftHand : PhotonIdentifiers.RightHand;
 
 		string str = rootPhotonView.Owner.ActorNumber.ToString() + increment.ToString();
-		photonView.ViewID = int.Parse(str); ;
+		photonView.ViewID = int.Parse(str);
 		photonView.TransferOwnership(rootPhotonView.Owner);
 	}
 
@@ -47,7 +49,7 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 			float currentPinky = pinkyAnimator.GetFloat(animatorString);
 			float currentThumb = thumbAnimator.GetFloat(animatorString);
 
-			float timeMul = Time.deltaTime * 3.5f;
+			float timeMul = Time.deltaTime * lerpSpeed;
 
 			indexAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentIndex, index, timeMul));
 			middleAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentIndex, middle, timeMul));

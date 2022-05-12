@@ -42,7 +42,8 @@ public class GuiWorldSpacePanel : MonoBehaviour
 
     public void AddLog(string text)
     {
-        logs.Add(text);
+        if (gameObject.activeInHierarchy)
+            logs.Add(text);
     }
 
     private void ClearLogs()
