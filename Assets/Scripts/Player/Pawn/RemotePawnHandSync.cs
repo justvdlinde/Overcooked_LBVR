@@ -100,6 +100,7 @@ public class RemotePawnHandSync : MonoBehaviour
 		float pinky = pinkyAnimator.GetFloat(animatorString);
 		float thumb = thumbAnimator.GetFloat(animatorString);
 
+
 		indexAnimator.SetFloat(animatorString, Mathf.MoveTowards(index, GetAnimValue(Fingers.Index), indexSpeed));
 		middleAnimator.SetFloat(animatorString, Mathf.MoveTowards(middle, GetAnimValue(Fingers.Middle), middleSpeed));
 		ringAnimator.SetFloat(animatorString, Mathf.MoveTowards(ring, GetAnimValue(Fingers.Ring), ringSpeed));
