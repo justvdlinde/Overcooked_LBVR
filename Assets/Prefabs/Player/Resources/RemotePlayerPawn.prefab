@@ -582,23 +582,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 742712703636653323, guid: c4ea7f05e0e2cfe4597ce80bb9f97837, type: 3}
   m_PrefabInstance: {fileID: 7766882186165556939}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4675509581841917200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2458321300378457828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3deba7e7aee16bf4fa4ff249c5247031, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  indexAnimator: {fileID: 8655754972434337883}
-  middleAnimator: {fileID: 2505769296778828239}
-  ringAnimator: {fileID: 3770490727989436494}
-  pinkyAnimator: {fileID: 459204475502679660}
-  thumbAnimator: {fileID: 3903809201515278290}
 --- !u!114 &1980638010932289950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,23 +604,25 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6879557635618102240
+--- !u!114 &4675509581841917200
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7027629132382720960}
+  m_GameObject: {fileID: 2458321300378457828}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3deba7e7aee16bf4fa4ff249c5247031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indexAnimator: {fileID: 3615310678484549476}
-  middleAnimator: {fileID: 3523464894359030387}
-  ringAnimator: {fileID: 7525983208265270155}
-  pinkyAnimator: {fileID: 6223489580565396617}
-  thumbAnimator: {fileID: 5008373157281757463}
+  rootPhotonView: {fileID: 526050103001317106}
+  hand: 0
+  indexAnimator: {fileID: 8655754972434337883}
+  middleAnimator: {fileID: 2505769296778828239}
+  ringAnimator: {fileID: 3770490727989436494}
+  pinkyAnimator: {fileID: 459204475502679660}
+  thumbAnimator: {fileID: 3903809201515278290}
 --- !u!114 &6213811438971789428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,3 +645,22 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &6879557635618102240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7027629132382720960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3deba7e7aee16bf4fa4ff249c5247031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rootPhotonView: {fileID: 526050103001317106}
+  hand: 1
+  indexAnimator: {fileID: 3615310678484549476}
+  middleAnimator: {fileID: 3523464894359030387}
+  ringAnimator: {fileID: 7525983208265270155}
+  pinkyAnimator: {fileID: 6223489580565396617}
+  thumbAnimator: {fileID: 5008373157281757463}

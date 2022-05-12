@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 {
+	[SerializeField] private PhotonView rootPhotonView = null;
+	[SerializeField] private Hand hand = Hand.None;
+
 	[SerializeField] private Animator indexAnimator = null;
 	[SerializeField] private Animator middleAnimator = null;
 	[SerializeField] private Animator ringAnimator = null;
@@ -19,8 +22,18 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 	private float thumb = 0;
 
 	private const string animatorString = "FingerFloat";
-	// Update is called once per frame
-	void Update()
+
+    private void Start()
+    {
+		// Because local and remote prefabs are different, the view IDs need to be setup manually:
+		int increment = hand == Hand.Left ? PhotonIdentifiers.LeftHand : PhotonIdentifiers.RightHand;
+
+		string str = rootPhotonView.Owner.ActorNumber.ToString() + increment.ToString();
+		photonView.ViewID = int.Parse(str); ;
+		photonView.TransferOwnership(rootPhotonView.Owner);
+	}
+
+    private void Update()
 	{
 		if(photonView.IsMine)
 		{

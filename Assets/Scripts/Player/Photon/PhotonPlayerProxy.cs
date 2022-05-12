@@ -7,6 +7,11 @@ using Photon.Realtime;
 /// </summary>
 public class PhotonPlayerProxy : MonoBehaviourPun, IPunInstantiateMagicCallback
 {
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     public void OnPhotonInstantiate(PhotonMessageInfo info)
     {
         if (!info.Sender.IsLocal)
