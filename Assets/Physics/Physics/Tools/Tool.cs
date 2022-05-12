@@ -257,12 +257,36 @@ namespace PhysicsCharacter
 			return false;
 		}
 
+		public bool invertParent = false;
+		public bool allowInversion = true;
+
 		protected virtual void OnGrabbedCallback(Hand hand, ToolHandle toolHandle)
 		{
 			if(heldHandles < 0)
 				heldHandles = 0;
 			heldHandles++;
 			rigidBody.useGravity = false;
+
+			
+			if(allowInversion && heldHandles == 1)
+			{
+				Transform targetTransform = (invertParent) ? transform.parent : transform;
+				Vector3 handUp = PhysicsPlayerBlackboard.Instance.GetFollowTarget(hand).up;
+				float dot = Vector3.Dot(toolHandle.transform.up * targetTransform.localScale.y, handUp);
+
+				if (dot < 0 && targetTransform.localScale.y >= 0)
+				{
+					Vector3 localScale = targetTransform.localScale;
+					localScale.y *= -1;
+					targetTransform.localScale = localScale;
+				}
+				else if(dot >= 0 && targetTransform.localScale.y < 0)
+				{
+					Vector3 localScale = targetTransform.localScale;
+					localScale.y *= -1;
+					targetTransform.localScale = localScale;
+				}
+			}
 
 			//ForcePosition();
 
@@ -336,7 +360,6 @@ namespace PhysicsCharacter
 				rigidBody.angularVelocity = Vector3.MoveTowards(rigidBody.angularVelocity, newAngularVelocity, maxChange);
 			}
 		}
-
 
 		protected Vector3 FindNewAngularVelocity()
 		{

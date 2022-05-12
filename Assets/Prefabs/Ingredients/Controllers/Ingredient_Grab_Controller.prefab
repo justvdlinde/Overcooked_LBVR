@@ -80,6 +80,8 @@ MonoBehaviour:
   clipChecker: {fileID: 0}
   photonView: {fileID: 7921332959912920898}
   forcePosition: 1
+  invertParent: 0
+  allowInversion: 0
 --- !u!114 &7921332959912920898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,7 +373,7 @@ MonoBehaviour:
     localPosition: {x: 0, y: 0, z: 0}
     localRotation: {x: 0, y: 0, z: 0, w: 0}
   reEnableDistance: 0.6
-  handlePriority: 6
+  handlePriority: 4
   handlePose:
     indexPose: 2
     indexPoseValue: 0.3

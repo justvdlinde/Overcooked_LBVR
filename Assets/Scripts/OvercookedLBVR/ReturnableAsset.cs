@@ -20,6 +20,13 @@ public class ReturnableAsset : MonoBehaviour
 			rb.angularVelocity = Vector3.zero;
 		}
 
+		if(transform.localScale.y < 0)
+		{
+			Vector3 localScale = transform.localScale;
+			localScale.y *= -1;
+			transform.localScale = localScale;
+		}
+
 		transform.position = returnDispenser.GetReturnPos();
 		transform.rotation = returnDispenser.GetReturnRot();
 	}

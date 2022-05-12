@@ -154,16 +154,17 @@ namespace PhysicsCharacter
 
 				heldHand = hand;
 
-				parentObject = target;
-				transform.parent = target;
-				transform.localPosition = Vector3.zero;
-				transform.localRotation = Quaternion.identity;
-
 				PhysicsPlayerBlackboard.Instance.SetToolAndHandCollisions(Hand.Right, true);
 
 				SetHandData(hand, target);
 
 				OnGrabbedCall?.Invoke(hand, this);
+
+				parentObject = target;
+				transform.parent = target;
+				transform.localPosition = Vector3.zero;
+				transform.localRotation = Quaternion.identity;
+
 			}
 			else if(allowLeftGrip && hand == Hand.Left && !isHeldLeftHand)
 			{
@@ -182,16 +183,17 @@ namespace PhysicsCharacter
 
 				heldHand = hand;
 
-				parentObject = target;
-				transform.parent = target;
-				transform.localPosition = Vector3.zero;
-				transform.localRotation = Quaternion.identity;
-
 				PhysicsPlayerBlackboard.Instance.SetToolAndHandCollisions(Hand.Left, true);
 
 				SetHandData(hand, target);
 
 				OnGrabbedCall?.Invoke(hand, this);
+				
+				parentObject = target;
+				transform.parent = target;
+				transform.localPosition = Vector3.zero;
+				transform.localRotation = Quaternion.identity;
+
 			}
 
 			return this;
