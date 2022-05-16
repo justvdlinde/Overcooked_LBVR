@@ -243,6 +243,7 @@ MonoBehaviour:
   preferredToolHand: 1
   otherToolHandle: {fileID: 7628820565282496829}
   isGrabbedByRemote: 0
+  parentTool: {fileID: 0}
 --- !u!1 &5853532453732691667
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,6 +347,8 @@ MonoBehaviour:
   photonView: {fileID: -2127286866967161279}
   rootPhotonView: {fileID: -2127286866967161279}
   forcePosition: 1
+  invertParent: 0
+  allowInversion: 1
 --- !u!114 &5353464206537866258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,7 +689,7 @@ MonoBehaviour:
     localPosition: {x: 0, y: 0, z: 0}
     localRotation: {x: 0, y: 0, z: 0, w: 0}
   reEnableDistance: 0.6
-  handlePriority: 4
+  handlePriority: 6
   handlePose:
     indexPose: 2
     indexPoseValue: 0.3
@@ -702,6 +705,7 @@ MonoBehaviour:
   preferredToolHand: 0
   otherToolHandle: {fileID: 5853532452858087711}
   isGrabbedByRemote: 0
+  parentTool: {fileID: 0}
 --- !u!1 &7628820566310143154
 GameObject:
   m_ObjectHideFlags: 0

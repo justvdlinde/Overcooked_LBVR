@@ -36,7 +36,7 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 	private Vector3 originalLocalScale;
 
 	public bool isRemoteClient = false;
-	private Transform followTarget = null;
+	private Vector3 followTarget;
 
 	private void Awake()
 	{
@@ -82,13 +82,36 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 		if (!isRemoteClient)
 			return;
 
+		ToolHandle t = tool.GetTargToolhandle(hand);
+
 		handGraphics.transform.parent = tool.transform;
-		followTarget = tool.GetFollowPosAndRot(hand);
-		Quaternion rot = tool.GetFollowQuat(hand);
-		handGraphics.transform.position = followTarget.transform.position;
-		handGraphics.transform.position -= pickupPivot.localPosition;
-		// add some form of offset from handle
-		handGraphics.transform.forward = pickupPivot.forward;
+		handGraphics.transform.localPosition = Vector3.zero;
+		handGraphics.transform.localRotation = Quaternion.identity;
+
+		// get offset from somewhere
+		Vector3 offset = new Vector3((hand == Hand.Left) ? -0.024f : 0.024f, -0.002f, -0.13f);
+		if (t.UseHandleHandedness)
+			offset = Vector3.zero;
+
+		handGraphics.transform.position = t.localTransformMirror.GetWorldPosition();
+		handGraphics.transform.localPosition += offset;
+		//float o = (t.OtherToolHandle == null) ? 0.0f : 180f;
+		float zOffset = (hand == Hand.Left) ? 90f : -90f;
+		handGraphics.rotation = t.localTransformMirror.GetWorldRotation() * Quaternion.Euler(new Vector3(0,0,zOffset));
+
+		if(t.UseHandleHandedness)
+		{
+			Vector3 diffToHandle = pickupPivot.position - t.transform.position;
+			handGraphics.transform.localPosition -= diffToHandle;
+		}
+
+		//followTarget = tool.GetFollowPos(hand);
+		//Quaternion rot = tool.GetFollowQuat(hand);
+		//handGraphics.transform.position = followTarget;
+		//// handGraphics.transform.position -= pickupPivot.localPosition;
+		//// add some form of offset from handle
+		//handGraphics.localRotation = Quaternion.identity;
+		//handGraphics.transform.forward = pickupPivot.forward;
 		//handGraphics.transform.rotation = followTarget.transform.rotation * tool.GetFollowQuat(hand);// followTarget.transform.rotation;// * rot;
 
 	}
@@ -110,7 +133,7 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 			return;
 
 		handGraphics.transform.parent = transform;
-		followTarget = null;
+		followTarget = transform.position;
 		handGraphics.localPosition = originalLocalPos;
 		handGraphics.localRotation = originalLocalRot;
 		handGraphics.localScale = originalLocalScale;
@@ -133,10 +156,10 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 			float timeMul = Time.deltaTime * lerpSpeed;
 
 			indexAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentIndex, index, timeMul));
-			middleAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentIndex, middle, timeMul));
-			ringAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentIndex, middle, timeMul));
-			pinkyAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentIndex, middle, timeMul));
-			thumbAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentIndex, thumb, timeMul));
+			middleAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentMiddle, middle, timeMul));
+			ringAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentMiddle, middle, timeMul));
+			pinkyAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentMiddle, middle, timeMul));
+			thumbAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentThumb, thumb, timeMul));
 		}
 	}
 

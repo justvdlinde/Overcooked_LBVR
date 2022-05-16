@@ -33,21 +33,44 @@ namespace PhysicsCharacter
 		private float maxGripDistance = 2.0f;
 		public bool forcePosition = true;
 
-		public Transform GetFollowPosAndRot(Hand hand)
+		public Vector3 GetFollowPos(Hand hand)
 		{
 			foreach (ToolHandle t in toolHandles)
 			{
 				if (hand == Hand.Right && t.allowRightGrip && !t.UseHandleHandedness)
-					return t.transform;
+					return t.localTransformMirror.GetWorldPosition();
 
 				if (hand == Hand.Left && t.allowLeftGrip && !t.UseHandleHandedness)
-					return t.transform;
+					return t.localTransformMirror.GetWorldPosition();
+
 
 				if (hand == t.preferredToolHand)
-					return t.transform;
+					return t.localTransformMirror.GetWorldPosition();
+
 			}
 
-			return toolHandles[0].transform;
+			return toolHandles[0].localTransformMirror.GetWorldPosition();
+			;
+		}
+
+		public ToolHandle GetTargToolhandle(Hand hand)
+		{
+			foreach (ToolHandle t in toolHandles)
+			{
+				if (hand == Hand.Right && t.allowRightGrip && !t.UseHandleHandedness)
+					return t;
+
+				if (hand == Hand.Left && t.allowLeftGrip && !t.UseHandleHandedness)
+					return t;
+
+
+				if (hand == t.preferredToolHand)
+					return t;
+
+			}
+
+			return toolHandles[0];
+			;
 		}
 
 		public Quaternion GetFollowQuat(Hand hand)
