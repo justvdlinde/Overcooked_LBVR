@@ -1,10 +1,11 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
+public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable, IPunOwnershipCallbacks
 {
 	private const float lerpSpeed = 10f;
 
@@ -25,15 +26,16 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 
 	private const string animatorString = "FingerFloat";
 
-    private void Start()
-    {
-		// Because local and remote prefabs are different, the view IDs need to be setup manually:
-		int increment = hand == Hand.Left ? PhotonIdentifiers.LeftHand : PhotonIdentifiers.RightHand;
+ //   private void Start()
+ //   {
+	//	// Because local and remote prefabs are different, the view IDs need to be setup manually:
+	//	int increment = hand == Hand.Left ? PhotonIdentifiers.LeftHand : PhotonIdentifiers.RightHand;
 
-		string str = rootPhotonView.Owner.ActorNumber.ToString() + increment.ToString();
-		photonView.ViewID = int.Parse(str);
-		photonView.TransferOwnership(rootPhotonView.Owner);
-	}
+	//	Debug.Log("local: " + rootPhotonView.Owner.IsLocal + " Owner.ActorNumber: " + rootPhotonView.Owner.ActorNumber);
+	//	string str = rootPhotonView.Owner.ActorNumber.ToString() + increment.ToString();
+	//	photonView.ViewID = int.Parse(str);
+	//	photonView.TransferOwnership(rootPhotonView.Owner);
+	//}
 
     private void Update()
 	{
@@ -92,4 +94,12 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 			thumb = (float)stream.ReceiveNext();
 		}
 	}
+
+    public void OnOwnershipRequest(PhotonView targetView, PhotonNetworkedPlayer requestingPlayer)
+    {
+    }
+
+    public void OnOwnershipTransfered(PhotonView targetView, PhotonNetworkedPlayer previousOwner)
+    {
+    }
 }
