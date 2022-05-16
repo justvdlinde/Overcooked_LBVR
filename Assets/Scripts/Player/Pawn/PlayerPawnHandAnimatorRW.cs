@@ -68,7 +68,7 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 
 	private void OnPickupEvent(Hand hand, Tool tool)
 	{
-		Debug.Log($"picked up photonview ID {tool.RootPhotonView.ViewID} with {hand.ToString()} hand");
+		//Debug.Log($"picked up photonview ID {tool.RootPhotonView.ViewID} with {hand.ToString()} hand");
 		photonView.RPC(nameof(OnPickupEventRPC), RpcTarget.Others, tool.RootPhotonView.ViewID);
 
 	}
@@ -77,7 +77,7 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 	public void OnPickupEventRPC(int viewID)
 	{
 		Tool tool = PhotonView.Find(viewID).GetComponentInChildren<Tool>();
-		Debug.Log($"photonView ID {photonView.ViewID} grabbed tool with ID {viewID}");
+		//Debug.Log($"photonView ID {photonView.ViewID} grabbed tool with ID {viewID}");
 
 		if (!isRemoteClient)
 			return;
@@ -95,7 +95,6 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 
 		handGraphics.transform.position = t.localTransformMirror.GetWorldPosition();
 		handGraphics.transform.localPosition += offset;
-		//float o = (t.OtherToolHandle == null) ? 0.0f : 180f;
 		float zOffset = (hand == Hand.Left) ? 90f : -90f;
 		handGraphics.rotation = t.localTransformMirror.GetWorldRotation() * Quaternion.Euler(new Vector3(0,0,zOffset));
 
@@ -104,16 +103,6 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 			Vector3 diffToHandle = pickupPivot.position - t.transform.position;
 			handGraphics.transform.localPosition -= diffToHandle;
 		}
-
-		//followTarget = tool.GetFollowPos(hand);
-		//Quaternion rot = tool.GetFollowQuat(hand);
-		//handGraphics.transform.position = followTarget;
-		//// handGraphics.transform.position -= pickupPivot.localPosition;
-		//// add some form of offset from handle
-		//handGraphics.localRotation = Quaternion.identity;
-		//handGraphics.transform.forward = pickupPivot.forward;
-		//handGraphics.transform.rotation = followTarget.transform.rotation * tool.GetFollowQuat(hand);// followTarget.transform.rotation;// * rot;
-
 	}
 
 
