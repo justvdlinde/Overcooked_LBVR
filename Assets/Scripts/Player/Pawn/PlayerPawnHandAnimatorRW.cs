@@ -116,16 +116,6 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 		handGraphics.localScale = originalLocalScale;
 	}
 
-	private void Start()
-    {
-		// Because local and remote prefabs are different, the view IDs need to be setup manually:
-		int increment = hand == Hand.Left ? PhotonIdentifiers.LeftHand : PhotonIdentifiers.RightHand;
-
-		string str = rootPhotonView.Owner.ActorNumber.ToString() + increment.ToString();
-		photonView.ViewID = int.Parse(str);
-		photonView.TransferOwnership(rootPhotonView.Owner);
-	}
-
     private void Update()
 	{
 		if(photonView.IsMine)
