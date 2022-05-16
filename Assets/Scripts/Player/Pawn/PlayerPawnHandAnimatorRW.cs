@@ -47,7 +47,7 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 			originalLocalScale = handGraphics.localScale;
 		}
 	}
-
+	
 	private void OnEnable()
 	{
 		if(!isRemoteClient && pickupManager != null)
@@ -86,7 +86,7 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 		followTarget = tool.GetFollowPosAndRot(hand);
 		Quaternion rot = tool.GetFollowQuat(hand);
 		handGraphics.transform.position = followTarget.transform.position;
-		handGraphics.transform.position += pickupPivot.localPosition;
+		handGraphics.transform.position -= pickupPivot.localPosition;
 		// add some form of offset from handle
 		handGraphics.transform.forward = pickupPivot.forward;
 		//handGraphics.transform.rotation = followTarget.transform.rotation * tool.GetFollowQuat(hand);// followTarget.transform.rotation;// * rot;

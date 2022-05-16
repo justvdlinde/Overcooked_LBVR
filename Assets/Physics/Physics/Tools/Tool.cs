@@ -25,12 +25,35 @@ namespace PhysicsCharacter
 		[SerializeField] protected ClippingCheckerOnSpawn clipChecker = null;
 		[SerializeField] protected PhotonView photonView = null;
 		[SerializeField] protected PhotonView rootPhotonView = null;
+		public PhotonView RootPhotonView => rootPhotonView;
 
 		private Vector3 targetPos = Vector3.zero;
 
 		private Quaternion targetRot = Quaternion.identity;
 		private float maxGripDistance = 2.0f;
 		public bool forcePosition = true;
+
+		public Transform GetFollowPosAndRot(Hand hand)
+		{
+			foreach (ToolHandle t in toolHandles)
+			{
+				if (hand == Hand.Right && t.allowRightGrip && !t.UseHandleHandedness)
+					return t.transform;
+
+				if (hand == Hand.Left && t.allowLeftGrip && !t.UseHandleHandedness)
+					return t.transform;
+
+				if (hand == t.preferredToolHand)
+					return t.transform;
+			}
+
+			return toolHandles[0].transform;
+		}
+
+		public Quaternion GetFollowQuat(Hand hand)
+		{
+			return toolTransformDelegate.GetRotation();
+		}
 
 		public Hand GetHeldHand()
 		{
@@ -49,6 +72,7 @@ namespace PhysicsCharacter
 
 			foreach(ToolHandle toolHandle in toolHandles)
 			{
+				toolHandle.parentTool = this;
 				toolHandle.OnGrabbedCall += OnGrabbedCallback;
 				toolHandle.OnReleasedCall += OnReleasedCallback;
 			}
@@ -272,25 +296,25 @@ namespace PhysicsCharacter
 			rigidBody.useGravity = false;
 
 			
-			if(allowInversion && heldHandles == 1)
-			{
-				Transform targetTransform = (invertParent) ? transform.parent : transform;
-				Vector3 handUp = PhysicsPlayerBlackboard.Instance.GetFollowTarget(hand).up;
-				float dot = Vector3.Dot(toolHandle.transform.up * targetTransform.localScale.y, handUp);
+			//if(allowInversion && heldHandles == 1)
+			//{
+			//	Transform targetTransform = (invertParent) ? transform.parent : transform;
+			//	Vector3 handUp = PhysicsPlayerBlackboard.Instance.GetFollowTarget(hand).up;
+			//	float dot = Vector3.Dot(toolHandle.transform.up * targetTransform.localScale.y, handUp);
 
-				if (dot < 0 && targetTransform.localScale.y >= 0)
-				{
-					Vector3 localScale = targetTransform.localScale;
-					localScale.y *= -1;
-					targetTransform.localScale = localScale;
-				}
-				else if(dot >= 0 && targetTransform.localScale.y < 0)
-				{
-					Vector3 localScale = targetTransform.localScale;
-					localScale.y *= -1;
-					targetTransform.localScale = localScale;
-				}
-			}
+			//	if (dot < 0 && targetTransform.localScale.y >= 0)
+			//	{
+			//		Vector3 localScale = targetTransform.localScale;
+			//		localScale.y *= -1;
+			//		targetTransform.localScale = localScale;
+			//	}
+			//	else if(dot >= 0 && targetTransform.localScale.y < 0)
+			//	{
+			//		Vector3 localScale = targetTransform.localScale;
+			//		localScale.y *= -1;
+			//		targetTransform.localScale = localScale;
+			//	}
+			//}
 
 			//ForcePosition();
 

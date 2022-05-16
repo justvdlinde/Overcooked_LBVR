@@ -37,6 +37,7 @@ namespace PhysicsCharacter
 
 		[Header("Handed Tool Handle Settings")]
 		[SerializeField] private bool useHandleHandedness = false;
+		public bool UseHandleHandedness => useHandleHandedness;
 		[SerializeField] public Hand preferredToolHand = Hand.None;
 		[SerializeField] private ToolHandle otherToolHandle = null;
 		public ToolHandle OtherToolHandle => otherToolHandle;
@@ -48,6 +49,8 @@ namespace PhysicsCharacter
 		public bool releasedRightHand { get; private set; } = false;
 
 		public bool isGrabbedByRemote;
+
+		public Tool parentTool = null;
 
 		private void Awake()
 		{

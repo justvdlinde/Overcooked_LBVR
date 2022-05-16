@@ -942,6 +942,10 @@ PrefabInstance:
       propertyPath: onPress.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2408577532040741938, guid: aa8f503564cef824da9c1775f2b87a8b, type: 3}
+      propertyPath: rootPhotonView
+      value: 
+      objectReference: {fileID: 6323799357735374229}
     - target: {fileID: 4851526776236638524, guid: aa8f503564cef824da9c1775f2b87a8b, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.333

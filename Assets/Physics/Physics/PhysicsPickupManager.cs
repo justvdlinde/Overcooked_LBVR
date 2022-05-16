@@ -33,6 +33,9 @@ namespace PhysicsCharacter
 
 		[SerializeField] private LayerMask pickupablesMask = 0;
 
+		public System.Action<Hand, Tool> OnPickupEvent;
+		public System.Action<Hand, Tool> OnDropEvent;
+
 		private void Start()
 		{
 			handDelegate = HandsDataDelegate.GetHandedInstance(hand);
@@ -129,8 +132,7 @@ namespace PhysicsCharacter
 
 				if(closestObject != null && IsHandGripping() && !isGrippingPrevious)
 				{
-					currentPickupable = closestObject;
-					currentPickupable = currentPickupable.GetGrabbed(hand, gripAnchor);
+					DoPickupObject(closestObject);
 				}
 			}
 
@@ -138,13 +140,11 @@ namespace PhysicsCharacter
 			{
 				if (!IsHandGripping())
 				{
-					currentPickupable.GetReleased(hand);
-					currentPickupable = null;
+					DoDropObject();
 				}
 				else if (!handDelegate.IsHandInRange())
 				{
-					currentPickupable.GetReleased(hand);
-					currentPickupable = null;
+					DoDropObject();
 				}
 			}
 
@@ -155,6 +155,37 @@ namespace PhysicsCharacter
 
 			isGrippingPrevious = handGripping;
 		}
+
+		
+
+		private void DoPickupObject(PickupableObject closestObject)
+		{
+
+			currentPickupable = closestObject;
+			currentPickupable = currentPickupable.GetGrabbed(hand, gripAnchor);
+			// only invoke if a tool is picked up
+			if(currentPickupable is ToolHandle)
+			{
+				ToolHandle handle = currentPickupable as ToolHandle;
+
+				OnPickupEvent?.Invoke(hand, handle.parentTool);
+			}
+		}
+
+		private void DoDropObject()
+		{
+			// only invoke if a tool is picked up
+			if (currentPickupable is ToolHandle)
+			{
+				ToolHandle handle = currentPickupable as ToolHandle;
+
+				OnDropEvent?.Invoke(hand, handle.parentTool);
+			}
+
+			currentPickupable.GetReleased(hand);
+			currentPickupable = null;
+		}
+
 
 		public void OnGripEnter(Collider col)
 		{

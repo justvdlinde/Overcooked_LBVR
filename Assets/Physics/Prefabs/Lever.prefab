@@ -77,6 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowRightGrip: 1
   allowLeftGrip: 1
+  HandleIsCloseToToolPos: 0
   throwDistance: 0.25
   localTransformMirror:
     parent: {fileID: 0}
@@ -102,6 +103,7 @@ MonoBehaviour:
   preferredToolHand: 0
   otherToolHandle: {fileID: 7087498177177867226}
   isGrabbedByRemote: 0
+  parentTool: {fileID: 0}
 --- !u!1 &4851526776574458199
 GameObject:
   m_ObjectHideFlags: 0
@@ -252,7 +254,7 @@ MonoBehaviour:
   onRelease:
     m_PersistentCalls:
       m_Calls: []
-  toolHandle: {fileID: 0}
+  toolHandle: {fileID: 2408577532040741938}
   leverTransform: {fileID: 7087498175095550994}
   leverReactionSpots: 0.1
   offset: 0
@@ -640,6 +642,7 @@ MonoBehaviour:
   - {fileID: 7087498177177867226}
   - {fileID: 4851526776236638499}
   toolTransformDelegate: {fileID: 8901938139849024917}
+  dummyToolHandle: {fileID: 4851526778069219682}
   rigidBody: {fileID: 7087498175095550992}
   slowDownVelocity: 0.75
   slowDownRotation: 0.75
@@ -647,8 +650,11 @@ MonoBehaviour:
   maxRotationChange: 0
   maxAngularVelocity: 7
   clipChecker: {fileID: 0}
-  photonView: {fileID: 0}
+  photonView: {fileID: 8840343590606275858}
+  rootPhotonView: {fileID: 8840343590606275858}
   forcePosition: 0
+  invertParent: 0
+  allowInversion: 0
 --- !u!114 &8840343590606275858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,6 +754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allowRightGrip: 1
   allowLeftGrip: 1
+  HandleIsCloseToToolPos: 0
   throwDistance: 0.25
   localTransformMirror:
     parent: {fileID: 0}
@@ -773,3 +780,4 @@ MonoBehaviour:
   preferredToolHand: 1
   otherToolHandle: {fileID: 4851526776236638499}
   isGrabbedByRemote: 0
+  parentTool: {fileID: 0}
