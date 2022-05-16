@@ -136,21 +136,21 @@ namespace PhysicsCharacter
 
 		public override Vector3 GetAnchorPosition()
 		{
-			if(primaryToolHandlePriority == secondaryToolHandlePriority)
-				return GetAverageAnchorPosition();
-			else if(primaryToolHandle != null)
-				return primaryToolHandle.localTransformMirror.GetWorldPosition();
-			else
+			//if(primaryToolHandlePriority == secondaryToolHandlePriority)
+			//	return GetAverageAnchorPosition();
+			//else if(primaryToolHandle != null)
+			//	return primaryToolHandle.localTransformMirror.GetWorldPosition();
+			//else
 				return GetAverageAnchorPosition();
 		}
 
 		public override Vector3 GetPosition()
 		{
-			if(primaryToolHandlePriority == secondaryToolHandlePriority)
-				return GetAveragePosition();
-			else if(primaryToolHandle != null)
-				return primaryToolHandle.transform.position;
-			else
+			//if(primaryToolHandlePriority == secondaryToolHandlePriority)
+			//	return GetAveragePosition();
+			//else if(primaryToolHandle != null)
+			//	return primaryToolHandle.transform.position;
+			//else
 				return GetAveragePosition();
 		}
 
