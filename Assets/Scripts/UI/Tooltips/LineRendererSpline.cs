@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class LineRendererSpline : MonoBehaviour
 {
-    [SerializeField] private Tooltip tooltip;
+    [SerializeField] private TooltipManager tooltip;
 
     private float vertexCount = 12;
-    private float point2Height = .8f;
-    private float devideBy = 2.4f;
+    [SerializeField]private float point2Height = .8f;
+    [SerializeField]private float divideBy = 2.4f;
 
     void Update()
     {
-        tooltip.TT_Mid.transform.position = new Vector3((tooltip.TT_Mid.transform.position.x + tooltip.TT_End.transform.position.x) / devideBy, point2Height, (tooltip.TT_Start.transform.position.z + tooltip.TT_End.transform.position.z) / devideBy);
+        tooltip.TT_Mid.transform.position = new Vector3((tooltip.TT_Mid.transform.position.x + tooltip.TT_End.transform.position.x) / divideBy, point2Height, (tooltip.TT_Start.transform.position.z + tooltip.TT_End.transform.position.z) / divideBy);
         var pointList = new List<Vector3>();
 
         for (float ratio = 0; ratio <= 1; ratio += 1 / vertexCount)
