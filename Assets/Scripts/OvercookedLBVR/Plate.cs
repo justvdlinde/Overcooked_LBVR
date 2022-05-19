@@ -8,6 +8,8 @@ public class Plate : MonoBehaviour
 
     [SerializeField] private FoodStack foodStack = null;
 
+    
+
     public void OnDeliver()
     {
         // TODO: instantiate some kind of particle/feedback

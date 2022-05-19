@@ -8,6 +8,8 @@ public class FoodStackSnapPoint : MonoBehaviour
     public float colliderPadding = 0.1f;
     public float snapMargin = 0.8f;
 
+  
+
     private void OnValidate()
     {
         if (TryGetComponent(out Collider collider))
