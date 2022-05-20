@@ -107,7 +107,7 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LinearLimit:
-    limit: 0.015
+    limit: 0.15
     bounciness: 0
     contactDistance: 0
   m_AngularXLimitSpring:
@@ -715,6 +715,7 @@ MonoBehaviour:
   hoverMat: {fileID: 2100000, guid: d1a956acabe97da4fbd58e76b856f395, type: 2}
   useOwnMatswitch: 1
   audioSource: {fileID: 7905934757793493648}
+  dodebug: 0
 --- !u!1 &8017427160882248272
 GameObject:
   m_ObjectHideFlags: 0
