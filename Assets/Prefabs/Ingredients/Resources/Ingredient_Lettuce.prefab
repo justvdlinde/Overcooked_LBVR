@@ -490,6 +490,18 @@ PrefabInstance:
       propertyPath: snapController
       value: 
       objectReference: {fileID: 3243728929214684329}
+    - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: colliders.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: colliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 8685556545126606044}
+    - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: colliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 6986182520985628949}
     - target: {fileID: 415704936152818749, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 60

@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
@@ -25,6 +26,7 @@ public class Ingredient : MonoBehaviourPun
     [SerializeField] private IngredientChopController chopController = null;
     [Tooltip("Optional, only needed if object is grabbable")]
     [SerializeField] private PhysicsCharacter.Tool grabController = null;
+	[SerializeField] private List<Collider> colliders = null;
 
     public bool IsPreparedProperly()
     {
@@ -33,6 +35,17 @@ public class Ingredient : MonoBehaviourPun
             returnValue &= cookController.State == CookState.Cooked;
         return returnValue;
     }
+
+
+	public void SetCollisionsIgnored(Collider col, bool isIgnored)
+	{
+		if (colliders == null)
+			return;
+		foreach (var item in colliders)
+		{
+			Physics.IgnoreCollision(col, item, isIgnored);
+		}
+	}
 
     public void SetState(IngredientStatus status)
     {

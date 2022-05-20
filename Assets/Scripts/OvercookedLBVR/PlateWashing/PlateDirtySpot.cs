@@ -7,8 +7,9 @@ using Utils.Core.Attributes;
 public class PlateDirtySpot : MonoBehaviour
 {
 
-	float cleanTime = 1.0f;
-	float cleanProgress = 0.0f;
+	public float cleanTime = 1.0f;
+	public int cleanHits = 3;
+	private float cleanProgress = 0.0f;
 	public bool IsCleaned => cleanProgress >= cleanTime;
 
 	[SerializeField] private Transform graphics = null;
@@ -45,6 +46,25 @@ public class PlateDirtySpot : MonoBehaviour
 		{
 			cleanProgress += Time.deltaTime;
 			// emit some particles here to communicate function
+		}
+		else
+			cleanProgress = 1.0f;
+
+		float scaleTarget = Mathf.Lerp(1.0f, 0.1f, cleanProgress / cleanTime);
+		graphics.localScale = Vector3.one * scaleTarget;
+
+		if (cleanProgress >= cleanTime)
+			DoClean();
+	}
+
+	public void DoCleanSpotSponge()
+	{
+		if (IsCleaned)
+			return;
+
+		if (cleanProgress < cleanTime)
+		{
+			cleanProgress += cleanTime / (float)cleanHits;
 		}
 		else
 			cleanProgress = 1.0f;

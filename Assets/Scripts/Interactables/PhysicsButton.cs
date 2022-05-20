@@ -28,7 +28,6 @@ public class PhysicsButton : MonoBehaviour
 	private bool previousState = false;
 	private float lerpVal;
 
-
 	public Action PressEvent { get; set; }
 	public Action ReleaseEvent { get; set; }
 

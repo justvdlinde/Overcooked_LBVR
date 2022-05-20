@@ -998,6 +998,18 @@ PrefabInstance:
       propertyPath: needsToBeCooked
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: colliders.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: colliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 8766503095729636453}
+    - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: colliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 6548568541483746022}
     - target: {fileID: 415704934877111496, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.69172

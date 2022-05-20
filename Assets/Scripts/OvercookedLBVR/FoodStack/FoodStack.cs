@@ -22,8 +22,10 @@ public class FoodStack : MonoBehaviourPunCallbacks
     [SerializeField] private bool firstIngredientMustBeBunBottom = true;
     [SerializeField] private bool lastIngredientMustBeBunTop = true;
 
-    // Needs SerializeField for the inspector script to be useable
-    [SerializeField, HideInInspector] private List<Ingredient> ingredientsStack = new List<Ingredient>();
+	// Needs SerializeField for the inspector script to be useable
+	[SerializeField, HideInInspector] private List<Ingredient> ingredientsStack = new List<Ingredient>();
+
+	[SerializeField] private Collider plateCollider = null;
 
     private List<float> ingredientHeights = new List<float>();
     private float totalStackHeight;
@@ -94,6 +96,7 @@ public class FoodStack : MonoBehaviourPunCallbacks
         ingredientPhotonView.TransferOwnership(-1);
         photonView.RPC(nameof(AddIngredientToStackRPC), RpcTarget.Others, ingredientPhotonView.ViewID);
         AddIngredientToStackInternal(ingredient);
+		ingredient.SetCollisionsIgnored(plateCollider, true);
     }
 
 	[PunRPC]
@@ -101,9 +104,10 @@ public class FoodStack : MonoBehaviourPunCallbacks
     {
 		Ingredient ingredient = PhotonView.Find(viewID).GetComponent<Ingredient>();
         AddIngredientToStackInternal(ingredient);
-    }
+		ingredient.SetCollisionsIgnored(plateCollider, true);
+	}
 
-    private void AddIngredientToStackInternal(Ingredient ingredient)
+	private void AddIngredientToStackInternal(Ingredient ingredient)
     {
 		ingredientsStack.Add(ingredient);
         StackToTop(ingredient.SnapController);
@@ -144,6 +148,8 @@ public class FoodStack : MonoBehaviourPunCallbacks
         return ingredient.CanBeGrabbed();
     }
 
+	
+
     public Ingredient RemoveTopIngredient()
     {
         Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
@@ -159,7 +165,9 @@ public class FoodStack : MonoBehaviourPunCallbacks
         ingredient.SnapController.OnSnap(false);
         ingredient.transform.SetParent(null);
 
-        float removedIngredientHeight = ingredientHeights[ingredientHeights.Count - 1];
+		ingredient.SetCollisionsIgnored(plateCollider, false);
+
+		float removedIngredientHeight = ingredientHeights[ingredientHeights.Count - 1];
         ingredientHeights.RemoveAt(ingredientHeights.Count - 1);
 
         totalStackHeight -= removedIngredientHeight;

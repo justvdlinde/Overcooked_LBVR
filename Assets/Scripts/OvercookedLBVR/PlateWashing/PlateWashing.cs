@@ -24,6 +24,7 @@ public class PlateWashing : MonoBehaviour
 	public bool IsPlateClean { get => isPlateClean; set { isPlateClean = value; if (value == true) SetPlateClean(); else SetPlateDirty(); } }
     [SerializeField] private ParticleSystem isCleanedParticles;
 
+	public List<GameObject> toggleComponentsEnableOnClean = null;
 
     private void Start()
 	{
@@ -59,9 +60,15 @@ public class PlateWashing : MonoBehaviour
         currentPlateState = PlateState.Dirty;
         cleanGraphics.gameObject.SetActive(isPlateClean);
         dirtyGraphics.gameObject.SetActive(!isPlateClean);
-        // unstack all ingredients from the top
-        // disable other scripts other than washable and physics
-    }
+
+		foreach (var item in toggleComponentsEnableOnClean)
+		{
+			item.SetActive(false);
+		}
+
+		// unstack all ingredients from the top
+		// disable other scripts other than washable and physics
+	}
 
     [Button]
     public void SetPlateClean()
@@ -72,6 +79,11 @@ public class PlateWashing : MonoBehaviour
         isPlateClean = true;
         cleanGraphics.gameObject.SetActive(isPlateClean);
         dirtyGraphics.gameObject.SetActive(!isPlateClean);
+
+		foreach (var item in toggleComponentsEnableOnClean)
+		{
+			item.SetActive(true);
+		}
         // enable all plate functionality
         // flip plate asset
     }

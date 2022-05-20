@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class WaterDispenser : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField] private ParticleSystem particleSystem = null;
+	private List<ParticleCollisionEvent> collisionEvents = new List<ParticleCollisionEvent>();
+	private const float COLLISION_RADIUS = 0.05f;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+	private void OnParticleCollision(GameObject other)
+	{
+		int collisionCount = particleSystem.GetCollisionEvents(other, collisionEvents);
+
+		if (collisionCount > 0)
+		{
+			Collider[] colliders = Physics.OverlapSphere(collisionEvents[0].intersection, COLLISION_RADIUS);
+			foreach (Collider collider in colliders)
+			{
+				if (collider.TryGetComponent(out PlateDirtySpot recipient))
+				{
+					recipient.DoCleanSpot();
+				}
+			}
+		}
+	}
 }
