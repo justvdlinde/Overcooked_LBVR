@@ -26,7 +26,18 @@ public class Ingredient : MonoBehaviourPun
     [SerializeField] private IngredientChopController chopController = null;
     [Tooltip("Optional, only needed if object is grabbable")]
     [SerializeField] private PhysicsCharacter.Tool grabController = null;
-	[SerializeField] private List<Collider> colliders = null;
+    [Tooltip("Optional, only needed if object is status conditionable")]
+    [SerializeField] private IngredientStatusCondition statusConditionManager = null;
+
+    [SerializeField] private List<Collider> colliders = null;
+
+    public bool CanIngredientCook()
+	{
+        if (statusConditionManager == null)
+            return true;
+        else
+            return statusConditionManager.CanCook;
+	}
 
     public bool IsPreparedProperly()
     {
@@ -67,4 +78,16 @@ public class Ingredient : MonoBehaviourPun
     {
         return ingredientType.ToString() + "(" + status + (CookController != null ? "-" + CookController.State : string.Empty) + ")";
     }
+
+    public CookState GetCookState()
+	{
+        if (!needsToBeCooked)
+            return CookState.Raw;
+
+        if (cookController != null)
+            return cookController.State;
+        
+        // default
+        return CookState.Raw;
+	}
 }

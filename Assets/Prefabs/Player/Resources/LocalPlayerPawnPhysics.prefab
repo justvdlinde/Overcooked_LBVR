@@ -714,6 +714,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2435852509154693050, guid: 13aa16a09ea59cf4ab8f7c2d06f6fc69, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4368111165116032858, guid: 13aa16a09ea59cf4ab8f7c2d06f6fc69, type: 3}
       propertyPath: hand
       value: 1
@@ -734,6 +738,18 @@ PrefabInstance:
       propertyPath: pickupablesMask.m_Bits
       value: 33554496
       objectReference: {fileID: 0}
+    - target: {fileID: 5561138712899949057, guid: 13aa16a09ea59cf4ab8f7c2d06f6fc69, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7272689957229323888, guid: 13aa16a09ea59cf4ab8f7c2d06f6fc69, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839216585294432916, guid: 13aa16a09ea59cf4ab8f7c2d06f6fc69, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7891789334119320910, guid: 13aa16a09ea59cf4ab8f7c2d06f6fc69, type: 3}
       propertyPath: followTarget
       value: 
@@ -741,6 +757,10 @@ PrefabInstance:
     - target: {fileID: 7891789334119320910, guid: 13aa16a09ea59cf4ab8f7c2d06f6fc69, type: 3}
       propertyPath: physicsMask.m_Bits
       value: 1199570999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8489035455053040824, guid: 13aa16a09ea59cf4ab8f7c2d06f6fc69, type: 3}
+      propertyPath: m_Mass
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13aa16a09ea59cf4ab8f7c2d06f6fc69, type: 3}
@@ -778,6 +798,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5479955370879912504}
     m_Modifications:
+    - target: {fileID: 255314750923347042, guid: c91f1533831d0e24280dd444806bf5a1, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344847130935852714, guid: c91f1533831d0e24280dd444806bf5a1, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913588248148791886, guid: c91f1533831d0e24280dd444806bf5a1, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1999975620258305428, guid: c91f1533831d0e24280dd444806bf5a1, type: 3}
       propertyPath: followTarget
       value: 
@@ -785,6 +817,10 @@ PrefabInstance:
     - target: {fileID: 1999975620258305428, guid: c91f1533831d0e24280dd444806bf5a1, type: 3}
       propertyPath: physicsMask.m_Bits
       value: 654311479
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281007472036350683, guid: c91f1533831d0e24280dd444806bf5a1, type: 3}
+      propertyPath: m_Mass
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5214501037423329637, guid: c91f1533831d0e24280dd444806bf5a1, type: 3}
       propertyPath: otherPickupManager
@@ -894,6 +930,10 @@ PrefabInstance:
       propertyPath: rootPhotonView
       value: 
       objectReference: {fileID: 5816082050202137716}
+    - target: {fileID: 6307838144641161056, guid: c91f1533831d0e24280dd444806bf5a1, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7102462613473213993, guid: c91f1533831d0e24280dd444806bf5a1, type: 3}
       propertyPath: m_RootOrder
       value: 1

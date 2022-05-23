@@ -112,6 +112,9 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
 
     public void Cook(float add = 1)
     {
+        if (!ingredient.CanIngredientCook())
+            return;
+
         if (state != CookState.Burned)
         {
             if (state == CookState.Raw && CookProgress > rawToCookTime)
