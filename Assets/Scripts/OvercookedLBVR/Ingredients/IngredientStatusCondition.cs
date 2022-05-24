@@ -31,6 +31,8 @@ public class IngredientStatusCondition : MonoBehaviour
 	[field: SerializeField]
 	public bool IsOnFire { get; private set; }
 
+	public bool WasOnFire { get; private set; }
+
 	private const string ShaderRottenVar = "_RottenValue";
 	private const string ShaderFrozenVar = "_FrozenValue";
 	private const string ShaderWetVar = "_WetValue";
@@ -38,6 +40,7 @@ public class IngredientStatusCondition : MonoBehaviour
 
 	[SerializeField] private Ingredient connectedIngredient = null;
 	public bool CanCook => currentHeat >= 0f;
+	public bool CanChop => currentHeat >= -30f && !IsFrozen;
 
 	private float maxHeat = 100f;
 
@@ -47,81 +50,6 @@ public class IngredientStatusCondition : MonoBehaviour
 	private float wetValue = -30f;
 	private float frozenValue = -75f;
 	private float minHeat = -100f;
-
-	public float heatAmt = 10f;
-	public StatusConditionHeatSource heatsource = StatusConditionHeatSource.Heat;
-
-	[Button]
-	public void AddHeatDebug()
-	{
-		AddHeat(heatAmt, heatsource);
-	}
-
-	public void AddHeat(float heatStrength, StatusConditionHeatSource sourceType)
-	{
-		if (sourceType == StatusConditionHeatSource.Heat && IsOnFire)
-			return;
-		if (sourceType == StatusConditionHeatSource.Cold && IsFrozen)
-			return;
-		if (sourceType == StatusConditionHeatSource.Wet && IsWet)
-			return;
-
-		float maxHeatLocal = (connectedIngredient.NeedsToBeCooked && connectedIngredient.GetCookState() != CookState.Burned) ? 0.0f : maxHeat;
-		currentHeat += heatStrength;
-		currentHeat = Mathf.Clamp(currentHeat, minHeat, maxHeatLocal);
-
-
-		if (sourceType == StatusConditionHeatSource.Wet)
-		{
-			if (IsFrozen)
-				return;
-			currentHeat = -30f;
-			IsFrozen = false;
-			IsOnFire = false;
-			IsWet = true;
-			IsWetValue = 1f;
-			ToggleParticleSystems(true);
-		}
-		else
-		{
-			if(IsWet && currentHeat >= 0.0f)
-			{
-				IsFrozen = false;
-				IsWet = false;
-				IsOnFire = false;
-			}
-
-			if (IsFrozen && currentHeat >= 0.0f)
-			{
-				IsFrozen = false;
-				IsWet = false;
-				IsOnFire = false;
-			}
-
-			if (IsOnFire && currentHeat <= 0.0f)
-			{
-				IsFrozen = false;
-				IsWet = false;
-				IsOnFire = false;
-			}
-
-			if (currentHeat < frozenValue)
-			{
-				IsFrozen = true;
-				IsWet = false;
-				IsOnFire = false;
-			}
-			if (currentHeat > onFireValue)
-			{
-				IsFrozen = false;
-				IsWet = false;
-				IsOnFire = true;
-			}
-		}
-
-	}
-
-
 
 	public ParticleSystem IsRottenParticles = null;
 	public ParticleSystem IsWetParticles = null;
@@ -135,6 +63,35 @@ public class IngredientStatusCondition : MonoBehaviour
 	private float IsFrozenValue = 0;
 	private float IsOnFireValue = 0;
 
+	public void CopyValues(IngredientStatusCondition copyFrom)
+	{
+		if (copyFrom == null)
+			return;
+		copyFrom.SendValues(out IsRottenValue, out IsWetValue, out IsFrozenValue, out IsOnFireValue, out currentHeat, out bool isRotten, out bool isWet, out bool isFrozen, out bool isOnFire, out bool wasOnFire);
+		this.IsFrozen = isFrozen;
+		this.IsRotten = isRotten;
+		this.IsOnFire = isOnFire;
+		this.IsWet = isWet;
+		this.WasOnFire = wasOnFire;
+
+		ToggleParticleSystems(true);
+	}
+
+	public void SendValues(out float IsRottenValue, out float IsWetValue, out float IsFrozenValue, out float IsOnFireValue, out float currentHeat, out bool IsRotten, out bool IsWet, out bool IsFrozen, out bool IsOnFire, out bool WasOnFire)
+	{
+		IsRottenValue = this.IsRottenValue;
+		IsWetValue = this.IsWetValue;
+		IsFrozenValue = this.IsFrozenValue;
+		IsOnFireValue = this.IsOnFireValue;
+		IsRotten = this.IsRotten;
+		IsWet = this.IsWet;
+		IsFrozen = this.IsFrozen;
+		IsOnFire = this.IsOnFire;
+		WasOnFire = this.WasOnFire;
+		currentHeat = this.currentHeat;
+	}
+
+
 	private void Awake()
 	{
 		shadedMaterials = new List<Material>();
@@ -147,6 +104,7 @@ public class IngredientStatusCondition : MonoBehaviour
 
 	private void OnEnable()
 	{
+		WasOnFire = false;
 		if (shadedMaterials != null && shadedMaterials.Count > 0)
 		{
 			shadedMaterials = new List<Material>();
@@ -170,7 +128,7 @@ public class IngredientStatusCondition : MonoBehaviour
 		IsRottenValue = SetValue(IsRotten, IsRottenValue);
 		IsWetValue = SetValue(IsWet, IsWetValue);
 		IsFrozenValue = SetValue(IsFrozen, IsFrozenValue);
-		IsOnFireValue = SetValue(IsOnFire, IsOnFireValue);
+		IsOnFireValue = SetValue(IsOnFire || WasOnFire, IsOnFireValue);
 
 		if (shadedMaterials != null)
 		{
@@ -224,7 +182,7 @@ public class IngredientStatusCondition : MonoBehaviour
 					item.SetFloat(ShaderRottenVar, (IsRotten) ? 1 : 0);
 					item.SetFloat(ShaderWetVar, (IsWet) ? 1 : 0);
 					item.SetFloat(ShaderFrozenVar, (IsFrozen) ? 1 : 0);
-					item.SetFloat(ShaderOnFireVar, (IsOnFire) ? 1 : 0);
+					item.SetFloat(ShaderOnFireVar, (IsOnFire || WasOnFire) ? 1 : 0);
 				}
 			}
 		}
@@ -248,6 +206,7 @@ public class IngredientStatusCondition : MonoBehaviour
 				break;
 			case StatusCondition.OnFire:
 				IsOnFire = true;
+				WasOnFire = true;
 				IsOnFireValue = 1;
 				break;
 			default:
@@ -280,5 +239,76 @@ public class IngredientStatusCondition : MonoBehaviour
 				break;
 		}
 		ToggleParticleSystems(true);
+	}
+
+	public void AddHeat(float heatStrength, StatusConditionHeatSource sourceType)
+	{
+		if (IsOnFire && sourceType == StatusConditionHeatSource.Heat)
+			return;
+		if (WasOnFire && currentHeat >= 0.0 && sourceType == StatusConditionHeatSource.Heat)
+			return;
+		if (IsWet && sourceType == StatusConditionHeatSource.Wet)
+			return;
+		if (IsFrozen && sourceType == StatusConditionHeatSource.Cold)
+			return;
+
+		float maxHeatLocal = (connectedIngredient.NeedsToBeCooked && connectedIngredient.GetCookState() != CookState.Burned) ? 0.0f : maxHeat;
+		currentHeat += heatStrength;
+		currentHeat = Mathf.Clamp(currentHeat, minHeat, maxHeatLocal);
+
+
+		if (sourceType == StatusConditionHeatSource.Wet)
+		{
+			if (IsFrozen)
+				return;
+			currentHeat = -30f;
+			IsFrozen = false;
+			IsOnFire = false;
+			IsWet = true;
+			IsWetValue = 1f;
+			ToggleParticleSystems(true);
+		}
+		else
+		{
+			if (IsWet && currentHeat >= 0.0f)
+			{
+				IsFrozen = false;
+				IsWet = false;
+				IsOnFire = false;
+			}
+
+			if (IsFrozen && currentHeat >= 0.0f)
+			{
+				IsFrozen = false;
+				IsWet = false;
+				IsOnFire = false;
+			}
+
+			if (IsOnFire && currentHeat <= 0.0f)
+			{
+				IsFrozen = false;
+				IsWet = false;
+				IsOnFire = false;
+			}
+
+			if (currentHeat < frozenValue)
+			{
+				IsFrozen = true;
+				IsWet = false;
+				IsOnFire = false;
+			}
+			if (currentHeat > onFireValue)
+			{
+				IsFrozen = false;
+				IsWet = false;
+				IsOnFire = true;
+				WasOnFire = true;
+			}
+		}
+	}
+
+	public float GetDisplayProgress()
+	{
+		return Mathf.InverseLerp(25, 175, currentHeat + 100f);
 	}
 }

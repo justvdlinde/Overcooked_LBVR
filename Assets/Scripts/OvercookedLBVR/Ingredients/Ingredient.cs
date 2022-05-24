@@ -28,7 +28,7 @@ public class Ingredient : MonoBehaviourPun
     [SerializeField] private PhysicsCharacter.Tool grabController = null;
     [Tooltip("Optional, only needed if object is status conditionable")]
     [SerializeField] private IngredientStatusCondition statusConditionManager = null;
-
+    public IngredientStatusCondition StatusConditionManager => statusConditionManager;
     [SerializeField] private List<Collider> colliders = null;
 
     public bool CanIngredientCook()

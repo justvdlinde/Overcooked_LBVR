@@ -21,7 +21,7 @@ public class HeatSource : MonoBehaviour
             statusCondition = other.GetComponentInParent<IngredientStatusCondition>();
         if (statusCondition != null)
 		{
-            statusCondition.AddHeat(heatStrength, IngredientStatusCondition.StatusConditionHeatSource.Heat);
+            statusCondition.AddHeat(Time.deltaTime * 30f, IngredientStatusCondition.StatusConditionHeatSource.Heat);
 		}
     }
 

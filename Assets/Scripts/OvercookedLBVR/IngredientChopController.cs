@@ -88,8 +88,9 @@ public class IngredientChopController : MonoBehaviourPun
 
 	public void Chop(int hit)
     {
-		if(photonView.IsMine)
-			photonView.RPC(nameof(ChopRPC), RpcTarget.All, hit);
+		if(ingredient.StatusConditionManager.CanChop)
+			if(photonView.IsMine)
+				photonView.RPC(nameof(ChopRPC), RpcTarget.All, hit);
 	}
 
 	[PunRPC]
@@ -136,7 +137,10 @@ public class IngredientChopController : MonoBehaviourPun
 				{
 					Transform point = processInstantiationData[i].transform;
 					GameObject prefab = processInstantiationData[i].prefab;
-					PhotonNetwork.Instantiate(prefab.name, point.position, Quaternion.identity);
+					GameObject instance = PhotonNetwork.Instantiate(prefab.name, point.position, Quaternion.identity);
+					IngredientStatusCondition ingredientComponent = instance.GetComponentInChildren<IngredientStatusCondition>();
+					if (ingredientComponent != null)
+						ingredientComponent.CopyValues(ingredient.StatusConditionManager);
 				}
 			}
 
