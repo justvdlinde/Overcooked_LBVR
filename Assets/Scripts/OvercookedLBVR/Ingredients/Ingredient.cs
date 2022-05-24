@@ -44,6 +44,10 @@ public class Ingredient : MonoBehaviourPun
         bool returnValue = State == IngredientStatus.Processed;
         if (needsToBeCooked)
             returnValue &= cookController.State == CookState.Cooked;
+
+        if (statusConditionManager != null)
+            return returnValue && statusConditionManager.IsIngredientPreparedProperly();
+
         return returnValue;
     }
 

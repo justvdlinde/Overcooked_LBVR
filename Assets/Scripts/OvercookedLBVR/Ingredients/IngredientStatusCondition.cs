@@ -133,6 +133,11 @@ public class IngredientStatusCondition : MonoBehaviour
 		countdownCanvas.transform.rotation = Quaternion.identity;
 	}
 
+	public bool IsIngredientPreparedProperly()
+	{
+		return !IsOnFire && !IsWet && !IsRotten && !IsFrozen && !WasOnFire;
+	}
+
 	private float SetValue(bool Condition, float Value)
 	{
 		float returnVal = Value;
