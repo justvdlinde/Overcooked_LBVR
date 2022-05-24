@@ -126,7 +126,7 @@ public abstract class GameFlow : MonoBehaviour
         if (Application.isPlaying)
         {
             string title = wasConnected ? "Lost connection" : "Failed to connect. ";
-            popupService.SpawnPopup().Setup(title, @event.Info.ErrorDescription, new InteractablePopup.ButtonData("Retry", () => ConnectToNetwork()));
+            popupService.SpawnPopup().Setup(title, @event.Info.ErrorDescription, new InteractablePopup.ButtonData("Retry", () => StartCoroutine(ConnectToNetwork())));
         }
         wasConnected = false;
     }

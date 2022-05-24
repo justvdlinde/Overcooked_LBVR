@@ -118,6 +118,7 @@ public class IngredientChopController : MonoBehaviourPun
 	[Button]
 	public void ProcessIngredient()
     {
+		ingredient.SetState(IngredientStatus.Processed);
 		photonView.RPC(nameof(ProcessIngredientRPC), RpcTarget.All);
     }
 
@@ -155,10 +156,13 @@ public class IngredientChopController : MonoBehaviourPun
 	
 	private void ToggleGraphicsToState()
     {
+		Debug.Log("ToggleGraphicsToState");
 		if (chopMethod == ChopMethod.ToggleGraphic)
 		{
+			Debug.Log(chopMethod);
 			if (processedGraphics != null && unProcessedGraphics != null)
 			{
+				Debug.Log("toggle visuals");
 				unProcessedGraphics.gameObject.SetActive(ingredient.State == IngredientStatus.UnProcessed);
 				processedGraphics.gameObject.SetActive(ingredient.State == IngredientStatus.Processed);
 			}
