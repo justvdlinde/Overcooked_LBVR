@@ -41,6 +41,9 @@ public class IngredientStatusCondition : MonoBehaviour
 	[SerializeField] private Ingredient connectedIngredient = null;
 	public bool CanCook => currentHeat >= 0f;
 	public bool CanChop => currentHeat >= -30f && !IsFrozen;
+	public bool CanPickUp => !IsOnFire;
+
+	private Coroutine CountdownCoroutine = null;
 
 	private float maxHeat = 100f;
 
@@ -63,34 +66,13 @@ public class IngredientStatusCondition : MonoBehaviour
 	private float IsFrozenValue = 0;
 	private float IsOnFireValue = 0;
 
-	public void CopyValues(IngredientStatusCondition copyFrom)
-	{
-		if (copyFrom == null)
-			return;
-		copyFrom.SendValues(out IsRottenValue, out IsWetValue, out IsFrozenValue, out IsOnFireValue, out currentHeat, out bool isRotten, out bool isWet, out bool isFrozen, out bool isOnFire, out bool wasOnFire);
-		this.IsFrozen = isFrozen;
-		this.IsRotten = isRotten;
-		this.IsOnFire = isOnFire;
-		this.IsWet = isWet;
-		this.WasOnFire = wasOnFire;
+	[SerializeField] private GameObject countdownCanvas = null;
+	[SerializeField] private TMPro.TextMeshProUGUI countdownText = null;
 
-		ToggleParticleSystems(true);
-	}
-
-	public void SendValues(out float IsRottenValue, out float IsWetValue, out float IsFrozenValue, out float IsOnFireValue, out float currentHeat, out bool IsRotten, out bool IsWet, out bool IsFrozen, out bool IsOnFire, out bool WasOnFire)
-	{
-		IsRottenValue = this.IsRottenValue;
-		IsWetValue = this.IsWetValue;
-		IsFrozenValue = this.IsFrozenValue;
-		IsOnFireValue = this.IsOnFireValue;
-		IsRotten = this.IsRotten;
-		IsWet = this.IsWet;
-		IsFrozen = this.IsFrozen;
-		IsOnFire = this.IsOnFire;
-		WasOnFire = this.WasOnFire;
-		currentHeat = this.currentHeat;
-	}
-
+	[SerializeField] private Color startColor = Color.white;
+	
+	[SerializeField] private Color endColor = Color.green;
+	[SerializeField] private float yOffset = 0.0f;
 
 	private void Awake()
 	{
@@ -100,6 +82,10 @@ public class IngredientStatusCondition : MonoBehaviour
 		{
 			shadedMaterials.Add(item.material);
 		}
+
+		yOffset = countdownCanvas.transform.localPosition.y;
+
+		countdownCanvas.SetActive(false);
 	}
 
 	private void OnEnable()
@@ -142,6 +128,9 @@ public class IngredientStatusCondition : MonoBehaviour
 		}
 
 		ToggleParticleSystems();
+
+		countdownCanvas.transform.position = connectedIngredient.transform.position + Vector3.up * yOffset;
+		countdownCanvas.transform.rotation = Quaternion.identity;
 	}
 
 	private float SetValue(bool Condition, float Value)
@@ -310,5 +299,75 @@ public class IngredientStatusCondition : MonoBehaviour
 	public float GetDisplayProgress()
 	{
 		return Mathf.InverseLerp(25, 175, currentHeat + 100f);
+	}
+
+	public void SetIsRotting(bool isRotting)
+	{
+		if(IsRotten)
+			return;
+
+		if (isRotting && !isFloorRotting)
+		{
+			StopAllCoroutines();
+			CountdownCoroutine = StartCoroutine(StartCountdown(5));
+		}
+		else if (!isRotting)
+		{
+			StopCoroutine(CountdownCoroutine);
+			countdownCanvas.SetActive(false);
+			isFloorRotting = false;
+		}
+	}
+
+	bool isFloorRotting = false;
+	private IEnumerator StartCountdown(int seconds)
+	{
+		isFloorRotting = true;
+		countdownCanvas.SetActive(true);
+		countdownText.text = 5.ToString();
+		countdownText.color = startColor;
+		int count = 0;
+		while(true)
+		{
+			yield return new WaitForSeconds(1);
+			count++;
+			countdownText.text = (5 - count).ToString();
+			countdownText.color = Color.Lerp(startColor, endColor, (float)count / (float)seconds);
+
+			if (count >= seconds)
+				break;
+		}
+		countdownCanvas.SetActive(false);
+
+		AddStatusCondition(StatusCondition.Rotten);
+		isFloorRotting = false;
+	}
+
+	public void CopyValues(IngredientStatusCondition copyFrom)
+	{
+		if (copyFrom == null)
+			return;
+		copyFrom.SendValues(out IsRottenValue, out IsWetValue, out IsFrozenValue, out IsOnFireValue, out currentHeat, out bool isRotten, out bool isWet, out bool isFrozen, out bool isOnFire, out bool wasOnFire);
+		this.IsFrozen = isFrozen;
+		this.IsRotten = isRotten;
+		this.IsOnFire = isOnFire;
+		this.IsWet = isWet;
+		this.WasOnFire = wasOnFire;
+
+		ToggleParticleSystems(true);
+	}
+
+	public void SendValues(out float IsRottenValue, out float IsWetValue, out float IsFrozenValue, out float IsOnFireValue, out float currentHeat, out bool IsRotten, out bool IsWet, out bool IsFrozen, out bool IsOnFire, out bool WasOnFire)
+	{
+		IsRottenValue = this.IsRottenValue;
+		IsWetValue = this.IsWetValue;
+		IsFrozenValue = this.IsFrozenValue;
+		IsOnFireValue = this.IsOnFireValue;
+		IsRotten = this.IsRotten;
+		IsWet = this.IsWet;
+		IsFrozen = this.IsFrozen;
+		IsOnFire = this.IsOnFire;
+		WasOnFire = this.WasOnFire;
+		currentHeat = this.currentHeat;
 	}
 }

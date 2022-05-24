@@ -71,6 +71,8 @@ public class Ingredient : MonoBehaviourPun
 
     public bool CanBeGrabbed()
     {
+        if (statusConditionManager != null)
+            return statusConditionManager.CanPickUp && grabController != null;
         return grabController != null;
     }
 

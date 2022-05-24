@@ -231,17 +231,33 @@ PrefabInstance:
       propertyPath: processInstantiationPrefabs.Array.data[1]
       value: 
       objectReference: {fileID: 3691675340356780062, guid: f38517a5997b2ca4488cb5669d3b1b3f, type: 3}
+    - target: {fileID: 397978141313947862, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 415704935684263701, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: m_Size.y
       value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 901645217182600325, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1698536654608434325, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: m_Name
       value: Ingredient_Bun_Whole
       objectReference: {fileID: 0}
+    - target: {fileID: 2999919432314221435, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4152286123382452166, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: viewIdField
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551335861602763872, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5554103771995163421, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: viewIdField
