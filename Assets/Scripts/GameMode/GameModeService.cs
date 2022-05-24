@@ -39,7 +39,7 @@ public class GameModeService : IService
         CurrentGameMode = gameMode;
         CurrentGameMode.Setup();
         if (CurrentGameMode.MatchPhase == MatchPhase.Undefined)
-            CurrentGameMode.PreGame();
+            CurrentGameMode.StartPreGame();
 
         globalEventDispatcher.Invoke(new GameModeChangedEvent(CurrentGameMode));
 
