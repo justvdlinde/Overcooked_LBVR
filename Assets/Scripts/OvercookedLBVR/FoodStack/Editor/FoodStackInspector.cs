@@ -78,18 +78,28 @@ public class FoodStackInspector : Editor
 
     private void DrawHelperButtons()
     {
+        bool guiWasEnabled = GUI.enabled;
+
         EditorGUILayout.BeginHorizontal();
         ingredientType = (IngredientType)EditorGUILayout.EnumPopup(ingredientType);
-        if (GUI.enabled)
-            GUI.enabled = ingredientType != IngredientType.None;
+        GUI.enabled = guiWasEnabled && ingredientType != IngredientType.None;
         if (GUILayout.Button("Add to stack"))
-            OnAddToStackButtonSelected();
+            AddIngredientToStack(ingredientType);
+        EditorGUILayout.EndHorizontal();
+
+        GUI.enabled = guiWasEnabled;
+        EditorGUILayout.BeginHorizontal();
+        if (GUILayout.Button("Add minimum burger requirements"))
+        {
+            AddIngredientToStack(IngredientType.BunBottom);
+            AddIngredientToStack(IngredientType.Patty);
+            AddIngredientToStack(IngredientType.BunTop);
+        }
         EditorGUILayout.EndHorizontal();
 
         EditorGUILayout.BeginHorizontal();
         destroyOnRemove = EditorGUILayout.Toggle("Destroy", destroyOnRemove);
-        if (GUI.enabled)
-            GUI.enabled = foodStack.IngredientsStack.Count > 0;
+        GUI.enabled = guiWasEnabled && foodStack.IngredientsStack.Count > 0;
         if (GUILayout.Button("Remove top ingredient"))
         {
             Ingredient ingredient = foodStack.RemoveTopIngredient();
@@ -101,7 +111,7 @@ public class FoodStackInspector : Editor
         GUI.enabled = true;
     }
 
-    private void OnAddToStackButtonSelected()
+    private void AddIngredientToStack(IngredientType ingredientType)
     {
         if (ingredientType == IngredientType.None)
             return;

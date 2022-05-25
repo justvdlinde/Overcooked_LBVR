@@ -226,13 +226,13 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
     public virtual void StartPreGame(bool replay = false)
     {
         SetPhase(MatchPhase.PreGame);
-        //if (PhotonNetwork.IsMasterClient)
-        //{
+        if (PhotonNetwork.IsMasterClient)
+        {
             PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.GAME_STATE, (int)MatchPhase);
             if (replay)
                 GameModeInitializedTimeStamp = DateTime.Now.ToString();
             PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.GAME_TIME_STAMP, GameModeInitializedTimeStamp.ToString());
-        //}
+        }
 
         if (replay)
         {
@@ -254,6 +254,18 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
   //      countdownTimer.Start(StartActiveGame);
   //  }
 
+    public virtual void AttemptToStartActiveGame()
+    {
+        photonView.RPC(nameof(AttemptToStartActiveGameRPC), RpcTarget.MasterClient);
+    }
+
+    [PunRPC]
+    protected virtual void AttemptToStartActiveGameRPC()
+    {
+        if (StartRequirementsAreMet())
+            StartActiveGame();
+    }
+
     public virtual void StartActiveGame()
     {
         if (MatchPhase == MatchPhase.Active)
@@ -262,9 +274,9 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         SetPhase(MatchPhase.Active);
         globalEventDispatcher.Invoke(new StartGameEvent());
 
-        //if (PhotonNetwork.IsMasterClient)
-        //{
-			MatchStartTimeStamp = (float)PhotonNetwork.Time;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            MatchStartTimeStamp = (float)PhotonNetwork.Time;
             Dictionary<string, object> properties = new Dictionary<string, object>
             {
                 { RoomPropertiesPhoton.GAME_STATE, (int)MatchPhase },
@@ -273,7 +285,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 
             RaisePhotonEventCode(PhotonEventCodes.GAME_START);
             PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
-        //}
+        }
 
         // In case a player joins mid-game, the start time and current network time have to be subtracted from the match duration 
         float duration = MatchDuration;
@@ -298,11 +310,11 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         SetPhase(MatchPhase.PostGame);
         GameTimer.Stop();
 
-        //if (PhotonNetwork.IsMasterClient)
-        //{
-			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.GAME_STATE, (int)MatchPhase);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.GAME_STATE, (int)MatchPhase);
             RaisePhotonEventCode(PhotonEventCodes.GAME_STOP);
-        //}
+        }
         globalEventDispatcher.Invoke(new GameOverEvent(GetGameResult()));
         MatchEndTimeStamp = (float)PhotonNetwork.Time;
     }
@@ -321,8 +333,8 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     public virtual void Replay()
     {
-        //if (PhotonNetwork.IsMasterClient)
-        RaisePhotonEventCode(PhotonEventCodes.GAME_RESTART);
+        if (PhotonNetwork.IsMasterClient)
+            RaisePhotonEventCode(PhotonEventCodes.GAME_RESTART);
 
         if (MatchPhase == MatchPhase.Active)
             EndGame();

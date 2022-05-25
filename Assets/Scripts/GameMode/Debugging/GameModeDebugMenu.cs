@@ -97,18 +97,28 @@ public class GameModeDebugMenu : IDebugMenu
 
         GUILayout.Label("Phase: " + currentGameMode.MatchPhase);
         GUILayout.Label("Start requirements met: " + currentGameMode.StartRequirementsAreMet());
-        GUILayout.Label("Duration: " + $"{(int)currentGameMode.GameTimer.TimeRemaining / 60}:{currentGameMode.GameTimer.TimeRemaining % 60:00}");
+        GUILayout.Label("Duration: " + $"{(int)currentGameMode.GameTimer.Duration / 60}:{currentGameMode.GameTimer.Duration % 60:00}");
         GUILayout.Label("Time remaining: " + $"{(int)currentGameMode.GameTimer.TimeRemaining / 60}:{currentGameMode.GameTimer.TimeRemaining % 60:00}");
         GUILayout.Label("timer is running: " + currentGameMode.GameTimer.IsRunning);
 
         if (drawDeveloperOptions)
         {
-            if (GUILayout.Button("StartGame"))
-                currentGameMode.StartActiveGame();
+            if (Photon.Pun.PhotonNetwork.IsMasterClient)
+            {
+                if (GUILayout.Button("StartGame"))
+                    currentGameMode.StartActiveGame();
+            }
+            else
+            {
+                if (GUILayout.Button("StartGame"))
+                    currentGameMode.AttemptToStartActiveGame();
+                GUI.enabled = false;
+            }
             if (GUILayout.Button("EndGame"))
                 currentGameMode.EndGame();
             if (GUILayout.Button("Replay"))
                 currentGameMode.Replay();
+            GUI.enabled = true;
 
             if (currentGameMode.MatchPhase == MatchPhase.Active)
             {
