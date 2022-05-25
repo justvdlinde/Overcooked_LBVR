@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,9 @@ namespace PhysicsCharacter
 		private Quaternion targetRot = Quaternion.identity;
 		private float maxGripDistance = 2.0f;
 		public bool forcePosition = true;
+
+		public Action OnLocalPickupEvent = null;
+		public Action OnLocalDropEvent = null;
 
 		public Vector3 GetFollowPos(Hand hand)
 		{
@@ -315,7 +319,14 @@ namespace PhysicsCharacter
 		{
 			if(heldHandles < 0)
 				heldHandles = 0;
+
+			if(heldHandles == 0)
+			{
+				OnLocalPickupEvent?.Invoke();
+			}
+
 			heldHandles++;
+
 			rigidBody.useGravity = false;
 
 			
@@ -360,11 +371,14 @@ namespace PhysicsCharacter
 			if (rigidBody == null)
 				return;
 
-				if (heldHandles > 0)
+			if (heldHandles > 0)
 				heldHandles--;
 
 			if(heldHandles <= 0)
+			{
 				rigidBody.useGravity = true;
+				OnLocalDropEvent?.Invoke();
+			}
 
 			toolHandle.transform.parent = transform;
 			toolHandle.transform.localPosition = toolHandle.localTransformMirror.localPosition;

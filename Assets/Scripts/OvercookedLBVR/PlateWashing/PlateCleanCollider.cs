@@ -8,6 +8,8 @@ public class PlateCleanCollider : MonoBehaviour
 	{
 		if (other.TryGetComponent(out PlateDirtySpot recipient))
 		{
+			Rigidbody rb = recipient.GetComponentInParent<Rigidbody>();
+
 			recipient.DoCleanSpotSponge();
 		}
 	}

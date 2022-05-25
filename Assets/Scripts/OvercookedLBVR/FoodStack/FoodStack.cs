@@ -148,7 +148,14 @@ public class FoodStack : MonoBehaviourPunCallbacks
         return ingredient.CanBeGrabbed();
     }
 
-	
+	public void RemoveAllIngredients()
+	{
+        int count = ingredientsStack.Count;
+		for (int i = 0; i < count; i++)
+		{
+            RemoveTopIngredient();
+		}
+	}
 
     public Ingredient RemoveTopIngredient()
     {

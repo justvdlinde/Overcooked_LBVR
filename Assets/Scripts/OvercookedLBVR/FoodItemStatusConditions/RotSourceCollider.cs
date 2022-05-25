@@ -6,23 +6,25 @@ public class RotSourceCollider : MonoBehaviour
 {
 	private void OnTriggerEnter(Collider other)
 	{
-		IngredientStatusCondition statusCondition = other.GetComponentInChildren<IngredientStatusCondition>();
-		if (statusCondition == null)
-			statusCondition = other.GetComponentInParent<IngredientStatusCondition>();
-		if (statusCondition != null)
+		IRottable iRottable = other.GetComponentInChildren<IRottable>();
+		if (iRottable == null)
+			iRottable = other.GetComponentInParent<IRottable>();
+		if (iRottable != null)
 		{
-			statusCondition.SetIsRotting(true);
+			iRottable.SetIsRotting(true);
 		}
+
+
 	}
 
 	private void OnTriggerExit(Collider other)
 	{
-		IngredientStatusCondition statusCondition = other.GetComponentInChildren<IngredientStatusCondition>();
-		if (statusCondition == null)
-			statusCondition = other.GetComponentInParent<IngredientStatusCondition>();
-		if (statusCondition != null)
+		IRottable iRottable = other.GetComponentInChildren<IRottable>();
+		if (iRottable == null)
+			iRottable = other.GetComponentInParent<IRottable>();
+		if (iRottable != null)
 		{
-			statusCondition.SetIsRotting(false);
+			iRottable.SetIsRotting(false);
 		}
 	}
 }

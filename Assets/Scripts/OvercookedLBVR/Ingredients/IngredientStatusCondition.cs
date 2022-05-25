@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using Utils.Core.Attributes;
 
-public class IngredientStatusCondition : MonoBehaviour
+public class IngredientStatusCondition : MonoBehaviour, IRottable
 {
 	public enum StatusCondition
 	{
