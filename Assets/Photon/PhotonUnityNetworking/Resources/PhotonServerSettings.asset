@@ -64,5 +64,7 @@ MonoBehaviour:
   - RemoveAllActiveOrdersRPC
   - OnDropEventRPC
   - OnPickupEventRPC
+  - AttemptToStartActiveGameRPC
+  - OnDeliverRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1

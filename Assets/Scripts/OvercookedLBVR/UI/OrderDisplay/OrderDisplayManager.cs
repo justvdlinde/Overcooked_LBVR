@@ -77,6 +77,12 @@ public class OrderDisplayManager : MonoBehaviourPun
 
     public static bool AllDisplaysAreFree()
     {
+        if (Instance == null)
+        {
+            Debug.LogError("No OrderDisplayManager in scene!");
+            return false;
+        }
+
         for (int i = 0; i < Instance.OrderDisplays.Length; i++)
         {
             if (Instance.OrderDisplays[i].Order != null)
@@ -98,6 +104,12 @@ public class OrderDisplayManager : MonoBehaviourPun
 
     public static OrderDisplay GetFreeDisplay()
     {
+        if (Instance == null)
+        {
+            Debug.LogError("No OrderDisplayManager in scene!");
+            return null;
+        }
+
         foreach (OrderDisplay display in Instance.orderDisplays)
         {
             if (display.CanBeUsed())

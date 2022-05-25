@@ -115,21 +115,12 @@ public class StoryMode : GameMode
 
     public override void DeliverDish(Plate dish)
     {
-        if (!PhotonNetwork.IsMasterClient)
-            return;
-
         Order order = OrdersController.GetClosestMatch(dish.FoodStack);
 
-        if (order != null)
-        {
-            dish.OnDeliver();
-            Debug.Log("Delivered dish: " + dish.FoodStack + "\nclosest match: " + order);
-        }
-        else
-        {
+        if (order == null)
             throw new System.Exception("No closest order found!");
-        }
 
+        Debug.Log("Delivered dish: " + dish.FoodStack + "\nclosest match: " + order);
         ScoreData score = scoreCalculator.CalculateScore(order, dish.FoodStack, DishResult.Delivered);
         Debug.Log("Score: " + score.Points + "/" + ScoreData.MaxPoints);
         OnDishDelivered(dish, order, score);

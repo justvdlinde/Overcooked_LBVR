@@ -19,7 +19,13 @@ public class GameModeDebugMenu : IDebugMenu
         gamemodeStrings = Enum.GetNames(typeof(GameModeEnum));
     }
 
-    public void Open() { }
+    public void Open() 
+    {
+        currentGameMode = gameModeService.CurrentGameMode;
+        if (currentGameMode != null)
+            settingsScoreText = currentGameMode.MatchDuration.ToString();
+    }
+
     public void Close() { }
 
     public void OnGUI(bool drawDeveloperOptions)
@@ -68,26 +74,20 @@ public class GameModeDebugMenu : IDebugMenu
     private void DrawSettingsPanel()
     {
         GUILayout.BeginVertical(currentGameMode.Name + " Settings", "window");
-
-        GUILayout.BeginHorizontal();
-        GUILayout.Label("Score Target: ");
-        settingsScoreText = GUILayout.TextField(settingsScoreText);
-        GUILayout.EndHorizontal();
+        GUI.enabled = Photon.Pun.PhotonNetwork.IsMasterClient;
 
         GUILayout.BeginHorizontal();
         GUILayout.Label("Match Duration: ");
         settingsDurationText = GUILayout.TextField(settingsDurationText);
         GUILayout.EndHorizontal();
 
-        //if (GUILayout.Button("Update settings"))
-        //{
-        //    GameModeSettings settings = ScriptableObject.CreateInstance<GameModeSettings>();
-        //    if (int.TryParse(settingsScoreText, out int result))
-        //        settings.scoreTarget = result;
-        //    if (int.TryParse(settingsDurationText, out result))
-        //        settings.matchDuration = result;
-        //    currentGameMode.Setup(settings);
-        //}
+        if (GUILayout.Button("Update settings"))
+        {
+            if (int.TryParse(settingsDurationText, out int result))
+                currentGameMode.SetMatchDuration(result);
+        }
+
+        GUI.enabled = true;
         GUILayout.EndVertical();
     }
 
@@ -97,18 +97,28 @@ public class GameModeDebugMenu : IDebugMenu
 
         GUILayout.Label("Phase: " + currentGameMode.MatchPhase);
         GUILayout.Label("Start requirements met: " + currentGameMode.StartRequirementsAreMet());
-        GUILayout.Label("Duration: " + string.Format("{0:0:00}", currentGameMode.MatchDuration));
-        GUILayout.Label("Time remaining: " + string.Format("{0:0:00}", currentGameMode.GameTimer.TimeRemaining));
+        GUILayout.Label("Duration: " + $"{(int)currentGameMode.GameTimer.Duration / 60}:{currentGameMode.GameTimer.Duration % 60:00}");
+        GUILayout.Label("Time remaining: " + $"{(int)currentGameMode.GameTimer.TimeRemaining / 60}:{currentGameMode.GameTimer.TimeRemaining % 60:00}");
         GUILayout.Label("timer is running: " + currentGameMode.GameTimer.IsRunning);
 
         if (drawDeveloperOptions)
         {
-            if (GUILayout.Button("StartGame"))
-                currentGameMode.StartActiveGame();
+            if (Photon.Pun.PhotonNetwork.IsMasterClient)
+            {
+                if (GUILayout.Button("StartGame"))
+                    currentGameMode.StartActiveGame();
+            }
+            else
+            {
+                if (GUILayout.Button("StartGame"))
+                    currentGameMode.AttemptToStartActiveGame();
+                GUI.enabled = false;
+            }
             if (GUILayout.Button("EndGame"))
                 currentGameMode.EndGame();
             if (GUILayout.Button("Replay"))
                 currentGameMode.Replay();
+            GUI.enabled = true;
 
             if (currentGameMode.MatchPhase == MatchPhase.Active)
             {

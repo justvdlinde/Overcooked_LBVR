@@ -201,7 +201,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         switch (phase)
         {
             case MatchPhase.PreGame:
-                PreGame(false);
+                StartPreGame(false);
                 break;
             case MatchPhase.Active:
                 StartActiveGame();
@@ -217,12 +217,13 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     protected void SetPhase(MatchPhase newPhase)
     {
+        Debug.Log("New Game phase: " + newPhase);
         MatchPhase = newPhase;
         MatchPhaseChangedEvent?.Invoke(newPhase);
         globalEventDispatcher.Invoke(new GameModePhaseChangedEvent(newPhase));
     }
 
-    public virtual void PreGame(bool replay = false)
+    public virtual void StartPreGame(bool replay = false)
     {
         SetPhase(MatchPhase.PreGame);
         if (PhotonNetwork.IsMasterClient)
@@ -253,14 +254,29 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
   //      countdownTimer.Start(StartActiveGame);
   //  }
 
+    public virtual void AttemptToStartActiveGame()
+    {
+        photonView.RPC(nameof(AttemptToStartActiveGameRPC), RpcTarget.MasterClient);
+    }
+
+    [PunRPC]
+    protected virtual void AttemptToStartActiveGameRPC()
+    {
+        if (StartRequirementsAreMet())
+            StartActiveGame();
+    }
+
     public virtual void StartActiveGame()
     {
+        if (MatchPhase == MatchPhase.Active)
+            return;
+
         SetPhase(MatchPhase.Active);
         globalEventDispatcher.Invoke(new StartGameEvent());
 
         if (PhotonNetwork.IsMasterClient)
         {
-			MatchStartTimeStamp = (float)PhotonNetwork.Time;
+            MatchStartTimeStamp = (float)PhotonNetwork.Time;
             Dictionary<string, object> properties = new Dictionary<string, object>
             {
                 { RoomPropertiesPhoton.GAME_STATE, (int)MatchPhase },
@@ -296,7 +312,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 
         if (PhotonNetwork.IsMasterClient)
         {
-			PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.GAME_STATE, (int)MatchPhase);
+            PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.GAME_STATE, (int)MatchPhase);
             RaisePhotonEventCode(PhotonEventCodes.GAME_STOP);
         }
         globalEventDispatcher.Invoke(new GameOverEvent(GetGameResult()));
@@ -323,7 +339,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         if (MatchPhase == MatchPhase.Active)
             EndGame();
 
-        PreGame(true);
+        StartPreGame(true);
         Scoreboard.Reset();
         globalEventDispatcher.Invoke(new ReplayEvent());
     }
@@ -332,6 +348,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.MATCH_DURATION, newDuration);
         MatchDuration = newDuration;
+        GameTimer.Set(MatchDuration);
     }
 
     /// <summary>
