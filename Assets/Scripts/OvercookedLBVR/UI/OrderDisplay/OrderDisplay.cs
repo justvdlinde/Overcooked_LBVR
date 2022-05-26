@@ -21,11 +21,6 @@ public class OrderDisplay : MonoBehaviour
             timeSlider.value = order.timer.TimeRemaining / order.timer.Duration;
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(10, 20 + (10 * orderNumber), 200, 20), order != null ? "order" : "null");
-    }
-
     public void Show(Order order)
     {
         // TODO: some kind of animation/flair

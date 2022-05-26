@@ -1,7 +1,6 @@
 using System;
 using Utils.Core.Attributes;
 
-//[Serializable]
 public class Order : IDisposable
 {
     public Action<Order> TimerExceededEvent;
