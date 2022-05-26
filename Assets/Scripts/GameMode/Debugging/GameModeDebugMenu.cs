@@ -172,11 +172,13 @@ public class GameModeDebugMenu : IDebugMenu
         GUILayout.EndHorizontal();
         GUILayout.Label("Completed orders in succession: " + orderGenerator.completedOrdersInSuccession);
 
-        bool guiWasEnabled = GUI.enabled;
-        GUI.enabled = OrderDisplayManager.HasFreeDisplay();
-        if(GUILayout.Button("Add new order"))
-            story.CreateNewActiveOrder(OrderDisplayManager.GetFreeDisplay().orderNumber);
-        GUI.enabled = guiWasEnabled;
+        if (GUILayout.Button("Add new order"))
+        {
+            if (OrderDisplayManager.HasFreeDisplay())
+                story.CreateNewActiveOrder(OrderDisplayManager.GetFreeDisplay().orderNumber);
+            else
+                Debug.LogWarning("No Free Display available for new order");
+        }
 
         for (int i = 0; i < story.OrdersController.ActiveOrders.Count; i++)
         {

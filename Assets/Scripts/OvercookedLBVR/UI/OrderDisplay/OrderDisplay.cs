@@ -7,7 +7,8 @@ public class OrderDisplay : MonoBehaviour
     public Slider timeSlider;
     public int orderNumber;
 
-    public Order Order { get; private set; }
+    public Order Order => order;
+    private Order order = null;
 
     private void Awake()
     {
@@ -16,16 +17,21 @@ public class OrderDisplay : MonoBehaviour
 
     public void Update()
     {
-        if (Order != null)
-            timeSlider.value = Order.timer.TimeRemaining / Order.timer.Duration;
+        if (order != null)
+            timeSlider.value = order.timer.TimeRemaining / order.timer.Duration;
+    }
+
+    private void OnGUI()
+    {
+        GUI.Label(new Rect(10, 20 + (10 * orderNumber), 200, 20), order != null ? "order" : "null");
     }
 
     public void Show(Order order)
     {
         // TODO: some kind of animation/flair
         Clear();
-        order.orderNumber = orderNumber;
-        Order = order;
+        this.order = order;
+        this.order.orderNumber = orderNumber;
         grid.DisplayOrder(order);
     }
 
@@ -33,12 +39,12 @@ public class OrderDisplay : MonoBehaviour
     {
         // TODO: some kind of animation/flair
         grid.Clear();
-        Order = null;
+        order = null;
         timeSlider.value = 0;
     }
 
     public bool CanBeUsed()
     {
-        return Order == null;
+        return order == null;
     }
 }

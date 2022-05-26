@@ -22,6 +22,11 @@ public class OrderDisplayManager : MonoBehaviourPun
         Instance = this;
 
         globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+
+        for(int i = 0; i < orderDisplays.Length; i++)
+        {
+            OrderDisplays[i].orderNumber = i;
+        }
     }
 
     private void OnDestroy()
@@ -85,7 +90,7 @@ public class OrderDisplayManager : MonoBehaviourPun
 
         for (int i = 0; i < Instance.OrderDisplays.Length; i++)
         {
-            if (Instance.OrderDisplays[i].Order != null)
+            //if (Instance.OrderDisplays[i].Order != null)
                 return false;
         }
         return true;

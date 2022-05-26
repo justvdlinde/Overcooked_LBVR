@@ -95,6 +95,7 @@ public class StoryMode : GameMode
             if (PhotonNetwork.IsMasterClient)
             {
                 OrderDisplay freeDisplay = OrderDisplayManager.GetFreeDisplay();
+                Debug.Log("free display given: " + freeDisplay + " orderNR " + freeDisplay.orderNumber);
                 CreateNewActiveOrder(freeDisplay.orderNumber);
             }
         }
