@@ -8,8 +8,8 @@ public class OperatorUIMenu : MonoBehaviour
 {
     public bool IsOpen { get; protected set; } = false;
 
-    [SerializeField] protected TextMeshProUGUI gameModeLabel = null;
-    [SerializeField] protected TextMeshProUGUI timerLabel = null;
+    //[SerializeField] protected TextMeshProUGUI gameModeLabel = null;
+    //[SerializeField] protected TextMeshProUGUI timerLabel = null;
     [SerializeField] protected Button startGameButton = null;
     [SerializeField] protected Button stopGameButton = null;
     [SerializeField] protected Button replayGameButton = null;
@@ -27,8 +27,8 @@ public class OperatorUIMenu : MonoBehaviour
 
     private void Start()
     {
-        if(gameModeService.CurrentGameMode != null)
-            gameModeLabel.text = CurrentGameMode.Name;
+        //if(gameModeService.CurrentGameMode != null)
+        //    gameModeLabel.text = CurrentGameMode.Name;
 
         globalEventDispatcher.Subscribe<GameModePhaseChangedEvent>(OnGamePhaseChangedEvent);
         globalEventDispatcher.Subscribe<GameModeChangedEvent>(OnGameModeChangedEvent);
@@ -65,7 +65,7 @@ public class OperatorUIMenu : MonoBehaviour
 
     private void OnGameModeChangedEvent(GameModeChangedEvent @event)
     {
-        gameModeLabel.text = @event.GameMode.Name;
+        //gameModeLabel.text = @event.GameMode.Name;
     }
 
     private void OnGamePhaseChangedEvent(GameModePhaseChangedEvent @event)
@@ -77,16 +77,18 @@ public class OperatorUIMenu : MonoBehaviour
 
     private void OnStartGameButtonPressedEvent()
     {
-        CurrentGameMode.StartActiveGame();
+        CurrentGameMode.AttemptToStartActiveGame();
     }
 
     private void OnStopGameButtonPressedEvent()
     {
+        // might need an attempt function like AttemptToStartActiveGame?
         CurrentGameMode.EndGame();
     }
 
     private void OnReplayGameButtonPressedEvent()
     {
+        // might need an attempt function like AttemptToStartActiveGame?
         CurrentGameMode.Replay();
     }
 

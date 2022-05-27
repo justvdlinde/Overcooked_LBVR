@@ -90,7 +90,7 @@ public class OrderDisplayManager : MonoBehaviourPun
 
         for (int i = 0; i < Instance.OrderDisplays.Length; i++)
         {
-            //if (Instance.OrderDisplays[i].Order != null)
+            if (!Instance.OrderDisplays[i].CanBeUsed())
                 return false;
         }
         return true;
