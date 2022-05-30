@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,12 +51,20 @@ public class IngredientStatusCondition : MonoBehaviour
 
 	[SerializeField] private IngredientStatusConditionGraphics conditionGraphics = null;
 
+	[SerializeField] private PhotonView photonView = null;
+
 	public bool IsIngredientPreparedProperly()
 	{
 		return !IsOnFire && !IsWet && !IsRotten && !IsFrozen && !WasOnFire;
 	}
 
 	public void AddStatusCondition(StatusCondition condition)
+	{
+		photonView.RPC(nameof(AddStatusConditionRPC), RpcTarget.All, condition);
+	}
+
+	[PunRPC]
+	private void AddStatusConditionRPC(StatusCondition condition)
 	{
 		switch (condition)
 		{
@@ -75,10 +84,17 @@ public class IngredientStatusCondition : MonoBehaviour
 			default:
 				break;
 		}
-		conditionGraphics.AddStatusCondition(condition);
+		if (photonView.IsMine)
+			conditionGraphics.AddStatusCondition(condition);
 	}
 
 	public void RemoveStatusCondition(StatusCondition condition)
+	{
+		photonView.RPC(nameof(RemoveStatusConditionRPC), RpcTarget.All, condition);
+	}
+
+	[PunRPC]
+	private void RemoveStatusConditionRPC(StatusCondition condition)
 	{
 		switch (condition)
 		{
@@ -97,7 +113,8 @@ public class IngredientStatusCondition : MonoBehaviour
 			default:
 				break;
 		}
-		conditionGraphics.RemoveStatusCondition(condition);
+		if(photonView.IsMine)
+			conditionGraphics.RemoveStatusCondition(condition);
 	}
 
 	public void AddHeat(float heatStrength, StatusConditionHeatSource sourceType)
