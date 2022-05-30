@@ -169,10 +169,18 @@ public class FoodStack : MonoBehaviourPunCallbacks
     {
         Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
         ingredientsStack.Remove(ingredient);
-        ingredient.SnapController.OnSnap(false);
-        ingredient.transform.SetParent(null);
 
-		ingredient.SetCollisionsIgnored(plateCollider, false);
+        if (ingredient.IngredientType.IsSauce())
+        {
+            if (ingredient.photonView.IsMine)
+                PhotonNetwork.Destroy(ingredient.gameObject);
+        }
+        else
+        {
+            ingredient.SnapController.OnSnap(false);
+            ingredient.transform.SetParent(null);
+            ingredient.SetCollisionsIgnored(plateCollider, false);
+        }
 
 		float removedIngredientHeight = ingredientHeights[ingredientHeights.Count - 1];
         ingredientHeights.RemoveAt(ingredientHeights.Count - 1);
