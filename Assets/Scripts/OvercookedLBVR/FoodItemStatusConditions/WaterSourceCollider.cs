@@ -11,7 +11,7 @@ public class WaterSourceCollider : MonoBehaviour
             statusCondition = other.GetComponentInParent<IngredientStatusCondition>();
         if (statusCondition != null)
         {
-            statusCondition.AddHeat(-30f, IngredientStatusCondition.StatusConditionHeatSource.Wet);
+            statusCondition.AddHeat(-30f, StatusConditionHeatSource.Wet);
         }
     }
 }

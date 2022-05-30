@@ -21,7 +21,7 @@ public class FireExtinguisherParticleSystem : MonoBehaviour
 					statusCondition = other.GetComponentInParent<IngredientStatusCondition>();
 				if (statusCondition != null)
 				{
-					statusCondition.AddHeat(-Time.deltaTime * 25f, IngredientStatusCondition.StatusConditionHeatSource.Cold);
+					statusCondition.AddHeat(-Time.deltaTime * 25f, StatusConditionHeatSource.Cold);
 				}
 			}
 		}

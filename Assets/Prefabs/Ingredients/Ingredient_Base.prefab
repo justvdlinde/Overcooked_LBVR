@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3254468496341055678}
-  - component: {fileID: 5502415681567977669}
+  - component: {fileID: 2065405443261525428}
   m_Layer: 6
   m_Name: Graphics
   m_TagString: Untagged
@@ -35,7 +35,7 @@ Transform:
   m_Father: {fileID: 6692300663542894660}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5502415681567977669
+--- !u!114 &2065405443261525428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,15 +44,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1060128967161958981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adf7ea0d28546db4888b1edbf317d7cd, type: 3}
+  m_Script: {fileID: 11500000, guid: 6b52ef7c0ba13aa4fa750cd8eeaf68b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsRotten>k__BackingField: 0
-  <IsWet>k__BackingField: 0
-  <IsFrozen>k__BackingField: 0
-  <IsOnFire>k__BackingField: 0
-  connectedIngredient: {fileID: 59611235620371129}
-  currentHeat: 0
   IsRottenParticles: {fileID: 7581063943416606398}
   IsWetParticles: {fileID: 8670198720119121376}
   IsFrozenParticles: {fileID: 801345111586247868}
@@ -60,9 +54,11 @@ MonoBehaviour:
   shadedMaterials: []
   countdownCanvas: {fileID: 4093899498332165151}
   countdownText: {fileID: 5807485363297187353}
-  startColor: {r: 0.16312027, g: 1, b: 0, a: 1}
-  endColor: {r: 0.108757555, g: 0.49056602, b: 0.108757555, a: 1}
+  startColor: {r: 0, g: 1, b: 0.0747633, a: 1}
+  endColor: {r: 0.07484871, g: 0.5471698, b: 0.07484871, a: 1}
   yOffset: 0
+  connectedIngredient: {fileID: 59611235620371129}
+  connectedCondition: {fileID: 4443576776531160006}
 --- !u!1 &1698536654608434325
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,6 +72,7 @@ GameObject:
   - component: {fileID: 8729201025394254469}
   - component: {fileID: 5554103771995163421}
   - component: {fileID: 8953940111436927376}
+  - component: {fileID: 4443576776531160006}
   m_Layer: 6
   m_Name: Ingredient_Base
   m_TagString: Untagged
@@ -119,7 +116,7 @@ MonoBehaviour:
   snapController: {fileID: 0}
   chopController: {fileID: 0}
   grabController: {fileID: 3304535414630095785}
-  statusConditionManager: {fileID: 5502415681567977669}
+  statusConditionManager: {fileID: 0}
   colliders: []
 --- !u!54 &8729201025394254469
 Rigidbody:
@@ -175,6 +172,25 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 1
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &4443576776531160006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698536654608434325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf7ea0d28546db4888b1edbf317d7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <IsRotten>k__BackingField: 0
+  <IsWet>k__BackingField: 0
+  <IsFrozen>k__BackingField: 0
+  <IsOnFire>k__BackingField: 0
+  connectedIngredient: {fileID: 59611235620371129}
+  currentHeat: 0
+  conditionGraphics: {fileID: 2065405443261525428}
 --- !u!1001 &1169150959768902286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -522,6 +538,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6692300663542894660}
     m_Modifications:
+    - target: {fileID: 2155860453403785755, guid: a9b784a1d95556f4e9208ae0b7ba4889, type: 3}
+      propertyPath: m_BlockingMask.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3079273867652749603, guid: a9b784a1d95556f4e9208ae0b7ba4889, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
