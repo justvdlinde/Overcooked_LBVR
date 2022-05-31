@@ -197,12 +197,12 @@ namespace PhysicsCharacter
 
 			PhysicsPlayerBlackboard.Instance.PickupItem(hand, pickedupHandle);
 
-			transform.rotation = toolTransformDelegate.GetRotation();
+			//transform.rotation = toolTransformDelegate.GetRotation();
 			targetRot = toolTransformDelegate.GetRotation();
 
-			transform.position = pickedupHandle.transform.position;
-			Vector3 diff = (toolTransformDelegate.GetPosition()) - (rigidBody.worldCenterOfMass + (toolTransformDelegate.GetAnchorPosition() - rigidBody.worldCenterOfMass));
-			transform.position += diff;
+			//transform.position = pickedupHandle.transform.position;
+			//Vector3 diff = (toolTransformDelegate.GetPosition()) - (rigidBody.worldCenterOfMass + (toolTransformDelegate.GetAnchorPosition() - rigidBody.worldCenterOfMass));
+			//transform.position += diff;
 			targetPos = transform.position;
 
 
@@ -354,6 +354,9 @@ namespace PhysicsCharacter
 				rigidBody.ResetCenterOfMass();
 				OnLocalDropEvent?.Invoke();
 			}
+			else
+				rigidBody.centerOfMass = rigidBody.transform.InverseTransformPoint(toolTransformDelegate.GetAnchorPosition());
+
 
 			toolHandle.transform.parent = transform;
 			toolHandle.transform.localPosition = toolHandle.localTransformMirror.localPosition;
