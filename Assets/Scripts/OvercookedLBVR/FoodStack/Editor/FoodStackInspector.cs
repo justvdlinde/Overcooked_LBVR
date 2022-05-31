@@ -16,7 +16,7 @@ public class FoodStackInspector : Editor
     private void OnEnable()
     {
         foodStack = target as FoodStack;
-        ingredientsData = Resources.Load<IngredientsData>("IngredientsData");
+        ingredientsData = IngredientsData.Instance;
         ingredientsStack = serializedObject.FindProperty("ingredientsStack");
     }
 

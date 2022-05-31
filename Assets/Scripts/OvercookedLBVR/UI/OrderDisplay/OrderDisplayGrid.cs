@@ -13,7 +13,7 @@ public class OrderDisplayGrid : MonoBehaviour
 
     private void Awake()
     {
-        ingredientsData = Resources.Load<IngredientsData>("IngredientsData");
+        ingredientsData = IngredientsData.Instance;
         Clear();
     }
 
