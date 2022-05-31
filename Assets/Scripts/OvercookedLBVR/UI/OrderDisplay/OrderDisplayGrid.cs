@@ -1,17 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Utils.Core.Attributes;
 using Utils.Core.Extensions;
 
 public class OrderDisplayGrid : MonoBehaviour
 {
-    public float intervalSpace = 1;
+    [SerializeField] private float intervalSpace = 1;
+    [SerializeField] private GridLayoutGroup ingredientsListGroup;
+    [SerializeField] private Image ingredientIconPrefab;
 
-    private Order order;
+    private Order currentOrder;
     private IngredientsData ingredientsData;
     private int childCount = 0;
-    private List<GameObject> icons = new List<GameObject>();
+    private List<Image> iconsInGrid = new List<Image>();
 
     private void Awake()
     {
@@ -20,15 +23,15 @@ public class OrderDisplayGrid : MonoBehaviour
 
     public void Clear()
     {
-        order = null;   
+        currentOrder = null;   
         transform.RemoveAllChildren();
-        icons = new List<GameObject>();
+        iconsInGrid = new List<Image>();
     }
 
     public void DisplayOrder(Order order)
     {
         Clear();
-        this.order = order;
+        this.currentOrder = order;
         childCount = order.ingredients.Length;
 
         for (int i = 0; i < order.ingredients.Length; i++)
@@ -55,7 +58,7 @@ public class OrderDisplayGrid : MonoBehaviour
 
     public void ClearEditor()
     {
-        order = null;
+        currentOrder = null;
         System.Action destroyCall = null;
 
         Transform[] ts = transform.GetComponentsInChildren<Transform>();
@@ -70,14 +73,19 @@ public class OrderDisplayGrid : MonoBehaviour
 
         destroyCall?.Invoke();
 
-        icons = new List<GameObject>();
+        iconsInGrid = new List<Image>();
     }
 
 
     private void CreateIcon(IngredientData ingredient)
     {
-        GameObject icon = Instantiate(ingredient.ingredientIcon, transform);
-        icons.Add(icon);
+        // instantiate icon prefab
+        // change icon sprite
+        // add to grid and list
+
+        throw new System.NotImplementedException();
+        //GameObject icon = Instantiate(ingredient.ingredientIcon, transform);
+        //icons.Add(icon);
     }
 
     [Button]
@@ -85,7 +93,7 @@ public class OrderDisplayGrid : MonoBehaviour
     {
         for (int i = 0; i < childCount; i++)
         {
-            Transform child = icons[i].transform;
+            Transform child = iconsInGrid[i].transform;
             child.localPosition = new Vector3(0, i * intervalSpace, 0);
         }
     }
