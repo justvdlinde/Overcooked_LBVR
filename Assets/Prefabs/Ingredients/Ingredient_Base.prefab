@@ -116,7 +116,7 @@ MonoBehaviour:
   snapController: {fileID: 0}
   chopController: {fileID: 0}
   grabController: {fileID: 3304535414630095785}
-  statusConditionManager: {fileID: 0}
+  statusConditionManager: {fileID: 4443576776531160006}
   colliders: []
 --- !u!54 &8729201025394254469
 Rigidbody:
@@ -191,6 +191,7 @@ MonoBehaviour:
   connectedIngredient: {fileID: 59611235620371129}
   currentHeat: 0
   conditionGraphics: {fileID: 2065405443261525428}
+  photonView: {fileID: 5554103771995163421}
 --- !u!1001 &1169150959768902286
 PrefabInstance:
   m_ObjectHideFlags: 0

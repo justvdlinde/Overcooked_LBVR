@@ -184,8 +184,6 @@ namespace PhysicsCharacter
 			if(toolHandles == null || toolHandles.Count <= 0 || IsBeingHeld(hand))
 				return;
 
-			
-
 			ToolHandle pickedupHandle = toolHandles[0].GetGrabbed(hand, PhysicsPlayerBlackboard.Instance.GetFollowTarget(hand)) as ToolHandle;
 			if(pickedupHandle == null)
 				return;
@@ -312,9 +310,6 @@ namespace PhysicsCharacter
 			return false;
 		}
 
-		public bool invertParent = false;
-		public bool allowInversion = true;
-
 		protected virtual void OnGrabbedCallback(Hand hand, ToolHandle toolHandle)
 		{
 			if(heldHandles < 0)
@@ -325,32 +320,11 @@ namespace PhysicsCharacter
 				OnLocalPickupEvent?.Invoke();
 			}
 
+			rigidBody.centerOfMass = rigidBody.transform.InverseTransformPoint(toolTransformDelegate.GetAnchorPosition());
+
 			heldHandles++;
 
 			rigidBody.useGravity = false;
-
-			
-			//if(allowInversion && heldHandles == 1)
-			//{
-			//	Transform targetTransform = (invertParent) ? transform.parent : transform;
-			//	Vector3 handUp = PhysicsPlayerBlackboard.Instance.GetFollowTarget(hand).up;
-			//	float dot = Vector3.Dot(toolHandle.transform.up * targetTransform.localScale.y, handUp);
-
-			//	if (dot < 0 && targetTransform.localScale.y >= 0)
-			//	{
-			//		Vector3 localScale = targetTransform.localScale;
-			//		localScale.y *= -1;
-			//		targetTransform.localScale = localScale;
-			//	}
-			//	else if(dot >= 0 && targetTransform.localScale.y < 0)
-			//	{
-			//		Vector3 localScale = targetTransform.localScale;
-			//		localScale.y *= -1;
-			//		targetTransform.localScale = localScale;
-			//	}
-			//}
-
-			//ForcePosition();
 
 			photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
 			rootPhotonView.TransferOwnership(PhotonNetwork.LocalPlayer);
@@ -377,6 +351,7 @@ namespace PhysicsCharacter
 			if(heldHandles <= 0)
 			{
 				rigidBody.useGravity = true;
+				rigidBody.ResetCenterOfMass();
 				OnLocalDropEvent?.Invoke();
 			}
 
@@ -398,7 +373,7 @@ namespace PhysicsCharacter
 
 		protected virtual void MoveUsingPhysics()
 		{
-			rigidBody.velocity *= 0.995f;
+			rigidBody.velocity *= slowDownVelocity;
 
 			Vector3 newVelocity = FindNewVelocity();
 			if(IsValidVelocity(newVelocity.x))

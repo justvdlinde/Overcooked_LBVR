@@ -58,13 +58,28 @@ public class IngredientStatusCondition : MonoBehaviour
 		return !IsOnFire && !IsWet && !IsRotten && !IsFrozen && !WasOnFire;
 	}
 
-	public void AddStatusCondition(StatusCondition condition)
+	public StatusCondition c = StatusCondition.Frozen;
+	public bool updateP = false;
+
+	[Button]
+	public void TestAddCondition()
 	{
-		photonView.RPC(nameof(AddStatusConditionRPC), RpcTarget.All, condition);
+		AddStatusCondition(c, updateP);
+	}
+
+	[Button]
+	public void TestRemoveCondition()
+	{
+		RemoveStatusCondition(c, updateP);
+	}
+
+	public void AddStatusCondition(StatusCondition condition, bool instantUpdateParticles = true)
+	{
+		photonView.RPC(nameof(AddStatusConditionRPC), RpcTarget.All, condition, instantUpdateParticles);
 	}
 
 	[PunRPC]
-	private void AddStatusConditionRPC(StatusCondition condition)
+	private void AddStatusConditionRPC(StatusCondition condition, bool instantUpdateParticles)
 	{
 		switch (condition)
 		{
@@ -84,17 +99,17 @@ public class IngredientStatusCondition : MonoBehaviour
 			default:
 				break;
 		}
-		if (photonView.IsMine)
+		if (photonView.IsMine && instantUpdateParticles)
 			conditionGraphics.AddStatusCondition(condition);
 	}
 
-	public void RemoveStatusCondition(StatusCondition condition)
+	public void RemoveStatusCondition(StatusCondition condition, bool instantUpdateParticles = true)
 	{
-		photonView.RPC(nameof(RemoveStatusConditionRPC), RpcTarget.All, condition);
+		photonView.RPC(nameof(RemoveStatusConditionRPC), RpcTarget.All, condition, instantUpdateParticles);
 	}
 
 	[PunRPC]
-	private void RemoveStatusConditionRPC(StatusCondition condition)
+	private void RemoveStatusConditionRPC(StatusCondition condition, bool instantUpdateParticles)
 	{
 		switch (condition)
 		{
@@ -113,7 +128,7 @@ public class IngredientStatusCondition : MonoBehaviour
 			default:
 				break;
 		}
-		if(photonView.IsMine)
+		if(photonView.IsMine && instantUpdateParticles)
 			conditionGraphics.RemoveStatusCondition(condition);
 	}
 
@@ -138,46 +153,45 @@ public class IngredientStatusCondition : MonoBehaviour
 			if (IsFrozen)
 				return;
 			currentHeat = -30f;
-			IsFrozen = false;
-			IsOnFire = false;
-			IsWet = true;
-			conditionGraphics.SetIsWetValue(1f);
+			RemoveStatusCondition(StatusCondition.Frozen, false);
+			// force set particles here
+			AddStatusCondition(StatusCondition.Wet, true);
+			RemoveStatusCondition(StatusCondition.OnFire, false);
 		}
 		else
 		{
 			if (IsWet && currentHeat >= 0.0f)
 			{
-				IsFrozen = false;
-				IsWet = false;
-				IsOnFire = false;
+				RemoveStatusCondition(StatusCondition.Frozen, false);
+				RemoveStatusCondition(StatusCondition.Wet, false);
+				RemoveStatusCondition(StatusCondition.OnFire, false);
 			}
 
 			if (IsFrozen && currentHeat >= 0.0f)
 			{
-				IsFrozen = false;
-				IsWet = false;
-				IsOnFire = false;
+				RemoveStatusCondition(StatusCondition.Frozen, false);
+				RemoveStatusCondition(StatusCondition.Wet, false);
+				RemoveStatusCondition(StatusCondition.OnFire, false);
 			}
 
 			if (IsOnFire && currentHeat <= 0.0f)
 			{
-				IsFrozen = false;
-				IsWet = false;
-				IsOnFire = false;
+				RemoveStatusCondition(StatusCondition.Frozen, false);
+				RemoveStatusCondition(StatusCondition.Wet, false);
+				RemoveStatusCondition(StatusCondition.OnFire, false);
 			}
 
 			if (currentHeat < frozenValue)
 			{
-				IsFrozen = true;
-				IsWet = false;
-				IsOnFire = false;
+				AddStatusCondition(StatusCondition.Frozen, false);
+				RemoveStatusCondition(StatusCondition.Wet, false);
+				RemoveStatusCondition(StatusCondition.OnFire, false);
 			}
 			if (currentHeat > onFireValue)
 			{
-				IsFrozen = false;
-				IsWet = false;
-				IsOnFire = true;
-				WasOnFire = true;
+				RemoveStatusCondition(StatusCondition.Frozen, false);
+				RemoveStatusCondition(StatusCondition.Wet, false);
+				AddStatusCondition(StatusCondition.OnFire, false);
 			}
 		}
 	}
@@ -188,6 +202,12 @@ public class IngredientStatusCondition : MonoBehaviour
 			return;
 		copyFrom.SendValues(out float IsRottenValue, out float IsWetValue, out float IsFrozenValue, out float IsOnFireValue, out currentHeat, out bool isRotten, out bool isWet, out bool isFrozen, out bool isOnFire, out bool wasOnFire);
 
+		photonView.RPC(nameof(SetCopyValuesRPC), RpcTarget.All, IsRottenValue, IsWetValue, IsFrozenValue, IsOnFireValue, currentHeat, isRotten, isWet, isFrozen, isOnFire, wasOnFire);
+	}
+
+	[PunRPC]
+	public void SetCopyValuesRPC(float IsRottenValue, float IsWetValue, float IsFrozenValue, float IsOnFireValue, float currentHeat, bool isRotten, bool isWet, bool isFrozen, bool isOnFire, bool wasOnFire)
+	{
 		conditionGraphics.SendValues(IsRottenValue, IsWetValue, IsFrozenValue, IsOnFireValue);
 		this.IsFrozen = isFrozen;
 		this.IsRotten = isRotten;
@@ -196,6 +216,7 @@ public class IngredientStatusCondition : MonoBehaviour
 		this.WasOnFire = wasOnFire;
 	}
 
+	// read values from parent status condition when being cut into 2 parts
 	public void SendValues(out float IsRottenValue, out float IsWetValue, out float IsFrozenValue, out float IsOnFireValue, out float currentHeat, out bool IsRotten, out bool IsWet, out bool IsFrozen, out bool IsOnFire, out bool WasOnFire)
 	{
 		IsRottenValue = conditionGraphics .IsRottenValue;
