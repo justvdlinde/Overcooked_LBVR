@@ -1,17 +1,17 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Utils.Core.Attributes;
 
+[Flags]
 public enum StatusCondition
 {
-	Rotten,
-	Wet,
-	Frozen,
-	OnFire
+	None = 0,
+	Rotten = 1,
+	Wet = 2,
+	Frozen = 4,
+	OnFire = 8
 }
 
 public enum StatusConditionHeatSource
@@ -20,178 +20,148 @@ public enum StatusConditionHeatSource
 	Wet,
 	Cold
 }
-public class IngredientStatusCondition : MonoBehaviour
+
+public class IngredientStatusCondition : MonoBehaviourPunCallbacks
 {
-
-	[field: SerializeField]
-	public bool IsRotten { get; private set; }
-	[field: SerializeField]
-	public bool IsWet { get; private set; }
-	[field: SerializeField]
-	public bool IsFrozen { get; private set; }
-	[field: SerializeField]
-	public bool IsOnFire { get; private set; }
-
-	public bool WasOnFire { get; private set; }
-
-
 	[SerializeField] private Ingredient connectedIngredient = null;
-	public bool CanCook => currentHeat >= 0f;
-	public bool CanChop => currentHeat >= -30f && !IsFrozen;
-	public bool CanPickUp => !IsOnFire;
-
-	public float CurrentHeat => currentHeat;
-
-	private float maxHeat = 100f;
-	public float currentHeat = 0f;
-	private float onFireValue = 75f;
-	private float wetValue = -30f;
-	private float frozenValue = -75f;
-	private float minHeat = -100f;
-
 	[SerializeField] private IngredientStatusConditionGraphics conditionGraphics = null;
 
-	[SerializeField] private PhotonView photonView = null;
+	[field: SerializeField]
+	public StatusCondition Condition { get; private set; }
+	[field: SerializeField]
+	public float CurrentHeat { get; private set; }
+	[field: SerializeField]
+
+	public bool WasOnFire { get; private set; }
+	public bool IsRotten => Condition.HasFlag(StatusCondition.Rotten);
+	public bool IsWet => Condition.HasFlag(StatusCondition.Wet);
+	public bool IsFrozen => Condition.HasFlag(StatusCondition.Frozen);
+	public bool IsOnFire => Condition.HasFlag(StatusCondition.OnFire);
+
+	public bool CanCook => CurrentHeat >= 0f;
+	public bool CanChop => CurrentHeat >= -30f && !IsFrozen;
+	public bool CanPickUp => !IsOnFire;
+
+	private const float MaxHeat = 100f;
+	private const float OnFireValue = 75f;
+	private const float WetValue = -30f;
+	private const float FrozenValue = -75f;
+	private const float MinHeat = -100f;
+
+	[Header("Debugging")]
+	public StatusCondition testCondition = StatusCondition.Frozen;
+	public bool testInstantUpdateParticles = false;
+
+	public override void OnPlayerEnteredRoom(PhotonNetworkedPlayer newPlayer)
+	{
+		if (PhotonNetwork.IsMasterClient)
+			SendSyncData(newPlayer);
+	}
+
+	private void SendSyncData(PhotonNetworkedPlayer player)
+	{
+		photonView.RPC(nameof(CopyValuesRPC), player, Condition, CurrentHeat, WasOnFire, conditionGraphics.IsRottenValue, conditionGraphics.IsWetValue, conditionGraphics.IsFrozenValue, conditionGraphics.IsOnFireValue);
+	}
 
 	public bool IsIngredientPreparedProperly()
 	{
 		return !IsOnFire && !IsWet && !IsRotten && !IsFrozen && !WasOnFire;
 	}
 
-	public StatusCondition c = StatusCondition.Frozen;
-	public bool updateP = false;
-
-	[Button]
-	public void TestAddCondition()
-	{
-		AddStatusCondition(c, updateP);
-	}
-
-	[Button]
-	public void TestRemoveCondition()
-	{
-		RemoveStatusCondition(c, updateP);
-	}
-
-	public void AddStatusCondition(StatusCondition condition, bool instantUpdateParticles = true)
-	{
-		photonView.RPC(nameof(AddStatusConditionRPC), RpcTarget.All, condition, instantUpdateParticles);
+	public void SetStatusCondition(StatusCondition condition, bool instantUpdateParticles = true)
+    {
+		photonView.RPC(nameof(SetStatusConditionRPC), RpcTarget.All, condition, instantUpdateParticles);
 	}
 
 	[PunRPC]
-	private void AddStatusConditionRPC(StatusCondition condition, bool instantUpdateParticles)
+	private void SetStatusConditionRPC(StatusCondition condition, bool instantUpdateParticles)
 	{
-		switch (condition)
-		{
-			case StatusCondition.Rotten:
-				IsRotten = true;
-				break;
-			case StatusCondition.Wet:
-				IsWet = true;
-				break;
-			case StatusCondition.Frozen:
-				IsFrozen = true;
-				break;
-			case StatusCondition.OnFire:
-				IsOnFire = true;
-				WasOnFire = true;
-				break;
-			default:
-				break;
-		}
+		Condition = condition;
 		if (photonView.IsMine && instantUpdateParticles)
 			conditionGraphics.AddStatusCondition(condition);
 	}
 
-	public void RemoveStatusCondition(StatusCondition condition, bool instantUpdateParticles = true)
+	public StatusCondition AddStatusCondition(StatusCondition condition, StatusCondition add)
 	{
-		photonView.RPC(nameof(RemoveStatusConditionRPC), RpcTarget.All, condition, instantUpdateParticles);
+		return condition |= add;
 	}
 
-	[PunRPC]
-	private void RemoveStatusConditionRPC(StatusCondition condition, bool instantUpdateParticles)
+	public StatusCondition RemoveStatusCondition(StatusCondition condition, StatusCondition remove)
 	{
-		switch (condition)
-		{
-			case StatusCondition.Rotten:
-				IsRotten = false;
-				break;
-			case StatusCondition.Wet:
-				IsWet = false;
-				break;
-			case StatusCondition.Frozen:
-				IsFrozen = false;
-				break;
-			case StatusCondition.OnFire:
-				IsOnFire = false;
-				break;
-			default:
-				break;
-		}
-		if(photonView.IsMine && instantUpdateParticles)
-			conditionGraphics.RemoveStatusCondition(condition);
+		return condition &= ~remove;
 	}
 
 	public void AddHeat(float heatStrength, StatusConditionHeatSource sourceType)
 	{
 		if (IsOnFire && sourceType == StatusConditionHeatSource.Heat)
 			return;
-		if (WasOnFire && currentHeat >= 0.0 && sourceType == StatusConditionHeatSource.Heat)
+		if (WasOnFire && CurrentHeat >= 0.0 && sourceType == StatusConditionHeatSource.Heat)
 			return;
 		if (IsWet && sourceType == StatusConditionHeatSource.Wet)
 			return;
 		if (IsFrozen && sourceType == StatusConditionHeatSource.Cold)
 			return;
 
-		float maxHeatLocal = (connectedIngredient.NeedsToBeCooked && connectedIngredient.GetCookState() != CookState.Burned) ? 0.0f : maxHeat;
-		currentHeat += heatStrength;
-		currentHeat = Mathf.Clamp(currentHeat, minHeat, maxHeatLocal);
-
+		float maxHeatLocal = (connectedIngredient.NeedsToBeCooked && connectedIngredient.GetCookState() != CookState.Burned) ? 0.0f : MaxHeat;
+		CurrentHeat += heatStrength;
+		CurrentHeat = Mathf.Clamp(CurrentHeat, MinHeat, maxHeatLocal);
 
 		if (sourceType == StatusConditionHeatSource.Wet)
 		{
 			if (IsFrozen)
 				return;
-			currentHeat = -30f;
-			RemoveStatusCondition(StatusCondition.Frozen, false);
-			// force set particles here
-			AddStatusCondition(StatusCondition.Wet, true);
-			RemoveStatusCondition(StatusCondition.OnFire, false);
+			CurrentHeat = WetValue;
+			StatusCondition newCondition = Condition;
+			newCondition = RemoveStatusCondition(newCondition, StatusCondition.Frozen);
+			newCondition = AddStatusCondition(newCondition, StatusCondition.Wet);
+			newCondition = RemoveStatusCondition(newCondition, StatusCondition.OnFire);
+			SetStatusCondition(newCondition);
 		}
 		else
 		{
-			if (IsWet && currentHeat >= 0.0f)
+			if (IsWet && CurrentHeat >= 0.0f)
 			{
-				RemoveStatusCondition(StatusCondition.Frozen, false);
-				RemoveStatusCondition(StatusCondition.Wet, false);
-				RemoveStatusCondition(StatusCondition.OnFire, false);
+				StatusCondition newCondition = Condition;
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.Frozen);
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.Wet);
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.OnFire);
+				SetStatusCondition(newCondition);
 			}
 
-			if (IsFrozen && currentHeat >= 0.0f)
-			{
-				RemoveStatusCondition(StatusCondition.Frozen, false);
-				RemoveStatusCondition(StatusCondition.Wet, false);
-				RemoveStatusCondition(StatusCondition.OnFire, false);
+            if (IsFrozen && CurrentHeat >= 0.0f)
+            {
+				StatusCondition newCondition = Condition;
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.Frozen);
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.Wet);
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.OnFire);
+				SetStatusCondition(newCondition);
+            }
+
+            if (IsOnFire && CurrentHeat <= 0.0f)
+            {
+				StatusCondition newCondition = Condition;
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.Frozen);
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.Wet);
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.OnFire);
+				SetStatusCondition(newCondition);
 			}
 
-			if (IsOnFire && currentHeat <= 0.0f)
-			{
-				RemoveStatusCondition(StatusCondition.Frozen, false);
-				RemoveStatusCondition(StatusCondition.Wet, false);
-				RemoveStatusCondition(StatusCondition.OnFire, false);
+			if (CurrentHeat < FrozenValue)
+            {
+				StatusCondition newCondition = Condition;
+				newCondition = AddStatusCondition(newCondition, StatusCondition.Frozen);
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.Wet);
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.OnFire);
+				SetStatusCondition(newCondition);
 			}
 
-			if (currentHeat < frozenValue)
-			{
-				AddStatusCondition(StatusCondition.Frozen, false);
-				RemoveStatusCondition(StatusCondition.Wet, false);
-				RemoveStatusCondition(StatusCondition.OnFire, false);
-			}
-			if (currentHeat > onFireValue)
-			{
-				RemoveStatusCondition(StatusCondition.Frozen, false);
-				RemoveStatusCondition(StatusCondition.Wet, false);
-				AddStatusCondition(StatusCondition.OnFire, false);
+			if (CurrentHeat > OnFireValue)
+            {
+				StatusCondition newCondition = Condition;
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.Frozen);
+				newCondition = RemoveStatusCondition(newCondition, StatusCondition.Wet);
+				newCondition = AddStatusCondition(newCondition, StatusCondition.OnFire);
+				SetStatusCondition(newCondition);
 			}
 		}
 	}
@@ -200,34 +170,44 @@ public class IngredientStatusCondition : MonoBehaviour
 	{
 		if (copyFrom == null)
 			return;
-		copyFrom.SendValues(out float IsRottenValue, out float IsWetValue, out float IsFrozenValue, out float IsOnFireValue, out currentHeat, out bool isRotten, out bool isWet, out bool isFrozen, out bool isOnFire, out bool wasOnFire);
 
-		photonView.RPC(nameof(SetCopyValuesRPC), RpcTarget.All, IsRottenValue, IsWetValue, IsFrozenValue, IsOnFireValue, currentHeat, isRotten, isWet, isFrozen, isOnFire, wasOnFire);
+		copyFrom.SendValues(out StatusCondition condition, out float currentHeat, out bool wasOnFire, out float rottenValue, out float wetValue, out float frozenValue, out float onFireValue);
+		photonView.RPC(nameof(CopyValuesRPC), RpcTarget.All, condition, currentHeat, wasOnFire, rottenValue, wetValue, frozenValue, onFireValue);
 	}
 
 	[PunRPC]
-	public void SetCopyValuesRPC(float IsRottenValue, float IsWetValue, float IsFrozenValue, float IsOnFireValue, float currentHeat, bool isRotten, bool isWet, bool isFrozen, bool isOnFire, bool wasOnFire)
+	public void CopyValuesRPC(StatusCondition condition, float currentHeat, bool wasOnFire, float rottenValue, float wetValue, float frozenValue, float onFireValue)
 	{
-		conditionGraphics.SendValues(IsRottenValue, IsWetValue, IsFrozenValue, IsOnFireValue);
-		this.IsFrozen = isFrozen;
-		this.IsRotten = isRotten;
-		this.IsOnFire = isOnFire;
-		this.IsWet = isWet;
-		this.WasOnFire = wasOnFire;
+		conditionGraphics.SendValues(rottenValue, wetValue, frozenValue, onFireValue);
+		Condition = condition;
+		WasOnFire = wasOnFire;
+		CurrentHeat = currentHeat;
 	}
 
 	// read values from parent status condition when being cut into 2 parts
-	public void SendValues(out float IsRottenValue, out float IsWetValue, out float IsFrozenValue, out float IsOnFireValue, out float currentHeat, out bool IsRotten, out bool IsWet, out bool IsFrozen, out bool IsOnFire, out bool WasOnFire)
+	public void SendValues(out StatusCondition condition, out float currentHeat, out bool wasOnFire, out float rottenValue, out float wetValue, out float frozenValue, out float onFireValue)
 	{
-		IsRottenValue = conditionGraphics .IsRottenValue;
-		IsWetValue = conditionGraphics.IsWetValue;
-		IsFrozenValue = conditionGraphics.IsFrozenValue;
-		IsOnFireValue = conditionGraphics.IsOnFireValue;
-		IsRotten = this.IsRotten;
-		IsWet = this.IsWet;
-		IsFrozen = this.IsFrozen;
-		IsOnFire = this.IsOnFire;
-		WasOnFire = this.WasOnFire;
-		currentHeat = this.currentHeat;
+		condition = Condition;
+		currentHeat = CurrentHeat;
+		wasOnFire = WasOnFire;
+
+		rottenValue = conditionGraphics.IsRottenValue;
+		wetValue = conditionGraphics.IsWetValue;
+		frozenValue = conditionGraphics.IsFrozenValue;
+		onFireValue = conditionGraphics.IsOnFireValue;
 	}
+
+#if UNITY_EDITOR
+	[Button]
+	public void TestAddCondition()
+	{
+		SetStatusCondition(AddStatusCondition(Condition, testCondition));
+	}
+
+	[Button]
+	public void TestRemoveCondition()
+	{
+		SetStatusCondition(RemoveStatusCondition(Condition, testCondition));
+	}
+#endif
 }

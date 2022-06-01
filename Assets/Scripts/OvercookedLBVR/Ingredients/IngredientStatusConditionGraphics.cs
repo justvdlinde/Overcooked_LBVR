@@ -182,7 +182,8 @@ public class IngredientStatusConditionGraphics : MonoBehaviour, IRottable
 		}
 		countdownCanvas.SetActive(false);
 
-		connectedCondition.AddStatusCondition(StatusCondition.Rotten);
+		StatusCondition newCondition = connectedCondition.AddStatusCondition(connectedCondition.Condition, StatusCondition.Rotten);
+		connectedCondition.SetStatusCondition(newCondition);
 		isFloorRotting = false;
 	}
 
