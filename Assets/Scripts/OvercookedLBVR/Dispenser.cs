@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using UnityEngine;
 using Utils.Core.Attributes;
 
@@ -11,28 +12,35 @@ public class Dispenser : MonoBehaviourPun
     [SerializeField] private ForceMode forceMode = ForceMode.Force;
     [SerializeField] private AudioSource AudioSource;
 
+    private DateTime timeLastAcitvated;
+    private const float minSecondsBetweenDispense = 0.5f;
 
-    public void DispenseObject(Rigidbody obj)
+    public void DispenseObject()
     {
-        GameObject g = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, spawnPoint.rotation);
-        g.AddComponent(typeof(DestroyOnGameStart));
-        photonView.RPC(nameof(DispenseObjectRPC), RpcTarget.All);
-        photonView.TransferOwnership(-1);
-
-        //instance.AddForce(instance.transform.forward * forceAmount, forceMode);
+        photonView.RPC(nameof(RequestDispenseRPC), RpcTarget.MasterClient);
     }
 
     [PunRPC]
-    private void DispenseObjectRPC(PhotonMessageInfo info)
+    private void RequestDispenseRPC()
     {
-        AudioSource.Play();
+        if (PhotonNetwork.IsMasterClient)
+        {
+            TimeSpan span = DateTime.Now.Subtract(timeLastAcitvated);
+            if (span.TotalSeconds > minSecondsBetweenDispense)
+            {
+                InstantiateObject();
+                timeLastAcitvated = DateTime.Now;
+            }
+        }
     }
 
     [Button]
-    public void DispenseObject()
+    private void InstantiateObject()
     { 
-        DispenseObject(prefab);
-
+        GameObject instance = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, spawnPoint.rotation);
+        // TODO: place this on prefabs, as this won't work for players joining late
+        instance.AddComponent(typeof(DestroyOnGameStart));
+        AudioSource.Play();
     }
 }
 
