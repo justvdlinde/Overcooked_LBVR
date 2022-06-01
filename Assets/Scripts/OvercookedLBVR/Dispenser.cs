@@ -11,15 +11,12 @@ public class Dispenser : MonoBehaviourPun
     [SerializeField] private ForceMode forceMode = ForceMode.Force;
     [SerializeField] private AudioSource AudioSource;
 
-
-    public void DispenseObject(Rigidbody obj)
+	public void DispenseObject(Rigidbody obj)
     {
         GameObject g = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, spawnPoint.rotation);
         g.AddComponent(typeof(DestroyOnGameStart));
         photonView.RPC(nameof(DispenseObjectRPC), RpcTarget.All);
         photonView.TransferOwnership(-1);
-
-        //instance.AddForce(instance.transform.forward * forceAmount, forceMode);
     }
 
     [PunRPC]

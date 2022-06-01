@@ -157,19 +157,19 @@ public class FoodStack : MonoBehaviourPunCallbacks
 
 		}
         
-        float dist = 0.05f;
+        //float dist = 0.05f;
 
-        Vector3 newSlideDir = plateCollider.ClosestPoint(transform.position - Vector3.up * 0.15f);
-        Vector3 newSlideDirLocal = transform.InverseTransformPoint(newSlideDir);
-        newSlideDirLocal.y = 0f;
-        newSlideDir = Vector3.Lerp(slideDir, transform.TransformPoint(newSlideDirLocal), 0.15f);
+        //Vector3 newSlideDir = plateCollider.ClosestPoint(transform.position - Vector3.up * 0.15f);
+        //Vector3 newSlideDirLocal = transform.InverseTransformPoint(newSlideDir);
+        //newSlideDirLocal.y = 0f;
+        //newSlideDir = Vector3.Lerp(slideDir, transform.TransformPoint(newSlideDirLocal), 0.15f);
 
-        //newSlideDir = transform.InverseTransformPoint(newSlideDir);
-        //newSlideDir.y = 0f;
-        //newSlideDir = transform.TransformPoint(newSlideDir);
-        slideDir = newSlideDir;
+        ////newSlideDir = transform.InverseTransformPoint(newSlideDir);
+        ////newSlideDir.y = 0f;
+        ////newSlideDir = transform.TransformPoint(newSlideDir);
+        //slideDir = newSlideDir;
 
-        Debug.DrawRay(transform.position + transform.InverseTransformDirection(Vector3.up * 0.05f), slideDir);
+        //Debug.DrawRay(transform.position + transform.InverseTransformDirection(Vector3.up * 0.05f), slideDir);
 	}
 
 	private void OnDrawGizmos()
