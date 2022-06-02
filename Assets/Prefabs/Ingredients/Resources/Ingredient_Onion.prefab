@@ -824,7 +824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
       propertyPath: connectedColliders.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
       propertyPath: choppingAudioClips.Array.data[0]
@@ -833,10 +833,22 @@ PrefabInstance:
     - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
       propertyPath: connectedColliders.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4368336952628129218}
+    - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
+      propertyPath: connectedColliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 7494628875809899818}
+    - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
+      propertyPath: connectedColliders.Array.data[2]
+      value: 
+      objectReference: {fileID: 3897358796072179605}
+    - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
+      propertyPath: connectedColliders.Array.data[3]
+      value: 
+      objectReference: {fileID: 8241855823075278666}
     - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
       propertyPath: processInstantiationData.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
       propertyPath: processInstantiationData.Array.data[0].prefab
