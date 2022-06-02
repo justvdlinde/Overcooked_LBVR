@@ -1,9 +1,10 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils.Core.Attributes;
 
-public class PlateWashing : MonoBehaviour, IRottable
+public class PlateWashing : MonoBehaviourPun, IRottable
 {
     public enum PlateState
     {
@@ -45,10 +46,14 @@ public class PlateWashing : MonoBehaviour, IRottable
 
 	private void Start()
 	{
-        if (IsPlateClean)
-            SetPlateClean();
-        else
-            SetPlateDirty();
+		if(PhotonNetwork.IsMasterClient)
+		{
+
+			if (IsPlateClean)
+				SetPlateClean();
+			else
+			   SetPlateDirty();
+		}
 	}
 
 	private void Update()
@@ -76,14 +81,20 @@ public class PlateWashing : MonoBehaviour, IRottable
     [Button]
     public void SetPlateDirty()
 	{
-        isPlateClean = false;
-        currentPlateState = PlateState.Dirty;
-        cleanGraphics.gameObject.SetActive(isPlateClean);
-        dirtyGraphics.gameObject.SetActive(!isPlateClean);
+		photonView.RPC(nameof(SetPlateDirtyRPC), RpcTarget.All);
+	}
 
-        foodStack.RemoveAllIngredients();
+	[PunRPC]
+	public void SetPlateDirtyRPC()
+	{
+		isPlateClean = false;
+		currentPlateState = PlateState.Dirty;
+		cleanGraphics.gameObject.SetActive(isPlateClean);
+		dirtyGraphics.gameObject.SetActive(!isPlateClean);
 
-        foreach (var item in toggleComponentsEnableOnClean)
+		foodStack.RemoveAllIngredients();
+
+		foreach (var item in toggleComponentsEnableOnClean)
 		{
 			item.SetActive(false);
 		}
@@ -91,23 +102,29 @@ public class PlateWashing : MonoBehaviour, IRottable
 		// disable other scripts other than washable and physics
 	}
 
-    [Button]
+	[Button]
     public void SetPlateClean()
 	{
-        currentPlateState = PlateState.Clean;
-        if(isPlateClean == false)
-            isCleanedParticles.Play();
-        isPlateClean = true;
-        cleanGraphics.gameObject.SetActive(isPlateClean);
-        dirtyGraphics.gameObject.SetActive(!isPlateClean);
+		photonView.RPC(nameof(SetPlateCleanRPC), RpcTarget.All);
+	}
+
+	[PunRPC]
+	public void SetPlateCleanRPC()
+	{
+		currentPlateState = PlateState.Clean;
+		if (isPlateClean == false)
+			isCleanedParticles.Play();
+		isPlateClean = true;
+		cleanGraphics.gameObject.SetActive(isPlateClean);
+		dirtyGraphics.gameObject.SetActive(!isPlateClean);
 
 		foreach (var item in toggleComponentsEnableOnClean)
 		{
 			item.SetActive(true);
 		}
-        // enable all plate functionality
-        // flip plate asset
-    }
+		// enable all plate functionality
+		// flip plate asset
+	}
 
 	public void SetIsRotting(bool isRotting)
 	{
