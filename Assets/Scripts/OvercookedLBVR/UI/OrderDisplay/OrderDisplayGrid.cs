@@ -35,6 +35,7 @@ public class OrderDisplayGrid : MonoBehaviour
     private OrderDisplayIngredientIcon CreateIcon(IngredientData ingredient)
     {
         OrderDisplayIngredientIcon icon = Instantiate(ingredientIconPrefab, grid.transform);
+        icon.transform.SetAsFirstSibling();
         icon.SetSprite(ingredientsData.GetCorrespondingData(ingredient.ingredientType).ingredientIcon);
         iconsInGrid.Add(icon);
         return icon;
