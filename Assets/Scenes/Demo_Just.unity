@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4514066, g: 0.50054705, b: 0.5704241, a: 1}
+  m_IndirectSpecularColor: {r: 0.45140654, g: 0.5005469, b: 0.5704253, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15300,7 +15300,6 @@ MonoBehaviour:
   spawnPoint: {fileID: 1511852268}
   AudioSource: {fileID: 50344609}
   instantiateWithForce: 0
-  forceDirection: {x: 0, y: 0, z: 0}
   forceAmount: 0
   forceMode: 0
   anim: {fileID: 0}
@@ -28558,7 +28557,6 @@ MonoBehaviour:
   spawnPoint: {fileID: 928964795}
   AudioSource: {fileID: 150678196}
   instantiateWithForce: 0
-  forceDirection: {x: 0, y: 0, z: 0}
   forceAmount: 0
   forceMode: 0
   anim: {fileID: 0}
@@ -36242,10 +36240,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1414999815571879219, guid: 4e31bb0a136bbf4429201e1983f1f5f3, type: 3}
-      propertyPath: forceAmount
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 1414999815571879219, guid: 4e31bb0a136bbf4429201e1983f1f5f3, type: 3}
       propertyPath: forceDirection.x
       value: -0.06
       objectReference: {fileID: 0}
@@ -38067,6 +38061,10 @@ PrefabInstance:
       propertyPath: m_PlayOnAwake
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2501857049157653802, guid: ae6c892c43fa2a14fb859bf9e0d4a29c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2768726622231627748, guid: ae6c892c43fa2a14fb859bf9e0d4a29c, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
@@ -38170,6 +38168,14 @@ PrefabInstance:
     - target: {fileID: 4475101008328732186, guid: ae6c892c43fa2a14fb859bf9e0d4a29c, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6027
+      objectReference: {fileID: 0}
+    - target: {fileID: 4838738796446455655, guid: ae6c892c43fa2a14fb859bf9e0d4a29c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4885710115937781954, guid: ae6c892c43fa2a14fb859bf9e0d4a29c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae6c892c43fa2a14fb859bf9e0d4a29c, type: 3}
@@ -41213,7 +41219,6 @@ MonoBehaviour:
   spawnPoint: {fileID: 1860915525}
   AudioSource: {fileID: 1195969214}
   instantiateWithForce: 0
-  forceDirection: {x: 0, y: 0, z: 0}
   forceAmount: 0
   forceMode: 0
   anim: {fileID: 0}
@@ -69986,7 +69991,6 @@ MonoBehaviour:
   spawnPoint: {fileID: 2042792617}
   AudioSource: {fileID: 1774793932}
   instantiateWithForce: 0
-  forceDirection: {x: 0, y: 0, z: 0}
   forceAmount: 0
   forceMode: 0
   anim: {fileID: 0}
@@ -77699,7 +77703,6 @@ MonoBehaviour:
   spawnPoint: {fileID: 1843305922303728197}
   AudioSource: {fileID: 4751740227223569337}
   instantiateWithForce: 0
-  forceDirection: {x: 0, y: 0, z: 0}
   forceAmount: 0
   forceMode: 0
   anim: {fileID: 0}

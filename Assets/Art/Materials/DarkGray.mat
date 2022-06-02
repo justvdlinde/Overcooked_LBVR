@@ -8,18 +8,21 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: DarkGray
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 32756216352df0a4398d90e7148e922a, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_b19b9f04e69c42b582d5aa27eca5fe10:
+        m_Texture: {fileID: 2800000, guid: 4638aac42feac3142a5d1ea0f316c1f9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -44,7 +47,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _LightbakePosterization_2ef269b2df334dc49c8353ac0c1bb8f6_Texture2DE585D289_3481019795:
+        m_Texture: {fileID: 2800000, guid: 02e6aef190b51664286e032e28634947, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 0271779ee4aee774189c1968a9a3ae7c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex_2:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -58,6 +69,26 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_002622a22cd643f69e5bf45a81808638_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 9e999d89745a95c478d18bb83e3acc06, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_82355f0f14b44fcdbb2ff87ddabe4c5d_Texture_1:
+        m_Texture: {fileID: 2800000, guid: b7b0aeed7f166ed4a9c81dc67686e913, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_9591d03582e242709247b3fdd25ecd11_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 31ccdd17b578428498f77a018911574e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_d68db852c0474774aa63eedfa3329e26_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 597558d90a73b63408589464f400326f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_eea17de3de4749469a79716d00e945c6_Texture_1:
+        m_Texture: {fileID: 2800000, guid: cf09edc6dfbbabe408af224eecde0b9f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -77,6 +108,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Boolean_0ddfb2b52da94cc1988620b3a1fca54c: 0
+    - Boolean_ab4a6d00114f419fa2e6e6c968d2001c: 0
+    - Vector1_10098053eb664922a997fdcbc64f92b4: 0
+    - Vector1_6a098b3a52c748dda8f49b631cf94958: 0
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -88,24 +123,29 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _FrozenValue: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.29
     - _GlossyReflections: 1
     - _Metallic: 1
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _OnFireValue: 0
     - _Parallax: 0.02
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _RottenValue: 0
     - _Smoothness: 0.713
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
     - _UVSec: 0
+    - _WetValue: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_bf0fd805e6d2491abc06222e36504282: {r: 0.8207547, g: 0.1355019, b: 0.1355019, a: 0}
     - _BaseColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
     - _Color: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

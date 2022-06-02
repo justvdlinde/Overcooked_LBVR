@@ -56,7 +56,7 @@ public class Dispenser : MonoBehaviourPun
 
         yield return new WaitForSeconds(0.25f);
 
-        GameObject instance = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, spawnPoint.rotation);
+        GameObject instance = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, Quaternion.identity);
         // TODO: place this on prefabs, as this won't work for players joining late
         instance.AddComponent(typeof(DestroyOnGameStart));
         AudioSource.Play();
