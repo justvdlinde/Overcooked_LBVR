@@ -346,13 +346,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
+      propertyPath: connectedColliders.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
       propertyPath: choppingAudioClips.Array.data[0]
       value: 
       objectReference: {fileID: 8300000, guid: 186abbeca9cf39a4caf21417f83b28e1, type: 3}
     - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
       propertyPath: connectedColliders.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2535708016721499776}
     - target: {fileID: 7734022972201750873, guid: e0395b0fa21ca5047a500683d33df32b, type: 3}
       propertyPath: connectedColliders.Array.data[1]
       value: 
