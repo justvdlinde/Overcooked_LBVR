@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System;
+using System.Collections;
 using UnityEngine;
 using Utils.Core;
 using Utils.Core.Attributes;
@@ -13,12 +14,15 @@ public class Dispenser : MonoBehaviourPun
 
     [Header("Force")]
     [SerializeField] private bool instantiateWithForce = false;
-    [SerializeField] private Vector3 forceDirection;
     [SerializeField] private float forceAmount = 1;
     [SerializeField] private ForceMode forceMode = ForceMode.Force;
 
+    [SerializeField] private Animator anim = null;
+
     private DateTime timeLastAcitvated;
-    private const float minSecondsBetweenDispense = 0.5f;
+    private const float minSecondsBetweenDispense = 4.5f;
+
+    private bool isDispensing = false;
 
     public void DispenseObject()
     {
@@ -41,16 +45,26 @@ public class Dispenser : MonoBehaviourPun
 
     [Button]
     private void InstantiateObject()
-    { 
+    {
+        StartCoroutine(InstantiateDelayed());
+    }
+
+    private IEnumerator InstantiateDelayed()
+	{
+        if (anim != null)
+            anim.SetTrigger("Dispense");
+
+        yield return new WaitForSeconds(0.25f);
+
         GameObject instance = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, spawnPoint.rotation);
         // TODO: place this on prefabs, as this won't work for players joining late
         instance.AddComponent(typeof(DestroyOnGameStart));
         AudioSource.Play();
-        if(instantiateWithForce)
+        if (instantiateWithForce)
         {
-            if(instance.TryGetComponent(out Rigidbody rigidbody))
+            if (instance.TryGetComponent(out Rigidbody rigidbody))
             {
-                rigidbody.AddForce(forceDirection * forceAmount, forceMode);
+                rigidbody.AddForce(spawnPoint.forward * forceAmount, forceMode);
             }
         }
     }
@@ -58,7 +72,7 @@ public class Dispenser : MonoBehaviourPun
     private void OnDrawGizmosSelected()
     {
         if(instantiateWithForce)
-            GizmosUtility.DrawArrow(spawnPoint.position, forceDirection);
+            GizmosUtility.DrawArrow(spawnPoint.position, spawnPoint.forward.normalized * 0.15f, 0.05f);
     }
 }
 

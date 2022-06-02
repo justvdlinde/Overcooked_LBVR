@@ -1,8 +1,11 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils.Core.Attributes;
+using Utils.Core.Events;
+using Utils.Core.Services;
 
 public class DirtyPlateSpawner : MonoBehaviourPun
 {
@@ -13,6 +16,54 @@ public class DirtyPlateSpawner : MonoBehaviourPun
     [SerializeField] private ConfigurableJoint joint = null;
     [SerializeField] private Collider checkCollider = null;
     [SerializeField] private LayerMask layermask = 0;
+
+    private GlobalEventDispatcher globalEventDispatcher = null;
+	[SerializeField] private float dishRespawnDelay = 10f;
+
+	private void OnEnable()
+	{
+        if (globalEventDispatcher == null)
+            globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+
+        globalEventDispatcher.Subscribe<DishDeliveredEvent>(OnDishDeliveredEvent);
+        globalEventDispatcher.Subscribe<PlateDestroyedEvent>(OnPlateDestroyedEvent);
+    }
+
+	private void OnDisable()
+	{
+        globalEventDispatcher.Unsubscribe<DishDeliveredEvent>(OnDishDeliveredEvent);
+        globalEventDispatcher.Unsubscribe<PlateDestroyedEvent>(OnPlateDestroyedEvent);
+    }
+
+	private void OnPlateDestroyedEvent(PlateDestroyedEvent obj)
+	{
+        photonView.RPC(nameof(PlateDestroyedRPC), RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void PlateDestroyedRPC()
+	{
+        StartCoroutine(SpawnDishInDelay());
+    }
+
+    private void OnDishDeliveredEvent(DishDeliveredEvent _event)
+	{
+        photonView.RPC(nameof(DishDeliveredRPC), RpcTarget.All);
+	}
+
+    [PunRPC]
+    private void DishDeliveredRPC()
+	{
+        StartCoroutine(SpawnDishInDelay());
+	}
+
+    private IEnumerator SpawnDishInDelay()
+	{
+        yield return new WaitForSeconds(dishRespawnDelay);
+
+        if (PhotonNetwork.IsMasterClient)
+            DispenseObject();
+	}
 
 	private void Update()
 	{

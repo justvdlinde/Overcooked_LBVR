@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2251225072059084487
 Transform:
@@ -113,7 +113,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2251225072363306664
 Transform:
@@ -220,7 +220,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2251225072395525860
 Transform:
@@ -315,7 +315,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2251225072724400583
 Transform:
@@ -410,7 +410,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2251225073184322830
 Transform:
@@ -545,7 +545,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2251225073404672721
 Transform:
@@ -639,7 +639,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2251225073659882376
 Transform:
@@ -715,6 +715,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_BigPipe_Connector_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1635040709485900, guid: dcd221c4e8d343f4db585edef9de4dce, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4321856032439466, guid: dcd221c4e8d343f4db585edef9de4dce, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -787,15 +791,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1569142240407545398, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.00000004175363
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1569142240407545398, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.032100014
+      value: 0.032100063
       objectReference: {fileID: 0}
     - target: {fileID: 1569142240407545398, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 0
+      value: 0.00000002963436
       objectReference: {fileID: 0}
     - target: {fileID: 3114525147041215500, guid: 468752e5efdd9324194b72cff176a1dd, type: 3}
       propertyPath: m_Name

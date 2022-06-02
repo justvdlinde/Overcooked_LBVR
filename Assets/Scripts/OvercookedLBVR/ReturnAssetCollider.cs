@@ -2,9 +2,18 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils.Core.Events;
+using Utils.Core.Services;
 
 public class ReturnAssetCollider : MonoBehaviour
 {
+	private GlobalEventDispatcher globalEventdispatcher = null;
+
+	private void Awake()
+	{
+		globalEventdispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+	}
+
 	private void OnTriggerEnter(Collider other)
 	{
 		ReturnableAsset asset = other.GetComponentInParent<ReturnableAsset>();
@@ -18,6 +27,20 @@ public class ReturnAssetCollider : MonoBehaviour
 		PhotonView photonView = other.GetComponentInParent<PhotonView>();
 		if(photonView == null)
 			photonView = other.GetComponentInChildren<PhotonView>();
+		Plate plate = other.GetComponentInParent<Plate>();
+
+		if(plate != null)
+		{
+			if (!photonView.IsMine)
+				return;
+
+			if (globalEventdispatcher != null)
+				globalEventdispatcher.Invoke<PlateDestroyedEvent>(new PlateDestroyedEvent());
+
+			PhotonNetwork.Destroy(photonView.transform.gameObject);
+
+			return; 
+		}
 
 		if (asset == null && photonView != null)
 		{

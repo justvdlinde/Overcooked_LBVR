@@ -29,15 +29,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: 0.0000000043597947
+      value: 0.000000042045897
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.032100003
+      value: 0.032100033
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: 0.00000003476938
+      value: 0.000000008278423
       objectReference: {fileID: 0}
     - target: {fileID: 6306617225401515552, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_RootOrder
@@ -86,6 +86,18 @@ PrefabInstance:
     - target: {fileID: 6306617225401515559, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_Name
       value: Dispenser_Lettuce Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836545200378293372, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.023232
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836545200378293372, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.10921
+      objectReference: {fileID: 0}
+    - target: {fileID: 7836545200378293372, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0028465
       objectReference: {fileID: 0}
     - target: {fileID: 8019060657202214618, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: prefab

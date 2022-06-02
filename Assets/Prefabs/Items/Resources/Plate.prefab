@@ -938,6 +938,7 @@ MonoBehaviour:
   lastIngredientMustBeBunTop: 1
   ingredientsStack: []
   plateCollider: {fileID: 6817364008715463967}
+  slideDir: {x: 0, y: 0, z: 0}
 --- !u!114 &-2127286866967161279
 MonoBehaviour:
   m_ObjectHideFlags: 0

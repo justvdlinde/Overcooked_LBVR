@@ -29,19 +29,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -1.18423795e-14
+      value: -0.0000000011286948
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.032099996
+      value: 0.032100078
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.z
-      value: -0.000000011589793
+      value: -0.000000018212532
       objectReference: {fileID: 0}
     - target: {fileID: 2572656785857050641, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2979452425531486571, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.40223938
       objectReference: {fileID: 0}
     - target: {fileID: 6306617225401515552, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_RootOrder

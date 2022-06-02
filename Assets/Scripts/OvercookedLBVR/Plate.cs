@@ -1,12 +1,37 @@
 using Photon.Pun;
+using System;
 using UnityEngine;
+using Utils.Core.Events;
+using Utils.Core.Services;
 
 [SelectionBase]
 public class Plate : MonoBehaviourPun
 {
     public FoodStack FoodStack => foodStack;
 
+    
     [SerializeField] private FoodStack foodStack = null;
+
+    private GlobalEventDispatcher globalEventDispatcher = null;
+
+	private void OnEnable()
+	{
+        if (globalEventDispatcher == null)
+            globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+
+        globalEventDispatcher.Subscribe<StartGameEvent>(OnStartGameEvent);
+	}
+
+	private void OnDisable()
+	{
+        globalEventDispatcher.Unsubscribe<StartGameEvent>(OnStartGameEvent);
+    }
+
+    private void OnStartGameEvent(StartGameEvent obj)
+	{
+		if(photonView.IsMine)
+            PhotonNetwork.Destroy(photonView.transform.gameObject);
+    }
 
     public void OnDeliver()
     {
