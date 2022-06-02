@@ -3,8 +3,20 @@ using System.Linq;
 using UnityEngine;
 using Utils.Core;
 
-public class IngredientsData : ScriptableObjectSingleton<IngredientsData>
+public class IngredientsData : ScriptableObject
 {
+    private static IngredientsData instance = null;
+
+    public static IngredientsData Instance
+    {
+        get
+        {
+            if (!instance)
+                instance = Resources.Load<IngredientsData>("IngredientsData");
+            return instance;
+        }
+    }
+
     public List<IngredientData> ingredients;
 
     public IngredientData GetCorrespondingData(IngredientType ingredient)
