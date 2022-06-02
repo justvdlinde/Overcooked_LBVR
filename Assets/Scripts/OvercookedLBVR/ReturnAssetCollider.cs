@@ -16,15 +16,21 @@ public class ReturnAssetCollider : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
+		if (other.GetComponent<PlayerPawn>())
+			return;
+
 		ReturnableAsset asset = other.GetComponentInParent<ReturnableAsset>();
 
-		if(asset != null)
+		if (asset != null)
 		{
 			asset.Return();
 			return;
 		}
 
 		PhotonView photonView = other.GetComponentInParent<PhotonView>();
+		if (photonView.GetComponent<PlayerPawn>() )
+			return;
+
 		if(photonView == null)
 			photonView = other.GetComponentInChildren<PhotonView>();
 		Plate plate = other.GetComponentInParent<Plate>();

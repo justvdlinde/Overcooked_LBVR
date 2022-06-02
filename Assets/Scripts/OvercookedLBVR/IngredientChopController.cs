@@ -60,7 +60,7 @@ public class IngredientChopController : MonoBehaviourPun
 		{
 			EnableColliders(choppingCollider, true);
 
-			if (IsChoppable && doNotChop)
+			if (IsChoppable && !doNotChop)
 			{
 				Chop(choppingCollider.HitDamage);
 			}
