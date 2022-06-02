@@ -33,34 +33,33 @@ MonoBehaviour:
   - AddScoreRPC
   - ApplyBulletDamageRPC
   - ApplyDamageRPC
-  - ApplySauceRPC
+  - AttemptToStartActiveGameRPC
   - ChopRPC
   - ClickRpc
+  - CopyValuesRPC
   - DestroyRpc
   - DispenseObjectRPC
   - GrabbedRPC
   - MoveRPC
+  - OnDeliverRPC
   - OnDownEventRPC
+  - OnDropEventRPC
+  - OnPickupEventRPC
   - OnUpEventRPC
   - ProcessIngredientRPC
   - ReleasedRPC
+  - RemoveAllActiveOrdersRPC
   - RemoveTopIngredientRPC
   - RequestStateRPC
+  - ResetProgressRPC
   - RespawnRPC
+  - SelectionEventRPC
   - SendSyncDataRPC
   - SetCookStateRPC
   - SetStateRPC
+  - SetStatusConditionRPC
   - ShootRPC
   - SubmitActiveOrderRPC
   - SubmitRemoveActiveOrderRPC
-  - AddSauceIngredientRPC
-  - ResetProgressRPC
-  - AddIngredientRPC
-  - CreateNewOrderRPC
-  - DeliverDishesInTriggerRPC
-  - SelectionEventRPC
-  - SetIngredientStateRPC
-  - StartGameRPC
-  - RemoveAllActiveOrdersRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1

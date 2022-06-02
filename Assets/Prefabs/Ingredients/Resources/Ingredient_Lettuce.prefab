@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6701702368280384916
 Transform:
   m_ObjectHideFlags: 0
@@ -490,6 +490,18 @@ PrefabInstance:
       propertyPath: snapController
       value: 
       objectReference: {fileID: 3243728929214684329}
+    - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: colliders.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: colliders.Array.data[0]
+      value: 
+      objectReference: {fileID: 8685556545126606044}
+    - target: {fileID: 59611235620371129, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: colliders.Array.data[1]
+      value: 
+      objectReference: {fileID: 6986182520985628949}
     - target: {fileID: 415704936152818749, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 60
@@ -498,9 +510,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.x
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 901645217182600325, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1698536654608434325, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: m_Name
       value: Ingredient_Lettuce
+      objectReference: {fileID: 0}
+    - target: {fileID: 1773314303885156210, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2999919432314221435, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3254468496341055678, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -509,6 +533,14 @@ PrefabInstance:
     - target: {fileID: 4152286123382452166, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: viewIdField
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4757463236045429650, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551335861602763872, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5554103771995163421, guid: e448997aab4359a4bb3ec48d03adf4e1, type: 3}
       propertyPath: viewIdField

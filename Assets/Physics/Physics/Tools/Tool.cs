@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,9 @@ namespace PhysicsCharacter
 		private Quaternion targetRot = Quaternion.identity;
 		private float maxGripDistance = 2.0f;
 		public bool forcePosition = true;
+
+		public Action OnLocalPickupEvent = null;
+		public Action OnLocalDropEvent = null;
 
 		public Vector3 GetFollowPos(Hand hand)
 		{
@@ -180,8 +184,6 @@ namespace PhysicsCharacter
 			if(toolHandles == null || toolHandles.Count <= 0 || IsBeingHeld(hand))
 				return;
 
-			
-
 			ToolHandle pickedupHandle = toolHandles[0].GetGrabbed(hand, PhysicsPlayerBlackboard.Instance.GetFollowTarget(hand)) as ToolHandle;
 			if(pickedupHandle == null)
 				return;
@@ -195,12 +197,12 @@ namespace PhysicsCharacter
 
 			PhysicsPlayerBlackboard.Instance.PickupItem(hand, pickedupHandle);
 
-			transform.rotation = toolTransformDelegate.GetRotation();
+			//transform.rotation = toolTransformDelegate.GetRotation();
 			targetRot = toolTransformDelegate.GetRotation();
 
-			transform.position = pickedupHandle.transform.position;
-			Vector3 diff = (toolTransformDelegate.GetPosition()) - (rigidBody.worldCenterOfMass + (toolTransformDelegate.GetAnchorPosition() - rigidBody.worldCenterOfMass));
-			transform.position += diff;
+			//transform.position = pickedupHandle.transform.position;
+			//Vector3 diff = (toolTransformDelegate.GetPosition()) - (rigidBody.worldCenterOfMass + (toolTransformDelegate.GetAnchorPosition() - rigidBody.worldCenterOfMass));
+			//transform.position += diff;
 			targetPos = transform.position;
 
 
@@ -308,38 +310,21 @@ namespace PhysicsCharacter
 			return false;
 		}
 
-		public bool invertParent = false;
-		public bool allowInversion = true;
-
 		protected virtual void OnGrabbedCallback(Hand hand, ToolHandle toolHandle)
 		{
 			if(heldHandles < 0)
 				heldHandles = 0;
+
+			if(heldHandles == 0)
+			{
+				OnLocalPickupEvent?.Invoke();
+			}
+
+			rigidBody.centerOfMass = rigidBody.transform.InverseTransformPoint(toolTransformDelegate.GetAnchorPosition());
+
 			heldHandles++;
+
 			rigidBody.useGravity = false;
-
-			
-			//if(allowInversion && heldHandles == 1)
-			//{
-			//	Transform targetTransform = (invertParent) ? transform.parent : transform;
-			//	Vector3 handUp = PhysicsPlayerBlackboard.Instance.GetFollowTarget(hand).up;
-			//	float dot = Vector3.Dot(toolHandle.transform.up * targetTransform.localScale.y, handUp);
-
-			//	if (dot < 0 && targetTransform.localScale.y >= 0)
-			//	{
-			//		Vector3 localScale = targetTransform.localScale;
-			//		localScale.y *= -1;
-			//		targetTransform.localScale = localScale;
-			//	}
-			//	else if(dot >= 0 && targetTransform.localScale.y < 0)
-			//	{
-			//		Vector3 localScale = targetTransform.localScale;
-			//		localScale.y *= -1;
-			//		targetTransform.localScale = localScale;
-			//	}
-			//}
-
-			//ForcePosition();
 
 			photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
 			rootPhotonView.TransferOwnership(PhotonNetwork.LocalPlayer);
@@ -360,11 +345,18 @@ namespace PhysicsCharacter
 			if (rigidBody == null)
 				return;
 
-				if (heldHandles > 0)
+			if (heldHandles > 0)
 				heldHandles--;
 
 			if(heldHandles <= 0)
+			{
 				rigidBody.useGravity = true;
+				rigidBody.ResetCenterOfMass();
+				OnLocalDropEvent?.Invoke();
+			}
+			else
+				rigidBody.centerOfMass = rigidBody.transform.InverseTransformPoint(toolTransformDelegate.GetAnchorPosition());
+
 
 			toolHandle.transform.parent = transform;
 			toolHandle.transform.localPosition = toolHandle.localTransformMirror.localPosition;
@@ -384,7 +376,7 @@ namespace PhysicsCharacter
 
 		protected virtual void MoveUsingPhysics()
 		{
-			rigidBody.velocity *= 0.995f;
+			rigidBody.velocity *= slowDownVelocity;
 
 			Vector3 newVelocity = FindNewVelocity();
 			if(IsValidVelocity(newVelocity.x))

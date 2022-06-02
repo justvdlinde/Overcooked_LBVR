@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,7 +28,6 @@ public class PhysicsButton : MonoBehaviour
 	private bool isPressed = false;
 	private bool previousState = false;
 	private float lerpVal;
-
 
 	public Action PressEvent { get; set; }
 	public Action ReleaseEvent { get; set; }

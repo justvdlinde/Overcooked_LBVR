@@ -22,8 +22,10 @@ public class FoodStack : MonoBehaviourPunCallbacks
     [SerializeField] private bool firstIngredientMustBeBunBottom = true;
     [SerializeField] private bool lastIngredientMustBeBunTop = true;
 
-    // Needs SerializeField for the inspector script to be useable
-    [SerializeField, HideInInspector] private List<Ingredient> ingredientsStack = new List<Ingredient>();
+	// Needs SerializeField for the inspector script to be useable
+	[SerializeField, HideInInspector] private List<Ingredient> ingredientsStack = new List<Ingredient>();
+
+	[SerializeField] private Collider plateCollider = null;
 
     private List<float> ingredientHeights = new List<float>();
     private float totalStackHeight;
@@ -94,6 +96,7 @@ public class FoodStack : MonoBehaviourPunCallbacks
         ingredientPhotonView.TransferOwnership(-1);
         photonView.RPC(nameof(AddIngredientToStackRPC), RpcTarget.Others, ingredientPhotonView.ViewID);
         AddIngredientToStackInternal(ingredient);
+		ingredient.SetCollisionsIgnored(plateCollider, true);
     }
 
 	[PunRPC]
@@ -101,9 +104,10 @@ public class FoodStack : MonoBehaviourPunCallbacks
     {
 		Ingredient ingredient = PhotonView.Find(viewID).GetComponent<Ingredient>();
         AddIngredientToStackInternal(ingredient);
-    }
+		ingredient.SetCollisionsIgnored(plateCollider, true);
+	}
 
-    private void AddIngredientToStackInternal(Ingredient ingredient)
+	private void AddIngredientToStackInternal(Ingredient ingredient)
     {
 		ingredientsStack.Add(ingredient);
         StackToTop(ingredient.SnapController);
@@ -143,6 +147,47 @@ public class FoodStack : MonoBehaviourPunCallbacks
         Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
         return ingredient.CanBeGrabbed();
     }
+    public Vector3 slideDir = Vector3.up;
+	private void Update()
+	{
+		if(ingredientsStack.Count > 0)
+		{
+            if (Vector3.Dot(transform.up, Vector3.up) < 0.4f)
+                RemoveAllIngredients();
+
+		}
+        
+        //float dist = 0.05f;
+
+        //Vector3 newSlideDir = plateCollider.ClosestPoint(transform.position - Vector3.up * 0.15f);
+        //Vector3 newSlideDirLocal = transform.InverseTransformPoint(newSlideDir);
+        //newSlideDirLocal.y = 0f;
+        //newSlideDir = Vector3.Lerp(slideDir, transform.TransformPoint(newSlideDirLocal), 0.15f);
+
+        ////newSlideDir = transform.InverseTransformPoint(newSlideDir);
+        ////newSlideDir.y = 0f;
+        ////newSlideDir = transform.TransformPoint(newSlideDir);
+        //slideDir = newSlideDir;
+
+        //Debug.DrawRay(transform.position + transform.InverseTransformDirection(Vector3.up * 0.05f), slideDir);
+	}
+
+	private void OnDrawGizmos()
+	{
+        Color c = Color.yellow;
+        c.a = 0.25f;
+        Gizmos.color = c;
+        Gizmos.DrawSphere(slideDir, 0.03f);
+	}
+
+	public void RemoveAllIngredients()
+	{
+        int count = ingredientsStack.Count;
+		for (int i = 0; i < count; i++)
+		{
+            RemoveTopIngredient();
+		}
+	}
 
     public Ingredient RemoveTopIngredient()
     {
@@ -156,10 +201,20 @@ public class FoodStack : MonoBehaviourPunCallbacks
     {
         Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
         ingredientsStack.Remove(ingredient);
-        ingredient.SnapController.OnSnap(false);
-        ingredient.transform.SetParent(null);
 
-        float removedIngredientHeight = ingredientHeights[ingredientHeights.Count - 1];
+        if (ingredient.IngredientType.IsSauce())
+        {
+            if (ingredient.photonView.IsMine)
+                PhotonNetwork.Destroy(ingredient.gameObject);
+        }
+        else
+        {
+            ingredient.SnapController.OnSnap(false);
+            ingredient.transform.SetParent(null);
+            ingredient.SetCollisionsIgnored(plateCollider, false);
+        }
+
+		float removedIngredientHeight = ingredientHeights[ingredientHeights.Count - 1];
         ingredientHeights.RemoveAt(ingredientHeights.Count - 1);
 
         totalStackHeight -= removedIngredientHeight;

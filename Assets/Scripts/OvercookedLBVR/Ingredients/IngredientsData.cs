@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Utils.Core;
 
-public class IngredientsData : ScriptableObject
+public class IngredientsData : ScriptableObjectSingleton<IngredientsData>
 {
     public List<IngredientData> ingredients;
 
@@ -16,6 +17,6 @@ public class IngredientsData : ScriptableObject
 public class IngredientData
 {
     public IngredientType ingredientType;
-    public GameObject ingredientPrefab;
-    public GameObject ingredientIcon;
+    public Ingredient ingredientPrefab;
+    public Sprite ingredientIcon;
 }

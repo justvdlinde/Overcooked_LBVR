@@ -1,13 +1,13 @@
 using System;
+using Utils.Core.Attributes;
 
-[Serializable]
 public class Order : IDisposable
 {
     public Action<Order> TimerExceededEvent;
 
     public IngredientType[] ingredients;
     public readonly NetworkedTimer timer;
-    public int orderNumber;
+    [ReadOnly] public int orderNumber;
 
     public Order(IngredientType[] ingredients, NetworkedTimer timer) : this(-1, ingredients, timer) {  }
 

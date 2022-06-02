@@ -7,27 +7,20 @@ using Utils.Core.Services;
 
 public class OrderDisplayManager : MonoBehaviourPun
 {
-    private static OrderDisplayManager Instance;
-
     public OrderDisplay[] OrderDisplays => orderDisplays;
-    [SerializeField] private OrderDisplay[] orderDisplays = null;
+    [SerializeField] protected OrderDisplay[] orderDisplays = null;
 
-    private Dictionary<Order, OrderDisplay> orderDisplayPairs = new Dictionary<Order, OrderDisplay>();
-    private GlobalEventDispatcher globalEventDispatcher;
+    protected Dictionary<Order, OrderDisplay> orderDisplayPairs = new Dictionary<Order, OrderDisplay>();
+    protected GlobalEventDispatcher globalEventDispatcher;
 
-    private void Awake()
+    protected virtual void Awake()
     {
-        if (Instance != null)
-            Destroy(Instance.gameObject);
-        Instance = this;
-
         globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
-    }
 
-    private void OnDestroy()
-    {
-        if (Instance == this)
-            Instance = null;
+        for(int i = 0; i < orderDisplays.Length; i++)
+        {
+            OrderDisplays[i].orderNumber = i;
+        }
     }
 
     public void Start()
@@ -75,37 +68,6 @@ public class OrderDisplayManager : MonoBehaviourPun
         ClearDisplay(@event.Order);
     }
 
-    public static bool AllDisplaysAreFree()
-    {
-        for (int i = 0; i < Instance.OrderDisplays.Length; i++)
-        {
-            if (Instance.OrderDisplays[i].Order != null)
-                return false;
-        }
-        return true;
-    }
-
-    public static bool HasFreeDisplay()
-    {
-        return HasFreeDisplay(out _);
-    }
-
-    public static bool HasFreeDisplay(out OrderDisplay display)
-    {
-        display = GetFreeDisplay();
-        return display != null;
-    }
-
-    public static OrderDisplay GetFreeDisplay()
-    {
-        foreach (OrderDisplay display in Instance.orderDisplays)
-        {
-            if (display.CanBeUsed())
-                return display;
-        }
-        return null;
-    }
-
     public void DisplayOrder(Order order)
     {
         OrderDisplay display = orderDisplays[order.orderNumber];
@@ -127,7 +89,7 @@ public class OrderDisplayManager : MonoBehaviourPun
 
 #if UNITY_EDITOR
     [Utils.Core.Attributes.Button]
-    private void AutoFindDisplays()
+    protected void AutoFindDisplays()
     {
         OrderDisplay[] displays = FindObjectsOfType<OrderDisplay>();
         orderDisplays = displays.OrderBy(item => item.orderNumber).ToArray();

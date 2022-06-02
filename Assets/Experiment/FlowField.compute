@@ -1,0 +1,23 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel FlowFieldCalculations
+
+struct FlowFieldNode
+{
+    float3 velocity;
+    float3 worldPos;
+};
+
+RWStructuredBuffer<FlowFieldNode> flowFieldNodesBuffer;
+float time;
+float deltaTime;
+
+float alignFactor;
+float speedReductionFactor;
+
+float3 flowObject;
+
+[numthreads(10,1,1)]
+void FlowFieldCalculations (uint3 id : SV_DispatchThreadID)
+{
+    
+}

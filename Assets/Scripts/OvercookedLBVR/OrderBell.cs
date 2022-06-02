@@ -32,10 +32,10 @@ public class OrderBell : MonoBehaviour
         if (gamemode != null)
         {
             if (gamemode.MatchPhase == MatchPhase.PreGame)
-                gamemode.StartActiveGame();
+                gamemode.AttemptToStartActiveGame();
             else if (gamemode.MatchPhase == MatchPhase.PostGame && ReplayDelayIsDone())
                 gamemode.Replay();
-            else
+            else if (gamemode.MatchPhase == MatchPhase.Active)
                 deliveryPoint.DeliverDishesInTrigger();
         }
         else

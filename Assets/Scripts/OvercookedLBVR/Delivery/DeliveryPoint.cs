@@ -54,16 +54,16 @@ public class DeliveryPoint : MonoBehaviour
 
             Debug.Log("plate.CanBeDelivered " + plate.CanBeDelivered());
             if (plate.CanBeDelivered())
-            {
                 DeliverDish(plate);
-                platesInTrigger.Remove(plate);
-            }
-		}
+        }
     }
 
     public void DeliverDish(Plate dish)
     {
         if(gamemodeService.CurrentGameMode != null)
             gamemodeService.CurrentGameMode.DeliverDish(dish);
+
+        platesInTrigger.Remove(dish);
+        dish.OnDeliver();
     }
 }

@@ -170,8 +170,6 @@ namespace PhysicsCharacter
 			Quaternion lookRotation = Quaternion.LookRotation(target, Vector3.Lerp(primaryToolHandle.transform.up, secondaryToolHandle.transform.up, 0.5f));
 			lookRotation *= Quaternion.Euler(multiHandRotationOffset);
 
-			Quaternion avg = GetAverageQuaternion();
-
 			return lookRotation;
 		}
 

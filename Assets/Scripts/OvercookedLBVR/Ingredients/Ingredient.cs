@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
@@ -25,14 +26,41 @@ public class Ingredient : MonoBehaviourPun
     [SerializeField] private IngredientChopController chopController = null;
     [Tooltip("Optional, only needed if object is grabbable")]
     [SerializeField] private PhysicsCharacter.Tool grabController = null;
+    [Tooltip("Optional, only needed if object is status conditionable")]
+    [SerializeField] private IngredientStatusCondition statusConditionManager = null;
+    public IngredientStatusCondition StatusConditionManager => statusConditionManager;
+    [SerializeField] private List<Collider> colliders = null;
+
+    public bool CanIngredientCook()
+	{
+        if (statusConditionManager == null)
+            return true;
+        else
+            return statusConditionManager.CanCook;
+	}
 
     public bool IsPreparedProperly()
     {
         bool returnValue = State == IngredientStatus.Processed;
         if (needsToBeCooked)
             returnValue &= cookController.State == CookState.Cooked;
+
+        if (statusConditionManager != null)
+            return returnValue && statusConditionManager.IsIngredientPreparedProperly();
+
         return returnValue;
     }
+
+
+	public void SetCollisionsIgnored(Collider col, bool isIgnored)
+	{
+		if (colliders == null)
+			return;
+		foreach (var item in colliders)
+		{
+			Physics.IgnoreCollision(col, item, isIgnored);
+		}
+	}
 
     public void SetState(IngredientStatus status)
     {
@@ -47,6 +75,8 @@ public class Ingredient : MonoBehaviourPun
 
     public bool CanBeGrabbed()
     {
+        if (statusConditionManager != null)
+            return statusConditionManager.CanPickUp && grabController != null;
         return grabController != null;
     }
 
@@ -54,4 +84,16 @@ public class Ingredient : MonoBehaviourPun
     {
         return ingredientType.ToString() + "(" + status + (CookController != null ? "-" + CookController.State : string.Empty) + ")";
     }
+
+    public CookState GetCookState()
+	{
+        if (!needsToBeCooked)
+            return CookState.Raw;
+
+        if (cookController != null)
+            return cookController.State;
+        
+        // default
+        return CookState.Raw;
+	}
 }

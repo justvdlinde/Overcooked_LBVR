@@ -16,6 +16,13 @@ public class HeatSource : MonoBehaviour
             if(cookable.IsCookable)
                 cookable.Cook(heatStrength);
         }
+        IngredientStatusCondition statusCondition = other.GetComponentInChildren<IngredientStatusCondition>();
+        if(statusCondition == null)
+            statusCondition = other.GetComponentInParent<IngredientStatusCondition>();
+        if (statusCondition != null)
+		{
+            statusCondition.AddHeat(Time.deltaTime * 30f, StatusConditionHeatSource.Heat);
+		}
     }
 
     private void OnTriggerEnter(Collider other)
