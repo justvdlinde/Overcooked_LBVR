@@ -25,6 +25,7 @@ public class PlayerSpawner : MonoBehaviour
         }
 
         networkService = GlobalServiceLocator.Instance.Get<INetworkService>();
+        PhotonNetwork.OfflineMode = true;
 
         PlayerFactory factory = new PlayerFactory(PhotonNetwork.LocalPlayer);
         IPlayer LocalPlayer = factory.Construct();

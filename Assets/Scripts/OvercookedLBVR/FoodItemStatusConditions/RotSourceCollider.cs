@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class RotSourceCollider : MonoBehaviour
@@ -13,8 +12,6 @@ public class RotSourceCollider : MonoBehaviour
 		{
 			iRottable.SetIsRotting(true);
 		}
-
-
 	}
 
 	private void OnTriggerExit(Collider other)

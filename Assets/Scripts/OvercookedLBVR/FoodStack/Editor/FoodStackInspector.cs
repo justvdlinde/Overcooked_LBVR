@@ -16,7 +16,7 @@ public class FoodStackInspector : Editor
     private void OnEnable()
     {
         foodStack = target as FoodStack;
-        ingredientsData = Resources.Load<IngredientsData>("IngredientsData");
+        ingredientsData = IngredientsData.Instance;
         ingredientsStack = serializedObject.FindProperty("ingredientsStack");
     }
 
@@ -116,9 +116,8 @@ public class FoodStackInspector : Editor
         if (ingredientType == IngredientType.None)
             return;
 
-        GameObject prefab = ingredientsData.GetCorrespondingData(ingredientType).ingredientPrefab;
+        Ingredient prefab = ingredientsData.GetCorrespondingData(ingredientType).ingredientPrefab;
         Ingredient ingredient = PhotonNetwork.Instantiate(prefab.name, foodStack.transform.position, foodStack.transform.rotation).GetComponent<Ingredient>();
-        Debug.Log(ingredient);
         if (ingredient.ChopController != null)
             ingredient.ChopController.ProcessIngredient();
         foodStack.AddIngredientToStack(ingredient);

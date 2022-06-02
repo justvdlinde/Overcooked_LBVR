@@ -147,6 +147,38 @@ public class FoodStack : MonoBehaviourPunCallbacks
         Ingredient ingredient = ingredientsStack[ingredientsStack.Count - 1];
         return ingredient.CanBeGrabbed();
     }
+    public Vector3 slideDir = Vector3.up;
+	private void Update()
+	{
+		if(ingredientsStack.Count > 0)
+		{
+            if (Vector3.Dot(transform.up, Vector3.up) < 0.4f)
+                RemoveAllIngredients();
+
+		}
+        
+        //float dist = 0.05f;
+
+        //Vector3 newSlideDir = plateCollider.ClosestPoint(transform.position - Vector3.up * 0.15f);
+        //Vector3 newSlideDirLocal = transform.InverseTransformPoint(newSlideDir);
+        //newSlideDirLocal.y = 0f;
+        //newSlideDir = Vector3.Lerp(slideDir, transform.TransformPoint(newSlideDirLocal), 0.15f);
+
+        ////newSlideDir = transform.InverseTransformPoint(newSlideDir);
+        ////newSlideDir.y = 0f;
+        ////newSlideDir = transform.TransformPoint(newSlideDir);
+        //slideDir = newSlideDir;
+
+        //Debug.DrawRay(transform.position + transform.InverseTransformDirection(Vector3.up * 0.05f), slideDir);
+	}
+
+	private void OnDrawGizmos()
+	{
+        Color c = Color.yellow;
+        c.a = 0.25f;
+        Gizmos.color = c;
+        Gizmos.DrawSphere(slideDir, 0.03f);
+	}
 
 	public void RemoveAllIngredients()
 	{

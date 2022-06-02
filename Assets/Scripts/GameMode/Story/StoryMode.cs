@@ -75,9 +75,9 @@ public class StoryMode : GameMode
 
         while (GameTimer.IsRunning)
         {
-            if (OrderDisplayManager.AllDisplaysAreFree())
+            if (SceneOrderDisplayManager.AllDisplaysAreFree())
             {
-                OrderDisplay freeDisplay = OrderDisplayManager.GetFreeDisplay();
+                OrderDisplay freeDisplay = SceneOrderDisplayManager.GetFreeDisplay();
                 CreateNewActiveOrder(freeDisplay.orderNumber);
                 continue;
             }
@@ -87,14 +87,14 @@ public class StoryMode : GameMode
                 yield return new WaitForSeconds(delay);
             }
 
-            while (!OrderDisplayManager.HasFreeDisplay())
+            while (!SceneOrderDisplayManager.HasFreeDisplay())
             {
                 yield return null;
             }
 
             if (PhotonNetwork.IsMasterClient)
             {
-                OrderDisplay freeDisplay = OrderDisplayManager.GetFreeDisplay();
+                OrderDisplay freeDisplay = SceneOrderDisplayManager.GetFreeDisplay();
                 CreateNewActiveOrder(freeDisplay.orderNumber);
             }
         }
