@@ -51,8 +51,7 @@ public class Dispenser : MonoBehaviourPun
 
     private IEnumerator InstantiateDelayed()
 	{
-        if (anim != null)
-            anim.SetTrigger("Dispense");
+        photonView.RPC(nameof(DoAnimationRPC), RpcTarget.All);
 
         yield return new WaitForSeconds(0.25f);
 
@@ -67,6 +66,13 @@ public class Dispenser : MonoBehaviourPun
                 rigidbody.AddForce(spawnPoint.forward * forceAmount, forceMode);
             }
         }
+    }
+
+    [PunRPC]
+    private void DoAnimationRPC()
+	{
+        if (anim != null)
+            anim.SetTrigger("Dispense");
     }
 
     private void OnDrawGizmosSelected()
