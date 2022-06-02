@@ -1,49 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3310651932800475354
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4466127903325450224}
-  - component: {fileID: 8943333700175477620}
-  m_Layer: 24
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4466127903325450224
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3310651932800475354}
-  m_LocalRotation: {x: 0.0000000018626449, y: -0, z: 0.05826492, w: 0.99830115}
-  m_LocalPosition: {x: 0, y: -0.000000048756082, z: 0}
-  m_LocalScale: {x: 1, y: 0.32781, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5249155251209014836}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 6.68}
---- !u!65 &8943333700175477620
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3310651932800475354}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0.00000011920929}
 --- !u!1001 &625524270569710393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146,11 +102,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.x
-      value: -0.000000021308592
+      value: 0.000000007193214
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.y
-      value: 0.03210001
+      value: 0.032100063
       objectReference: {fileID: 0}
     - target: {fileID: 1704215133684638544, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
       propertyPath: m_ConnectedAnchor.z
@@ -241,11 +197,6 @@ PrefabInstance:
 --- !u!4 &1916183699048739662 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3666724768479805553, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
-  m_PrefabInstance: {fileID: 2915364237656994623}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5249155251209014836 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6966447056803904779, guid: 2ecc3fe0ac0385343981cd8d2c4a1953, type: 3}
   m_PrefabInstance: {fileID: 2915364237656994623}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &3618492018179562992 stripped

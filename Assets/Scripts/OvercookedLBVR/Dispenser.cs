@@ -63,7 +63,9 @@ public class Dispenser : MonoBehaviourPun
         {
             if (instance.TryGetComponent(out Rigidbody rigidbody))
             {
-                rigidbody.AddForce(spawnPoint.forward * forceAmount, forceMode);
+                float forceAmt = forceAmount + Mathf.Lerp(forceAmount * -0.1f, forceAmount * 0.1f, UnityEngine.Random.value);
+                rigidbody.AddForce(spawnPoint.forward * forceAmt, forceMode);
+                rigidbody.AddTorque(UnityEngine.Random.insideUnitSphere * forceAmt * 0.01f);
             }
         }
     }
