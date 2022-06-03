@@ -134,19 +134,33 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 		}
 		else
 		{
-			float currentIndex = indexAnimator.GetFloat(animatorString);
-			float currentMiddle = middleAnimator.GetFloat(animatorString);
-			float currentRing = ringAnimator.GetFloat(animatorString);
-			float currentPinky = pinkyAnimator.GetFloat(animatorString);
-			float currentThumb = thumbAnimator.GetFloat(animatorString);
-
 			float timeMul = Time.deltaTime * lerpSpeed;
 
-			indexAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentIndex, index, timeMul));
-			middleAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentMiddle, middle, timeMul));
-			ringAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentMiddle, middle, timeMul));
-			pinkyAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentMiddle, middle, timeMul));
-			thumbAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentThumb, thumb, timeMul));
+			if (indexAnimator != null)
+			{
+				float currentIndex = indexAnimator.GetFloat(animatorString);
+				indexAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentIndex, index, timeMul));
+			}
+			if (indexAnimator != null)
+			{
+				float currentMiddle = middleAnimator.GetFloat(animatorString);
+				middleAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentMiddle, middle, timeMul));
+			}
+			if (indexAnimator != null)
+			{
+				float currentRing = ringAnimator.GetFloat(animatorString);
+				ringAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentRing, middle, timeMul));
+			}
+			if (indexAnimator != null)
+			{
+				float currentPinky = pinkyAnimator.GetFloat(animatorString);
+				pinkyAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentPinky, middle, timeMul));
+			}
+			if (indexAnimator != null)
+			{
+				float currentThumb = thumbAnimator.GetFloat(animatorString);
+				thumbAnimator.SetFloat(animatorString, Mathf.MoveTowards(currentThumb, thumb, timeMul));
+			}
 		}
 	}
 
