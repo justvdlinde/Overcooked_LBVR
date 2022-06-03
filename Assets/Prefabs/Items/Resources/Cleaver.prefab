@@ -342,6 +342,7 @@ MonoBehaviour:
   preferredToolHand: 2
   otherToolHandle: {fileID: 0}
   isGrabbedByRemote: 0
+  parentTool: {fileID: 0}
 --- !u!1 &4112349930651044802
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,6 +496,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Prop_Kitchen_Knife_Butcher_01
       objectReference: {fileID: 0}
+    - target: {fileID: 1857297998006694, guid: 474af3d68725ee74ca6136754a0d47f6, type: 3}
+      propertyPath: m_Layer
+      value: 26
+      objectReference: {fileID: 0}
     - target: {fileID: 4449720406644922, guid: 474af3d68725ee74ca6136754a0d47f6, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -551,6 +556,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 23698218810415904, guid: 474af3d68725ee74ca6136754a0d47f6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8829083393e9d4c4bb87fa7e92b4acaa, type: 2}
+    - target: {fileID: 33222770493433070, guid: 474af3d68725ee74ca6136754a0d47f6, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1851144545920074780, guid: 8b6d33281d8f51242a9cb1f05696256d, type: 3}
     m_RemovedComponents:
     - {fileID: 64685738612993022, guid: 474af3d68725ee74ca6136754a0d47f6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 474af3d68725ee74ca6136754a0d47f6, type: 3}
