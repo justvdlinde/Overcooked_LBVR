@@ -1,16 +1,18 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class HeatSource : MonoBehaviour
 {
-    public List<GameObject> CookedItems => cookedItems;
-    private List<GameObject> cookedItems = new List<GameObject>();
+    public List<Ingredient> CookedItems => cookedItems;
+    private List<Ingredient> cookedItems = new List<Ingredient>();
 
     [SerializeField] private float heatStrength = 1;
 
     private void OnTriggerStay(Collider other)
     {
+        Debug.Log("OntriggertStay " + other);
         if (other.gameObject.TryGetComponent(out IngredientCookController cookable))
         {
             if(cookable.IsCookable)
@@ -27,23 +29,32 @@ public class HeatSource : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("OntriggerEnter " + other);
         if (other.gameObject.TryGetComponent(out IngredientCookController cookable))
         {
             if (cookable.IsCookable)
             {
                 cookable.SetCookStatus(true);
-                cookedItems.Add(other.gameObject);
+                cookedItems.Add(cookable.Ingredient);
+                cookable.Ingredient.DestroyEvent += OnIngredientDestroyEvent;
             }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        Debug.Log("OntriggerExit " + other);
         if (other.gameObject.TryGetComponent(out IngredientCookController cookable))
         {
             if (cookable.IsCooking)
                 cookable.SetCookStatus(false);
-            cookedItems.Remove(other.gameObject);
+            cookedItems.Remove(cookable.Ingredient);
+            cookable.Ingredient.DestroyEvent -= OnIngredientDestroyEvent;
         }
+    }
+
+    private void OnIngredientDestroyEvent(Ingredient ingredient)
+    {
+        cookedItems.Remove(ingredient);
     }
 }

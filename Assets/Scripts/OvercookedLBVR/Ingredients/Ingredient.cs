@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class Ingredient : MonoBehaviourPun
     public bool NeedsToBeCooked => needsToBeCooked;
     public IngredientCookController CookController => cookController;
     public IngredientChopController ChopController => chopController;
+
+    public Action<Ingredient> DestroyEvent;
 
     [SerializeField] private IngredientType ingredientType = IngredientType.None;
     [SerializeField] private IngredientStatus status = IngredientStatus.UnProcessed;
@@ -96,4 +99,9 @@ public class Ingredient : MonoBehaviourPun
         // default
         return CookState.Raw;
 	}
+
+    private void OnDestroy()
+    {
+        DestroyEvent?.Invoke(this);
+    }
 }
