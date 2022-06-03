@@ -46,4 +46,14 @@ public class GameModeService : IService
         if (PhotonNetwork.IsMasterClient)
             PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.GAME_MODE, (int)CurrentGameMode.GameModeEnum);
     }
+
+    public bool IsMatchActive()
+    {
+        if (CurrentGameMode == null)
+            return false;
+
+        Debug.Log(CurrentGameMode.MatchPhase);
+
+        return CurrentGameMode.MatchPhase == MatchPhase.Active;
+    }
 }

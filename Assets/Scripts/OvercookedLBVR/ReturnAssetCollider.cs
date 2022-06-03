@@ -5,17 +5,34 @@ using UnityEngine;
 using Utils.Core.Events;
 using Utils.Core.Services;
 
-public class ReturnAssetCollider : MonoBehaviour
+public class ReturnAssetCollider : MonoBehaviourPun
 {
 	private GlobalEventDispatcher globalEventdispatcher = null;
+
+	[SerializeField] private ParticleSystem despawnParticles = null;
+
+	[SerializeField] private BoxCollider connectedCollider = null;
+
+	[SerializeField] private GameModeService gameModeService = null;
 
 	private void Awake()
 	{
 		globalEventdispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+		gameModeService = GlobalServiceLocator.Instance.Get<GameModeService>();
+	}
+
+	private bool IsMatchActive()
+	{
+		if (gameModeService == null)
+			gameModeService = GlobalServiceLocator.Instance.Get<GameModeService>();
+		if (gameModeService == null)
+			return false;
+		return gameModeService.IsMatchActive();
 	}
 
 	private void OnTriggerEnter(Collider other)
 	{
+
 		if (other.GetComponent<PlayerPawn>())
 			return;
 
@@ -24,39 +41,65 @@ public class ReturnAssetCollider : MonoBehaviour
 		if (asset != null)
 		{
 			asset.Return();
+			photonView.RPC(nameof(PlayParticlesRPC), RpcTarget.All, asset.transform.position);
+
 			return;
 		}
 
-		PhotonView photonView = other.GetComponentInParent<PhotonView>();
-		if (photonView.GetComponent<PlayerPawn>() )
+		if (!IsMatchActive())
 			return;
 
-		if(photonView == null)
-			photonView = other.GetComponentInChildren<PhotonView>();
+		PhotonView otherPhotonView = other.GetComponentInParent<PhotonView>();
+		if (otherPhotonView.GetComponent<PlayerPawn>())
+			return;
+
+		if(otherPhotonView == null)
+			otherPhotonView = other.GetComponentInChildren<PhotonView>();
 		Plate plate = other.GetComponentInParent<Plate>();
 
 		if(plate != null)
 		{
-			if (!photonView.IsMine)
+			if (!otherPhotonView.IsMine)
 				return;
 
 			if (globalEventdispatcher != null)
 				globalEventdispatcher.Invoke<PlateDestroyedEvent>(new PlateDestroyedEvent());
+			photonView.RPC(nameof(PlayParticlesRPC), RpcTarget.All, otherPhotonView.transform.position);
 
-			PhotonNetwork.Destroy(photonView.transform.gameObject);
+			PhotonNetwork.Destroy(otherPhotonView.transform.gameObject);
 
 			return; 
 		}
 
-		if (asset == null && photonView != null)
+		if (asset == null && otherPhotonView != null)
 		{
-			if (!photonView.IsMine)
+			if (!otherPhotonView.IsMine)
 				return;
 			// TO DO: replace RB check with IPoolable
 			// TO DO: destroy photon object
 			//Destroy(rb.transform.gameObject);
-			PhotonNetwork.Destroy(photonView.transform.gameObject);
+
+			photonView.RPC(nameof(PlayParticlesRPC), RpcTarget.All, otherPhotonView.transform.position);
+
+			PhotonNetwork.Destroy(otherPhotonView.transform.gameObject);
 			return;
 		}
+	}
+
+	[PunRPC]
+	private void PlayParticlesRPC(Vector3 position)
+	{
+		if (despawnParticles == null)
+			return;
+		despawnParticles.transform.position = position;
+		despawnParticles.Play();
+	}
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.red * new Color(1,1,1,0.3f);
+
+		Gizmos.DrawCube(transform.position, connectedCollider.bounds.size);
+
 	}
 }

@@ -108,7 +108,6 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 
 	private void OnDropEvent(Hand hand, Tool tool)
 	{
-		Debug.Log($"dropped photonview ID {tool.RootPhotonView.ViewID} with {hand.ToString()} hand");
 		photonView.RPC(nameof(OnDropEventRPC), RpcTarget.Others, tool.RootPhotonView.ViewID);
 	}
 
@@ -116,7 +115,6 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 	public void OnDropEventRPC(int viewID)
 	{
 		Tool tool = PhotonView.Find(viewID).GetComponentInChildren<Tool>();
-		Debug.Log($"photonView ID {photonView.ViewID} dropped tool with ID {viewID}");
 
 		if (!isRemoteClient)
 			return;

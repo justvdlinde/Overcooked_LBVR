@@ -20,7 +20,7 @@ public class Dispenser : MonoBehaviourPun
     [SerializeField] private Animator anim = null;
 
     private DateTime timeLastAcitvated;
-    private const float minSecondsBetweenDispense = 4.5f;
+    private const float minSecondsBetweenDispense = 3.0f;
 
     private bool isDispensing = false;
 
@@ -53,7 +53,7 @@ public class Dispenser : MonoBehaviourPun
 	{
         photonView.RPC(nameof(DoAnimationRPC), RpcTarget.All);
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.2f);
 
         GameObject instance = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, Quaternion.identity);
         // TODO: place this on prefabs, as this won't work for players joining late
