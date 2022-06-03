@@ -39,8 +39,6 @@ public class IngredientChopController : MonoBehaviourPun
 
 	private int hitCount = 0;
 
-	public bool doNotChop = false;
-
     private void OnValidate()
     {
 		if (ingredient == null)
@@ -50,8 +48,7 @@ public class IngredientChopController : MonoBehaviourPun
     private void Awake()
     {
 		// TODO: test if these work when joining late:
-		if(!doNotChop)
-			ToggleGraphicsToState();
+		ToggleGraphicsToState();
 	}
 
 	private void OnTriggerEnter(Collider other)
@@ -60,7 +57,7 @@ public class IngredientChopController : MonoBehaviourPun
 		{
 			EnableColliders(choppingCollider, true);
 
-			if (IsChoppable && !doNotChop)
+			if (IsChoppable)
 			{
 				Chop(choppingCollider.HitDamage);
 			}
@@ -121,9 +118,6 @@ public class IngredientChopController : MonoBehaviourPun
 	[Button]
 	public void ProcessIngredient()
     {
-		if (doNotChop)
-			return;
-
 		ingredient.SetState(IngredientStatus.Processed);
 		photonView.RPC(nameof(ProcessIngredientRPC), RpcTarget.All);
     }
@@ -149,10 +143,10 @@ public class IngredientChopController : MonoBehaviourPun
 					if (ingredientComponent != null)
 						ingredientComponent.CopyValues(ingredient.StatusConditionManager);
 				}
+				PhotonNetwork.Destroy(ingredient.gameObject);
 			}
 
-			if(photonView.IsMine)
-				PhotonNetwork.Destroy(ingredient.gameObject);
+			//if(photonView.IsMine)
 		}
 		else
 		{
