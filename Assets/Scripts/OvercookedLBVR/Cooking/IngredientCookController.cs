@@ -8,6 +8,7 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
 {
     public bool IsCookable => ingredient.State == IngredientStatus.Processed;
 
+    public Ingredient Ingredient => ingredient;
     public CookState State => state;
     public bool IsCooking { get; private set; }
     public float CookProgress { get; private set; }
