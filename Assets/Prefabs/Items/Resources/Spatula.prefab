@@ -386,6 +386,7 @@ MonoBehaviour:
   preferredToolHand: 2
   otherToolHandle: {fileID: 0}
   isGrabbedByRemote: 0
+  parentTool: {fileID: 0}
 --- !u!1 &5885194896009231120
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,7 +426,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5885194896009231120}
-  m_Mesh: {fileID: 4300000, guid: b4bec80918480fd46aebee85a29283c0, type: 3}
+  m_Mesh: {fileID: -4676188267520500942, guid: 596c72112e0a7be4590da26259517884, type: 3}
 --- !u!23 &5907457522746841380
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -445,7 +446,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb5a8f1b9970d0f41a73e9afcbe48579, type: 2}
+  - {fileID: 2100000, guid: 8829083393e9d4c4bb87fa7e92b4acaa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
