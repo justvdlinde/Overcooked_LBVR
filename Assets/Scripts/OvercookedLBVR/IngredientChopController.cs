@@ -90,7 +90,26 @@ public class IngredientChopController : MonoBehaviourPun
     {
 		if(ingredient.StatusConditionManager.CanChop)
 			if(photonView.IsMine)
-				photonView.RPC(nameof(ChopRPC), RpcTarget.All, hit);
+			{
+				hitCount += hit;
+				PlayChopSound();
+
+				if (particles != null)
+				{
+					if (particles.isPlaying)
+						particles.Stop();
+					particles.Play();
+				}
+
+				if (hitCount >= hitsNeededToProcess)
+				{
+					if (PhotonNetwork.IsMasterClient)
+					{
+						ProcessIngredient();
+					}
+				}
+				photonView.RPC(nameof(ChopRPC), RpcTarget.Others, hit);
+			}
 	}
 
 	[PunRPC]
