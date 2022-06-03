@@ -87,43 +87,39 @@ public class IngredientChopController : MonoBehaviourPun
     }
 
 	public void Chop(int hit)
-	{
-		if (ingredient.StatusConditionManager.CanChop)
-		{
-			if (photonView.IsMine)
-			{
-				Debug.Log("call chop rpc");
-				photonView.RPC(nameof(ChopRPC), RpcTarget.Others, hit);
-				ChopInternal(hit);
-			}
-		}
+    {
+		if(ingredient.StatusConditionManager.CanChop)
+        {
+			DoChop(hit);
+			photonView.RPC(nameof(ChopRPC), RpcTarget.Others, hit);
+        }
 	}
+
+	private void DoChop(int hit)
+    {
+        hitCount += hit;
+        PlayChopSound();
+
+        if (particles != null)
+        {
+            if (particles.isPlaying)
+                particles.Stop();
+            particles.Play();
+        }
+
+        if (hitCount >= hitsNeededToProcess)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                ProcessIngredient();
+            }
+        }
+    }
 
 	[PunRPC]
 	private void ChopRPC(int hit)
 	{
-		ChopInternal(hit);
-	}
-
-	private void ChopInternal(int hit)
-    {
-		hitCount += hit;
-		PlayChopSound();
-
-		if (particles != null)
-		{
-			if (particles.isPlaying)
-				particles.Stop();
-			particles.Play();
-		}
-
-		if (hitCount >= hitsNeededToProcess)
-		{
-			if (PhotonNetwork.IsMasterClient)
-			{
-				ProcessIngredient();
-			}
-		}
+		DoChop(hit);
 	}
 
 	[Button]
@@ -154,10 +150,10 @@ public class IngredientChopController : MonoBehaviourPun
 					if (ingredientComponent != null)
 						ingredientComponent.CopyValues(ingredient.StatusConditionManager);
 				}
-			}
-
-			if (photonView.IsMine)
+				
+				ingredient._PhotonView.TransferOwnership(PhotonNetwork.MasterClient);
 				PhotonNetwork.Destroy(ingredient.gameObject);
+			}
 		}
 		else
 		{

@@ -16,6 +16,8 @@ public class Ingredient : MonoBehaviourPun
 
     public Action<Ingredient> DestroyEvent;
 
+    public PhotonView _PhotonView => photonView;
+
     [SerializeField] private IngredientType ingredientType = IngredientType.None;
     [SerializeField] private IngredientStatus status = IngredientStatus.UnProcessed;
     [SerializeField] private bool needsToBeCooked = false; 
