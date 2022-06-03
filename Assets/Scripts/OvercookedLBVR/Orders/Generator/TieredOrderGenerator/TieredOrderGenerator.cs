@@ -30,10 +30,11 @@ public class TieredOrderGenerator : IOrderGenerator
 
 	public void OnOrderCompleted(bool success)
     {
-		if (success)
+		// TO DO: IMPLEMENT THIS BETTER
+		//if (success)
 			completedOrdersInSuccession++;
-		else
-			completedOrdersInSuccession = 0;
+		//else
+		//	completedOrdersInSuccession = 0;
 
 		if (completedOrdersInSuccession > Tiers[currentTier].AmountToCompleteTier)
 		{
