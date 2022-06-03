@@ -162,20 +162,20 @@ namespace LW_IK
 
 			torso.position = Vector3.Lerp(torso.position, wantedTorsoPosition, Time.deltaTime * torsoFollowSpeed * torsoSpeedMultiplier);
 
-			float wantedAngleZ = AngleBetweenVector2(Vector3ToVector2YZ(head.position - torsoGraphicsForSwaying.position), Vector3.up);
-			float wantedAngle = AngleBetweenVector2((head.position - torsoGraphicsForSwaying.position), Vector3.up);
-			wantedAngle -= 90f;
-			wantedAngleZ -= 90f;
-			wantedAngle *= torsoRotationSpeed;
-			wantedAngle = Mathf.Clamp(wantedAngle, -15f, 15f);
-
-			wantedAngle -= wantedAngleZ;
-
-			wantedAngleZ *= -1;
-			wantedAngle *= -1;
-
 			if(wantToSway)
 			{
+				float wantedAngleZ = AngleBetweenVector2(Vector3ToVector2YZ(head.position - torsoGraphicsForSwaying.position), Vector3.up);
+				float wantedAngle = AngleBetweenVector2((head.position - torsoGraphicsForSwaying.position), Vector3.up);
+				wantedAngle -= 90f;
+				wantedAngleZ -= 90f;
+				wantedAngle *= torsoRotationSpeed;
+				wantedAngle = Mathf.Clamp(wantedAngle, -15f, 15f);
+
+				wantedAngle -= wantedAngleZ;
+
+				wantedAngleZ *= -1;
+				wantedAngle *= -1;
+
 
 				Vector3 desiredEulers = new Vector3(wantedAngle, torsoGraphicsForSwaying.localEulerAngles.y, wantedAngleZ);
 

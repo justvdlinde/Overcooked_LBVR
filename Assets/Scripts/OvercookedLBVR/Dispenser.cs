@@ -20,7 +20,7 @@ public class Dispenser : MonoBehaviourPun
     [SerializeField] private Animator anim = null;
 
     private DateTime timeLastAcitvated;
-    private const float minSecondsBetweenDispense = 4.5f;
+    private const float minSecondsBetweenDispense = 3.0f;
 
     private bool isDispensing = false;
 

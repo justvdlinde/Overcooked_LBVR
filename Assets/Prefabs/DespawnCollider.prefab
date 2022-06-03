@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7206428748922179611}
   - component: {fileID: 7206428748922179610}
   - component: {fileID: 7206428748922179589}
+  - component: {fileID: 3910268987830258685}
   m_Layer: 0
   m_Name: DespawnCollider
   m_TagString: Untagged
@@ -60,6 +61,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   despawnParticles: {fileID: 5272855993293707239}
   connectedCollider: {fileID: 7206428748922179610}
+--- !u!114 &3910268987830258685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7206428748922179588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &7206428749852256507
 PrefabInstance:
   m_ObjectHideFlags: 0

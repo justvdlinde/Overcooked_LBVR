@@ -24,6 +24,8 @@ public class ReturnAssetCollider : MonoBehaviourPun
 	private bool IsMatchActive()
 	{
 		if (gameModeService == null)
+			gameModeService = GlobalServiceLocator.Instance.Get<GameModeService>();
+		if (gameModeService == null)
 			return false;
 		return gameModeService.IsMatchActive();
 	}
