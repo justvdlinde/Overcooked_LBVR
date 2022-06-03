@@ -24,6 +24,12 @@ public class DispenseOnGameStart : MonoBehaviourPun
         globalEventDispatcher.Unsubscribe<StartGameEvent>(OnStartGameEvent);
     }
 
+	private void Start()
+	{
+		if(PhotonNetwork.IsMasterClient)
+            connectedDispenser.DispenseObject();
+    }
+
     private void OnStartGameEvent(StartGameEvent obj)
     {
         if (photonView.IsMine)
