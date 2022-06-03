@@ -143,10 +143,10 @@ public class IngredientChopController : MonoBehaviourPun
 					if (ingredientComponent != null)
 						ingredientComponent.CopyValues(ingredient.StatusConditionManager);
 				}
-				PhotonNetwork.Destroy(ingredient.gameObject);
 			}
 
-			//if(photonView.IsMine)
+			if (photonView.IsMine)
+				PhotonNetwork.Destroy(ingredient.gameObject);
 		}
 		else
 		{
