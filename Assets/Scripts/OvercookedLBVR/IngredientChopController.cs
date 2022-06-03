@@ -87,15 +87,26 @@ public class IngredientChopController : MonoBehaviourPun
     }
 
 	public void Chop(int hit)
-    {
-		if(ingredient.StatusConditionManager.CanChop)
-			if(photonView.IsMine)
-				photonView.RPC(nameof(ChopRPC), RpcTarget.All, hit);
+	{
+		if (ingredient.StatusConditionManager.CanChop)
+		{
+			if (photonView.IsMine)
+			{
+				Debug.Log("call chop rpc");
+				photonView.RPC(nameof(ChopRPC), RpcTarget.Others, hit);
+				ChopInternal(hit);
+			}
+		}
 	}
 
 	[PunRPC]
 	private void ChopRPC(int hit)
 	{
+		ChopInternal(hit);
+	}
+
+	private void ChopInternal(int hit)
+    {
 		hitCount += hit;
 		PlayChopSound();
 
