@@ -1,4 +1,6 @@
 using Photon.Pun;
+using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,16 +19,18 @@ public class DispenseOnGameStart : MonoBehaviourPun
             globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
 
         globalEventDispatcher.Subscribe<StartGameEvent>(OnStartGameEvent);
+        globalEventDispatcher.Subscribe<ConnectionSuccessEvent>(OnConnected);
     }
 
     private void OnDisable()
     {
         globalEventDispatcher.Unsubscribe<StartGameEvent>(OnStartGameEvent);
+        globalEventDispatcher.Unsubscribe<ConnectionSuccessEvent>(OnConnected);
     }
 
-	private void Start()
-	{
-		if(PhotonNetwork.IsMasterClient)
+    private void OnConnected(ConnectionSuccessEvent obj)
+    {
+        if (PhotonNetwork.IsMasterClient)
             connectedDispenser.DispenseObject();
     }
 
