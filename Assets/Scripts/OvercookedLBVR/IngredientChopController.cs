@@ -127,7 +127,7 @@ public class IngredientChopController : MonoBehaviourPun
 
 		if (hitCount >= hitsNeededToProcess)
 		{
-			if (PhotonNetwork.IsMasterClient)
+			if (photonView.IsMine)
 			{
 				ProcessIngredient();
 			}
