@@ -1,3 +1,4 @@
+using PhysicsCharacter;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class GrillCover : MonoBehaviour
     [SerializeField] private float upTargPos = 5.0f;
 	[SerializeField] private float downTargPos = -100.0f;
 
+	[SerializeField] private Tool handle = null;
+
 	public bool IsHoodClosed { get; private set; } = false;
 
 	// some particles when closed (smoke shooting out form under hood)
@@ -28,6 +31,8 @@ public class GrillCover : MonoBehaviour
 
 	private void Update()
 	{
+		hingeJoint.useSpring = !handle.IsBeingHeld();
+
 		JointSpring spr = hingeJoint.spring;
 		spr.targetPosition = 0;
 		if (Vector3.Dot(grillHood.forward, Vector3.up) > disableSpringLimit)

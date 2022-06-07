@@ -390,7 +390,7 @@ MonoBehaviour:
   hand: 1
   handFollowTarget: {fileID: 7370627395004671740}
   HandTargetToolhandle: {fileID: 0}
-  maxHandDistance: 0.5
+  maxHandDistance: 0.25
 --- !u!114 &5390276487774762968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   hand: 0
   handFollowTarget: {fileID: 7370627396099990538}
   HandTargetToolhandle: {fileID: 0}
-  maxHandDistance: 0.5
+  maxHandDistance: 0.25
 --- !u!114 &3208259646954569578
 MonoBehaviour:
   m_ObjectHideFlags: 0

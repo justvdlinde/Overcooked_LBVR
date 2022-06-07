@@ -97,7 +97,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 293781033}
-  m_Layer: 26
+  m_Layer: 0
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1139670240
 Transform:
   m_ObjectHideFlags: 0
@@ -1000,7 +1000,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5572623411073830488}
   - component: {fileID: 9210976259664852279}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1088,7 +1088,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1321338487517254248}
   - component: {fileID: 847840401406422251}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1176,7 +1176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2387775284552722231}
   - component: {fileID: 7384762085193730921}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1220,7 +1220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2641912673868550615}
   - component: {fileID: 468553875373113078}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1553,7 +1553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4320143996177985196}
   - component: {fileID: 4236606130924937732}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2284,6 +2284,7 @@ MonoBehaviour:
   hingeJoint: {fileID: 4851526778002405223}
   upTargPos: -90
   downTargPos: 10
+  handle: {fileID: 2408577533333196132}
 --- !u!1 &4485513259993607549
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,7 +2374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2805509517934747197}
   - component: {fileID: 8468456679682191043}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2417,7 +2418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5048102744731918381}
   - component: {fileID: 5025950132111123009}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2781,7 +2782,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
@@ -2819,7 +2820,7 @@ HingeJoint:
     contactDistance: 0
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_EnableCollision: 0
+  m_EnableCollision: 1
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
@@ -2937,7 +2938,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2880267871179315047}
   - component: {fileID: 5207037508671446861}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3025,7 +3026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6675974232226210641}
   - component: {fileID: 4280163803420155388}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3069,7 +3070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2460790830507989574}
   - component: {fileID: 2088616433270262247}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3113,7 +3114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3984119710269357207}
   - component: {fileID: 3961273529909818102}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3245,7 +3246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5952374170429667157}
   - component: {fileID: 70111059241646229}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3477,9 +3478,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7087498177024490816}
   serializedVersion: 2
-  m_Mass: 50
+  m_Mass: 100
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -3524,12 +3525,14 @@ MonoBehaviour:
   slowDownVelocity: 0.75
   slowDownRotation: 0.75
   maxPositionChange: 500
-  maxRotationChange: 0
-  maxAngularVelocity: 7
+  maxRotationChange: 720
+  maxAngularVelocity: 150
   clipChecker: {fileID: 0}
   photonView: {fileID: 8840343589783620676}
   rootPhotonView: {fileID: 8840343589783620676}
   forcePosition: 0
+  disablePosition: 0
+  disableRotation: 1
 --- !u!114 &8840343589783620676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3577,7 +3580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1378919204557414905}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Colliders (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3725,7 +3728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4629971671753311084}
   - component: {fileID: 298942372968019398}
-  m_Layer: 0
+  m_Layer: 21
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4198,6 +4201,18 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: -1830188484986461195, guid: 29bfebb7f0ce23841b5fba00c0097328, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1830188484986461195, guid: 29bfebb7f0ce23841b5fba00c0097328, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.139
+      objectReference: {fileID: 0}
+    - target: {fileID: -1830188484986461195, guid: 29bfebb7f0ce23841b5fba00c0097328, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.224
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 29bfebb7f0ce23841b5fba00c0097328, type: 3}
       propertyPath: m_Name
       value: Kitchen_Grill
@@ -4227,8 +4242,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5817899675601690601, guid: 29bfebb7f0ce23841b5fba00c0097328, type: 3}
+      propertyPath: m_Layer
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5817899675601690601, guid: 29bfebb7f0ce23841b5fba00c0097328, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5877315573343138113, guid: 29bfebb7f0ce23841b5fba00c0097328, type: 3}
+      propertyPath: m_Layer
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 5877315573343138113, guid: 29bfebb7f0ce23841b5fba00c0097328, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -4335,6 +4358,8 @@ MonoBehaviour:
   photonView: {fileID: 7593042031699195111}
   rootPhotonView: {fileID: 7593042031699195111}
   forcePosition: 0
+  disablePosition: 0
+  disableRotation: 0
 --- !u!114 &7593042031699195111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4369,7 +4394,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.004999994, y: 0.04549828, z: 0.5171585}
-  m_Center: {x: 0.47981805, y: -0.025650531, z: 0.038322203}
+  m_Center: {x: 0.47, y: -0.025650531, z: 0.038322203}
 --- !u!65 &5447728266119093692
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4382,7 +4407,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.005, y: 0.052572012, z: 0.15890275}
-  m_Center: {x: 0.47981805, y: 0.024258658, z: -0.11247434}
+  m_Center: {x: 0.47, y: 0.024258658, z: -0.11247434}
 --- !u!65 &6029722961626660734
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4395,7 +4420,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.005, y: 0.052572012, z: 0.15890275}
-  m_Center: {x: -0.479818, y: 0.024258658, z: -0.11247434}
+  m_Center: {x: -0.47, y: 0.024258658, z: -0.11247434}
 --- !u!65 &7118953740683115551
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4408,7 +4433,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.004999994, y: 0.04549828, z: 0.5171585}
-  m_Center: {x: -0.479818, y: -0.025650531, z: 0.0383222}
+  m_Center: {x: -0.47, y: -0.025650531, z: 0.0383222}
 --- !u!1001 &3350835000955519275
 PrefabInstance:
   m_ObjectHideFlags: 0
