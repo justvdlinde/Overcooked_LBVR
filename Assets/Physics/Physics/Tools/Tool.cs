@@ -149,8 +149,10 @@ namespace PhysicsCharacter
 
 			if (heldHandles > 0 && !PhysicsPlayerBlackboard.Instance.isFading)
 			{
-				MoveUsingPhysics();
-				RotateUsingPhysics();
+				if(!disablePosition)
+					MoveUsingPhysics();
+				if(!disableRotation)
+					RotateUsingPhysics();
 			}
 			else if(heldHandles > 0)
 			{
@@ -309,6 +311,9 @@ namespace PhysicsCharacter
 			}
 			return false;
 		}
+
+		public bool disablePosition = false;
+		public bool disableRotation = false;
 
 		protected virtual void OnGrabbedCallback(Hand hand, ToolHandle toolHandle)
 		{

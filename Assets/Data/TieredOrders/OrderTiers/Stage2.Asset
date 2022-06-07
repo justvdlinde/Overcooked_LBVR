@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Stage2
   m_EditorClassIdentifier: 
   tier: 2
-  amountToCompleteTier: 4
+  amountToCompleteTier: 2
   tieredRecipieOdds:
-  - odds: 70
+  - odds: 20
     tieredRecipie: {fileID: 11400000, guid: 3518feee06be14746b7f7192224ec41e, type: 2}
-  - odds: 75
+  - odds: 20
     tieredRecipie: {fileID: 11400000, guid: ae5ee15f8c38fab41adbd344d96b9f92, type: 2}
-  - odds: 50
+  - odds: 80
     tieredRecipie: {fileID: 11400000, guid: df9d8613f90bf644b91ed208c266309d, type: 2}

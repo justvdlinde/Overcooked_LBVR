@@ -142,16 +142,21 @@ namespace PhysicsCharacter
 				{
 					DoDropObject();
 				}
-				else if (!handDelegate.IsHandInRange())
-				{
-					DoDropObject();
-				}
+				//else if (!handDelegate.IsHandInRange())
+				//{
+				//	DoDropObject();
+				//}
 			}
 
 			//if (currentPickupable != null && currentPickupable.IsObjectBeingHeld(hand) == false && !IsHandGripping() && Vector3.Distance(currentPickupable.transform.position, handDelegate.GetFollowPosition()) > 0.25f)
 			//{
 			//	ForceDropItem();
 			//}
+
+			if(!IsHandGripping())
+			{
+				handDelegate.ResetHandPose();
+			}
 
 			isGrippingPrevious = handGripping;
 		}

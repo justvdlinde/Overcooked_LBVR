@@ -62,5 +62,11 @@ MonoBehaviour:
   - SubmitActiveOrderRPC
   - SubmitRemoveActiveOrderRPC
   - RequestDispenseRPC
+  - DishDeliveredRPC
+  - DoAnimationRPC
+  - PlateDestroyedRPC
+  - SetPlateCleanRPC
+  - SetPlateDirtyRPC
+  - PlayParticlesRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
