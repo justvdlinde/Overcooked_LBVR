@@ -111,10 +111,14 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
             burntGraphic.SetActive(state == CookState.Burned);
     }
 
-    public void Cook(float add = 1)
+    public bool IsUnderCookingHood { get; private set; } = false;
+
+    public void Cook(float add = 1, bool IsHoodClosed = false)
     {
         if (!ingredient.CanIngredientCook())
             return;
+
+        IsUnderCookingHood = IsHoodClosed;
 
         if (state != CookState.Burned)
         {
@@ -134,6 +138,7 @@ public class IngredientCookController : MonoBehaviourPunCallbacks
 
         PlayParticles();
         CookProgress += add * Time.deltaTime;
+        Debug.Log(CookProgress);
     }
 
     public void SetState(CookState status)

@@ -58,8 +58,8 @@ public class IngredientCookUI : MonoBehaviour
 	// TODO: replace with cook start/stop event + sync on startup?
 	private void Update()
 	{
-		root.SetActive(cookable.IsCooking && cookable.State != CookState.Burned);
-		warningObject.SetActive(cookable.IsCooking && ShouldWarningShow());
+		root.SetActive(cookable.IsCooking && cookable.State != CookState.Burned && !cookable.IsUnderCookingHood);
+		warningObject.SetActive(cookable.IsCooking && ShouldWarningShow() && !cookable.IsUnderCookingHood);
 
 		if (cookable.IsCooking)
 		{

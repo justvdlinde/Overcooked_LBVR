@@ -10,13 +10,23 @@ public class HeatSource : MonoBehaviour
 
     [SerializeField] private float heatStrength = 1;
 
+    [SerializeField] private GrillCover grillCover = null;
+
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("OntriggertStay " + other);
+        float heatMultiplier = 1.0f;
+        if (grillCover != null)
+            heatMultiplier *= ((grillCover.IsHoodClosed) ? 1.5f : 1.0f);
+
         if (other.gameObject.TryGetComponent(out IngredientCookController cookable))
         {
-            if(cookable.IsCookable)
-                cookable.Cook(heatStrength);
+            if (grillCover != null)
+			{
+                if (cookable.IsCookable)
+                   cookable.Cook(heatStrength * heatMultiplier, grillCover.IsHoodClosed);
+			}
+            else
+                cookable.Cook(heatStrength * heatMultiplier, false);
         }
         IngredientStatusCondition statusCondition = other.GetComponentInChildren<IngredientStatusCondition>();
         if(statusCondition == null)
