@@ -28,7 +28,9 @@ public class OrderDisplayGrid : MonoBehaviour
         Clear();
         for (int i = 0; i < order.ingredients.Length; i++)
         {
-            CreateIcon(ingredientsData.GetCorrespondingData(order.ingredients[i]));
+            Canvas go = CreateIcon(ingredientsData.GetCorrespondingData(order.ingredients[i])).GetComponent<Canvas>();
+            //go.transform.GetChild(1).localScale *= 2f;
+            go.sortingOrder = i;
         }
     }
 
@@ -37,6 +39,10 @@ public class OrderDisplayGrid : MonoBehaviour
         OrderDisplayIngredientIcon icon = Instantiate(ingredientIconPrefab, grid.transform);
         icon.transform.SetAsFirstSibling();
         icon.SetSprite(ingredientsData.GetCorrespondingData(ingredient.ingredientType).ingredientIcon);
+
+        if (ingredient.ingredientType == IngredientType.Onion || ingredient.ingredientType == IngredientType.Bacon || ingredient.ingredientType == IngredientType.Patty)
+            icon.SetIsFried();
+
         iconsInGrid.Add(icon);
         return icon;
     }

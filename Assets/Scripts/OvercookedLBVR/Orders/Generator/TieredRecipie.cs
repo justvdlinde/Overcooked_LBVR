@@ -106,7 +106,8 @@ public class TieredRecipie : ScriptableObject
 		IngredientType.Lettuce,
 		IngredientType.Tomato,
 		IngredientType.Cheese,
-		IngredientType.Onion
+		IngredientType.Onion,
+		IngredientType.Bacon
 		};
 
 		int number = Random.Range(0, availableIngredients.Count);
