@@ -16,7 +16,7 @@ public class HeatSourceAudioController : MonoBehaviour
         {
             if (!audioSource.isPlaying)
                 audioSource.Play();
-            float maxAudio = (heatSource.IsHoodClosed) ? maxAudioVolume : maxAudioVolume * 0.5f;
+            float maxAudio = (!heatSource.IsHoodClosed) ? maxAudioVolume : maxAudioVolume * 0.5f;
             audioSource.volume = Mathf.Lerp(audioSource.volume, maxAudio, audioVolumeLerpSpeed * Time.deltaTime);
         }
 
