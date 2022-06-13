@@ -55,6 +55,9 @@ public class StoryMode : GameMode
 
     public override void StartActiveGame()
     {
+        if (PhotonNetwork.IsMasterClient)
+            ordersController.RemoveAllActiveOrders();
+
         base.StartActiveGame();
         if (PhotonNetwork.IsMasterClient)
             orderGenerator.ResetGenerator();

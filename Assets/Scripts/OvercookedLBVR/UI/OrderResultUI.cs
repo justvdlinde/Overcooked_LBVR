@@ -17,6 +17,12 @@ public class OrderResultUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI infoLabel;
     [SerializeField] private Image[] stars = null;
 
+    [Header("Feedback")]
+    public AudioSource succesAudio = null;
+    public AudioSource failAudio = null;
+    public ParticleSystem succesParticles = null;
+    public ParticleSystem minorSuccesParticles = null;
+
     private ScoreData score;
 
     public void Setup(ScoreData score)
@@ -58,9 +64,33 @@ public class OrderResultUI : MonoBehaviour
         float points = score.Points;
         float maxPoints = ScoreData.MaxPoints;
 
+        int enabledCount = 0;
+
         for (int i = 0; i < stars.Length ; i++)
         {
-            stars[i].enabled = (points / maxPoints) >= (((float)i + 1) / stars.Length);
+            if((points / maxPoints) >= (((float)i + 1) / stars.Length))
+			{
+                enabledCount++;
+                stars[i].enabled = true;
+			}
+            else
+			{
+                stars[i].enabled = false;
+			}
         }
+
+        if (enabledCount > 1)
+		{
+            succesAudio.Play();
+            minorSuccesParticles.Play();
+
+        }
+        else
+            failAudio.Play();
+
+        if (enabledCount == 3)
+            succesParticles.Play();
     }
+
+ 
 }

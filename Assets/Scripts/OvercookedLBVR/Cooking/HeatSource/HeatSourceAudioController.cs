@@ -16,7 +16,8 @@ public class HeatSourceAudioController : MonoBehaviour
         {
             if (!audioSource.isPlaying)
                 audioSource.Play();
-            audioSource.volume = Mathf.Lerp(audioSource.volume, maxAudioVolume, audioVolumeLerpSpeed * Time.deltaTime);
+            float maxAudio = (heatSource.IsHoodClosed) ? maxAudioVolume : maxAudioVolume * 0.5f;
+            audioSource.volume = Mathf.Lerp(audioSource.volume, maxAudio, audioVolumeLerpSpeed * Time.deltaTime);
         }
 
         if (heatSource.CookedItems.Count < 1)

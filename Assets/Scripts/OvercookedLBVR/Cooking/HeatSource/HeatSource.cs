@@ -12,6 +12,8 @@ public class HeatSource : MonoBehaviour
 
     [SerializeField] private GrillCover grillCover = null;
 
+    public bool IsHoodClosed => grillCover.IsHoodClosed;
+
     private void OnTriggerStay(Collider other)
     {
         float heatMultiplier = 1.0f;
