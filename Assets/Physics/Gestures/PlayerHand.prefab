@@ -1451,11 +1451,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3deba7e7aee16bf4fa4ff249c5247031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rootPhotonView: {fileID: 0}
+  hand: 2
   indexAnimator: {fileID: 9084680327649121118}
   middleAnimator: {fileID: 9084680328239416502}
   ringAnimator: {fileID: 9084680327824425035}
   pinkyAnimator: {fileID: 9084680328480718659}
   thumbAnimator: {fileID: 9084680328084861117}
+  pickupManager: {fileID: 0}
+  handGraphics: {fileID: 0}
+  pickupPivot: {fileID: 0}
+  isRemoteClient: 0
+  defaultPosition: {fileID: 0}
 --- !u!114 &6467205078618531702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2275,7 +2282,7 @@ MonoBehaviour:
   fingerTip: {fileID: 848134391693879426}
   frozenCheckLayers:
     serializedVersion: 2
-    m_Bits: 67108865
+    m_Bits: 94371905
 --- !u!114 &9065909769580355486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2344,7 +2351,7 @@ MonoBehaviour:
   fingerTip: {fileID: 4419226916725965696}
   frozenCheckLayers:
     serializedVersion: 2
-    m_Bits: 67108865
+    m_Bits: 94371905
 --- !u!95 &9084680327649121118
 Animator:
   serializedVersion: 3
@@ -2383,7 +2390,7 @@ MonoBehaviour:
   fingerTip: {fileID: 8991618064497970181}
   frozenCheckLayers:
     serializedVersion: 2
-    m_Bits: 67108865
+    m_Bits: 94371905
 --- !u!114 &9027731050822404250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2437,7 +2444,7 @@ MonoBehaviour:
   fingerTip: {fileID: 645757085725695876}
   frozenCheckLayers:
     serializedVersion: 2
-    m_Bits: 67108865
+    m_Bits: 94371905
 --- !u!114 &7594911258658294092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2506,4 +2513,4 @@ MonoBehaviour:
   fingerTip: {fileID: 721927709463338550}
   frozenCheckLayers:
     serializedVersion: 2
-    m_Bits: 67108865
+    m_Bits: 94371905

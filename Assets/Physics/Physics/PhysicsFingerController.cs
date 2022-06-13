@@ -25,9 +25,9 @@ namespace PhysicsCharacter
 
 			registeredColliders = new List<Collider>();
 
-			fingertipTrigger.EnterEvent += OnCollisionEnterEvent;
+			//fingertipTrigger.EnterEvent += OnCollisionEnterEvent;
 			//fingertipTrigger.stayEvent += OnCollisionStayEvent;
-			fingertipTrigger.ExitEvent += OnCollisionExitEvent;
+			//fingertipTrigger.ExitEvent += OnCollisionExitEvent;
 		}
 
 		public float GetFingerValue()
@@ -40,37 +40,55 @@ namespace PhysicsCharacter
 			return fingerController.currentInputValue;
 		}
 
-		private void OnCollisionEnterEvent(Collider col)
+		private void Update()
 		{
-			if(!canFreeze || col.tag == "Player")
+			if (!canFreeze)
 				return;
-			// register current fold of finger to finger upper range
-			// add to list
-			if(!registeredColliders.Contains(col))
-				registeredColliders.Add(col);
-
-			if(registeredColliders.Count > 0)
+			Collider[] cols = Physics.OverlapSphere(fingertipTrigger.transform.position, 0.05f, fingerController.frozenCheckLayers);
+			if (cols.Length != 0)
 			{
 				fingerUpperRange = fingerController.currentVal;
 				isFrozen = true;
 			}
-		}
-
-		private void OnCollisionExitEvent(Collider col)
-		{
-			if(!canFreeze)
-				return;
-			// reset upper range to 1.0f
-			// remove from list. reset if last in list/empty list
-
-			if(registeredColliders.Contains(col))
-				registeredColliders.Remove(col);
-
-			if(registeredColliders.Count == 0)
+			else
 			{
 				UnfreezeFingers();
 			}
 		}
+
+		//private void OnCollisionEnterEvent(Collider col)
+		//{
+		//	return;
+		//	if(!canFreeze || col.tag == "Player")
+		//		return;
+		//	// register current fold of finger to finger upper range
+		//	// add to list
+		//	if(!registeredColliders.Contains(col))
+		//		registeredColliders.Add(col);
+
+		//	if(registeredColliders.Count > 0)
+		//	{
+		//		fingerUpperRange = fingerController.currentVal;
+		//		isFrozen = true;
+		//	}
+		//}
+
+		//private void OnCollisionExitEvent(Collider col)
+		//{
+		//	return;
+		//	if(!canFreeze)
+		//		return;
+		//	// reset upper range to 1.0f
+		//	// remove from list. reset if last in list/empty list
+
+		//	if(registeredColliders.Contains(col))
+		//		registeredColliders.Remove(col);
+
+		//	if(registeredColliders.Count == 0)
+		//	{
+		//		UnfreezeFingers();
+		//	}
+		//}
 
 		private void UnfreezeFingers()
 		{

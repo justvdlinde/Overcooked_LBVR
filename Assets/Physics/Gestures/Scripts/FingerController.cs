@@ -21,7 +21,7 @@ namespace PhysicsCharacter
 
 		public float currentInputValue { get; private set; } = 0.0f;
 		private float previousTarget = 0.0f;
-		[SerializeField] private LayerMask frozenCheckLayers = 0;
+		[SerializeField] public LayerMask frozenCheckLayers = 0;
 
 		public float currentVal { get; private set; } = 0.0f;
 		
