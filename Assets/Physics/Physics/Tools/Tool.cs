@@ -326,10 +326,11 @@ namespace PhysicsCharacter
 			}
 
 			rigidBody.centerOfMass = rigidBody.transform.InverseTransformPoint(toolTransformDelegate.GetAnchorPosition());
-
 			heldHandles++;
 
 			rigidBody.useGravity = false;
+
+			maxPositionChange = 10f;
 
 			photonView.TransferOwnership(PhotonNetwork.LocalPlayer);
 			rootPhotonView.TransferOwnership(PhotonNetwork.LocalPlayer);
@@ -362,6 +363,8 @@ namespace PhysicsCharacter
 			else
 				rigidBody.centerOfMass = rigidBody.transform.InverseTransformPoint(toolTransformDelegate.GetAnchorPosition());
 
+			toolHandle.HandleIsCloseToToolPos = false;
+
 
 			toolHandle.transform.parent = transform;
 			toolHandle.transform.localPosition = toolHandle.localTransformMirror.localPosition;
@@ -393,6 +396,7 @@ namespace PhysicsCharacter
 
 		protected Vector3 FindNewVelocity()
 		{
+			maxPositionChange = Mathf.MoveTowards(maxPositionChange, 500f, 10f);
 			//				world pos of tool handle		world pos of tool itself	world pos of relative pos where handle was attached on spawn minus tool pos to get the offset
 			Vector3 diff = (toolTransformDelegate.GetPosition()) - (rigidBody.worldCenterOfMass + (toolTransformDelegate.GetAnchorPosition() - rigidBody.worldCenterOfMass));
 			return diff / Time.deltaTime;

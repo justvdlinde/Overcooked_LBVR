@@ -6,6 +6,7 @@ public class TieredOrderGenerator : IOrderGenerator
 	public OrderTier[] Tiers { get; private set; }
 	public Action<int> TierChangedEvent;
 
+	private int starterTier = 0;
 	public int currentTier;
 	public int completedOrdersInSuccession;
 	public bool randomizeTimer = true;
@@ -14,9 +15,16 @@ public class TieredOrderGenerator : IOrderGenerator
     {
 		this.randomizeTimer = randomizeTimer;
 		this.currentTier = currentTier;
-
+		starterTier = currentTier;
 		LoadTiers();
     }
+
+	public void ResetGenerator()
+	{
+		currentTier = starterTier;
+		completedOrdersInSuccession = 0;
+		TierChangedEvent?.Invoke(currentTier);
+	}
 
 	private void LoadTiers()
     {
@@ -39,6 +47,7 @@ public class TieredOrderGenerator : IOrderGenerator
 		if (completedOrdersInSuccession > Tiers[currentTier].AmountToCompleteTier)
 		{
 			currentTier++;
+			completedOrdersInSuccession = 0;
 			TierChangedEvent?.Invoke(currentTier);
 		}
 	}

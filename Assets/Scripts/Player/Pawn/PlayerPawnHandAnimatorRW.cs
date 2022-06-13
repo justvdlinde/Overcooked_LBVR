@@ -132,7 +132,7 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 	[SerializeField] private Transform defaultPosition = null;
 	private ToolHandle heldToolhandle = null;
 
-    private void Update()
+    private void FixedUpdate()
 	{
 		if(photonView.IsMine)
 		{

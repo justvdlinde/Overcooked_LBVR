@@ -44,7 +44,7 @@ public class PlateDirtySpot : MonoBehaviour
 		// communicate these values over net? might be unneeded
 		if (cleanProgress < cleanTime)
 		{
-			cleanProgress += Time.deltaTime;
+			cleanProgress += 0.05f;
 			// emit some particles here to communicate function
 		}
 		else
