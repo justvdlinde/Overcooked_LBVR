@@ -27,13 +27,13 @@ public class TieredRecipie : ScriptableObject
 	public int TopRandomIngredientsAmount { get => topRandomIngredientsAmount; }
 	public int BottomRandomIngredientsAmount { get => bottomRandomIngredientsAmount; }
 
-	public float GetTimeForRecipie(bool useRandomOffset = false)
+	public float GetTimeForRecipie(int ingredientCount, bool useRandomOffset = false)
 	{
-		float offset = Mathf.Lerp(-timerDeviationPercentage, timerDeviationPercentage, (float)(GenerateRandom0to100() * 0.01f));
+		float time = Mathf.Max(timeForRecipieInSeconds, ingredientCount * 15);
+		float offset = Mathf.Lerp((float)-timerDeviationPercentage, (float)timerDeviationPercentage, (float)(GenerateRandom0to100() * 0.01f)) * 0.01f;
 
 		//offset *= timeForRecipieInSeconds;
-
-		return timeForRecipieInSeconds + offset;
+		return time + (time * offset);
 	}
 
 	public List<IngredientType> GetRecipie()

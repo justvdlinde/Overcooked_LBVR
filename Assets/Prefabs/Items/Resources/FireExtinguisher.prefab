@@ -199,6 +199,8 @@ MonoBehaviour:
   photonView: {fileID: 6349496524005918410}
   rootPhotonView: {fileID: 6349496524005918410}
   forcePosition: 1
+  disablePosition: 0
+  disableRotation: 0
 --- !u!114 &6349496524005918410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,13 +719,17 @@ PrefabInstance:
       propertyPath: CollisionModule.enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3873521651283020484, guid: af25567df97037b4e9962f3b22fac624, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 4225761527
+      objectReference: {fileID: 0}
     - target: {fileID: 3873521651283020485, guid: af25567df97037b4e9962f3b22fac624, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3873521651283020485, guid: af25567df97037b4e9962f3b22fac624, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.1431
+      value: 0.112
       objectReference: {fileID: 0}
     - target: {fileID: 3873521651283020485, guid: af25567df97037b4e9962f3b22fac624, type: 3}
       propertyPath: m_LocalPosition.y

@@ -56,6 +56,8 @@ public class StoryMode : GameMode
     public override void StartActiveGame()
     {
         base.StartActiveGame();
+        if (PhotonNetwork.IsMasterClient)
+            orderGenerator.ResetGenerator();
         storyFlow = coroutineService.StartCoroutine(StoryFlow());
     }
 
@@ -150,7 +152,8 @@ public class StoryMode : GameMode
 
     private void OnActiveOrderAdded(Order order)
     {
-        order.TimerExceededEvent += OnOrderTimerExceeded;
+        // commented to prevent orders form timing out
+        //order.TimerExceededEvent += OnOrderTimerExceeded;
     }
 
     private void OnOrderTimerExceeded(Order order)
