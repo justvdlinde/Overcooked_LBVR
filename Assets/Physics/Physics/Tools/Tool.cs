@@ -387,7 +387,6 @@ namespace PhysicsCharacter
 			rigidBody.velocity *= slowDownVelocity;
 
 			Vector3 newVelocity = FindNewVelocity();
-			Debug.Log(rigidBody.velocity.magnitude);
 			if(IsValidVelocity(newVelocity.x))
 			{
 				float maxChange = maxPositionChange * Time.deltaTime;
@@ -400,7 +399,6 @@ namespace PhysicsCharacter
 			maxPositionChange = Mathf.MoveTowards(maxPositionChange, 500f, 10f);
 			//				world pos of tool handle		world pos of tool itself	world pos of relative pos where handle was attached on spawn minus tool pos to get the offset
 			Vector3 diff = (toolTransformDelegate.GetPosition()) - (rigidBody.worldCenterOfMass + (toolTransformDelegate.GetAnchorPosition() - rigidBody.worldCenterOfMass));
-			Debug.Log(diff.magnitude);
 			return diff / Time.deltaTime;
 		}
 		protected void RotateUsingPhysics()
