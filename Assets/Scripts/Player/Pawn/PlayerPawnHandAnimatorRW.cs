@@ -77,17 +77,17 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 	public void OnPickupEventRPC(int viewID)
 	{
 		Tool tool = PhotonView.Find(viewID).GetComponentInChildren<Tool>();
+		//Debug.Log($"photonView ID {photonView.ViewID} grabbed tool with ID {viewID}");
 
 		if (!isRemoteClient)
 			return;
 
 		ToolHandle t = tool.GetTargToolhandle(hand);
 
-		heldToolhandle = t;
-
-		handGraphics.transform.parent = null;
-		handGraphics.transform.position = t.transform.position;
-		handGraphics.transform.rotation = t.transform.rotation;
+		handGraphics.transform.parent = tool.transform;
+		tool.childrenToUnparentOnDestroy.Add(handGraphics.transform);
+		handGraphics.transform.localPosition = Vector3.zero;
+		handGraphics.transform.localRotation = Quaternion.identity;
 
 		// get offset from somewhere
 		Vector3 offset = new Vector3((hand == Hand.Left) ? -0.024f : 0.024f, -0.002f, -0.13f);
@@ -115,12 +115,8 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 	[PunRPC]
 	public void OnDropEventRPC(int viewID)
 	{
-		Tool tool = PhotonView.Find(viewID).GetComponentInChildren<Tool>();
-
 		if (!isRemoteClient)
 			return;
-
-		heldToolhandle = null;
 
 		handGraphics.transform.parent = transform;
 		followTarget = transform.position;
@@ -129,10 +125,7 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 		handGraphics.localScale = originalLocalScale;
 	}
 
-	[SerializeField] private Transform defaultPosition = null;
-	private ToolHandle heldToolhandle = null;
-
-    private void FixedUpdate()
+    private void Update()
 	{
 		if(photonView.IsMine)
 		{
@@ -140,34 +133,6 @@ public class PlayerPawnHandAnimatorRW : MonoBehaviourPun, IPunObservable
 		}
 		else
 		{
-			if(isRemoteClient)
-			{
-				if (heldToolhandle != null)
-				{
-					// get offset from somewhere
-					Vector3 offset = new Vector3((hand == Hand.Left) ? -0.024f : 0.024f, -0.002f, -0.13f);
-					if (heldToolhandle.UseHandleHandedness)
-						offset = Vector3.zero;
-
-					handGraphics.transform.position = heldToolhandle.localTransformMirror.GetWorldPosition();
-					handGraphics.transform.localPosition += offset;
-					float zOffset = (hand == Hand.Left) ? 90f : -90f;
-					handGraphics.rotation = heldToolhandle.localTransformMirror.GetWorldRotation() * Quaternion.Euler(new Vector3(0, 0, zOffset));
-
-					if (heldToolhandle.UseHandleHandedness)
-					{
-						Vector3 diffToHandle = pickupPivot.position - heldToolhandle.transform.position;
-						handGraphics.transform.localPosition -= diffToHandle;
-					}
-				}
-				else
-				{
-					handGraphics.transform.parent = transform;
-					handGraphics.transform.position = defaultPosition.position;
-					handGraphics.transform.rotation = defaultPosition.rotation;
-				}
-			}
-
 			float timeMul = Time.deltaTime * lerpSpeed;
 
 			if (indexAnimator != null)

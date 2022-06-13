@@ -37,6 +37,22 @@ namespace PhysicsCharacter
 		public Action OnLocalPickupEvent = null;
 		public Action OnLocalDropEvent = null;
 
+		public List<Transform> childrenToUnparentOnDestroy = new List<Transform>();
+
+		private void OnDestroy()
+		{
+			foreach (var item in childrenToUnparentOnDestroy)
+			{
+				if (transform == null)
+					continue;
+				if (item == null)
+					continue;
+				if (item.parent == transform)
+					item.parent = null;
+			}
+			childrenToUnparentOnDestroy.Clear();
+		}
+
 		public Vector3 GetFollowPos(Hand hand)
 		{
 			foreach (ToolHandle t in toolHandles)
