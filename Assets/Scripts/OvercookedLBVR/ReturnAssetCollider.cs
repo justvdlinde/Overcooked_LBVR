@@ -50,7 +50,7 @@ public class ReturnAssetCollider : MonoBehaviourPun
 			return;
 
 		PhotonView otherPhotonView = other.GetComponentInParent<PhotonView>();
-		if (otherPhotonView.GetComponent<PlayerPawn>())
+		if (otherPhotonView == null || otherPhotonView.GetComponent<PlayerPawn>())
 			return;
 
 		if(otherPhotonView == null)

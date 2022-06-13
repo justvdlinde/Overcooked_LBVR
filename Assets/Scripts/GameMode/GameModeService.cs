@@ -52,8 +52,6 @@ public class GameModeService : IService
         if (CurrentGameMode == null)
             return false;
 
-        Debug.Log(CurrentGameMode.MatchPhase);
-
         return CurrentGameMode.MatchPhase == MatchPhase.Active;
     }
 }

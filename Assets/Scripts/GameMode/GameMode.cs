@@ -98,7 +98,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     protected GlobalEventDispatcher globalEventDispatcher;
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         GameTimer = new Timer();
         DontDestroyOnLoad(this);
@@ -120,6 +120,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         PhotonNetworkService.RoomPropertiesChangedEvent -= OnRoomPropertiesChangedEvent;
         PhotonNetworkService.PhotonEventReceivedEvent -= OnPhotonEventReceived;
+        GameTimer.onDone -= OnTimerReachedZero;
     }
 
     public virtual void Setup()
@@ -131,8 +132,10 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         else
         {
             Hashtable properties = PhotonNetwork.CurrentRoom.CustomProperties;
-            MatchDuration = (float)properties[RoomPropertiesPhoton.MATCH_DURATION];
-            GameModeInitializedTimeStamp = (string)properties[RoomPropertiesPhoton.GAME_TIME_STAMP];
+            if(properties.TryGetValue(RoomPropertiesPhoton.MATCH_DURATION, out object property))
+                MatchDuration = (float)property;
+            if(properties.TryGetValue(RoomPropertiesPhoton.GAME_TIME_STAMP, out property))
+                GameModeInitializedTimeStamp = (string)property;
 
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(RoomPropertiesPhoton.MATCH_START_TIME, out object value))
                 MatchStartTimeStamp = (float)value;
@@ -201,7 +204,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         switch (phase)
         {
             case MatchPhase.PreGame:
-                StartPreGame(false);
+                StartPreGame();
                 break;
             case MatchPhase.Active:
                 StartActiveGame();
@@ -223,22 +226,19 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         globalEventDispatcher.Invoke(new GameModePhaseChangedEvent(newPhase));
     }
 
-    public virtual void StartPreGame(bool replay = false)
+    public virtual void StartPreGame()
     {
         SetPhase(MatchPhase.PreGame);
         if (PhotonNetwork.IsMasterClient)
         {
             PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.GAME_STATE, (int)MatchPhase);
-            if (replay)
-                GameModeInitializedTimeStamp = DateTime.Now.ToString();
+            GameModeInitializedTimeStamp = DateTime.Now.ToString();
             PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.GAME_TIME_STAMP, GameModeInitializedTimeStamp.ToString());
         }
 
-        if (replay)
-        {
-            Scoreboard.Reset();
-            GameTimer.Reset();
-        }
+        Scoreboard.Reset();
+        GameTimer.Reset();
+        Debug.Log("StartpreGame, reset stuff, timer duration: " + GameTimer.Duration + " time remaining " + GameTimer.TimeRemaining);
     }
 
   //  public virtual void StartCountdown()
@@ -288,11 +288,12 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         }
 
         // In case a player joins mid-game, the start time and current network time have to be subtracted from the match duration 
-        float duration = MatchDuration;
-        if (MatchStartTimeStamp != 0)
-            duration = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
+        //float duration = MatchDuration;
+        //if (MatchStartTimeStamp != 0)
+        //    duration = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
 
-        GameTimer.Set(duration);
+        Debug.Log("ActiveGame() duration: " + MatchDuration);
+        GameTimer.Set(MatchDuration);
         GameTimer.Start(OnTimerReachedZero);
     }
 
@@ -339,8 +340,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         if (MatchPhase == MatchPhase.Active)
             EndGame();
 
-        StartPreGame(true);
-        Scoreboard.Reset();
+        StartPreGame();
         globalEventDispatcher.Invoke(new ReplayEvent());
     }
 
