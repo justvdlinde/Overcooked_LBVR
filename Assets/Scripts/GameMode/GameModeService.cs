@@ -18,7 +18,7 @@ public class GameModeService : IService
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            GameMode gameModeInstance = PhotonNetwork.Instantiate(GameModeHelper.GetGameModePrefabName(gamemode), Vector3.zero, Quaternion.identity).GetComponent<GameMode>();
+            GameMode gameModeInstance = PhotonNetwork.InstantiateSceneObject(GameModeHelper.GetGameModePrefabName(gamemode), Vector3.zero, Quaternion.identity).GetComponent<GameMode>();
             Object.DontDestroyOnLoad(gameModeInstance);
             SetGameMode(gameModeInstance);
         }

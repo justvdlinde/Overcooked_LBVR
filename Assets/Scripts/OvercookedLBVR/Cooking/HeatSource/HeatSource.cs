@@ -41,7 +41,7 @@ public class HeatSource : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("OntriggerEnter " + other);
+        //Debug.Log("OntriggerEnter " + other);
         if (other.gameObject.TryGetComponent(out IngredientCookController cookable))
         {
             if (cookable.IsCookable)
@@ -55,7 +55,7 @@ public class HeatSource : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("OntriggerExit " + other);
+        //Debug.Log("OntriggerExit " + other);
         if (other.gameObject.TryGetComponent(out IngredientCookController cookable))
         {
             if (cookable.IsCooking)

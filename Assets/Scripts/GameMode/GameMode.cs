@@ -140,9 +140,12 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(RoomPropertiesPhoton.MATCH_START_TIME, out object value))
                 MatchStartTimeStamp = (float)value;
 
-            MatchPhase phase = (MatchPhase)(int)properties[RoomPropertiesPhoton.GAME_STATE];
-            if (MatchPhase != phase)
-                InvokePhase(phase);
+            if (properties.TryGetValue(RoomPropertiesPhoton.GAME_STATE, out property))
+            {
+                MatchPhase phase = (MatchPhase)(int)property;
+                if (MatchPhase != phase)
+                    InvokePhase(phase);
+            }
         }
 
         GameTimer.Set(MatchDuration);
@@ -286,13 +289,17 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
             RaisePhotonEventCode(PhotonEventCodes.GAME_START);
             PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
         }
+        else
+        {
+            // In case a player joins mid-game, the start time and current network time have to be subtracted from the match duration 
+            float duration = MatchDuration;
+            if (MatchStartTimeStamp != 0)
+            {
+                duration = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
+                Debug.Log("joined midgame detected, duration: " + $"{(int)duration / 60}:{duration % 60:00}");
+            }
+        }
 
-        // In case a player joins mid-game, the start time and current network time have to be subtracted from the match duration 
-        //float duration = MatchDuration;
-        //if (MatchStartTimeStamp != 0)
-        //    duration = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
-
-        Debug.Log("ActiveGame() duration: " + MatchDuration);
         GameTimer.Set(MatchDuration);
         GameTimer.Start(OnTimerReachedZero);
     }
