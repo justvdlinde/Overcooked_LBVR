@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using UnityEngine;
 
@@ -103,7 +104,8 @@ public class GameModeDebugMenu : IDebugMenu
 
         if (drawDeveloperOptions)
         {
-            if (Photon.Pun.PhotonNetwork.IsMasterClient)
+            GUI.enabled = currentGameMode.MatchPhase == MatchPhase.PreGame;
+            if (PhotonNetwork.IsMasterClient)
             {
                 if (GUILayout.Button("StartGame"))
                     currentGameMode.StartActiveGame();
@@ -112,12 +114,17 @@ public class GameModeDebugMenu : IDebugMenu
             {
                 if (GUILayout.Button("StartGame"))
                     currentGameMode.AttemptToStartActiveGame();
-                GUI.enabled = false;
             }
-            if (GUILayout.Button("EndGame"))
-                currentGameMode.EndGame();
-            if (GUILayout.Button("Replay"))
-                currentGameMode.Replay();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                GUI.enabled = currentGameMode.MatchPhase == MatchPhase.Active;
+                if (GUILayout.Button("EndGame"))
+                    currentGameMode.EndGame();
+
+                GUI.enabled = currentGameMode.MatchPhase == MatchPhase.PostGame;
+                if (GUILayout.Button("Replay"))
+                    currentGameMode.Replay();
+            }
             GUI.enabled = true;
 
             if (currentGameMode.MatchPhase == MatchPhase.Active)

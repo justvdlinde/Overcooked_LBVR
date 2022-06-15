@@ -5,6 +5,7 @@ using UnityEngine;
 using Utils.Core.Attributes;
 using Utils.Core.Services;
 using Utils.Core;
+using Photon.Realtime;
 
 public class StoryMode : GameMode
 {

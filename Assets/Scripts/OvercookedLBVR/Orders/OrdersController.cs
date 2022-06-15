@@ -15,7 +15,7 @@ public class OrdersController : MonoBehaviourPunCallbacks
     public Action<Order> ActiveOrderRemoved;
 
     private GlobalEventDispatcher globalEventDispatcher;
-    private DishFitnessCalculator comparisor = new DishFitnessCalculator();
+    private readonly DishFitnessCalculator fitnessCalculator = new DishFitnessCalculator();
 
     public void Awake()
     {
@@ -129,12 +129,12 @@ public class OrdersController : MonoBehaviourPunCallbacks
             return null;
 
         Order bestFit = ActiveOrders[0];
-        float bestFitScore = comparisor.CalculateFitness(dish.Compare(ActiveOrders[0]));
+        float bestFitScore = fitnessCalculator.CalculateFitness(dish.Compare(ActiveOrders[0]));
 
         for (int i = 1; i < ActiveOrders.Count; i++)
         {
             Order order = ActiveOrders[i];
-            float score = comparisor.CalculateFitness(dish.Compare(order));
+            float score = fitnessCalculator.CalculateFitness(dish.Compare(order));
 
             if (score > bestFitScore)
             {
