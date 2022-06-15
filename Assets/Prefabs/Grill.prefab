@@ -3531,6 +3531,7 @@ MonoBehaviour:
   photonView: {fileID: 8840343589783620676}
   rootPhotonView: {fileID: 8840343589783620676}
   forcePosition: 0
+  childrenToUnparentOnDestroy: []
   disablePosition: 0
   disableRotation: 1
 --- !u!114 &8840343589783620676
@@ -4358,6 +4359,7 @@ MonoBehaviour:
   photonView: {fileID: 7593042031699195111}
   rootPhotonView: {fileID: 7593042031699195111}
   forcePosition: 0
+  childrenToUnparentOnDestroy: []
   disablePosition: 0
   disableRotation: 0
 --- !u!114 &7593042031699195111
@@ -4547,7 +4549,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4242286151780734917, guid: 9f0e4d0a02c79814091d3d535047376f, type: 3}
       propertyPath: maxAudioVolume
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f0e4d0a02c79814091d3d535047376f, type: 3}

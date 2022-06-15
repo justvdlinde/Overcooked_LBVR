@@ -10,6 +10,7 @@ public class WaterToolSpring : MonoBehaviour
 	private float springval = 1f;
 
 	public Tool connectedTool = null;
+	public Rigidbody connectedRB = null;
 
 	public LineRenderer lineRenderer = null;
 
@@ -50,10 +51,15 @@ public class WaterToolSpring : MonoBehaviour
 	public void EnableSpring()
 	{
 		spring.spring = springval;
+
+		if (connectedTool.IsBeingHeldRemote())
+			connectedRB.isKinematic = false;
 	}
 
 	public void DisableSpring()
 	{
 		spring.spring = 0f;
+		if (connectedTool.IsBeingHeldRemote())
+			connectedRB.isKinematic = true;
 	}
 }

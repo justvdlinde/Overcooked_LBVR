@@ -1,8 +1,9 @@
+using Photon.Pun;
 using UnityEngine;
 using Utils.Core.Events;
 using Utils.Core.Services;
 
-public class OrderResultManager : MonoBehaviour
+public class OrderResultManager : MonoBehaviourPun
 {
     [SerializeField] private OrderResultUI resultPrefab = null;
     [SerializeField] private float yOffset = 0.4f;
@@ -37,7 +38,14 @@ public class OrderResultManager : MonoBehaviour
             spawnPos.y += yOffset;
         }
 
+        photonView.RPC(nameof(OnDeliveredUIRPC), RpcTarget.All, @event.Score.Points, @event.Score.Result, spawnPos, Quaternion.identity);
+    }
+
+    [PunRPC]
+    public void OnDeliveredUIRPC(float points, DishResult result, Vector3 spawnPos, Quaternion rotation)
+	{
         OrderResultUI instance = Instantiate(resultPrefab, spawnPos, Quaternion.identity);
-        instance.Setup(@event.Score);
+        ScoreData scoreData = new ScoreData(points, result);
+        instance.Setup(scoreData);
     }
 }

@@ -318,6 +318,16 @@ namespace PhysicsCharacter
 			return false;
 		}
 
+		public bool IsBeingHeldRemote()
+		{
+			foreach (ToolHandle h in toolHandles)
+			{
+				if (h.IsHeldByRemote())
+					return true;
+			}
+			return false;
+		}
+
 		public bool IsBeingHeld(Hand hand)
 		{
 			foreach(ToolHandle h in toolHandles)

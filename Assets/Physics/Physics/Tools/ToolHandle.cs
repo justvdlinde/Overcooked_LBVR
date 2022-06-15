@@ -268,6 +268,11 @@ namespace PhysicsCharacter
 				return base.IsObjectBeingHeld();
 		}
 
+		public bool IsHeldByRemote()
+		{
+			return isGrabbedByRemote;
+		}
+
 		public override bool IsObjectBeingHeld(Hand hand)
 		{
 			if (isGrabbedByRemote)
