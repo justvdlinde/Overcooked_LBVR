@@ -8,6 +8,7 @@ public class WaterToolSpring : MonoBehaviour
     public SpringJoint spring;
 
 	private float springval = 1f;
+	[SerializeField] private float maxRange = 1f;
 
 	public Tool connectedTool = null;
 	public Rigidbody connectedRB = null;
@@ -25,7 +26,7 @@ public class WaterToolSpring : MonoBehaviour
 	{
 		if(connectedTool.IsBeingHeld())
 		{
-			if (Vector3.Distance(connectedTool.transform.position, transform.position) > 1f)
+			if (Vector3.Distance(connectedTool.transform.position, transform.position) > maxRange)
 			{
 				connectedTool.GetTargToolhandle(connectedTool.GetHeldHand()).GetReleased(connectedTool.GetHeldHand());
 			}
@@ -52,7 +53,7 @@ public class WaterToolSpring : MonoBehaviour
 	{
 		spring.spring = springval;
 
-		if (connectedTool.IsBeingHeldRemote())
+		if (!connectedTool.IsBeingHeldRemote() && !connectedTool.IsBeingHeld())
 			connectedRB.isKinematic = false;
 	}
 
