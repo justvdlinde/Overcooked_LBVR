@@ -29,7 +29,7 @@ public class TieredRecipie : ScriptableObject
 
 	public float GetTimeForRecipie(int ingredientCount, bool useRandomOffset = false)
 	{
-		float time = Mathf.Max(timeForRecipieInSeconds, ingredientCount * 15);
+		float time = Mathf.Max(timeForRecipieInSeconds, ingredientCount * 25);
 		float offset = Mathf.Lerp((float)-timerDeviationPercentage, (float)timerDeviationPercentage, (float)(GenerateRandom0to100() * 0.01f)) * 0.01f;
 
 		//offset *= timeForRecipieInSeconds;
