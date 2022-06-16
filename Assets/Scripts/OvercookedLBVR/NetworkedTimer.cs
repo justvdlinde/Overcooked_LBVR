@@ -11,9 +11,9 @@ public class NetworkedTimer : Timer
         NetworkedTimeStarted = networkTimeStarted;
     }
 
-    public override void Start(Action onDoneEvent = null)
+    public override void Start(Action onDoneEvent = null, float elapsed = 0)
     {
-        base.Start(onDoneEvent);
+        base.Start(onDoneEvent, elapsed);
 
         if (NetworkedTimeStarted != 0)
             ElapsedTime = (float)(PhotonNetwork.Time - NetworkedTimeStarted);

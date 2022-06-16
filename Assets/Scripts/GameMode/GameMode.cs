@@ -66,7 +66,7 @@ public abstract class GameMode : MonoBehaviourPun
     /// <summary>
     /// Timer used to keep track of game time
     /// </summary>
-    public NetworkedTimer GameTimer { get; protected set; }
+    public Timer GameTimer { get; protected set; }
 
     /// <summary>
     /// Time the match has been alive, in milliseconds
@@ -100,7 +100,7 @@ public abstract class GameMode : MonoBehaviourPun
 
     protected virtual void Awake()
     {
-        GameTimer = new NetworkedTimer();
+        GameTimer = new Timer();
         DontDestroyOnLoad(this);
 
         globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
@@ -247,7 +247,6 @@ public abstract class GameMode : MonoBehaviourPun
         }
 
         Scoreboard.Reset();
-        GameTimer.Reset();
     }
 
   //  public virtual void StartCountdown()
@@ -284,7 +283,6 @@ public abstract class GameMode : MonoBehaviourPun
         globalEventDispatcher.Invoke(new StartGameEvent());
 
         float elapsedTime = 0;
-
         if (PhotonNetwork.IsMasterClient)
         {
             MatchStartTimeStamp = (float)PhotonNetwork.Time;
@@ -300,21 +298,13 @@ public abstract class GameMode : MonoBehaviourPun
         }
         else
         {
-            // In case a player joins mid-game, the start time and current network time have to be subtracted from the match duration 
-            if (MatchStartTimeStamp != 0)
-            {
-                float duration = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
-                elapsedTime = MatchDuration - duration;
-                Debug.Log("joined midgame detected, elapsedTime: " + $"{(int)elapsedTime / 60}:{elapsedTime % 60:00}");
-                GameTimer.Set(MatchStartTimeStamp, MatchDuration);
-            }
-            else
-            {
-                GameTimer.Set(MatchDuration);
-            }
+            float timeRemaining = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
+            elapsedTime = MatchDuration - timeRemaining;
+            GameTimer.Set(MatchDuration);
         }
 
-        GameTimer.Start(OnTimerReachedZero);
+        Debug.Log("START timer, time elapsed: " + elapsedTime);
+        GameTimer.Start(OnTimerReachedZero, elapsedTime);
     }
 
     protected virtual void OnTimerReachedZero()
@@ -360,6 +350,8 @@ public abstract class GameMode : MonoBehaviourPun
         if (MatchPhase == MatchPhase.Active)
             EndGame();
 
+        GameTimer.Reset();
+        Debug.Log("Reset timer, timeremaining: " + GameTimer.TimeRemaining);
         StartPreGame();
         globalEventDispatcher.Invoke(new ReplayEvent());
     }
