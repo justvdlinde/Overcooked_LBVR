@@ -62,8 +62,6 @@ public class ReturnAssetCollider : MonoBehaviourPun
 			if (!otherPhotonView.IsMine)
 				return;
 
-			if (globalEventdispatcher != null)
-				globalEventdispatcher.Invoke<PlateDestroyedEvent>(new PlateDestroyedEvent());
 			photonView.RPC(nameof(PlayParticlesRPC), RpcTarget.All, otherPhotonView.transform.position);
 
 			PhotonNetwork.Destroy(otherPhotonView.transform.gameObject);
