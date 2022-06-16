@@ -25,9 +25,9 @@ public class StoryMode : GameMode
     private ScoreCalculator scoreCalculator;
     private CoroutineTask storyFlow;
 
-    public override void OnPhotonInstantiate(PhotonMessageInfo info)
+    protected override void Awake()
     {
-        base.OnPhotonInstantiate(info);
+        base.Awake();
         coroutineService = GlobalServiceLocator.Instance.Get<CoroutineService>();
     }
 
@@ -58,10 +58,10 @@ public class StoryMode : GameMode
     {
         if (PhotonNetwork.IsMasterClient)
             ordersController.RemoveAllActiveOrders();
+        if (PhotonNetwork.IsMasterClient)
+            orderGenerator.Reset();
 
         base.StartActiveGame();
-        if (PhotonNetwork.IsMasterClient)
-            orderGenerator.ResetGenerator();
         storyFlow = coroutineService.StartCoroutine(StoryFlow());
     }
 

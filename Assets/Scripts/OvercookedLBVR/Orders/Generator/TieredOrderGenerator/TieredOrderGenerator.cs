@@ -19,7 +19,7 @@ public class TieredOrderGenerator : IOrderGenerator
 		LoadTiers();
     }
 
-	public void ResetGenerator()
+	public void Reset()
 	{
 		currentTier = starterTier;
 		completedOrdersInSuccession = 0;

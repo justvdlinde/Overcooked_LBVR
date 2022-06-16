@@ -66,7 +66,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
     /// <summary>
     /// Timer used to keep track of game time
     /// </summary>
-    public Timer GameTimer { get; protected set; }
+    public NetworkedTimer GameTimer { get; protected set; }
 
     /// <summary>
     /// Time the match has been alive, in milliseconds
@@ -100,7 +100,7 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 
     protected virtual void Awake()
     {
-        GameTimer = new Timer();
+        GameTimer = new NetworkedTimer();
         DontDestroyOnLoad(this);
     }
 
@@ -241,7 +241,6 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 
         Scoreboard.Reset();
         GameTimer.Reset();
-        Debug.Log("StartpreGame, reset stuff, timer duration: " + GameTimer.Duration + " time remaining " + GameTimer.TimeRemaining);
     }
 
   //  public virtual void StartCountdown()
@@ -277,6 +276,8 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         SetPhase(MatchPhase.Active);
         globalEventDispatcher.Invoke(new StartGameEvent());
 
+        float elapsedTime = 0;
+
         if (PhotonNetwork.IsMasterClient)
         {
             MatchStartTimeStamp = (float)PhotonNetwork.Time;
@@ -288,19 +289,24 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
 
             RaisePhotonEventCode(PhotonEventCodes.GAME_START);
             PhotonNetwork.CurrentRoom.SetCustomProperties(properties);
+            GameTimer.Set(MatchDuration);
         }
         else
         {
             // In case a player joins mid-game, the start time and current network time have to be subtracted from the match duration 
-            float duration = MatchDuration;
             if (MatchStartTimeStamp != 0)
             {
-                duration = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
-                Debug.Log("joined midgame detected, duration: " + $"{(int)duration / 60}:{duration % 60:00}");
+                float duration = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
+                elapsedTime = MatchDuration - duration;
+                Debug.Log("joined midgame detected, elapsedTime: " + $"{(int)elapsedTime / 60}:{elapsedTime % 60:00}");
+                GameTimer.Set(MatchStartTimeStamp, MatchDuration);
+            }
+            else
+            {
+                GameTimer.Set(MatchDuration);
             }
         }
 
-        GameTimer.Set(MatchDuration);
         GameTimer.Start(OnTimerReachedZero);
     }
 

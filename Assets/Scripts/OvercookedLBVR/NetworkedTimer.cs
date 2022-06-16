@@ -15,7 +15,7 @@ public class NetworkedTimer : Timer
     {
         base.Start(onDoneEvent);
 
-        if(NetworkedTimeStarted != 0)
+        if (NetworkedTimeStarted != 0)
             ElapsedTime = (float)(PhotonNetwork.Time - NetworkedTimeStarted);
         else
             NetworkedTimeStarted = PhotonNetwork.Time;
