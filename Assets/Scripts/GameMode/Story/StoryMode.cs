@@ -27,24 +27,42 @@ public class StoryMode : GameMode
 
     protected override void Awake()
     {
-        base.Awake();
         coroutineService = GlobalServiceLocator.Instance.Get<CoroutineService>();
+        base.Awake();
     }
 
-    private void OnEnable()
+    public void OnEnable()
     {
         ordersController.ActiveOrderAdded += OnActiveOrderAdded;
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
         ordersController.ActiveOrderAdded -= OnActiveOrderAdded;
+    }
+
+    protected override void OnPlayerJoined(PhotonPlayer newPlayer)
+    { 
+        base.OnPlayerJoined(newPlayer);
+        SendSyncData(newPlayer.NetworkClient);
+    }
+
+    private void SendSyncData(PhotonNetworkedPlayer player)
+    {
+        photonView.RPC(nameof(SendSyncDataRPC), player, orderGenerator.currentTier, orderGenerator.completedOrdersInSuccession);
+    }
+
+    [PunRPC]
+    private void SendSyncDataRPC(int currentTier, int completedOrdersInSuccession)
+    {
+        orderGenerator.currentTier = currentTier;
+        orderGenerator.completedOrdersInSuccession = completedOrdersInSuccession;
     }
 
     public override void Setup()
     {
         scoreCalculator = new ScoreCalculator();
-        orderGenerator = new TieredOrderGenerator(true, 0);
+        orderGenerator = new TieredOrderGenerator(true);
         settings = Resources.Load<StorySettings>("StorySettings");
         settings = Instantiate(settings); // Make copy so the original asset stays the same
 
@@ -147,24 +165,22 @@ public class StoryMode : GameMode
         (Scoreboard as StoryModeScoreboard).AddScore(order, score);
         OrdersController.RemoveActiveOrder(order);
         order.TimerExceededEvent -= OnOrderTimerExceeded;
-        CompleteTieredOrder(true);
+        OnOrdercompleted(true);
         globalEventDispatcher.Invoke(new DishDeliveredEvent(dish, order, score));
 
         if (!GameTimer.IsRunning && ordersController.ActiveOrders.Count == 0)
             OnLastOrderServed();
     }
 
-
-    // TO DO: resolve this hack.
-    private void CompleteTieredOrder(bool success)
+    private void OnOrdercompleted(bool success)
 	{
-        photonView.RPC(nameof(CompleteTieredOrderRPC), RpcTarget.All, success);
+        photonView.RPC(nameof(OnOrdercompletedRPC), RpcTarget.All, success);
     }
 
     [PunRPC]
-    private void CompleteTieredOrderRPC(bool success)
+    private void OnOrdercompletedRPC(bool success)
 	{
-        orderGenerator.OnOrderCompleted(true);
+        orderGenerator.OnOrderCompleted(success);
 	}
 
     private void OnActiveOrderAdded(Order order)
@@ -176,7 +192,7 @@ public class StoryMode : GameMode
     private void OnOrderTimerExceeded(Order order)
     {
         order.TimerExceededEvent -= OnOrderTimerExceeded;
-        CompleteTieredOrder(false);
+        OnOrdercompleted(false);
 
         if (PhotonNetwork.IsMasterClient)
         {

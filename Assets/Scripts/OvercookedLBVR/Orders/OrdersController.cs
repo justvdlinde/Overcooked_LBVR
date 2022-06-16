@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using Utils.Core.Events;
 using Utils.Core.Services;
 
-public class OrdersController : MonoBehaviourPunCallbacks
+public class OrdersController : MonoBehaviourPun
 {
     public List<Order> ActiveOrders { get; private set; } = new List<Order>();
     public List<Order> CompletedOrders { get; private set; } = new List<Order>();
@@ -17,15 +17,22 @@ public class OrdersController : MonoBehaviourPunCallbacks
     private GlobalEventDispatcher globalEventDispatcher;
     private readonly DishFitnessCalculator fitnessCalculator = new DishFitnessCalculator();
 
-    public void Awake()
+    protected virtual void Awake()
     {
         globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+        globalEventDispatcher.Subscribe<PlayerJoinEvent>(OnPlayerJoinedEvent);
     }
 
-    public override void OnPlayerEnteredRoom(PhotonNetworkedPlayer newPlayer)
+    protected virtual void OnDestroy()
+    {
+        globalEventDispatcher.Unsubscribe<PlayerJoinEvent>(OnPlayerJoinedEvent);
+    }
+
+    // MonobehaviourPunCallbacks.OnPlayerEnteredRoom is not always being called, therefore this event is needed
+    private void OnPlayerJoinedEvent(PlayerJoinEvent @event)
     {
         if (PhotonNetwork.IsMasterClient)
-            SendSyncData(newPlayer);
+            SendSyncData((@event.Player as PhotonPlayer).NetworkClient);
     }
 
     private void SendSyncData(PhotonNetworkedPlayer player)

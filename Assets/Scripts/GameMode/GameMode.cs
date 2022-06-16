@@ -16,7 +16,7 @@ public enum MatchPhase
     PostGame
 }
 
-public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
+public abstract class GameMode : MonoBehaviourPun
 {
     /// <summary>
     /// The name of the gamemode
@@ -102,11 +102,9 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
     {
         GameTimer = new NetworkedTimer();
         DontDestroyOnLoad(this);
-    }
 
-    public virtual void OnPhotonInstantiate(PhotonMessageInfo info)
-    {
         globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+        globalEventDispatcher.Subscribe<PlayerJoinEvent>(OnPlayerJoinedEvent);
 
         GameModeService gameModeService = GlobalServiceLocator.Instance.Get<GameModeService>();
         if (gameModeService.CurrentGameMode != this)
@@ -116,8 +114,17 @@ public abstract class GameMode : MonoBehaviourPun, IPunInstantiateMagicCallback
         PhotonNetworkService.PhotonEventReceivedEvent += OnPhotonEventReceived;
     }
 
+    // MonobehaviourPunCallbacks.OnPlayerEnteredRoom is not always being called, therefore this event is needed
+    private void OnPlayerJoinedEvent(PlayerJoinEvent @event)
+    {
+        OnPlayerJoined(@event.Player as PhotonPlayer);
+    }
+
+    protected virtual void OnPlayerJoined(PhotonPlayer player) { }
+
     public virtual void OnDestroy()
     {
+        globalEventDispatcher.Unsubscribe<PlayerJoinEvent>(OnPlayerJoinedEvent);
         PhotonNetworkService.RoomPropertiesChangedEvent -= OnRoomPropertiesChangedEvent;
         PhotonNetworkService.PhotonEventReceivedEvent -= OnPhotonEventReceived;
         GameTimer.onDone -= OnTimerReachedZero;
