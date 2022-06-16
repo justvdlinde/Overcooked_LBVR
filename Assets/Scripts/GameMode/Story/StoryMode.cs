@@ -19,6 +19,7 @@ public class StoryMode : GameMode
     [SerializeField] private OrdersController ordersController = null;
     [SerializeField] private StoryModeScoreboard scoreboard = null;
     [SerializeField, InspectableSO] protected StorySettings settings;
+    [SerializeField] private bool endGameOnTimerStop = false;
 
     protected CoroutineService coroutineService;
     private TieredOrderGenerator orderGenerator;
@@ -118,15 +119,25 @@ public class StoryMode : GameMode
 
             if (PhotonNetwork.IsMasterClient)
             {
-                OrderDisplay freeDisplay = SceneOrderDisplayManager.GetFreeDisplay();
-                CreateNewActiveOrder(freeDisplay.orderNumber);
+                if (GameTimer.IsRunning)
+                {
+                    OrderDisplay freeDisplay = SceneOrderDisplayManager.GetFreeDisplay();
+                    CreateNewActiveOrder(freeDisplay.orderNumber);
+                }
             }
         }
     }
 
+    protected override void OnTimerReachedZero()
+    {
+        base.OnTimerReachedZero();
+
+        if(PhotonNetwork.IsMasterClient && endGameOnTimerStop)
+            EndGame();
+    }
+
     public void CreateNewActiveOrder(int displayNr)
     {
-        // TODO: sync generator tier somehow
         Order order = orderGenerator.Generate();
         order.orderNumber = displayNr;
         OrdersController.AddActiveOrder(order);
