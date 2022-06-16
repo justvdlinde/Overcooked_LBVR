@@ -5,11 +5,12 @@ public class OrderDisplay : MonoBehaviour
 {
     public OrderDisplayGrid grid;
     public Slider timeSlider;
-    public int orderNumber;
+    public int OrderNumber => deliveryPoint.OrderNr;
 
     public Order Order => order;
     private Order order = null;
 
+    [SerializeField] private DeliveryPoint deliveryPoint = null;
     [SerializeField] private AudioSource lowTimeLeftSource = null;
     [SerializeField] private AudioSource orderRecievedSource = null;
     private bool lowTimeHasPlayed = false;
@@ -79,7 +80,7 @@ public class OrderDisplay : MonoBehaviour
         // TODO: some kind of animation/flair
         Clear();
         this.order = order;
-        this.order.orderNumber = orderNumber;
+        this.order.orderNumber = OrderNumber;
 
         orderRecievedSource.pitch = 1f + (((UnityEngine.Random.value + 1f) * 0.5f) * 0.1f);
         orderRecievedSource.Play();

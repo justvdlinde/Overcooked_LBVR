@@ -6,7 +6,12 @@ using Utils.Core.Services;
 [RequireComponent(typeof(Collider))]
 public class DeliveryPoint : MonoBehaviour
 {
-    public const int DISH_MIN_INGREDIENTS = 3;
+    public int OrderNr { get; private set; }
+    public OrderDisplay Display => display;
+
+    [SerializeField] private OrderBell bell;
+    [SerializeField] private TMPro.TextMeshProUGUI orderNrLabel;
+    [SerializeField] private OrderDisplay display;
 
     private List<Plate> platesInTrigger = new List<Plate>();
     private GameModeService gamemodeService;
@@ -14,6 +19,22 @@ public class DeliveryPoint : MonoBehaviour
     private void Awake()
     {
         gamemodeService = GlobalServiceLocator.Instance.Get<GameModeService>();
+    }
+
+    public void SetOrderNr(int nr)
+    {
+        OrderNr = nr;
+        orderNrLabel.text = (OrderNr + 1).ToString();
+    }
+
+    private void OnEnable()
+    {
+        bell.PressEvent += DeliverDishInTrigger;
+    }
+
+    private void OnDisable()
+    {
+        bell.PressEvent -= DeliverDishInTrigger;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,10 +60,8 @@ public class DeliveryPoint : MonoBehaviour
     }
 
     [Button]
-    public void DeliverDishesInTrigger()
+    public void DeliverDishInTrigger()
     {
-        Debug.Log("platesInTrigger.Count: " + platesInTrigger.Count);
-
         for (int i = 0; i < platesInTrigger.Count; i++)
         {
             Plate plate = platesInTrigger[i];
@@ -54,14 +73,17 @@ public class DeliveryPoint : MonoBehaviour
 
             Debug.Log("plate.CanBeDelivered " + plate.CanBeDelivered());
             if (plate.CanBeDelivered())
-                DeliverDish(plate);
+            {
+                DeliverDish(plate, OrderNr);
+                break;
+            }
         }
     }
 
-    public void DeliverDish(Plate dish)
+    public void DeliverDish(Plate dish, int orderNr)
     {
         if(gamemodeService.CurrentGameMode != null)
-            gamemodeService.CurrentGameMode.DeliverDish(dish);
+            gamemodeService.CurrentGameMode.DeliverDish(dish, orderNr);
 
         platesInTrigger.Remove(dish);
         dish.OnDeliver();

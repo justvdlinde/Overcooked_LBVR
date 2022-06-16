@@ -24,12 +24,11 @@ public class ReturnAssetCollider : MonoBehaviourPun
 	private bool IsMatchActive()
 	{
 		if (gameModeService == null)
-			gameModeService = GlobalServiceLocator.Instance.Get<GameModeService>();
-		if (gameModeService == null)
 			return false;
 		return gameModeService.IsMatchActive();
 	}
 
+	// TODO: cleanup:
 	private void OnTriggerEnter(Collider other)
 	{
 
@@ -63,9 +62,8 @@ public class ReturnAssetCollider : MonoBehaviourPun
 				return;
 
 			photonView.RPC(nameof(PlayParticlesRPC), RpcTarget.All, otherPhotonView.transform.position);
-
-			PhotonNetwork.Destroy(otherPhotonView.transform.gameObject);
-
+			globalEventdispatcher.Invoke(new PlateOutOfBoundsEvent(plate));
+			plate.SetActive(false);
 			return; 
 		}
 
@@ -97,7 +95,7 @@ public class ReturnAssetCollider : MonoBehaviourPun
 	{
 		Gizmos.color = Color.red * new Color(1,1,1,0.3f);
 
-		Gizmos.DrawCube(transform.position, connectedCollider.bounds.size);
-
+		if(connectedCollider != null)
+			Gizmos.DrawCube(transform.position, connectedCollider.bounds.size);
 	}
 }

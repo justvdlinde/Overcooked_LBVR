@@ -100,10 +100,10 @@ public class StoryMode : GameMode
 
         while (GameTimer.IsRunning)
         {
-            if (SceneOrderDisplayManager.AllDisplaysAreFree())
+            if (SceneOrderDeliveryManager.AllDisplaysAreFree())
             {
-                OrderDisplay freeDisplay = SceneOrderDisplayManager.GetFreeDisplay();
-                CreateNewActiveOrder(freeDisplay.orderNumber);
+                OrderDisplay freeDisplay = SceneOrderDeliveryManager.GetFreeDisplay();
+                CreateNewActiveOrder(freeDisplay.OrderNumber);
                 continue;
             }
             else
@@ -112,7 +112,7 @@ public class StoryMode : GameMode
                 yield return new WaitForSeconds(delay);
             }
 
-            while (!SceneOrderDisplayManager.HasFreeDisplay())
+            while (!SceneOrderDeliveryManager.HasFreeDisplay())
             {
                 yield return null;
             }
@@ -121,8 +121,8 @@ public class StoryMode : GameMode
             {
                 if (GameTimer.IsRunning)
                 {
-                    OrderDisplay freeDisplay = SceneOrderDisplayManager.GetFreeDisplay();
-                    CreateNewActiveOrder(freeDisplay.orderNumber);
+                    OrderDisplay freeDisplay = SceneOrderDeliveryManager.GetFreeDisplay();
+                    CreateNewActiveOrder(freeDisplay.OrderNumber);
                 }
             }
         }
@@ -148,9 +148,9 @@ public class StoryMode : GameMode
         return new StoryGameResult(this, Scoreboard as StoryModeScoreboard);
     }
 
-    public override void DeliverDish(Plate dish)
+    public override void DeliverDish(Plate dish, int orderNr)
     {
-        Order order = OrdersController.GetClosestMatch(dish.FoodStack);
+        Order order = ordersController.GetOrder(orderNr); //OrdersController.GetClosestMatch(dish.FoodStack);
 
         if (order == null)
             throw new System.Exception("No closest order found!");

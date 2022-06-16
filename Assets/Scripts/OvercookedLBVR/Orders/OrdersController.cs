@@ -7,7 +7,7 @@ using Utils.Core.Services;
 
 public class OrdersController : MonoBehaviourPun
 {
-    public List<Order> ActiveOrders { get; private set; } = new List<Order>();
+    public List<Order> ActiveOrders { get; private set; }
     public List<Order> CompletedOrders { get; private set; } = new List<Order>();
     public int CurrentOrderIndex { get; private set; }
 
@@ -19,6 +19,8 @@ public class OrdersController : MonoBehaviourPun
 
     protected virtual void Awake()
     {
+        SetOrderCount(4);
+
         globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
         globalEventDispatcher.Subscribe<PlayerJoinEvent>(OnPlayerJoinedEvent);
     }
@@ -26,6 +28,11 @@ public class OrdersController : MonoBehaviourPun
     protected virtual void OnDestroy()
     {
         globalEventDispatcher.Unsubscribe<PlayerJoinEvent>(OnPlayerJoinedEvent);
+    }
+
+    private void SetOrderCount(int count)
+    {
+        ActiveOrders = new List<Order>(count);
     }
 
     // MonobehaviourPunCallbacks.OnPlayerEnteredRoom is not always being called, therefore this event is needed
@@ -122,6 +129,14 @@ public class OrdersController : MonoBehaviourPun
         ActiveOrderRemoved?.Invoke(order);
         globalEventDispatcher.Invoke(new ActiveOrderRemovedEvent(order));
         order.Dispose();
+    }
+
+    public Order GetOrder(int orderNr)
+    {
+        if (orderNr > ActiveOrders.Count)
+            return null;
+        else
+            return ActiveOrders[orderNr];
     }
 
     /// <summary>

@@ -7,15 +7,21 @@ using Utils.Core.Services;
 [SelectionBase]
 public class Plate : MonoBehaviourPun
 {
+    public const int DISH_MIN_INGREDIENTS = 3;
+
     public FoodStack FoodStack => foodStack;
+    public PlateWashing Washing => washing;
 
     [SerializeField] private FoodStack foodStack = null;
+    [SerializeField] private PlateWashing washing = null;
 
-    private GlobalEventDispatcher globalEventdispatcher = null;
-
+    private GlobalEventDispatcher globalEventdispatcher;
+ 
     private void Awake()
     {
         globalEventdispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+
+        // TODO: initial SetActivev sync for players joining midgame
     }
 
     public void OnDeliver()
@@ -33,11 +39,17 @@ public class Plate : MonoBehaviourPun
 
     public bool CanBeDelivered()
     {
-        return (foodStack != null && foodStack.IngredientsStack.Count >= DeliveryPoint.DISH_MIN_INGREDIENTS);
+        return (foodStack != null && foodStack.IngredientsStack.Count >= DISH_MIN_INGREDIENTS);
     }
 
-    private void OnDestroy()
+    public void SetActive(bool toggle)
     {
-		globalEventdispatcher.Invoke(new PlateDestroyedEvent());
+        photonView.RPC(nameof(SetActiveRPC), RpcTarget.All, toggle);
+    }
+
+    [PunRPC]
+    private void SetActiveRPC(bool toggle)
+    {
+        gameObject.SetActive(toggle);
     }
 }

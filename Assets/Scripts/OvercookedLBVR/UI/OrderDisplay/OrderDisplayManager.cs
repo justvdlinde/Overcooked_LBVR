@@ -7,19 +7,19 @@ using Utils.Core.Services;
 
 public class OrderDisplayManager : MonoBehaviourPun
 {
-    public OrderDisplay[] OrderDisplays => orderDisplays;
-    [SerializeField] protected OrderDisplay[] orderDisplays = null;
+    public DeliveryPoint[] DeliveryPoints => deliveryPoints;
+    [SerializeField] protected DeliveryPoint[] deliveryPoints = null;
 
-    protected Dictionary<Order, OrderDisplay> orderDisplayPairs = new Dictionary<Order, OrderDisplay>();
+    protected Dictionary<Order, DeliveryPoint> orderDeliveryPairs = new Dictionary<Order, DeliveryPoint>();
     protected GlobalEventDispatcher globalEventDispatcher;
 
     protected virtual void Awake()
     {
         globalEventDispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
 
-        for(int i = 0; i < orderDisplays.Length; i++)
+        for(int i = 0; i < deliveryPoints.Length; i++)
         {
-            OrderDisplays[i].orderNumber = i;
+            DeliveryPoints[i].SetOrderNr(i);
         }
     }
 
@@ -65,25 +65,29 @@ public class OrderDisplayManager : MonoBehaviourPun
 
     private void OnActiveOrderRemovedEvent(ActiveOrderRemovedEvent @event)
     {
-        ClearDisplay(@event.Order);
+        ClearDeliveryPointDisplay(@event.Order);
     }
 
     public void DisplayOrder(Order order)
     {
-        OrderDisplay display = orderDisplays[order.orderNumber];
-        if (!display.CanBeUsed())
+        DeliveryPoint deliveryPoint = deliveryPoints[order.orderNumber];
+        if (!deliveryPoint.Display.CanBeUsed())
             Debug.LogWarning("Display is already in use, displayed order will be overwritten");
 
-        display.Show(order);
-        orderDisplayPairs.Add(order, display);
+        deliveryPoint.Display.Show(order);
+        orderDeliveryPairs.Add(order, deliveryPoint);
     }
 
-    public void ClearDisplay(Order order)
+    public void ClearDeliveryPointDisplay(Order order)
     {
-        if(orderDisplayPairs.TryGetValue(order, out OrderDisplay display))
+        if(orderDeliveryPairs.TryGetValue(order, out DeliveryPoint deliveryPoint))
         {
-            display.Clear();
-            orderDisplayPairs.Remove(order);
+            deliveryPoint.Display.Clear();
+            orderDeliveryPairs.Remove(order);
+        }
+        else
+        {
+            Debug.LogError("No matching deliverypoint found for order with number: " + order);
         }
     }
 
@@ -91,8 +95,8 @@ public class OrderDisplayManager : MonoBehaviourPun
     [Utils.Core.Attributes.Button]
     protected void AutoFindDisplays()
     {
-        OrderDisplay[] displays = FindObjectsOfType<OrderDisplay>();
-        orderDisplays = displays.OrderBy(item => item.orderNumber).ToArray();
+        DeliveryPoint[] deliveryPoints = FindObjectsOfType<DeliveryPoint>();
+        deliveryPoints = deliveryPoints.OrderBy(item => item.OrderNr).ToArray();
     }
 #endif
 }

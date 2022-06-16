@@ -70,5 +70,10 @@ MonoBehaviour:
   - PlayParticlesRPC
   - OnDeliveredUIRPC
   - TestRPC
+  - CompleteTieredOrderRPC
+  - OnOrdercompletedRPC
+  - PlayAudioRPC
+  - SetActiveRPC
+  - StartDelayRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1

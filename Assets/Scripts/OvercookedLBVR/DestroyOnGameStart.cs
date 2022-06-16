@@ -27,6 +27,7 @@ public class DestroyOnGameStart : MonoBehaviour
 
     private void OnGameStartEvent(StartGameEvent obj)
     {
+        Debug.Log("ONGameStartEvent, destroy " + name);
         if (TryGetComponent(out PhotonView photonView))
         {
             if(photonView.IsMine)

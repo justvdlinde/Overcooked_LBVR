@@ -181,8 +181,8 @@ public class GameModeDebugMenu : IDebugMenu
 
         if (GUILayout.Button("Add new order"))
         {
-            if (SceneOrderDisplayManager.HasFreeDisplay())
-                story.CreateNewActiveOrder(SceneOrderDisplayManager.GetFreeDisplay().orderNumber);
+            if (SceneOrderDeliveryManager.HasFreeDisplay())
+                story.CreateNewActiveOrder(SceneOrderDeliveryManager.GetFreeDisplay().OrderNumber);
             else
                 Debug.LogWarning("No Free Display available for new order");
         }

@@ -8,8 +8,8 @@ using Utils.Core.Attributes;
 [SelectionBase]
 public class Dispenser : MonoBehaviourPun
 {
-    [SerializeField] private Rigidbody prefab = null;
-    [SerializeField] private Transform spawnPoint = null;
+    [SerializeField] protected Rigidbody prefab = null;
+    [SerializeField] protected Transform spawnPoint = null;
     [SerializeField] private AudioSource AudioSource;
 
     [Header("Force")]
@@ -37,14 +37,14 @@ public class Dispenser : MonoBehaviourPun
             TimeSpan span = DateTime.Now.Subtract(timeLastAcitvated);
             if (span.TotalSeconds > minSecondsBetweenDispense)
             {
-                InstantiateObject();
+                StartDelay();
                 timeLastAcitvated = DateTime.Now;
             }
         }
     }
 
     [Button]
-    private void InstantiateObject()
+    private void StartDelay()
     {
         StartCoroutine(InstantiateDelayed());
     }
@@ -52,12 +52,13 @@ public class Dispenser : MonoBehaviourPun
     private IEnumerator InstantiateDelayed()
 	{
         photonView.RPC(nameof(DoAnimationRPC), RpcTarget.All);
-
         yield return new WaitForSeconds(0.2f);
+        InstantiateObject();
+    }
 
+    protected virtual GameObject InstantiateObject()
+    {
         GameObject instance = PhotonNetwork.Instantiate(prefab.name, spawnPoint.position, Quaternion.identity);
-        // TODO: place this on prefabs, as this won't work for players joining late
-        instance.AddComponent(typeof(DestroyOnGameStart));
         AudioSource.Play();
         if (instantiateWithForce)
         {
@@ -68,6 +69,7 @@ public class Dispenser : MonoBehaviourPun
                 rigidbody.AddTorque(UnityEngine.Random.insideUnitSphere * forceAmt * 0.01f);
             }
         }
+        return instance;
     }
 
     [PunRPC]

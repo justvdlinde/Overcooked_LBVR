@@ -26,7 +26,7 @@ public class Order : IDisposable
 
     public override string ToString()
     {
-        return base.ToString() + " Ingredients: " + string.Join("-", ingredients);
+        return base.ToString() + " #" + orderNumber + " Ingredients: " + string.Join("-", ingredients);
     }
 
     public void Dispose()

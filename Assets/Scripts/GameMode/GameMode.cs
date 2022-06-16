@@ -303,7 +303,6 @@ public abstract class GameMode : MonoBehaviourPun
             GameTimer.Set(MatchDuration);
         }
 
-        Debug.Log("START timer, time elapsed: " + elapsedTime);
         GameTimer.Start(OnTimerReachedZero, elapsedTime);
     }
 
@@ -312,7 +311,6 @@ public abstract class GameMode : MonoBehaviourPun
         if (PhotonNetwork.IsMasterClient)
         {
             GameTimer.Stop();
-            //EndGame();
         }
     }
 
@@ -331,7 +329,7 @@ public abstract class GameMode : MonoBehaviourPun
     }
 
     public abstract IGameResult GetGameResult();
-    public abstract void DeliverDish(Plate dish);
+    public abstract void DeliverDish(Plate dish, int orderNr);
 
     public virtual void Shutdown()
     {

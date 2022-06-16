@@ -7,6 +7,10 @@ public class Layers
 	public const string WATER = "Water";
 	public const string UI = "UI";
 	public const string INGREDIENT = "Ingredient";
+	public const string DESTROY_COLLIDER = "DestroyCollider";
+	public const string DONT_COLLIDE_WITH_TOOL = "DontCollideWithTool";
+	public const string NO_COLLISION = "NoCollision";
+	public const string PHYSICS_DOOR = "PhysicsDoor";
 	public const string PHYSICS_BUTTON = "PhysicsButton";
 	public const string TOOL_HANDLE = "ToolHandle";
 	public const string TOOL = "Tool";
@@ -22,6 +26,10 @@ public class Layers
 	public const int WATER_INT = 4;
 	public const int UI_INT = 5;
 	public const int INGREDIENT_INT = 6;
+	public const int DESTROY_COLLIDER_INT = 7;
+	public const int DONT_COLLIDE_WITH_TOOL_INT = 21;
+	public const int NO_COLLISION_INT = 22;
+	public const int PHYSICS_DOOR_INT = 23;
 	public const int PHYSICS_BUTTON_INT = 24;
 	public const int TOOL_HANDLE_INT = 25;
 	public const int TOOL_INT = 26;

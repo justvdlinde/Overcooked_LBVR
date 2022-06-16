@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 5554103771995163421}
   - component: {fileID: 8953940111436927376}
   - component: {fileID: 4443576776531160006}
+  - component: {fileID: 6867786693423374136}
   m_Layer: 6
   m_Name: Ingredient_Base
   m_TagString: Untagged
@@ -184,14 +185,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf7ea0d28546db4888b1edbf317d7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <IsRotten>k__BackingField: 0
-  <IsWet>k__BackingField: 0
-  <IsFrozen>k__BackingField: 0
-  <IsOnFire>k__BackingField: 0
   connectedIngredient: {fileID: 59611235620371129}
-  currentHeat: 0
   conditionGraphics: {fileID: 2065405443261525428}
-  photonView: {fileID: 5554103771995163421}
+  <Condition>k__BackingField: 0
+  <CurrentHeat>k__BackingField: 0
+  <WasOnFire>k__BackingField: 0
+  testCondition: 4
+  testInstantUpdateParticles: 0
+--- !u!114 &6867786693423374136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698536654608434325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87a4aa230419f6144847a9e83cd90e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1169150959768902286
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -253,14 +265,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9e42f3e29ba7e745a6b9c0e79fb3dd9, type: 3}
---- !u!4 &5551335861602763872 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6715964458858798830, guid: c9e42f3e29ba7e745a6b9c0e79fb3dd9, type: 3}
-  m_PrefabInstance: {fileID: 1169150959768902286}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &8670198720119121376 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 7524128866322497390, guid: c9e42f3e29ba7e745a6b9c0e79fb3dd9, type: 3}
+  m_PrefabInstance: {fileID: 1169150959768902286}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5551335861602763872 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6715964458858798830, guid: c9e42f3e29ba7e745a6b9c0e79fb3dd9, type: 3}
   m_PrefabInstance: {fileID: 1169150959768902286}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2834712596722471524
