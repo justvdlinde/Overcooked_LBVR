@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b409e7bc6ac17c47b163e26fe12b29f, type: 3}
   m_Name: Kitchen 2
   m_EditorClassIdentifier: 
-  title: Demo_Just_Space
+  title: Demo_Just_2walls
   scene:
-    sceneAsset: {fileID: 102900000, guid: 724a7ff253461ef4282a46801d47a0dd, type: 3}
-    sceneName: Demo_Just_Space
-  dimensions: {x: 5, y: 5}
-  dimensionsInFeet: {x: 16.404167, y: 16.404167}
+    sceneAsset: {fileID: 102900000, guid: 1b04f86a85638104688a27f223dcb2ca, type: 3}
+    sceneName: Demo_Just_2walls
+  dimensions: {x: 6, y: 6}
+  dimensionsInFeet: {x: 19.685, y: 19.685}
