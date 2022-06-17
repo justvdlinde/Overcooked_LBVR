@@ -56,7 +56,18 @@ public class PlateWashing : MonoBehaviourPun, IRottable
 		}
 	}
 
-	private void Update()
+    private void OnEnable()
+    {
+		if (currentPlateState == PlateState.Dirty)
+		{
+			if (CountdownCoroutine != null)
+				StopCoroutine(CountdownCoroutine);
+			countdownCanvas.SetActive(false);
+			return;
+		}
+	}
+
+    private void Update()
 	{
         if (IsPlateClean)
             return;
@@ -92,7 +103,7 @@ public class PlateWashing : MonoBehaviourPun, IRottable
 		cleanGraphics.gameObject.SetActive(isPlateClean);
 		dirtyGraphics.gameObject.SetActive(!isPlateClean);
 
-		foodStack.RemoveAllIngredients();
+		foodStack.RemoveAllIngredients(false);
 
 		foreach (var item in toggleComponentsEnableOnClean)
 		{
@@ -138,7 +149,8 @@ public class PlateWashing : MonoBehaviourPun, IRottable
 		}
 		else if (!isRotting)
 		{
-			StopCoroutine(CountdownCoroutine);
+			if(CountdownCoroutine != null)
+				StopCoroutine(CountdownCoroutine);
 			countdownCanvas.SetActive(false);
 			isFloorRotting = false;
 		}

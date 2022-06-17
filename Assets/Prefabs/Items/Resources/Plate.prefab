@@ -923,6 +923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodStack: {fileID: 8280493064852665215}
+  washing: {fileID: 1164620339231088278}
 --- !u!114 &8280493064852665215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,8 +979,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
   m_SynchronizeAngularVelocity: 1
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  m_TeleportEnabled: 1
+  m_TeleportIfDistanceGreaterThan: 2
 --- !u!65 &8004550160256798095
 BoxCollider:
   m_ObjectHideFlags: 0

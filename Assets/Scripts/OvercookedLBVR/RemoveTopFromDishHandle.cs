@@ -21,7 +21,7 @@ public class RemoveTopFromDishHandle : PickupableObject
 		if (!foodStack.CanRemoveTopIngredient())
 			return null;
 
-		Ingredient ingredient = foodStack.RemoveTopIngredient();
+		Ingredient ingredient = foodStack.RemoveTopIngredient(false);
         PickupableObject handle = ingredient.GrabController.dummyToolHandle;
 		if (handle != null)
             return handle.GetGrabbed(hand, target);

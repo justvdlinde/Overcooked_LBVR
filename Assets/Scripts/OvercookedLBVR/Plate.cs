@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System;
 using UnityEngine;
 using Utils.Core.Events;
@@ -20,8 +21,30 @@ public class Plate : MonoBehaviourPun
     private void Awake()
     {
         globalEventdispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
+        globalEventdispatcher.Subscribe<PlayerJoinEvent>(OnPlayerJoinEvent);
+    }
 
-        // TODO: initial SetActivev sync for players joining midgame
+    private void OnDestroy()
+    {
+        globalEventdispatcher.Unsubscribe<PlayerJoinEvent>(OnPlayerJoinEvent);
+    }
+
+    // Photon OnPlayerEnteredRoom does not work for some reason so this event is used
+    private void OnPlayerJoinEvent(PlayerJoinEvent obj)
+    {
+        if (PhotonNetwork.IsMasterClient)
+            SendSyncData((obj.Player as PhotonPlayer).NetworkClient);
+    }
+
+    private void SendSyncData(PhotonNetworkedPlayer player)
+    {
+        photonView.RPC(nameof(SendPlateSyncDataRPC), player, gameObject.activeSelf);
+    }
+
+    [PunRPC]
+    private void SendPlateSyncDataRPC(bool isActive)
+    {
+        SetActive(isActive);
     }
 
     public void OnDeliver()
@@ -32,9 +55,8 @@ public class Plate : MonoBehaviourPun
     [PunRPC]
     private void OnDeliverRPC()
     {
-        // TODO: instantiate some kind of particle/feedback
-        if(photonView.IsMine)
-            PhotonNetwork.Destroy(gameObject);
+        gameObject.SetActive(false);
+        FoodStack.RemoveAllIngredients(true);
     }
 
     public bool CanBeDelivered()

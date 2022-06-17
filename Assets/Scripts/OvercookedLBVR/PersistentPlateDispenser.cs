@@ -1,4 +1,5 @@
 using Photon.Pun;
+using System;
 using UnityEngine;
 using Utils.Core.Events;
 using Utils.Core.Services;
@@ -25,12 +26,14 @@ public class PersistentPlateDispenser : Dispenser
     private void OnEnable()
     {
         globalEventDispatcher.Subscribe<StartGameEvent>(OnStartGameEvent);
+        globalEventDispatcher.Subscribe<ReplayEvent>(OnReplayGameEvent);
         globalEventDispatcher.Subscribe<ConnectionSuccessEvent>(OnConnected);
     }
 
     private void OnDisable()
     {
         globalEventDispatcher.Unsubscribe<StartGameEvent>(OnStartGameEvent);
+        globalEventDispatcher.Unsubscribe<ReplayEvent>(OnReplayGameEvent);
         globalEventDispatcher.Unsubscribe<ConnectionSuccessEvent>(OnConnected);
     }
 
@@ -50,17 +53,24 @@ public class PersistentPlateDispenser : Dispenser
 
     private void OnStartGameEvent(StartGameEvent obj)
     {
-        if (photonView.IsMine)
-            ResetPostion();
+        if (PhotonNetwork.IsMasterClient)
+            ResetPlate();
     }
 
-    private void ResetPostion()
+    private void OnReplayGameEvent(ReplayEvent obj)
+    {
+        if (PhotonNetwork.IsMasterClient)
+            ResetPlate();
+    }
+
+    private void ResetPlate()
     {
         if(PlateInstance.TryGetComponent(out Rigidbody rigidbody))
         {
             rigidbody.velocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
         }
-        transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+        PlateInstance.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+        PlateInstance.Washing.SetPlateClean();
     }
 }

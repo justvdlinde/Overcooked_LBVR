@@ -38,42 +38,40 @@ MonoBehaviour:
   - ClickRpc
   - CopyValuesRPC
   - DestroyRpc
-  - DispenseObjectRPC
+  - DoAnimationRPC
   - GrabbedRPC
   - MoveRPC
+  - OnDeliveredUIRPC
   - OnDeliverRPC
   - OnDownEventRPC
   - OnDropEventRPC
+  - OnOrdercompletedRPC
   - OnPickupEventRPC
   - OnUpEventRPC
+  - PlayAudioRPC
+  - PlayParticlesRPC
   - ProcessIngredientRPC
   - ReleasedRPC
   - RemoveAllActiveOrdersRPC
-  - RemoveTopIngredientRPC
+  - RemoveAllIngredientsRPC
+  - RemoveIngredientRPC
+  - RequestDispenseRPC
   - RequestStateRPC
   - ResetProgressRPC
   - RespawnRPC
   - SelectionEventRPC
   - SendSyncDataRPC
+  - SetActiveRPC
   - SetCookStateRPC
+  - SetPlateCleanRPC
+  - SetPlateDirtyRPC
   - SetStateRPC
   - SetStatusConditionRPC
   - ShootRPC
+  - StartDelayRPC
   - SubmitActiveOrderRPC
   - SubmitRemoveActiveOrderRPC
-  - RequestDispenseRPC
-  - DishDeliveredRPC
-  - DoAnimationRPC
-  - PlateDestroyedRPC
-  - SetPlateCleanRPC
-  - SetPlateDirtyRPC
-  - PlayParticlesRPC
-  - OnDeliveredUIRPC
-  - TestRPC
-  - CompleteTieredOrderRPC
-  - OnOrdercompletedRPC
-  - PlayAudioRPC
-  - SetActiveRPC
-  - StartDelayRPC
+  - SendFoodstackSyncDataRPC
+  - SendPlateSyncDataRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1

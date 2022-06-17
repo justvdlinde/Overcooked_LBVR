@@ -100,11 +100,13 @@ public class FoodStackInspector : Editor
         EditorGUILayout.BeginHorizontal();
         destroyOnRemove = EditorGUILayout.Toggle("Destroy", destroyOnRemove);
         GUI.enabled = guiWasEnabled && foodStack.IngredientsStack.Count > 0;
-        if (GUILayout.Button("Remove top ingredient"))
+        if (GUILayout.Button("Remove top"))
         {
-            Ingredient ingredient = foodStack.RemoveTopIngredient();
-            if (destroyOnRemove)
-                PhotonNetwork.Destroy(ingredient.gameObject);
+            foodStack.RemoveTopIngredient(destroyOnRemove);
+        }
+        if (GUILayout.Button("Remove all"))
+        {
+            foodStack.RemoveAllIngredients(destroyOnRemove);
         }
         EditorGUILayout.EndHorizontal();
 

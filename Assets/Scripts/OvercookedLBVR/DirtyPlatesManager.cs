@@ -39,7 +39,6 @@ public class DirtyPlatesManager : MonoBehaviourPun
 
 	private void OnPlateOutOfBoundsEvent(PlateOutOfBoundsEvent @event)
 	{
-        Debug.Log("OnPlateOutOfBoundsEvent, start delay for dirty");
         photonView.RPC(nameof(StartDelayRPC), RpcTarget.All, @event.Plate.photonView.ViewID);
     }
 
@@ -61,7 +60,7 @@ public class DirtyPlatesManager : MonoBehaviourPun
         if (PhotonNetwork.IsMasterClient)
         {
             Plate plate = PhotonView.Find(plateViewId).GetComponent<Plate>();
-            DirtifyPlate(plate);
+            AddToDirtyDishes(plate);
         }
 	}
 
@@ -86,14 +85,13 @@ public class DirtyPlatesManager : MonoBehaviourPun
         joint.targetPosition = targPos;
 	}
 
-	public void DirtifyPlate(Plate plate)
+	public void AddToDirtyDishes(Plate plate)
     {
         plate.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
         plate.Washing.SetPlateDirty();
+        plate.SetActive(true);
         photonView.RPC(nameof(PlayAudioRPC), RpcTarget.All);
         photonView.TransferOwnership(-1);
-
-        //instance.AddForce(instance.transform.forward * forceAmount, forceMode);
     }
 
     [PunRPC]
