@@ -23,7 +23,7 @@ public class OrderGeneratorTester : MonoBehaviour
     public void CreateNewActiveOrder()
     {
         Order order = orderGenerator.Generate();
-        order.orderNumber = 0;
+        order.orderIndex = 0;
         ordersController.AddActiveOrder(order);
     }
 }

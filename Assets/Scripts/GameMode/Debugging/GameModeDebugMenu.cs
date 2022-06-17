@@ -187,11 +187,17 @@ public class GameModeDebugMenu : IDebugMenu
                 Debug.LogWarning("No Free Display available for new order");
         }
 
-        for (int i = 0; i < story.OrdersController.ActiveOrders.Count; i++)
+        for (int i = 0; i < story.OrdersController.ActiveOrders.Length; i++)
         {
             Order order = story.OrdersController.ActiveOrders[i];
+            if (order == null)
+            {
+                GUILayout.Label("#" + i + ": null");
+                continue;
+            }
+
             GUILayout.BeginHorizontal();
-            GUILayout.Label(order.orderNumber + ": " + order + " (" + order.timer.TimeRemaining + ")");
+            GUILayout.Label(order.orderIndex + ": " + order + " (" + order.timer.TimeRemaining + ")");
 
             if (order.timer.IsRunning)
             {
@@ -205,13 +211,9 @@ public class GameModeDebugMenu : IDebugMenu
             }
 
             if (GUILayout.Button("Deliver"))
-                story.CheatDeliverDish(order.orderNumber);
+                story.CheatDeliverDish(order.orderIndex);
             GUILayout.EndHorizontal();
         }
-
-        if (story.OrdersController.ActiveOrders.Count == 0)
-            GUILayout.Label("Empty");
-
         GUILayout.EndVertical();
     }
 }

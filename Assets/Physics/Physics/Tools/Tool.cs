@@ -9,6 +9,8 @@ namespace PhysicsCharacter
 	//[RequireComponent(typeof(Rigidbody))]
 	public class Tool : MonoBehaviour
 	{
+		public bool MarkedForDestruction { get; protected set; }
+
 		[SerializeField] private List<ToolHandle> toolHandles = null;
 		[SerializeField] private ToolPositionDelegate toolTransformDelegate = null;
 		public DummyToolHandle dummyToolHandle = null;
@@ -41,6 +43,8 @@ namespace PhysicsCharacter
 
 		private void OnDestroy()
 		{
+			MarkedForDestruction = true;
+
 			foreach (var item in childrenToUnparentOnDestroy)
 			{
 				if (transform == null)
@@ -51,6 +55,12 @@ namespace PhysicsCharacter
 					item.parent = null;
 			}
 			childrenToUnparentOnDestroy.Clear();
+
+			foreach (ToolHandle h in toolHandles)
+			{
+				if (h.IsObjectBeingHeld())
+					h.ForceRelease();
+			}
 		}
 
 		public Vector3 GetFollowPos(Hand hand)
@@ -391,10 +401,12 @@ namespace PhysicsCharacter
 
 			toolHandle.HandleIsCloseToToolPos = false;
 
-
-			toolHandle.transform.parent = transform;
-			toolHandle.transform.localPosition = toolHandle.localTransformMirror.localPosition;
-			toolHandle.transform.localRotation = toolHandle.localTransformMirror.localRotation;
+			if (!MarkedForDestruction)
+			{
+				toolHandle.transform.parent = transform;
+				toolHandle.transform.localPosition = toolHandle.localTransformMirror.localPosition;
+				toolHandle.transform.localRotation = toolHandle.localTransformMirror.localRotation;
+			}
 
 			//photonView.TransferOwnership(-1);
 			photonView.RPC(nameof(ReleasedRPC), RpcTarget.Others, rigidBody.useGravity);

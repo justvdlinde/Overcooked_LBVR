@@ -44,7 +44,8 @@ public class DirtyPlatesManager : MonoBehaviourPun
 
     private void OnDishDeliveredEvent(DishDeliveredEvent @event)
 	{
-        photonView.RPC(nameof(StartDelayRPC), RpcTarget.All, @event.Dish.photonView.ViewID);
+        if(@event.Dish != null)
+            photonView.RPC(nameof(StartDelayRPC), RpcTarget.All, @event.Dish.photonView.ViewID);
 	}
 
     [PunRPC]

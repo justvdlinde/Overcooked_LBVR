@@ -5,7 +5,7 @@ public class OrderDisplay : MonoBehaviour
 {
     public OrderDisplayGrid grid;
     public Slider timeSlider;
-    public int OrderNumber => deliveryPoint.OrderNr;
+    public int OrderNumber => deliveryPoint.OrderIndex;
 
     public Order Order => order;
     private Order order = null;
@@ -80,7 +80,7 @@ public class OrderDisplay : MonoBehaviour
         // TODO: some kind of animation/flair
         Clear();
         this.order = order;
-        this.order.orderNumber = OrderNumber;
+        this.order.orderIndex = OrderNumber;
 
         orderRecievedSource.pitch = 1f + (((UnityEngine.Random.value + 1f) * 0.5f) * 0.1f);
         orderRecievedSource.Play();

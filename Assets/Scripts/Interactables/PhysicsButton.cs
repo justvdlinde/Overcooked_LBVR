@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Utils.Core.Attributes;
 
+[SelectionBase]
 public class PhysicsButton : MonoBehaviour
 {
 	private bool IsUsable = true;

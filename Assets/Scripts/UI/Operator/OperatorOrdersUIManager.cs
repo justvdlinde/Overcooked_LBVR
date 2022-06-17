@@ -24,7 +24,7 @@ public class OperatorOrdersUIManager : MonoBehaviour
 
     private void DisplayOrder(Order order)
     {
-        OrderDisplay display = displays[order.orderNumber];
+        OrderDisplay display = displays[order.orderIndex];
         display.Show(order);
         orderDisplayPairs.Add(order, display);
     }

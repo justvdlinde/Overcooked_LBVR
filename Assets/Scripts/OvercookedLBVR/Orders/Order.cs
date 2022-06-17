@@ -7,13 +7,13 @@ public class Order : IDisposable
 
     public IngredientType[] ingredients;
     public readonly NetworkedTimer timer;
-    [ReadOnly] public int orderNumber;
+    [ReadOnly] public int orderIndex;
 
     public Order(IngredientType[] ingredients, NetworkedTimer timer) : this(-1, ingredients, timer) {  }
 
     public Order(int orderNumber, IngredientType[] ingredients, NetworkedTimer timer)
     {
-        this.orderNumber = orderNumber;
+        this.orderIndex = orderNumber;
         this.ingredients = ingredients;
         this.timer = timer;
         timer.onDone += OnTimerExceeded;
@@ -26,7 +26,7 @@ public class Order : IDisposable
 
     public override string ToString()
     {
-        return base.ToString() + " #" + orderNumber + " Ingredients: " + string.Join("-", ingredients);
+        return base.ToString() + " #" + orderIndex + " Ingredients: " + string.Join("-", ingredients);
     }
 
     public void Dispose()

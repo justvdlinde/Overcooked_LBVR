@@ -6,7 +6,7 @@ using Utils.Core.Services;
 [RequireComponent(typeof(Collider))]
 public class DeliveryPoint : MonoBehaviour
 {
-    public int OrderNr { get; private set; }
+    public int OrderIndex { get; private set; }
     public OrderDisplay Display => display;
 
     [SerializeField] private OrderBell bell;
@@ -21,10 +21,10 @@ public class DeliveryPoint : MonoBehaviour
         gamemodeService = GlobalServiceLocator.Instance.Get<GameModeService>();
     }
 
-    public void SetOrderNr(int nr)
+    public void SetOrderIndex(int index)
     {
-        OrderNr = nr;
-        orderNrLabel.text = (OrderNr + 1).ToString();
+        OrderIndex = index;
+        orderNrLabel.text = (OrderIndex + 1).ToString();
     }
 
     private void OnEnable()
@@ -74,16 +74,23 @@ public class DeliveryPoint : MonoBehaviour
             Debug.Log("plate.CanBeDelivered " + plate.CanBeDelivered());
             if (plate.CanBeDelivered())
             {
-                DeliverDish(plate, OrderNr);
+                DeliverDish(plate, OrderIndex);
                 break;
             }
         }
     }
 
-    public void DeliverDish(Plate dish, int orderNr)
+    [Button]
+    private void CheatDeliverDish()
+    {
+        if (gamemodeService != null && gamemodeService.CurrentGameMode != null)
+            (gamemodeService.CurrentGameMode as StoryMode).CheatDeliverDish(OrderIndex);
+    }
+
+    public void DeliverDish(Plate dish, int orderIndex)
     {
         if(gamemodeService.CurrentGameMode != null)
-            gamemodeService.CurrentGameMode.DeliverDish(dish, orderNr);
+            gamemodeService.CurrentGameMode.DeliverDish(dish, orderIndex);
 
         platesInTrigger.Remove(dish);
         dish.OnDeliver();

@@ -7,7 +7,7 @@ using Utils.Core.Services;
 
 public class OrdersController : MonoBehaviourPun
 {
-    public List<Order> ActiveOrders { get; private set; }
+    public Order[] ActiveOrders { get; private set; }
     public List<Order> CompletedOrders { get; private set; } = new List<Order>();
     public int CurrentOrderIndex { get; private set; }
 
@@ -32,7 +32,7 @@ public class OrdersController : MonoBehaviourPun
 
     private void SetOrderCount(int count)
     {
-        ActiveOrders = new List<Order>(count);
+        ActiveOrders = new Order[count];
     }
 
     // MonobehaviourPunCallbacks.OnPlayerEnteredRoom is not always being called, therefore this event is needed
@@ -45,10 +45,13 @@ public class OrdersController : MonoBehaviourPun
     private void SendSyncData(PhotonNetworkedPlayer player)
     {
         List<byte[]> bytes = new List<byte[]>();
-        for (int i = 0; i < ActiveOrders.Count; i++)
+        for (int i = 0; i < ActiveOrders.Length; i++)
         {
-            byte[] order = OrderSerializer.Serialize(ActiveOrders[i]);
-            bytes.Add(order);
+            if (ActiveOrders[i] != null)
+            {
+                byte[] order = OrderSerializer.Serialize(ActiveOrders[i]);
+                bytes.Add(order);
+            }
         }
 
         // In case ActiveOrders is empty, send null, otherwise Photon will throw an error
@@ -87,7 +90,7 @@ public class OrdersController : MonoBehaviourPun
 
     private void AddActiveOrderInternal(Order order)
     {
-        ActiveOrders.Add(order);
+        ActiveOrders[order.orderIndex] = order;
         ActiveOrderAdded?.Invoke(order);
         order.timer.Start();
         CurrentOrderIndex++;
@@ -102,16 +105,17 @@ public class OrdersController : MonoBehaviourPun
     [PunRPC]
     public void RemoveAllActiveOrdersRPC()
     {
-        Order[] temp = ActiveOrders.ToArray();
+        Order[] temp = ActiveOrders;
         for (int i = 0; i < temp.Length; i++)
         {
-            RemoveActiveOrderInternal(temp[i], false);
+            if(temp[i] != null)
+                RemoveActiveOrderInternal(temp[i], false);
         }
     }
 
     public void RemoveActiveOrder(Order order)
     {
-        photonView.RPC(nameof(SubmitRemoveActiveOrderRPC), RpcTarget.Others, ActiveOrders.IndexOf(order));
+        photonView.RPC(nameof(SubmitRemoveActiveOrderRPC), RpcTarget.Others, order.orderIndex);
         RemoveActiveOrderInternal(order);
     }
 
@@ -123,7 +127,7 @@ public class OrdersController : MonoBehaviourPun
 
     private void RemoveActiveOrderInternal(Order order, bool addToCompleted = true)
     {
-        ActiveOrders.Remove(order);
+        ActiveOrders[order.orderIndex] = null;
         if(addToCompleted)
             CompletedOrders.Add(order);
         ActiveOrderRemoved?.Invoke(order);
@@ -131,12 +135,23 @@ public class OrdersController : MonoBehaviourPun
         order.Dispose();
     }
 
-    public Order GetOrder(int orderNr)
+    public Order GetOrder(int orderIndex)
     {
-        if (orderNr > ActiveOrders.Count)
+        if (orderIndex > ActiveOrders.Length)
             return null;
         else
-            return ActiveOrders[orderNr];
+            return ActiveOrders[orderIndex];
+    }
+
+    public int ActiveOrdersCount()
+    {
+        int count = 0;
+        for (int i = 0; i < ActiveOrders.Length; i++)
+        {
+            if (ActiveOrders[i] != null)
+                count++;
+        }
+        return count;
     }
 
     /// <summary>
@@ -147,13 +162,13 @@ public class OrdersController : MonoBehaviourPun
     /// <returns></returns>
     public Order GetClosestMatch(FoodStack dish)
     {
-        if (ActiveOrders == null || ActiveOrders.Count == 0)
+        if (ActiveOrders == null || ActiveOrders.Length == 0)
             return null;
 
         Order bestFit = ActiveOrders[0];
         float bestFitScore = fitnessCalculator.CalculateFitness(dish.Compare(ActiveOrders[0]));
 
-        for (int i = 1; i < ActiveOrders.Count; i++)
+        for (int i = 1; i < ActiveOrders.Length; i++)
         {
             Order order = ActiveOrders[i];
             float score = fitnessCalculator.CalculateFitness(dish.Compare(order));

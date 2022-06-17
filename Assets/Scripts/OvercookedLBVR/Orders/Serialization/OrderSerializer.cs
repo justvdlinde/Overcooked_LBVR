@@ -8,7 +8,7 @@ public static class OrderSerializer
     /// <returns></returns>
     public static byte[] Serialize(Order order)
     {
-        byte[] orderNr = BitConverter.GetBytes(order.orderNumber);
+        byte[] orderNr = BitConverter.GetBytes(order.orderIndex);
         if (BitConverter.IsLittleEndian)
             Array.Reverse(orderNr);
 

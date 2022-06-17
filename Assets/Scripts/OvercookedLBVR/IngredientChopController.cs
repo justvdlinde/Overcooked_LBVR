@@ -151,7 +151,7 @@ public class IngredientChopController : MonoBehaviourPun
 						ingredientComponent.CopyValues(ingredient.StatusConditionManager);
 				}
 				
-				ingredient._PhotonView.TransferOwnership(PhotonNetwork.MasterClient);
+				ingredient.photonView.TransferOwnership(PhotonNetwork.MasterClient);
 				PhotonNetwork.Destroy(ingredient.gameObject);
 			}
 		}

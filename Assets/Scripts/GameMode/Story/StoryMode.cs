@@ -139,7 +139,7 @@ public class StoryMode : GameMode
     public void CreateNewActiveOrder(int displayNr)
     {
         Order order = orderGenerator.Generate();
-        order.orderNumber = displayNr;
+        order.orderIndex = displayNr;
         OrdersController.AddActiveOrder(order);
     }
 
@@ -148,14 +148,14 @@ public class StoryMode : GameMode
         return new StoryGameResult(this, Scoreboard as StoryModeScoreboard);
     }
 
-    public override void DeliverDish(Plate dish, int orderNr)
+    public override void DeliverDish(Plate dish, int orderIndex)
     {
-        Order order = ordersController.GetOrder(orderNr); //OrdersController.GetClosestMatch(dish.FoodStack);
+        Order order = ordersController.GetOrder(orderIndex);
 
         if (order == null)
-            throw new System.Exception("No closest order found!");
+            throw new System.Exception("No order with orderNr " + orderIndex + " found!");
 
-        Debug.Log("Delivered dish: " + dish.FoodStack + "\nclosest match: " + order);
+        Debug.Log("Delivered #" + orderIndex + " dish " + dish.FoodStack + "\norder: " + order);
         ScoreData score = scoreCalculator.CalculateScore(order, dish.FoodStack, DishResult.Delivered);
         Debug.Log("Score: " + score.Points + "/" + ScoreData.MaxPoints);
         OnDishDelivered(dish, order, score);
@@ -163,7 +163,7 @@ public class StoryMode : GameMode
 
     public void CheatDeliverDish(int displayNr)
     {
-        Order order = ordersController.ActiveOrders.Where(o => o.orderNumber == displayNr).First();
+        Order order = ordersController.ActiveOrders.Where(o => o.orderIndex == displayNr).First();
         if (order != null)
         {
             ScoreData score = new ScoreData(ScoreData.MaxPoints, DishResult.Delivered);
@@ -179,7 +179,7 @@ public class StoryMode : GameMode
         OnOrdercompleted(true);
         globalEventDispatcher.Invoke(new DishDeliveredEvent(dish, order, score));
 
-        if (!GameTimer.IsRunning && ordersController.ActiveOrders.Count == 0)
+        if (!GameTimer.IsRunning && ordersController.ActiveOrdersCount() == 0)
             OnLastOrderServed();
     }
 
@@ -212,7 +212,7 @@ public class StoryMode : GameMode
             (Scoreboard as StoryModeScoreboard).AddScore(order, score);
         }
 
-        if (!GameTimer.IsRunning && ordersController.ActiveOrders.Count == 0)
+        if (!GameTimer.IsRunning && ordersController.ActiveOrdersCount() == 0)
             OnLastOrderServed();
     }
 

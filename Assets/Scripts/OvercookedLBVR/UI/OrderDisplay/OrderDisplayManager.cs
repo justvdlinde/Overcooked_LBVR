@@ -19,7 +19,7 @@ public class OrderDisplayManager : MonoBehaviourPun
 
         for(int i = 0; i < deliveryPoints.Length; i++)
         {
-            DeliveryPoints[i].SetOrderNr(i);
+            DeliveryPoints[i].SetOrderIndex(i);
         }
     }
 
@@ -35,12 +35,13 @@ public class OrderDisplayManager : MonoBehaviourPun
         if (gameModeService.CurrentGameMode != null)
         {
             OrdersController ordersController = gameModeService.CurrentGameMode.OrdersController;
-            if (ordersController != null && ordersController.ActiveOrders.Count > 0)
+            if (ordersController != null)
             {
-                for (int i = 0; i < ordersController.ActiveOrders.Count; i++)
+                for (int i = 0; i < ordersController.ActiveOrders.Length; i++)
                 {
                     Order order = ordersController.ActiveOrders[i];
-                    DisplayOrder(order);
+                    if(order != null)
+                        DisplayOrder(order);
                 }
             }
         }
@@ -70,7 +71,7 @@ public class OrderDisplayManager : MonoBehaviourPun
 
     public void DisplayOrder(Order order)
     {
-        DeliveryPoint deliveryPoint = deliveryPoints[order.orderNumber];
+        DeliveryPoint deliveryPoint = deliveryPoints[order.orderIndex];
         if (!deliveryPoint.Display.CanBeUsed())
             Debug.LogWarning("Display is already in use, displayed order will be overwritten");
 
@@ -96,7 +97,7 @@ public class OrderDisplayManager : MonoBehaviourPun
     protected void AutoFindDisplays()
     {
         DeliveryPoint[] deliveryPoints = FindObjectsOfType<DeliveryPoint>();
-        deliveryPoints = deliveryPoints.OrderBy(item => item.OrderNr).ToArray();
+        deliveryPoints = deliveryPoints.OrderBy(item => item.OrderIndex).ToArray();
     }
 #endif
 }

@@ -329,7 +329,7 @@ public abstract class GameMode : MonoBehaviourPun
     }
 
     public abstract IGameResult GetGameResult();
-    public abstract void DeliverDish(Plate dish, int orderNr);
+    public abstract void DeliverDish(Plate dish, int orderIndex);
 
     public virtual void Shutdown()
     {
