@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Demo_Just.unity
     guid: f4f797880aa33894ea016546b80998dc
+  - enabled: 1
+    path: Assets/Scenes/Demo_Just_2walls.unity
+    guid: 1b04f86a85638104688a27f223dcb2ca
+  - enabled: 1
+    path: Assets/Scenes/Demo_Just_4Delivery.unity
+    guid: 06f06f58a68cc3b439f70033b4c6b1d8
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}
