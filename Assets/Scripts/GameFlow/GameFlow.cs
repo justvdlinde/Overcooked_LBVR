@@ -92,6 +92,7 @@ public abstract class GameFlow : MonoBehaviour
     // Needs to be IEnumerator, as connecting through Photon will otherwise not work when called from Awake or Start
     protected virtual IEnumerator ConnectToNetwork()
     {
+        Debug.Log("ConnectToNetwork");
         yield return null;
         networkService.Connect(networkConfig);
         connectingScreenInstance.Open();
@@ -99,6 +100,7 @@ public abstract class GameFlow : MonoBehaviour
 
     protected virtual void OnConnectionSuccessEvent(ConnectionSuccessEvent @event)
     {
+        Debug.Log("OnConnectionSuccessEvent");
         wasConnected = true;
         connectingScreenInstance.Close();
 
@@ -152,6 +154,7 @@ public abstract class GameFlow : MonoBehaviour
 
     protected virtual void LoadScene(string sceneName)
     {
+        Debug.Log("LoadScene " + sceneName);
         if (sceneLoadDelay > 0)
             StartCoroutine(LoadSceneDelayed(sceneName, sceneLoadDelay));
         else

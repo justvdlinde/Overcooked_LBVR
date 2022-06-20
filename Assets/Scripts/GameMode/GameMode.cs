@@ -100,6 +100,7 @@ public abstract class GameMode : MonoBehaviourPun
 
     protected virtual void Awake()
     {
+        photonView.ViewID = PhotonIdentifiers.GameModeObject;
         GameTimer = new Timer();
         DontDestroyOnLoad(this);
 
@@ -249,19 +250,6 @@ public abstract class GameMode : MonoBehaviourPun
         Scoreboard.Reset();
     }
 
-  //  public virtual void StartCountdown()
-  //  {
-  //      SetPhase(MatchPhase.Countdown);
-		//if (PhotonNetwork.IsMasterClient)
-  //      {
-		//	PhotonNetwork.CurrentRoom.SetCustomProperty(RoomPropertiesPhoton.GAME_STATE, (int)MatchPhase);
-  //          RaisePhotonEventCode(PhotonEventCodes.GAME_START);
-  //      }
-  //      Timer countdownTimer = new Timer();
-  //      countdownTimer.Set(countdownDuration);
-  //      countdownTimer.Start(StartActiveGame);
-  //  }
-
     public virtual void AttemptToStartActiveGame()
     {
         photonView.RPC(nameof(AttemptToStartActiveGameRPC), RpcTarget.MasterClient);
@@ -298,11 +286,16 @@ public abstract class GameMode : MonoBehaviourPun
         }
         else
         {
-            float timeRemaining = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
-            elapsedTime = MatchDuration - timeRemaining;
+            if (MatchStartTimeStamp != 0)
+            {
+                Debug.Log(MatchStartTimeStamp + " time: " + (float)PhotonNetwork.Time);
+                float timeRemaining = Mathf.Clamp(MatchDuration - ((float)PhotonNetwork.Time - MatchStartTimeStamp), 0, MatchDuration);
+                elapsedTime = MatchDuration - timeRemaining;
+            }
             GameTimer.Set(MatchDuration);
         }
 
+        Debug.Log("Gametimer.Start, elapsedTime: " + elapsedTime);
         GameTimer.Start(OnTimerReachedZero, elapsedTime);
     }
 
@@ -340,6 +333,17 @@ public abstract class GameMode : MonoBehaviourPun
         Scoreboard.Dispose();
     }
 
+    public void AttemptToReplayGame()
+    {
+        photonView.RPC(nameof(AttemptToReplayGameRPC), RpcTarget.MasterClient);
+    }
+
+    [PunRPC]
+    protected virtual void AttemptToReplayGameRPC()
+    {
+        Replay();
+    }
+
     public virtual void Replay()
     {
         if (PhotonNetwork.IsMasterClient)
@@ -349,7 +353,6 @@ public abstract class GameMode : MonoBehaviourPun
             EndGame();
 
         GameTimer.Reset();
-        Debug.Log("Reset timer, timeremaining: " + GameTimer.TimeRemaining);
         StartPreGame();
         globalEventDispatcher.Invoke(new ReplayEvent());
     }

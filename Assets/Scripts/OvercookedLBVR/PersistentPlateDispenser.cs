@@ -23,6 +23,14 @@ public class PersistentPlateDispenser : Dispenser
         }
     }
 
+    private void Start()
+    {
+        if (PlateInstance == null && PhotonNetwork.IsMasterClient)
+        {
+            InstantiateObject();
+        }
+    }
+
     private void OnEnable()
     {
         globalEventDispatcher.Subscribe<StartGameEvent>(OnStartGameEvent);
@@ -39,16 +47,25 @@ public class PersistentPlateDispenser : Dispenser
 
     protected override GameObject InstantiateObject()
     {
-        GameObject instance = base.InstantiateObject();
-        if (instance.TryGetComponent(out Plate plate))
-            PlateInstance = plate;
-        return instance;
+        if (PlateInstance == null)
+        {
+            GameObject instance = base.InstantiateObject();
+            if (instance.TryGetComponent(out Plate plate))
+                PlateInstance = plate;
+            return instance;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private void OnConnected(ConnectionSuccessEvent obj)
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (PlateInstance == null && PhotonNetwork.IsMasterClient)
+        {
             InstantiateObject();
+        }
     }
 
     private void OnStartGameEvent(StartGameEvent obj)
@@ -65,6 +82,9 @@ public class PersistentPlateDispenser : Dispenser
 
     private void ResetPlate()
     {
+        if (PlateInstance == null)
+            return;
+
         if(PlateInstance.TryGetComponent(out Rigidbody rigidbody))
         {
             rigidbody.velocity = Vector3.zero;
