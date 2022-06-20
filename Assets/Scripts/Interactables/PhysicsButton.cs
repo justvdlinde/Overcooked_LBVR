@@ -89,7 +89,12 @@ public class PhysicsButton : MonoBehaviour
 		IsUsable = usable;
 	}
 
-	[Button]
+    private void OnEnable()
+    {
+		IsUsable = true;
+    }
+
+    [Button]
 	public void OnClick()
 	{
 		if (!IsUsable)
