@@ -146,11 +146,12 @@ public class IngredientChopController : MonoBehaviourPun
 					Transform point = processInstantiationData[i].transform;
 					GameObject prefab = processInstantiationData[i].prefab;
 					GameObject instance = PhotonNetwork.Instantiate(prefab.name, point.position, Quaternion.identity);
+					//t = instance.GetComponent<PhysicsCharacter.Tool>();
 					IngredientStatusCondition ingredientComponent = instance.GetComponentInChildren<IngredientStatusCondition>();
 					if (ingredientComponent != null)
 						ingredientComponent.CopyValues(ingredient.StatusConditionManager);
 				}
-				
+
 				ingredient.photonView.TransferOwnership(PhotonNetwork.MasterClient);
 				PhotonNetwork.Destroy(ingredient.gameObject);
 			}

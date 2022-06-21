@@ -59,7 +59,7 @@ namespace PhysicsCharacter
 			foreach (ToolHandle h in toolHandles)
 			{
 				if (h.IsObjectBeingHeld())
-					h.ForceRelease();
+					h.GetReleased(h.HeldHand);
 			}
 		}
 

@@ -13,7 +13,7 @@ public class TimeLeftDisplay : MonoBehaviour
 
 	private GameModeService gameModeService = null;
 
-	private string duringGameText = "Time untill close:";
+	private string duringGameText = "Time until close:";
 	private string preGameText = "Welcome to McKnuckys!";
 
 	private void Awake()
@@ -47,9 +47,17 @@ public class TimeLeftDisplay : MonoBehaviour
 			textDisplay.text = duringGameText;
 			timerObject.gameObject.SetActive(true);
 		}
+		else if(gameModeService.CurrentGameMode.MatchPhase == MatchPhase.PostGame && gameModeService.CurrentGameMode.Scoreboard is StoryModeScoreboard)
+		{
+			StoryModeScoreboard s = gameModeService.CurrentGameMode.Scoreboard as StoryModeScoreboard;
+			string delivered = "Total delivered orders: " + s.DeliveredOrdersCount.ToString();
+			string perfectCount = "Total perfect orders: " + s.DeliveredOrdersCount.ToString();
+			string totalpoints = "Points: " + s.TotalPoints.ToString() + "/" + s.MaxAchievablePoints.ToString();
+			timerObject.gameObject.SetActive(false);
+			textDisplay.text = delivered + "\n" + perfectCount + "\n" + totalpoints + "\n";
+		}
 		else
 		{
-			//timer.value = gameModeService.CurrentGameMode.GameTimeProgress01;
 			textDisplay.text = preGameText;
 			timerObject.gameObject.SetActive(false);
 		}
