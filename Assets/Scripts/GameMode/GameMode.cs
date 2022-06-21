@@ -101,6 +101,9 @@ public abstract class GameMode : MonoBehaviourPun
     protected virtual void Awake()
     {
         photonView.ViewID = PhotonIdentifiers.GameModeObject;
+        OrdersController.photonView.ViewID = photonView.ViewID + 1;
+        (Scoreboard as StoryModeScoreboard).photonView.ViewID = photonView.ViewID + 2;
+
         GameTimer = new Timer();
         DontDestroyOnLoad(this);
 
