@@ -39,7 +39,8 @@ public class PlayerMovementController : MonoBehaviour
         playerTransform.position = new Vector3(playerTransform.position.x, 0, playerTransform.position.z);
     }
 
-#if UNITY_EDITOR || DEVELOPMENT_BUILD
+#if UNITY_EDITOR
+//#if UNITY_EDITOR || DEVELOPMENT_BUILD
     private void Update()
     {
         Movement();
