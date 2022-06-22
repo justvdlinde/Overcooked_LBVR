@@ -21,7 +21,7 @@ public class LoadSceneOnButton : MonoBehaviour
 		if(PhotonNetwork.IsMasterClient)
 		{
 			GlobalServiceLocator.Instance.Get<GameModeService>().CurrentGameMode.EndGame();
-			GlobalServiceLocator.Instance.Get<SceneService>().LoadScene(initialLevel.Scene.SceneName);
+			GlobalServiceLocator.Instance.Get<NetworkedSceneService>().LoadScene(initialLevel.Scene.SceneName);
 		}
 	}
 

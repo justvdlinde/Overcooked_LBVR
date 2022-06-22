@@ -2,6 +2,7 @@ using Unity.Profiling;
 using UnityEngine;
 using Utils.Core.Attributes;
 using Utils.Core.FPSCounter;
+using Utils.Core.Services;
 
 public class InGameDebugManager : MonoBehaviour
 {
@@ -38,7 +39,11 @@ public class InGameDebugManager : MonoBehaviour
 
     private void Start()
     {
-        GUIWorldSpace.AddButton("Print Test", () => Debug.Log("Test"));
+        //GUIWorldSpace.AddButton("Print Test", () => Debug.Log("Test"));
+
+        // TO DO: remove
+        PhotonNetworkService n = GlobalServiceLocator.Instance.Get<INetworkService>() as PhotonNetworkService;
+        GUIWorldSpace.AddButton("Disconnect", () => n.Disconnect());
     }
 
     [Button]
