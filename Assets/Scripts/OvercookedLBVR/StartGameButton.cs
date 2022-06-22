@@ -26,6 +26,7 @@ public class StartGameButton : MonoBehaviour
     private void OnDestroy()
     {
         button.PressEvent -= OnPressEvent;
+        eventDispatcher.Unsubscribe<GameModePhaseChangedEvent>(OnGamePhaseChangedEvent);
     }
 
     private void OnPressEvent()
