@@ -45,6 +45,12 @@ public class PersistentPlateDispenser : Dispenser
         globalEventDispatcher.Unsubscribe<ConnectionSuccessEvent>(OnConnected);
     }
 
+    private void OnDestroy()
+    {
+        if (PhotonNetwork.IsMasterClient && PlateInstance != null)
+            PhotonNetwork.Destroy(PlateInstance.gameObject);
+    }
+
     protected override GameObject InstantiateObject()
     {
         if (PlateInstance == null)

@@ -22,6 +22,7 @@ public class Plate : MonoBehaviourPun
     {
         globalEventdispatcher = GlobalServiceLocator.Instance.Get<GlobalEventDispatcher>();
         globalEventdispatcher.Subscribe<PlayerJoinEvent>(OnPlayerJoinEvent);
+        DontDestroyOnLoad(gameObject);
     }
 
     private void OnDestroy()

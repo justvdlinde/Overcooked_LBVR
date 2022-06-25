@@ -14,6 +14,12 @@ public class NetworkedSceneService : SceneService
 
 	public NetworkedSceneService(CoroutineService coroutineService, GlobalEventDispatcher globalEventDispatcher) : base(coroutineService, globalEventDispatcher) { }
 
+    public override void LoadScene(string sceneName, Action<string> onDone = null)
+    {
+		UnityEngine.Debug.LogWarning("Loading scene is not synced for now! Call LoadSceneAsync.");
+        base.LoadScene(sceneName, onDone);
+    }
+
     public override IEnumerator LoadSceneAsyncCoroutine(string scene, Action<string> onDone = null)
     {
 		PhotonNetwork.LoadLevel(scene);
